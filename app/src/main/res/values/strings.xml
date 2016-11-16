@@ -39,4 +39,14 @@
     <string name="send_verify">发送验证短信</string>
     <string name="verify_code_hint">请输入验证码</string>
     <string name="verify_helper">短信验证码默认通过短信形式发送给您显示为四位数字</string>
+
+
+
+    <string-array name="categories">
+        <item>粮食作物</item>
+        <item>水果</item>
+        <item>禽畜蛋肉</item>
+        <item>蔬菜</item>
+        <item>更多</item>
+    </string-array>
 </resources>

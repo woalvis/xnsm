@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i("xx","onCreate");
         setContentView(R.layout.activity_main);
         initTabItemList();
         initTabView();
@@ -202,5 +204,12 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
             return viewIndicator;
 
         }
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("xx","onCreate");
     }
 }

@@ -10,38 +10,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="tech.xinong.xnsm.pro.user.view.RegisterActivity">
 
-    <Button
-        android:text="注册"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/register_register"
-        android:layout_below="@+id/editText3"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="101dp" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:hint="请输入密码"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/editText3"-->
+        <!--android:layout_below="@+id/register_verify_num"-->
+        <!--android:layout_alignLeft="@+id/register_verify_num"-->
+        <!--android:layout_alignStart="@+id/register_verify_num"-->
+        <!--android:layout_marginTop="17dp" />-->
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="请输入密码"
-        android:ems="10"
-        android:id="@+id/editText3"
-        android:layout_below="@+id/register_verify_num"
-        android:layout_alignLeft="@+id/register_verify_num"
-        android:layout_alignStart="@+id/register_verify_num"
-        android:layout_marginTop="17dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/editText3"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignStart="@+id/editText3"
-        android:layout_marginTop="22dp"
-        android:id="@+id/editText4"
-        android:hint="确认密码" />
+    <!--<EditText-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:ems="10"-->
+        <!--android:layout_below="@+id/editText3"-->
+        <!--android:layout_alignLeft="@+id/editText3"-->
+        <!--android:layout_alignStart="@+id/editText3"-->
+        <!--android:layout_marginTop="22dp"-->
+        <!--android:id="@+id/editText4"-->
+        <!--android:hint="确认密码" />-->
 
     <EditText
         android:layout_width="wrap_content"
@@ -49,6 +40,7 @@
         android:inputType="textPersonName"
         android:hint="验证码"
         android:ems="10"
+        android:text="489419"
         android:layout_marginTop="23dp"
         android:id="@+id/register_verify_num"
         android:layout_below="@+id/register_phone_num"
@@ -60,6 +52,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
+        android:text="13811548666"
         android:hint="请输入手机号"
         android:id="@+id/register_phone_num"
         android:layout_alignParentTop="true" />
@@ -74,4 +67,13 @@
         android:layout_marginLeft="61dp"
         android:layout_marginStart="61dp"
         android:id="@+id/register_req_verify" />
+
+    <Button
+        android:text="注册"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_register"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/register_verify_num"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

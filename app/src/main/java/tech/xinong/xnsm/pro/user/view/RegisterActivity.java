@@ -2,11 +2,14 @@ package tech.xinong.xnsm.pro.user.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.Cache;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -29,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private EditText etPhoneNum;
     private EditText etRegisterVerifyNum;
     private Button reqVerify;
+    private Button registerUser;
+
     private OkHttpClient mOkHttpClient;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -44,7 +48,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         etPhoneNum = (EditText) this.findViewById(R.id.register_phone_num);
         reqVerify = (Button) this.findViewById(R.id.register_req_verify);
         etRegisterVerifyNum = (EditText) this.findViewById(R.id.register_verify_num);
+        registerUser = (Button) this.findViewById(R.id.register_register);
         reqVerify.setOnClickListener(this);
+        registerUser.setOnClickListener(this);
     }
 
     private void initOkHttpClient() {
@@ -78,43 +84,61 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void register() throws IOException {
-        String url = HttpConstant.HOSRT+HttpConstant.URL_REGISTER;
+        String url = HttpConstant.HOST+HttpConstant.URL_REGISTER;
         Register register = new Register();
-        register.setCellPhone(etPhoneNum.getText().toString().trim());
+        register.setCellphone(etPhoneNum.getText().toString().trim());
         register.setVerificationCode(etRegisterVerifyNum.getText().toString().trim());
-        RequestBody formBody = new FormBody.Builder()
-                .add("verificationCode ", register.getVerificationCode())
-                .add("cellphone",register.getCellPhone())
-                .build();
+
+        String json = com.alibaba.fastjson.JSON.toJSONString(register);
+        Log.i("xx",json);
+        RequestBody formBodyT = RequestBody.create(JSON,json);
+
+
         Request request = new Request.Builder()
                 .url(url)
-                .post(formBody)
+                .post(formBodyT)
                 .build();
         Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e("XX","出错了");
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                String str = response.body().string();
-                Log.i("wangshu", str);
+               if (!TextUtils.isEmpty(response.toString())){
+                   String str = response.body().string();
+                   JSONObject result = JSONObject.parseObject(str);
+                   int c = result.getInteger("c");
+                   Log.i("wangshu", str);
+                   final String info = JSONObject.parseObject(str).getString("i");
+                   if (c==0){
+                       runOnUiThread(new Runnable() {
+                           @Override
+                           public void run() {
+                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
+                           }
+                       });
+                       RegisterActivity.this.finish();
+                   }else {
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                       runOnUiThread(new Runnable() {
+                           @Override
+                           public void run() {
+                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
+                           }
+                       });
+
+                   }
+               }
             }
 
         });
     }
 
     private void reqVerify(String verify) {
-        String urlRegister = HttpConstant.HOSRT + HttpConstant.URL_SEND_VERIFY + "?cellphone=" + verify;
+        String urlRegister = HttpConstant.HOST + HttpConstant.URL_SEND_VERIFY + "?cellphone=" + verify;
         Request.Builder requestBuilder = new Request.Builder().url(urlRegister);
         requestBuilder.method("GET", null);
         Request request = requestBuilder.build();
@@ -147,18 +171,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
     public class Register {
-        String cellPhone;
+        String cellphone;
         String verificationCode;
 
         public Register() {
         }
 
-        public String getCellPhone() {
-            return cellPhone;
+        public String getCellphone() {
+            return cellphone;
         }
 
-        public void setCellPhone(String cellPhone) {
-            this.cellPhone = cellPhone;
+        public void setCellphone(String cellphone) {
+            this.cellphone = cellphone;
         }
 
         public String getVerificationCode() {

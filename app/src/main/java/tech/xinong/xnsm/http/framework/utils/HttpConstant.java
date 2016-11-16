@@ -11,12 +11,16 @@ public class HttpConstant {
     public static final String PORT = ":8082";
 
     public static final String IP ="101.201.147.46";
-    public static final String HOSRT = PREFIX_HTTP+IP+PORT;
+    public static final String HOST = PREFIX_HTTP+IP+PORT;
 
     /*发送验证码*/
     public static final String URL_SEND_VERIFY = "/users/phone/verify";
     /*登录*/
     public static final String URL_LOGIN = "/auth/token";
+    /*登陆时候发的验证码*/
+    public static final String URL_LOGIN_VERIFY = "/users/phone/verifyLogin";
     /*注册*/
-    public static final String URL_REGISTER = " /users/register";
+    public static final String URL_REGISTER = "/users/register";
+    /*查询类别*/
+    public static final String URL_CATEGORY = "/categorys";
 }

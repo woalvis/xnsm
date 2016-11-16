@@ -24,9 +24,9 @@
         <activity
             android:name=".pro.GuideActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <activity android:name=".pro.MainActivity" />
-        <activity android:name=".pro.user.view.LoginActivity" />
-        <activity android:name=".pro.user.view.RegisterActivity"></activity>
+        <activity android:name=".pro.MainActivity" android:launchMode="singleInstance" />
+        <activity android:name=".pro.user.view.LoginActivity" android:label="@string/login"/>
+        <activity android:name=".pro.user.view.RegisterActivity" android:label="@string/register"></activity>
     </application>
 
 </manifest>
