@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ddd"
+    android:weightSum="1">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="160dp">
+            </android.support.v4.view.ViewPager>
+
+
+                <tech.xinong.xnsm.views.CircleIndicator
+                    android:id="@+id/circle_indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="12dp">
+
+
+                </tech.xinong.xnsm.views.CircleIndicator>
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                >
+
+                <Button
+                    style="@style/home_btn"
+                    android:gravity="center"
+                    android:background="@drawable/circle_bg"
+                    android:text="我的订单"
+                    />
+
+                <Button
+                    style="@style/home_btn"
+                    android:gravity="center"
+                    android:text="行情"
+                    android:background="@drawable/circle_bg"
+                    />
+
+                <Button
+
+                    style="@style/home_btn"
+                    android:gravity="center"
+                    android:text="大厅"
+
+                    android:background="@drawable/circle_bg"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/darkGreen"
+                android:gravity="center_vertical"
+                android:text="消息推送"/>
+
+
+            <WebView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@android:color/holo_blue_dark">
+
+            </WebView>
+
+
+
+            <tech.xinong.xnsm.views.GridViewForScrollView
+                android:id="@+id/grid_home_push"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:numColumns="2"
+                >
+            </tech.xinong.xnsm.views.GridViewForScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
