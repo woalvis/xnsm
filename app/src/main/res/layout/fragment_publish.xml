@@ -5,10 +5,38 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/publish"
-        android:textSize="@dimen/dimen_30_sp"/>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="85dp">
+
+       <TextView
+
+           android:id="@+id/publish_buy_tv"
+           android:gravity="center"
+           android:text="@string/publish_buy"
+           android:layout_width="0dp"
+           android:background="#ff0000"
+           android:layout_height="match_parent"
+           android:layout_weight="1"/>
+
+
+       <TextView
+           android:id="@+id/publish_sell_tv"
+           android:gravity="center"
+           android:background="#00ff00"
+           android:text="@string/publish_sell"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"/>
+
+
+       <TextView
+           android:id="@+id/publish_mylist_tv"
+           android:gravity="center"
+           android:background="#0000ff"
+           android:text="@string/my_publish"
+           android:layout_width="0dp"
+           android:layout_height="match_parent"
+           android:layout_weight="1"/>
+   </LinearLayout>
 </LinearLayout>

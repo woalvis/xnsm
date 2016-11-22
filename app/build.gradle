@@ -30,6 +30,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     testCompile 'junit:junit:4.12'
     //okhttp依赖
-    compile 'com.squareup.okhttp3:okhttp:3.2.0'
-    compile 'com.squareup.okio:okio:1.7.0'
+//    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+//    compile 'com.squareup.okio:okio:1.7.0'
+
+    compile 'com.lzy.net:okgo:+'
 }

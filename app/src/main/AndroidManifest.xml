@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
+        android:name=".pro.base.application.XnsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +15,14 @@
         <activity
             android:name=".pro.WelcomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".pro.GuideActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".pro.MainActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,11 +30,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".pro.GuideActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <activity android:name=".pro.MainActivity" android:launchMode="singleInstance" />
-        <activity android:name=".pro.user.view.LoginActivity" android:label="@string/login"/>
-        <activity android:name=".pro.user.view.RegisterActivity" android:label="@string/register"></activity>
+            android:name=".pro.user.view.LoginActivity"
+            android:label="@string/login" />
+        <activity
+            android:name=".pro.user.view.RegisterActivity"
+            android:label="@string/register" />
+        <activity android:name=".pro.buy.view.ProductListActivity" />
+        <activity android:name=".pro.buy.view.SpecActivity" />
+        <activity android:name=".pro.buy.view.SelectActivity"></activity>
     </application>
 
 </manifest>

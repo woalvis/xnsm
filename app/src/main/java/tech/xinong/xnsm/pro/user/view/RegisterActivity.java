@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
@@ -26,12 +27,17 @@ import okhttp3.Response;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 
+
+/**
+ * 注册界面，首先用手机号得到注册码，再通过注册码和自己填写的密码手机号完成注册
+ */
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText etPhoneNum;
-    private EditText etRegisterVerifyNum;
-    private Button reqVerify;
-    private Button registerUser;
+    private EditText etPhoneNum;//手机号码编辑栏
+    private EditText etRegisterVerifyNum;//注册码编辑栏
+    private Button reqVerify;//发送注册码按钮
+    private Button registerUser;//点击此按钮发送手机号注册码和密码完成注册
+    private LinearLayout passwordLayout;//密码编辑布局
 
     private OkHttpClient mOkHttpClient;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -44,15 +50,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         initOkHttpClient();
     }
 
+
+    /**
+     * 初始化控件
+     */
     private void initWidget() {
         etPhoneNum = (EditText) this.findViewById(R.id.register_phone_num);
         reqVerify = (Button) this.findViewById(R.id.register_req_verify);
         etRegisterVerifyNum = (EditText) this.findViewById(R.id.register_verify_num);
         registerUser = (Button) this.findViewById(R.id.register_register);
+        passwordLayout = (LinearLayout) this.findViewById(R.id.register_password_layout);
+
+
         reqVerify.setOnClickListener(this);
         registerUser.setOnClickListener(this);
     }
 
+
+    /**
+     * 初始化OkHttp
+     */
     private void initOkHttpClient() {
         File sdcache = getExternalCacheDir();
         int cacheSize = 10 * 1024 * 1024;
@@ -64,6 +81,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mOkHttpClient = builder.build();
     }
 
+
+    /**
+     * 控件点击事件回调
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -83,6 +105,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+
+    /**
+     * 注册
+     * @throws IOException
+     */
     private void register() throws IOException {
         String url = HttpConstant.HOST+HttpConstant.URL_REGISTER;
         Register register = new Register();
@@ -117,6 +144,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                        runOnUiThread(new Runnable() {
                            @Override
                            public void run() {
+                              // login();
+
                                Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
                            }
                        });
@@ -137,6 +166,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+
+    /**
+     * 发送验证码
+     * @param verify
+     */
     private void reqVerify(String verify) {
         String urlRegister = HttpConstant.HOST + HttpConstant.URL_SEND_VERIFY + "?cellphone=" + verify;
         Request.Builder requestBuilder = new Request.Builder().url(urlRegister);
@@ -151,17 +185,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (null != response.cacheResponse()) {
-                    String str = response.cacheResponse().toString();
-                    Log.i("wangshu", "cache---" + str);
-                } else {
-                    response.body().string();
-                    String str = response.networkResponse().toString();
-                    Log.i("wangshu", "network---" + str);
-                }
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        passwordLayout.setVisibility(View.VISIBLE);
+                        etPhoneNum.setClickable(false);
                         Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -170,9 +199,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
 
+    /**
+     * 注册信息包装类
+     */
     public class Register {
         String cellphone;
         String verificationCode;
+        String password;
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
 
         public Register() {
         }

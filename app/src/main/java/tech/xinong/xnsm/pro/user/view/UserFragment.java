@@ -87,4 +87,6 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> {
         Log.i("xx","UserFragment----onStart");
         super.onStart();
     }
+
+
 }

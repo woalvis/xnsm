@@ -1,5 +1,6 @@
 package tech.xinong.xnsm.pro.base.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
 
 public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> extends MvpFragment<P,V> {
 
+    public Context mContext;
+
     @Override
     public P bindPresenter() {
         return null;
@@ -28,6 +31,7 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mContext = getActivity();
         if (contentView==null){
             contentView = inflater.inflate(bindLayoutId(),container,false);
             initContentView(contentView);

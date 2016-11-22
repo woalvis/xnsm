@@ -5,7 +5,7 @@ import tech.xinong.xnsm.http.framework.IHttpCommand;
 import tech.xinong.xnsm.http.framework.IRequestParam;
 
 /**
- * Created by xzj on 16/6/2.
+ * Created by xzj on 16/11/2.
  */
 public abstract class HttpCommand<T> implements IHttpCommand<T> {
 

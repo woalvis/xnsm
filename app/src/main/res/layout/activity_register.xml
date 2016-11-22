@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
@@ -8,32 +8,39 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="tech.xinong.xnsm.pro.user.view.RegisterActivity">
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:hint="请输入密码"-->
-        <!--android:ems="10"-->
-        <!--android:id="@+id/editText3"-->
-        <!--android:layout_below="@+id/register_verify_num"-->
-        <!--android:layout_alignLeft="@+id/register_verify_num"-->
-        <!--android:layout_alignStart="@+id/register_verify_num"-->
-        <!--android:layout_marginTop="17dp" />-->
 
-    <!--<EditText-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:ems="10"-->
-        <!--android:layout_below="@+id/editText3"-->
-        <!--android:layout_alignLeft="@+id/editText3"-->
-        <!--android:layout_alignStart="@+id/editText3"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:id="@+id/editText4"-->
-        <!--android:hint="确认密码" />-->
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:text="13811548666"
+            android:hint="请输入手机号"
+            android:id="@+id/register_phone_num"
+            android:layout_alignParentTop="true" />
+
+
+        <Button
+            android:text="发送验证短信"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_req_verify" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,33 +54,49 @@
         android:layout_alignLeft="@+id/register_phone_num"
         android:layout_alignStart="@+id/register_phone_num" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:text="13811548666"
-        android:hint="请输入手机号"
-        android:id="@+id/register_phone_num"
-        android:layout_alignParentTop="true" />
 
-    <Button
-        android:text="发送验证短信"
-        android:layout_width="wrap_content"
+
+        <TextView
+            android:text="@string/verify_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:id="@+id/login_helper" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/register_password_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/register_register"
-        android:layout_alignStart="@+id/register_register"
-        android:layout_marginLeft="61dp"
-        android:layout_marginStart="61dp"
-        android:id="@+id/register_req_verify" />
+android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_password"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/confim_password"
+            />
+
+
+    </LinearLayout>
+
 
     <Button
         android:text="注册"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/register_register"
         android:layout_marginTop="35dp"
         android:layout_below="@+id/register_verify_num"
         android:layout_centerHorizontal="true" />
-</RelativeLayout>
+</LinearLayout>

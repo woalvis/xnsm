@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("xx","onCreate");
+        Log.i("xx","MainActivity+ onCreate");
         setContentView(R.layout.activity_main);
         initTabItemList();
         initTabView();
@@ -210,6 +210,6 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("xx","onCreate");
+        Log.i("xx","onStart");
     }
 }

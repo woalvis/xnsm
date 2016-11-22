@@ -1,23 +1,40 @@
 package tech.xinong.xnsm.pro.buy.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.lzy.okgo.callback.StringCallback;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 import tech.xinong.xnsm.R;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.XnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
+import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
+import tech.xinong.xnsm.pro.publish.model.PublishInfoModel;
 
 /**
  * 我要买页面
@@ -34,6 +51,13 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
             R.mipmap.category_vegetables,//蔬菜
             R.mipmap.category_more};//更多
     private String[] categoryNames;
+
+    private List<CategoryModel> categories;
+
+
+    /*测试用按钮*/
+    private Button get_listings;
+
 
     //创建对象
     @Override
@@ -74,14 +98,76 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(getContext(), categoryNames[position], Toast.LENGTH_SHORT).show();
+
+                        if (categories!=null||categories.size()!=0) {
+                            for (CategoryModel category : categories) {
+                                if (categoryNames[position].equals(category.getName())) {
+                                    Intent intent = new Intent(getActivity(), ProductListActivity.class);
+                                    intent.putExtra("selectOp",CategoryModel.OP_SELECT.FIND_GOODS);
+                                    intent.putExtra("category", category);
+                                    getActivity().startActivity(intent);
+                                } else {
+                                    Toast.makeText(getContext(), "暂时没有该品类的产品，正在建设中。。。", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
                     }
                 });
             }
         };
         gridCategory.setAdapter(adapter);
         productShow = (ListView) contentView.findViewById(R.id.buy_lv_show);
+
+        contentView.findViewById(R.id.bt_get_category).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                XinongHttpCommend.getInstence(mContext).getCategories(new XnHttpCallback() {
+                    @Override
+                    public void onSuccess(String info, String result) {
+
+                    }
+                });
+            }
+        });
+
+        get_listings = (Button) contentView.findViewById(R.id.get_listings);
+        get_listings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getListings();
+            }
+        });
+
     }
 
+
+    /**
+     * 得到listings的点击方法
+     */
+    public void getListings(){
+        XinongHttpCommend xinongHttpCommend = new XinongHttpCommend(getContext());
+        xinongHttpCommend.getListings(new StringCallback() {
+            @Override
+            public void onSuccess(String s, Call call, Response response) {
+               if (!TextUtils.isEmpty(s)){
+                   JSONObject resultJson = JSON.parseObject(s);
+                   if (resultJson.getInteger("c")==0){
+                       JSONObject rJson = JSON.parseObject(resultJson.getString("r"));
+                       if (rJson!=null){
+                           List<PublishInfoModel> publishInfoModelList = JSONArray.parseArray(rJson.getString("content"),PublishInfoModel.class);
+                           Log.d("xx",publishInfoModelList.toString());
+                       }
+
+                   }
+               }
+            }
+
+            @Override
+            public void onError(Call call, Response response, Exception e) {
+                super.onError(call, response, e);
+            }
+        });
+    }
 
     @Override
     protected int bindLayoutId() {

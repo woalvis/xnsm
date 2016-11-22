@@ -4,7 +4,19 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- 字体大小 -->
+
+
+
+    <!--字体大小sp-->
     <dimen name="dimen_30_sp">30sp</dimen>
-    <dimen name="dimen_1_dip">1dip</dimen>
-    <dimen name="tabbar_height">52dp</dimen>
+    <dimen name="dimen_16_sp">16sp</dimen>
+    <dimen name="dimen_18_sp">18sp</dimen>
+
+    <dimen name="dimen_1_dip">1dp</dimen>
+
+    <dimen name="tabbar_height">48dp</dimen>
+
+    <dimen name="navigation_height">45dp</dimen>
+
+    <dimen name="dimen_12_dip">12dp</dimen>
 </resources>

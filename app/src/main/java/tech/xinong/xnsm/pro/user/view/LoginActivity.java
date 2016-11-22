@@ -1,7 +1,6 @@
 package tech.xinong.xnsm.pro.user.view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +26,7 @@ import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.pro.MainActivity;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
+import tech.xinong.xnsm.util.XnsConstant;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText etPhoneNum;
@@ -37,20 +37,26 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private String userPhoneNum;
 
     private OkHttpClient mOkHttpClient;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        initWidget();
+    protected int bindView() {
+        return R.layout.activity_login;
     }
 
-    private void initWidget() {
+    @Override
+    public void initWidget() {
         etPhoneNum = (EditText) this.findViewById(R.id.login_et_phone_num);
         etVerify = (EditText) this.findViewById(R.id.login_et_verify_num);
         loginSendVerify = (Button) this.findViewById(R.id.login_send_verify);
         login = (Button) this.findViewById(R.id.login_login);
         loginSendVerify.setOnClickListener(this);
         login.setOnClickListener(this);
+    }
+
+    @Override
+    public void initData() {
+
     }
 
     @Override
@@ -87,14 +93,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if (null != response.cacheResponse()) {
-                    String str = response.cacheResponse().toString();
-                    Log.i("wangshu", "cache---" + str);
-                } else {
-                    response.body().string();
-                    String str = response.networkResponse().toString();
-                    Log.i("wangshu", "network---" + str);
-                }
+
+
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -140,7 +141,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 } else {
                     response.body().string();
                     Headers headers = response.headers();
-                    final String token = headers.get("X-ACCESS-TOKEN");
+                    final String token = headers.get(HttpConstant.HTTP_HEADER_TOKEN);
+                    editor.putString(XnsConstant.TOKEN,token);
+                    editor.commit();
+                    editor.clear();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -162,10 +166,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
             }
         });
-    }
-
-    private void getAsynHttp() {
-
     }
 
 

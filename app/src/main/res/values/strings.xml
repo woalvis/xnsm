@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Xnsm</string>
+    <string name="app_name">喜农市</string>
     <string name="toast_hello">你好，世界</string>
 
 
@@ -33,13 +33,14 @@
     <string name="csh_number">010-xxxxxxxx</string>
     <string name="about">关于</string>
     <string name="logout">退出登录</string>
+    <string name="input_password">请输入密码</string>
+    <string name="confim_password">确认密码</string>
 
     <!-- 登录界面需要的字符资源-->
     <string name="phone_num_hint">请输入手机号</string>
     <string name="send_verify">发送验证短信</string>
     <string name="verify_code_hint">请输入验证码</string>
     <string name="verify_helper">短信验证码默认通过短信形式发送给您显示为四位数字</string>
-
 
 
     <string-array name="categories">
@@ -49,4 +50,11 @@
         <item>蔬菜</item>
         <item>更多</item>
     </string-array>
+
+
+
+    <!--发布模块所需的字符资源 -->
+    <string name="publish_sell">发布供货</string>
+    <string name="publish_buy">发布采购</string>
+    <string name="my_publish">我的发布</string>
 </resources>
