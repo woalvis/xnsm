@@ -12,15 +12,16 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
 import tech.xinong.xnsm.http.framework.IHttpCommand;
 import tech.xinong.xnsm.http.framework.IRequestParam;
 import tech.xinong.xnsm.http.framework.impl.RequestParam;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.XnHttpCallback;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
+
+import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_PRO_BY_ID;
 
 /**
  * Created by Dream on 16/6/11.
@@ -69,7 +70,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
      * 得到所有的品类
      * @param callback
      */
-    public void getCategories(XnHttpCallback callback){
+    public void getCategories(AbsXnHttpCallback callback){
         StringCallback scb =  callback(callback);
         OkGo.get(getAbsoluteUrl(HttpConstant.URL_CATEGORY))     // 请求方式和请求url
                 .tag(this)// 请求的 tag, 主要用于取消对应的请求
@@ -82,7 +83,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
      * 得到某个品类下面的所有的产品
      * @param callback
      */
-    public void getProduct(XnHttpCallback callback,String name){
+    public void getProduct(AbsXnHttpCallback callback, String name){
         StringCallback scb =  callback(callback);
 
         OkGo.get(getAbsoluteUrl(String.format(HttpConstant.URL_PRODUCT,name,"VARIETY")))     // 请求方式和请求url
@@ -95,31 +96,56 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     /**
      * 得到区域
      */
-    public void getAreas(Callback callback){
-        Request.Builder requestBuilder = new Request.Builder().
-                url(getAbsoluteUrl(HttpConstant.URL_AREAS))
-                .addHeader(HttpConstant.HTTP_HEADER_TOKEN,token);
-        //可以省略，默认是GET请求
-        requestBuilder.method("GET",null);
-        Request request = requestBuilder.build();
-        Call mcall= mOkHttpClient.newCall(request);
-        mcall.enqueue(callback);
+    public void getAreas(AbsXnHttpCallback callback){
+        StringCallback scb =  callback(callback);
+
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_AREAS))     // 请求方式和请求url
+                .tag(this)// 请求的 tag, 主要用于取消对应的请求
+                .cacheKey("getAreas")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
+                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
+                .execute(scb);
+
     }
 
     /**
      * 请求别人发布的信息
      */
-    public void getListings(StringCallback callback){
+    public void getListings(AbsXnHttpCallback callback){
 
-
-
-
+        StringCallback scb =  callback(callback);
         OkGo.get(getAbsoluteUrl(HttpConstant.URL_LISTINGS))     // 请求方式和请求url
                 .tag(this)// 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("cacheKey")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
-                .execute(callback);
+                .execute(scb);
     }
+
+
+    /**
+     * 登录，需要用户名和密码，密码用MD5进行加密
+     */
+    public void login(String username,String password,AbsXnHttpCallback callback){
+        StringCallback scb =  callback(callback);
+        LoginBean loginBean = new LoginBean();
+        loginBean.setUsername(username);
+        loginBean.setPassword(password);
+
+        String jsonString = JSON.toJSONString(loginBean);
+        OkGo.post(HttpConstant.HOST+HttpConstant.URL_LOGIN)
+                .upJson(jsonString)
+                .execute(scb);
+    }
+
+
+    /**
+     * 通过产品的Id得到该产品所有的细节
+     */
+    public void getProductListings(String proId,AbsXnHttpCallback callback){
+        StringCallback scb =  callback(callback);
+        OkGo.get(String.format(getAbsoluteUrl(URL_GET_PRO_BY_ID),proId))
+                .execute(scb);
+    }
+
 
 
     /**
@@ -157,6 +183,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             /** 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程 */
             @Override
             public void onError(Call call, Response response, Exception e) {
+                callback.onError(call,response,e);
                 super.onError(call,response,e);
                 Toast.makeText(mContext, "网络请求错误", Toast.LENGTH_SHORT).show();
             }
@@ -176,5 +203,27 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
 
+    /**
+     * 登陆用包装类
+     */
+    private class LoginBean {
+        private String username;
+        private String password;
 
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
 }

@@ -11,6 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
             android:name=".pro.WelcomeActivity"
@@ -21,8 +22,8 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
         <activity
             android:name=".pro.MainActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +38,9 @@
             android:label="@string/register" />
         <activity android:name=".pro.buy.view.ProductListActivity" />
         <activity android:name=".pro.buy.view.SpecActivity" />
-        <activity android:name=".pro.buy.view.SelectActivity"></activity>
+        <activity android:name=".pro.buy.view.SelectActivity" />
+        <activity android:name=".pro.buy.view.GoodsDetailActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
     </application>
 
 </manifest>

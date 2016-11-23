@@ -1,25 +1,37 @@
 package tech.xinong.xnsm.pro.publish.model;
 
-import tech.xinong.xnsm.pro.base.model.BaseBean;
+import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by xiao on 2016/11/21.
  */
 
-public class PublishInfoModel extends BaseBean {
+public class PublishInfoModel implements Serializable{
 
-    private int hits;
-    private boolean inStock;
-    private int maxQuantity;
-    private String origin;
-    private String ownerFullName;
-    private String[] photo;
-    private String productName;
-    private String productionYear;
-    private String specification;
-    private String termBeginDate;
-    private String unitPrice;
-    private boolean verified;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+    private int hits;//点击量？？
+    private boolean inStock;//是否现货
+    private int maxQuantity;//最大供货量
+    private String origin;//产地
+    private String ownerFullName;//货主的姓名
+    private String[] photo;//图片
+    private String productName;//产品名称
+    private String productionYear;//生产年份
+    private String specification;//规格
+    private String termBeginDate;//
+    private String unitPrice;//
+    private boolean verified;//
 
     public int getHits() {
         return hits;
@@ -115,5 +127,23 @@ public class PublishInfoModel extends BaseBean {
 
     public void setVerified(boolean verified) {
         this.verified = verified;
+    }
+
+    @Override
+    public String toString() {
+        return "PublishInfoModel{" +
+                "hits=" + hits +
+                ", inStock=" + inStock +
+                ", maxQuantity=" + maxQuantity +
+                ", origin='" + origin + '\'' +
+                ", ownerFullName='" + ownerFullName + '\'' +
+                ", photo=" + Arrays.toString(photo) +
+                ", productName='" + productName + '\'' +
+                ", productionYear='" + productionYear + '\'' +
+                ", specification='" + specification + '\'' +
+                ", termBeginDate='" + termBeginDate + '\'' +
+                ", unitPrice='" + unitPrice + '\'' +
+                ", verified=" + verified +
+                '}';
     }
 }

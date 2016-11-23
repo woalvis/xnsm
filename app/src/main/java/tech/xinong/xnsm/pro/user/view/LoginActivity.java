@@ -1,42 +1,23 @@
 package tech.xinong.xnsm.pro.user.view;
 
 import android.content.Intent;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.Cache;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import tech.xinong.xnsm.R;
-import tech.xinong.xnsm.http.framework.utils.HttpConstant;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.MainActivity;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.util.XnsConstant;
+import tech.xinong.xnsm.util.DeviceInfoUtil;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText etPhoneNum;
-    private EditText etVerify;
-    private Button loginSendVerify;
+    private EditText etPassword;
     private Button login;
 
-    private String userPhoneNum;
-
-    private OkHttpClient mOkHttpClient;
 
 
     @Override
@@ -46,11 +27,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initWidget() {
-        etPhoneNum = (EditText) this.findViewById(R.id.login_et_phone_num);
-        etVerify = (EditText) this.findViewById(R.id.login_et_verify_num);
-        loginSendVerify = (Button) this.findViewById(R.id.login_send_verify);
-        login = (Button) this.findViewById(R.id.login_login);
-        loginSendVerify.setOnClickListener(this);
+        etPhoneNum = (EditText) this.findViewById(R.id.login_et_username);
+        etPassword = (EditText) this.findViewById(R.id.login_et_password);
+        login = (Button) this.findViewById(R.id.login_bt_login);
+
         login.setOnClickListener(this);
     }
 
@@ -62,11 +42,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.login_login:
-                login();
-                break;
-            case R.id.login_send_verify:
-                sendVerify();
+            case R.id.login_bt_login:
+
+                String phoneNum = etPhoneNum.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
+
+                login(phoneNum,DeviceInfoUtil.generateMD5(password));
                 break;
             default:break;
         }
@@ -75,111 +56,23 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
 
     /**
-     * 向服务器请求验证码
-     */
-    private void sendVerify() {
-        mOkHttpClient = new OkHttpClient();
-        final String phone = etPhoneNum.getText().toString().trim();
-        String urlRegister = HttpConstant.HOST + HttpConstant.URL_LOGIN_VERIFY + "?cellphone=" + phone;
-        Request.Builder requestBuilder = new Request.Builder().url(urlRegister);
-        requestBuilder.method("GET", null);
-        Request request = requestBuilder.build();
-        Call mcall = mOkHttpClient.newCall(request);
-        mcall.enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-    }
-
-    /**
      * 登录
      */
-    private void login() {
+    private void login(final String name, final String password) {
 
-        String phoneNum = etPhoneNum.getText().toString().trim();
-        String verifyCode = etVerify.getText().toString().trim();
-        String urlLogin = HttpConstant.HOST+HttpConstant.URL_LOGIN;
-        mOkHttpClient=new OkHttpClient();
-        Login login = new Login();
-        login.setCellphone(phoneNum);
-        login.setVerificationCode(verifyCode);
-        String json = JSON.toJSONString(login);
-        userPhoneNum = phoneNum;
-        RequestBody formBody = RequestBody.create(RegisterActivity.JSON,json);
-
-        Request request = new Request.Builder()
-                .url(urlLogin)
-                .post(formBody)
-                .build();
-        Call mcall= mOkHttpClient.newCall(request);
-        mcall.enqueue(new Callback() {
+        XinongHttpCommend.getInstence(mContext).login(name, password, new AbsXnHttpCallback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (null != response.cacheResponse()) {
-                    String str = response.cacheResponse().toString();
-                    Log.i("xzj", "cache---" + str);
-                } else {
-                    response.body().string();
-                    Headers headers = response.headers();
-                    final String token = headers.get(HttpConstant.HTTP_HEADER_TOKEN);
-                    editor.putString(XnsConstant.TOKEN,token);
-                    editor.commit();
-                    editor.clear();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (TextUtils.isEmpty(token)){
-                                Toast.makeText(LoginActivity.this, "登陆不成功，请重试", Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.putExtra("phone",userPhoneNum);
-                                LoginActivity.this.startActivity(intent);
-                                LoginActivity.this.finish();
-                            }
-                        }
-                    });
-
-                    String str = response.networkResponse().toString();
-                    Log.i("xzj", "network---" + str);
-                }
-
+            public void onSuccess(String info, String result) {
+                Toast.makeText(LoginActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                editor.putString("username",name);
+                editor.putString("password",password);
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                LoginActivity.this.startActivity(intent);
+                LoginActivity.this.finish();
             }
         });
     }
 
-
-
-    private void initOkHttpClient() {
-        File sdcache = getExternalCacheDir();
-        int cacheSize = 10 * 1024 * 1024;
-        OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(20, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .cache(new Cache(sdcache.getAbsoluteFile(), cacheSize));
-        mOkHttpClient = builder.build();
-    }
 
 
     private class Login{

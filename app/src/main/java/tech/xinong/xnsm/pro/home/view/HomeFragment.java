@@ -1,9 +1,9 @@
 package tech.xinong.xnsm.pro.home.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.lzy.okgo.callback.StringCallback;
 
 import java.util.List;
 
@@ -21,12 +20,14 @@ import okhttp3.Call;
 import okhttp3.Response;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
+import tech.xinong.xnsm.pro.buy.view.GoodsDetailActivity;
 import tech.xinong.xnsm.pro.publish.model.PublishInfoModel;
 import tech.xinong.xnsm.views.CircleIndicator;
 import tech.xinong.xnsm.views.GridViewForScrollView;
@@ -124,33 +125,40 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
      * 得到listings的方法
      */
     public void getListings(){
-        XinongHttpCommend xinongHttpCommend = new XinongHttpCommend(getContext());
-        xinongHttpCommend.getListings(new StringCallback() {
-            @Override
-            public void onSuccess(String s, Call call, Response response) {
-                if (!TextUtils.isEmpty(s)){
-                    JSONObject resultJson = JSON.parseObject(s);
-                    if (resultJson.getInteger("c")==0){
-                        JSONObject rJson = JSON.parseObject(resultJson.getString("r"));
-                        if (rJson!=null){
-                            List<PublishInfoModel> publishInfoModelList = JSONArray.parseArray(rJson.getString("content"),PublishInfoModel.class);
-                            Log.d("xx",publishInfoModelList.toString());
-                            gridHomePush.setFocusable(false);
-                            gridHomePush.setAdapter(new CommonAdapter<PublishInfoModel>(getContext(),R.layout.item_grid_pushed,publishInfoModelList) {
-                                @Override
-                                protected void fillItemData(CommonViewHolder viewHolder, int position, PublishInfoModel item) {
-                                    viewHolder.setTextForTextView(R.id.item_grid_price,item.getUnitPrice()+"/斤");
-                                    viewHolder.setTextForTextView(R.id.item_grid_description,item.getOrigin()+"  "+item.getOwnerFullName());
-                                   if (item.getPhoto()!=null&&item.getPhoto().length>=1){
+        XinongHttpCommend.getInstence(mContext).getListings(new AbsXnHttpCallback() {
 
-                                   }
+            @Override
+            public void onSuccess(String info, String result) {
+
+                JSONObject rJson = JSON.parseObject(result);
+                if (rJson!=null){
+                    List<PublishInfoModel> publishInfoModelList = JSONArray.parseArray(rJson.getString("content"),PublishInfoModel.class);
+                    Log.d("xx",publishInfoModelList.toString());
+                    gridHomePush.setFocusable(false);
+                    gridHomePush.setAdapter(new CommonAdapter<PublishInfoModel>(getContext(),R.layout.item_grid_pushed,publishInfoModelList) {
+                        @Override
+                        protected void fillItemData(CommonViewHolder viewHolder, int position, final PublishInfoModel item) {
+                            viewHolder.setTextForTextView(R.id.item_grid_price,item.getUnitPrice()+"/斤");
+                            viewHolder.setTextForTextView(R.id.item_grid_description,item.getOrigin()+"  "+item.getOwnerFullName());
+                            if (item.getPhoto()!=null&&item.getPhoto().length>=1){
+
+                            }
+                            viewHolder.setOnClickListener(R.id.item_grid_layout, new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(mContext, GoodsDetailActivity.class);
+                                    intent.putExtra("detail",item);
+                                    Toast.makeText(mContext,  item.getProductName(), Toast.LENGTH_SHORT).show();
+                                    mContext.startActivity(intent);
                                 }
                             });
 
-                        }
 
-                    }
+                        }
+                    });
+
                 }
+
             }
 
             @Override

@@ -52,7 +52,6 @@
     </string-array>
 
 
-
     <!--发布模块所需的字符资源 -->
     <string name="publish_sell">发布供货</string>
     <string name="publish_buy">发布采购</string>

@@ -9,7 +9,7 @@ import java.util.List;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
-import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.XnHttpCallback;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
@@ -49,7 +49,7 @@ public class ProductListActivity extends BaseActivity {
                 viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                     XinongHttpCommend.getInstence(mContext).getProduct(new XnHttpCallback() {
+                     XinongHttpCommend.getInstence(mContext).getProduct(new AbsXnHttpCallback() {
                             @Override
                             public void onSuccess(String info, String result) {
                                 Intent intent = new Intent(ProductListActivity.this,SpecActivity.class);
