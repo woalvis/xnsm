@@ -14,20 +14,22 @@ public class HttpConstant {
     public static final String PORT = ":8082";
 
     public static final String IP ="101.201.147.46";
+    //public static final String IP ="192.168.12.254";
+
     public static final String HOST = PREFIX_HTTP+IP+PORT;
 
 
     /**
      * User模块
      */
-    /*发送验证码*/
-    public static final String URL_SEND_VERIFY = "/users/phone/verify";
+    /*发送注册用的验证码*/
+    public static final String URL_SEND_VERIFY = "/public/phone/code";
     /*登录   用户名和密码*/
     public static final String URL_LOGIN = "/auth/token";
     /*登陆时候发的验证码 （没用）*/
     public static final String URL_LOGIN_VERIFY = "/users/phone/verifyLogin";
     /*注册  cellphone  verifyCode password*/
-    public static final String URL_REGISTER = "/users/register";
+    public static final String URL_REGISTER = "/public/registration";
 
 
 

@@ -16,8 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Response;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
@@ -152,8 +150,6 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
                                     mContext.startActivity(intent);
                                 }
                             });
-
-
                         }
                     });
 
@@ -161,10 +157,6 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
 
             }
 
-            @Override
-            public void onError(Call call, Response response, Exception e) {
-                super.onError(call, response, e);
-            }
         });
     }
 

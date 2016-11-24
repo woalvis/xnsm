@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import tech.xinong.xnsm.mvp.view.impl.MvpActivity;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
+import tech.xinong.xnsm.util.ActivityCollector;
 import tech.xinong.xnsm.util.XnsConstant;
 
 /**
@@ -27,6 +28,9 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
         mSharedPreferences = getSharedPreferences(XnsConstant.SP_NAME, MODE_PRIVATE);
         editor = mSharedPreferences.edit();
         mContext = this;
+
+        ActivityCollector.addActivity(this);
+//        InjectUtils.inject(this);
         initWidget();
         initData();
     }

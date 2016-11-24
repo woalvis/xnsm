@@ -1,31 +1,24 @@
 package tech.xinong.xnsm.pro.user.view;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import tech.xinong.xnsm.R;
-import tech.xinong.xnsm.http.framework.utils.HttpConstant;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 
 
 /**
@@ -38,6 +31,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button reqVerify;//发送注册码按钮
     private Button registerUser;//点击此按钮发送手机号注册码和密码完成注册
     private LinearLayout passwordLayout;//密码编辑布局
+
+    private TextInputLayout inputPassword;
+    private TextInputLayout inputConfirmPassword;
 
     private OkHttpClient mOkHttpClient;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -111,89 +107,89 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      * @throws IOException
      */
     private void register() throws IOException {
-        String url = HttpConstant.HOST+HttpConstant.URL_REGISTER;
+
         Register register = new Register();
         register.setCellphone(etPhoneNum.getText().toString().trim());
         register.setVerificationCode(etRegisterVerifyNum.getText().toString().trim());
+        register.setPassword("123456");
+        register.setConfirmPassword("123456");
 
-        String json = com.alibaba.fastjson.JSON.toJSONString(register);
-        Log.i("xx",json);
-        RequestBody formBodyT = RequestBody.create(JSON,json);
-
-
-        Request request = new Request.Builder()
-                .url(url)
-                .post(formBodyT)
-                .build();
-        Call call = mOkHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+        XinongHttpCommend.getInstence(this).registerUser(register, new AbsXnHttpCallback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("XX","出错了");
+            public void onSuccess(String info, String result) {
+                Toast.makeText(RegisterActivity.this,info,Toast.LENGTH_SHORT).show();
             }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-               if (!TextUtils.isEmpty(response.toString())){
-                   String str = response.body().string();
-                   JSONObject result = JSONObject.parseObject(str);
-                   int c = result.getInteger("c");
-                   Log.i("wangshu", str);
-                   final String info = JSONObject.parseObject(str).getString("i");
-                   if (c==0){
-                       runOnUiThread(new Runnable() {
-                           @Override
-                           public void run() {
-                              // login();
-
-                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
-                           }
-                       });
-                       RegisterActivity.this.finish();
-                   }else {
-
-                       runOnUiThread(new Runnable() {
-                           @Override
-                           public void run() {
-                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
-                           }
-                       });
-
-                   }
-               }
-            }
-
         });
+
+
+
+
+//        String url = HttpConstant.HOST+HttpConstant.URL_REGISTER;
+//        Register register = new Register();
+//        register.setCellphone(etPhoneNum.getText().toString().trim());
+//        register.setVerificationCode(etRegisterVerifyNum.getText().toString().trim());
+//
+//        String json = com.alibaba.fastjson.JSON.toJSONString(register);
+//        Log.i("xx",json);
+//        RequestBody formBodyT = RequestBody.create(JSON,json);
+//
+//
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .post(formBodyT)
+//                .build();
+//        Call call = mOkHttpClient.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                Log.e("XX","出错了");
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//               if (!TextUtils.isEmpty(response.toString())){
+//                   String str = response.body().string();
+//                   JSONObject result = JSONObject.parseObject(str);
+//                   int c = result.getInteger("c");
+//                   Log.i("wangshu", str);
+//                   final String info = JSONObject.parseObject(str).getString("i");
+//                   if (c==0){
+//                       runOnUiThread(new Runnable() {
+//                           @Override
+//                           public void run() {
+//                              // login();
+//
+//                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
+//                           }
+//                       });
+//                       RegisterActivity.this.finish();
+//                   }else {
+//
+//                       runOnUiThread(new Runnable() {
+//                           @Override
+//                           public void run() {
+//                               Toast.makeText(getApplicationContext(), info, Toast.LENGTH_SHORT).show();
+//                           }
+//                       });
+//
+//                   }
+//               }
+//            }
+//
+//        });
     }
 
 
     /**
      * 发送验证码
-     * @param verify
+     * @param cellPhone
      */
-    private void reqVerify(String verify) {
-        String urlRegister = HttpConstant.HOST + HttpConstant.URL_SEND_VERIFY + "?cellphone=" + verify;
-        Request.Builder requestBuilder = new Request.Builder().url(urlRegister);
-        requestBuilder.method("GET", null);
-        Request request = requestBuilder.build();
-        Call mcall = mOkHttpClient.newCall(request);
-        mcall.enqueue(new Callback() {
+    private void reqVerify(String cellPhone) {
+        XinongHttpCommend.getInstence(this).registerVerify(cellPhone, new AbsXnHttpCallback() {
             @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        passwordLayout.setVisibility(View.VISIBLE);
-                        etPhoneNum.setClickable(false);
-                        Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            public void onSuccess(String info, String result) {
+                passwordLayout.setVisibility(View.VISIBLE);
+                Toast.makeText(getApplicationContext(), "请求成功", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -206,6 +202,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         String cellphone;
         String verificationCode;
         String password;
+        String confirmPassword;
+
+        public String getConfirmPassword() {
+            return confirmPassword;
+        }
+
+        public void setConfirmPassword(String confirmPassword) {
+            this.confirmPassword = confirmPassword;
+        }
 
         public String getPassword() {
             return password;

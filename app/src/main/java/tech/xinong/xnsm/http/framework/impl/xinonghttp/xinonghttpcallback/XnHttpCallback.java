@@ -10,5 +10,7 @@ import okhttp3.Response;
 public interface XnHttpCallback {
     void onSuccess(String info,String result);
 
-    void onError(Call call, Response response, Exception e);
+    void onHttpError(Call call, Response response, Exception e);
+
+    void onError(String info);
 }

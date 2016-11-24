@@ -10,7 +10,14 @@ import okhttp3.Response;
 public abstract class AbsXnHttpCallback implements XnHttpCallback{
 
     @Override
-    public void onError(Call call, Response response, Exception e) {
+    public void onHttpError(Call call, Response response, Exception e) {
+        if (response.code()==401){
+
+        }
+    }
+
+    @Override
+    public void onError(String info) {
 
     }
 }

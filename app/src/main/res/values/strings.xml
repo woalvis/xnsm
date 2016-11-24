@@ -34,7 +34,7 @@
     <string name="about">关于</string>
     <string name="logout">退出登录</string>
     <string name="input_password">请输入密码</string>
-    <string name="confim_password">确认密码</string>
+    <string name="confirm_password">确认密码</string>
 
     <!-- 登录界面需要的字符资源-->
     <string name="phone_num_hint">请输入手机号</string>

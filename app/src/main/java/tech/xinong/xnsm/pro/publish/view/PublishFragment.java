@@ -1,5 +1,6 @@
 package tech.xinong.xnsm.pro.publish.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
+import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 
 /**
@@ -84,14 +86,13 @@ public class PublishFragment extends BaseFragment<BuyPresenter, BaseView> implem
      * 发布供货或者采购信息（我要买卖）
      */
     private void publishInfo(boolean isBuy) {
-
-
+        Intent intent = new Intent(mContext, PublishSelectCategoryActivity.class);
+        if (isBuy){
+            intent.putExtra("info", CategoryModel.OP_SELECT.PUBLISH_BUY);
+        }else {
+            intent.putExtra("info", CategoryModel.OP_SELECT.PUBLISH_SELL);
+        }
+        mContext.startActivity(intent);
     }
 
-
-    /**
-     * 发布采购信息（我要买）
-     */
-    private void publishBuy() {
-    }
 }

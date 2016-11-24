@@ -11,7 +11,6 @@ import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
-import tech.xinong.xnsm.pro.crash.CrashHandler;
 import tech.xinong.xnsm.util.XnsConstant;
 
 /**
@@ -24,11 +23,11 @@ public class XnsApplication extends Application{
     public void onCreate() {
 
         // 设置Thread Exception Handler
-        UnCatchExceptionHandler catchException = new UnCatchExceptionHandler(this);
-        Thread.setDefaultUncaughtExceptionHandler(catchException);
+//        UnCatchExceptionHandler catchException = new UnCatchExceptionHandler(this);
+//        Thread.setDefaultUncaughtExceptionHandler(catchException);
         //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
-        CrashHandler crashHandler = CrashHandler.getInstance();
-        crashHandler.init(this);
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(this);
 
         initOkHttp();
 
@@ -39,7 +38,9 @@ public class XnsApplication extends Application{
 
 
         SharedPreferences sp = getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
-
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
+        editor.commit();
         token = sp.getString(XnsConstant.TOKEN,"");
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpConstant.HTTP_HEADER_TOKEN,token);

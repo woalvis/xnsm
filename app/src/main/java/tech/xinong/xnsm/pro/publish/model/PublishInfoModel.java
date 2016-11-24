@@ -30,8 +30,8 @@ public class PublishInfoModel implements Serializable{
     private String productionYear;//生产年份
     private String specification;//规格
     private String termBeginDate;//
-    private String unitPrice;//
-    private boolean verified;//
+    private String unitPrice;//单位价格
+    private boolean verified;//认证
 
     public int getHits() {
         return hits;

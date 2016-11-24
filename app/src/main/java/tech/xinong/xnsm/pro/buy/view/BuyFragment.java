@@ -127,25 +127,25 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
 
         productShow = (ListView) contentView.findViewById(R.id.buy_lv_show);
 
-        contentView.findViewById(R.id.bt_get_category).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                XinongHttpCommend.getInstence(mContext).getCategories(new AbsXnHttpCallback() {
-                    @Override
-                    public void onSuccess(String info, String result) {
-                        categories = JSONArray.parseArray(result, CategoryModel.class);
-                    }
-                });
-            }
-        });
-
-        get_listings = (Button) contentView.findViewById(R.id.get_listings);
-        get_listings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getListings();
-            }
-        });
+//        contentView.findViewById(R.id.bt_get_category).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                XinongHttpCommend.getInstence(mContext).getCategories(new AbsXnHttpCallback() {
+//                    @Override
+//                    public void onSuccess(String info, String result) {
+//                        categories = JSONArray.parseArray(result, CategoryModel.class);
+//                    }
+//                });
+//            }
+//        });
+//
+//        get_listings = (Button) contentView.findViewById(R.id.get_listings);
+//        get_listings.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                getListings();
+//            }
+//        });
 
     }
 

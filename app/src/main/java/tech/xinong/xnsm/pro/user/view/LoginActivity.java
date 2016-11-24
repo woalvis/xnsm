@@ -11,7 +11,6 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.MainActivity;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.util.DeviceInfoUtil;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText etPhoneNum;
@@ -46,8 +45,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
 
                 String phoneNum = etPhoneNum.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
-
-                login(phoneNum,DeviceInfoUtil.generateMD5(password));
+                login(phoneNum,password);
                 break;
             default:break;
         }

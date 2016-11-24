@@ -10,8 +10,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".pro.WelcomeActivity"
@@ -39,8 +39,10 @@
         <activity android:name=".pro.buy.view.ProductListActivity" />
         <activity android:name=".pro.buy.view.SpecActivity" />
         <activity android:name=".pro.buy.view.SelectActivity" />
-        <activity android:name=".pro.buy.view.GoodsDetailActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+        <activity
+            android:name=".pro.buy.view.GoodsDetailActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity android:name=".pro.publish.view.PublishSelectCategoryActivity"></activity>
     </application>
 
 </manifest>

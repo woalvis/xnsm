@@ -20,7 +20,7 @@ public class ProductListActivity extends BaseActivity {
 
     private GridView gvProducts;
     private List<ProductModel> products;
-
+    private Intent mIntent;
 
     @Override
     protected int bindView() {
@@ -34,8 +34,9 @@ public class ProductListActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        Intent intent = getIntent();
-        CategoryModel categoryModel = (CategoryModel) intent.getSerializableExtra("category");
+        mIntent = getIntent();
+        CategoryModel categoryModel = (CategoryModel) mIntent.getSerializableExtra("category");
+
         if (categoryModel!=null){
             products = categoryModel.getProducts();
             Toast.makeText(this, products.toString(), Toast.LENGTH_SHORT).show();
@@ -54,6 +55,7 @@ public class ProductListActivity extends BaseActivity {
                             public void onSuccess(String info, String result) {
                                 Intent intent = new Intent(ProductListActivity.this,SpecActivity.class);
                                 intent.putExtra("result",result);
+                                intent.putExtra("selectOp",mIntent.getSerializableExtra("selectOp"));
                                 startActivity(intent);
                             }
                         } ,item.getName());

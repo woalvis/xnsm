@@ -37,6 +37,9 @@ public class GoodsDetailActivity extends BaseActivity {
         XinongHttpCommend.getInstence(this).getProductListings(publishInfoModel.getId(), new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
+
+
+
                 Log.e("xx",result);
             }
         });
