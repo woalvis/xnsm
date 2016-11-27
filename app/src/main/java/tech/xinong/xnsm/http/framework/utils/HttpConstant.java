@@ -35,7 +35,7 @@ public class HttpConstant {
 
 
     /*查询类别*/
-    public static final String URL_CATEGORY = "/categorys";
+    public static final String URL_CATEGORY = "/categories";
     /**/
     public static final String URL_PRODUCT = "/products/%s/%s";
     /*获得地区*/
@@ -48,9 +48,17 @@ public class HttpConstant {
     /*请求别人发布的信息*/
     public static final String URL_LISTINGS = "/listings";
     /*创建发布*/
-    public static final String URL_LISTINGS_SELL = "/listings/sell";
+    public static final String URL_LISTINGS_SELL = "/listings/sellerListing";
     /*上传文件*/
     public static final String URL_UPLOAD = "/listingDocs/upload";
     /* 通过产品的Id得到该产品所有的细节*/
     public static final String URL_GET_PRO_BY_ID="/listings/%s";
+
+
+
+    /*得到所有的运输方式*/
+    public static final String URL_GET_LOGISTIC_METHODS="/logisticMethods";
+
+    /*根据产品的ID得到所有的规格*/
+    public static final String URL_GET_ALLSPECS_BY_PRODUCTID = "/products/%S/allSpecs";
 }

@@ -9,6 +9,7 @@ import tech.xinong.xnsm.mvp.view.impl.MvpActivity;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
 import tech.xinong.xnsm.util.ActivityCollector;
 import tech.xinong.xnsm.util.XnsConstant;
+import tech.xinong.xnsm.util.ioc.InjectUtils;
 
 /**
  * Created by xiao on 2016/11/7.
@@ -24,25 +25,14 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(bindView());
         mSharedPreferences = getSharedPreferences(XnsConstant.SP_NAME, MODE_PRIVATE);
         editor = mSharedPreferences.edit();
         mContext = this;
-
         ActivityCollector.addActivity(this);
-//        InjectUtils.inject(this);
+        InjectUtils.inject(this);
         initWidget();
         initData();
     }
-
-
-    /**
-     * 绑定布局
-     * @return
-     */
-    protected abstract int bindView();
-
-
 
     @Override
     public p bindPresenter() {

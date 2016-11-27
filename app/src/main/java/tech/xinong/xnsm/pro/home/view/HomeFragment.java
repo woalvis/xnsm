@@ -80,11 +80,16 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
 //            }
 //        });
 
-        getListings();
+
 
         autoPlay();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        getListings();
+    }
 
     private void initNavigation(View contentView){
         DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);

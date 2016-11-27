@@ -2,16 +2,23 @@ package tech.xinong.xnsm.pro.buy.model;
 
 import java.io.Serializable;
 
-import tech.xinong.xnsm.pro.base.model.BaseBean;
-
 /**
  * Created by xiao on 2016/11/17.
  */
 
-public class ProductModel extends BaseBean implements Serializable {
+public class ProductModel implements Serializable {
     private String code;
     private String name;
     private String description;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
 
     public String getCode() {
         return code;

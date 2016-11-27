@@ -42,7 +42,9 @@
         <activity
             android:name=".pro.buy.view.GoodsDetailActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".pro.publish.view.PublishSelectCategoryActivity"></activity>
+        <activity android:name=".pro.publish.view.PublishSelectCategoryActivity" />
+        <activity android:name=".pro.publish.view.PublishSellActivity" />
+        <activity android:name=".pro.publish.view.SelectSpecificationActivity"></activity>
     </application>
 
 </manifest>

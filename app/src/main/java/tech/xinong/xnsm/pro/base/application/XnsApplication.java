@@ -39,8 +39,8 @@ public class XnsApplication extends Application{
 
         SharedPreferences sp = getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
-        editor.commit();
+//        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
+//        editor.commit();
         token = sp.getString(XnsConstant.TOKEN,"");
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpConstant.HTTP_HEADER_TOKEN,token);

@@ -101,15 +101,19 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
                                 Toast.makeText(getContext(), categoryNames[position], Toast.LENGTH_SHORT).show();
 
                                 if (categories != null || categories.size() != 0) {
+                                    boolean flag = false;
                                     for (CategoryModel category : categories) {
+
                                         if (categoryNames[position].equals(category.getName())) {
                                             Intent intent = new Intent(getActivity(), ProductListActivity.class);
                                             intent.putExtra("selectOp", CategoryModel.OP_SELECT.FIND_GOODS);
                                             intent.putExtra("category", category);
                                             getActivity().startActivity(intent);
-                                        } else {
-                                            Toast.makeText(getContext(), "暂时没有该品类的产品，正在建设中。。。", Toast.LENGTH_SHORT).show();
+                                            flag = true;
                                         }
+                                    }
+                                    if (!flag){
+                                        Toast.makeText(mContext, "暂时还没有该品类，我们正在建设中。。。", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }

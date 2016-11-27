@@ -9,15 +9,14 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.publish.model.PublishInfoModel;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
+
+@ContentView(R.layout.activity_goods_detail)
 public class GoodsDetailActivity extends BaseActivity {
     private TextView productDescription;//产品描述
     private TextView productNum;
 
-    @Override
-    protected int bindView() {
-        return R.layout.activity_goods_detail;
-    }
 
     @Override
     public void initWidget() {
@@ -37,8 +36,6 @@ public class GoodsDetailActivity extends BaseActivity {
         XinongHttpCommend.getInstence(this).getProductListings(publishInfoModel.getId(), new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
-
-
 
                 Log.e("xx",result);
             }

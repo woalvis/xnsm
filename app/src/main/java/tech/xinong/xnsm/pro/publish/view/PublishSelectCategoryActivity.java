@@ -16,7 +16,10 @@ import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.view.ProductListActivity;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
+
+@ContentView(R.layout.activity_publish_select_category)
 public class PublishSelectCategoryActivity extends BaseActivity {
 
 
@@ -24,10 +27,6 @@ public class PublishSelectCategoryActivity extends BaseActivity {
     private List<CategoryModel> categories;
     private CategoryModel.OP_SELECT opSelect;
 
-    @Override
-    protected int bindView() {
-        return R.layout.activity_publish_select_category;
-    }
 
     @Override
     public void initWidget() {

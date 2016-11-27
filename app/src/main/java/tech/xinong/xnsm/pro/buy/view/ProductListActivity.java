@@ -15,17 +15,15 @@ import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.model.ProductModel;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
+@ContentView(R.layout.activity_product_list)
 public class ProductListActivity extends BaseActivity {
 
     private GridView gvProducts;
     private List<ProductModel> products;
     private Intent mIntent;
 
-    @Override
-    protected int bindView() {
-        return R.layout.activity_product_list;
-    }
 
     @Override
     public void initWidget() {
@@ -55,6 +53,7 @@ public class ProductListActivity extends BaseActivity {
                             public void onSuccess(String info, String result) {
                                 Intent intent = new Intent(ProductListActivity.this,SpecActivity.class);
                                 intent.putExtra("result",result);
+                                intent.putExtra("productId",item.getName());
                                 intent.putExtra("selectOp",mIntent.getSerializableExtra("selectOp"));
                                 startActivity(intent);
                             }

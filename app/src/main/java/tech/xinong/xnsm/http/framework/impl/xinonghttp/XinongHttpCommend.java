@@ -127,8 +127,8 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     /**
      * 登录，需要用户名和密码，密码用MD5进行加密
      */
-    public void login(String username, String password, AbsXnHttpCallback callback) {
-        StringCallback scb = callback(callback);
+    public void login(String username, String password, StringCallback callback) {
+      //  StringCallback scb = callback(callback);
         LoginBean loginBean = new LoginBean();
         loginBean.setUsername(username);
         loginBean.setPassword(password);
@@ -136,7 +136,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
         String jsonString = JSON.toJSONString(loginBean);
         OkGo.post(HttpConstant.HOST + HttpConstant.URL_LOGIN)
                 .upJson(jsonString)
-                .execute(scb);
+                .execute(callback);
     }
 
 
@@ -164,7 +164,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
     /**
-     *
+     *注册用户
      */
     public void registerUser(RegisterActivity.Register register, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
@@ -172,6 +172,15 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
                 .upJson(JSON.toJSONString(register))
                 .execute(sbc);
     }
+
+
+     /*根据产品的ID得到所有的规格*/
+    public void getAllSpecsByproductId(String id,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(String.format(getAbsoluteUrl(HttpConstant.URL_GET_ALLSPECS_BY_PRODUCTID),id))
+            .execute(sbc);
+    }
+
 
     /**
      * 普通的请求回调
@@ -211,7 +220,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             public void onError(Call call, Response response, Exception e) {
 
                 callback.onHttpError(call, response, e);
-                Toast.makeText(mContext, "网络请求错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "网络请求错误，请检查网络", Toast.LENGTH_SHORT).show();
             }
 
         };

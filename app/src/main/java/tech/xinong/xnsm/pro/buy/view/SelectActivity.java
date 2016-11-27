@@ -26,11 +26,13 @@ import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
 
 /**
  * 选择具体品类的界面，包含之前传过来的参数
  */
+@ContentView(R.layout.activity_select)
 public class SelectActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView selectArea;
@@ -53,10 +55,6 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    protected int bindView() {
-        return R.layout.activity_select;
-    }
 
     @Override
     public void initWidget() {

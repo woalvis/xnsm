@@ -56,4 +56,19 @@
     <string name="publish_sell">发布供货</string>
     <string name="publish_buy">发布采购</string>
     <string name="my_publish">我的发布</string>
+
+    <!--发布供货消息-->
+    <string name="publish_sell_goods_name">货品名称</string>
+    <string name="publish_sell_goods_specification">货品规格</string>
+    <string name="publish_sell_goods_unit_price">货品单价</string>
+    <string name="publish_sell_goods_in_stock">是否现货</string>
+    <string name="publish_sell_term_begin_date">供货时间</string>
+    <string name="publish_sell_total_quantity">供货量</string>
+    <string name="publish_sell_address">发货地址</string>
+    <string name="publish_sell_origin">原产地</string>
+    <string name="publish_sell_logistic_method">物流方式</string>
+    <string name="publish_sell_goods_notes">货品描述</string>
+    <string name="publish_sell_goods_photos">货品照片</string>
+    <string name="publish_sell_select_specification">点击选择货品规格</string>
+
 </resources>

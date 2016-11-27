@@ -19,12 +19,14 @@
         android:id="@+id/login_et_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="13811548666"
         android:hint="@string/phone_num_hint"/>
 
     <EditText
         android:id="@+id/login_et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="123456"
         android:hint="@string/input_password"/>
 
 
