@@ -23,6 +23,7 @@
     <string name="login">登录</string>
     <string name="cancel">取消</string>
     <string name="register">注册</string>
+    <string name="submit">提交</string>
 
 
     <!-- user模块所需的字符资源 -->
@@ -70,5 +71,11 @@
     <string name="publish_sell_goods_notes">货品描述</string>
     <string name="publish_sell_goods_photos">货品照片</string>
     <string name="publish_sell_select_specification">点击选择货品规格</string>
-
+    <string name="publish_sell_since_pijia">起批价</string>
+    <string name="publish_sell_edit_price_hint">点这里填写价格</string>
+    <string name="publish_sell_edit_min_quantity_hint">点这里填写起批量</string>
+    <string name="publish_sell_edit_term_time">点这里填写上下市时间</string>
+    <string name="publish_sell_unit">元/斤</string>
+    <string name="publish_sell_help">斤起批</string>
+    <string name="publish_sell_edit_total_quantity_hint">请输入供货量</string>
 </resources>

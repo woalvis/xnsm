@@ -42,14 +42,16 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
     /**
      * 初始化控件
      */
-    public abstract void initWidget();
+    public void initWidget(){
+
+    };
 
 
     /**
      * 初始化数据
      */
-    public abstract void initData();
+    public void initData(){
 
-
+    };
 
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_select_term_time"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tech.xinong.xnsm.pro.publish.view.SelectTermTimeActivity">
+
+    <LinearLayout
+        android:id="@+id/select_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+
+            android:id="@+id/select_time_layout_term_begin_date"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/message_itembg"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上市时间"
+                />
+            <TextView
+                android:id="@+id/select_time_tv_begin_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:text="~"/>
+
+        <LinearLayout
+            android:id="@+id/select_time_layout_term_end_date"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/message_itembg"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下市时间"
+                />
+            <TextView
+                android:id="@+id/select_time_tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="请选择"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/select_term_time_confirm"
+        android:visibility="invisible"
+        android:layout_marginTop="40dp"
+        android:layout_below="@id/select_time_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="选好了"/>
+</RelativeLayout>

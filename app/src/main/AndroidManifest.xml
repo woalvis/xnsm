@@ -44,7 +44,9 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".pro.publish.view.PublishSelectCategoryActivity" />
         <activity android:name=".pro.publish.view.PublishSellActivity" />
-        <activity android:name=".pro.publish.view.SelectSpecificationActivity"></activity>
+        <activity android:name=".pro.publish.view.SelectSpecificationActivity" />
+        <activity android:name=".pro.publish.view.SelectUnitPriceActivity" />
+        <activity android:name=".pro.publish.view.SelectTermTimeActivity"></activity>
     </application>
 
 </manifest>

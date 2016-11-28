@@ -13,7 +13,15 @@
     <ListView
         android:id="@+id/spec_lv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="wrap_content"></ListView>
 
+
+    <Button
+        android:id="@+id/select_spec_bt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spec_lv"
+        android:text="@string/submit"
+        />
 
 </RelativeLayout>

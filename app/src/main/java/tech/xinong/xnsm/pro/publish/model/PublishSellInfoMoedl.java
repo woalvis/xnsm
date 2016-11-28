@@ -19,7 +19,7 @@ public class PublishSellInfoMoedl {
     private Integer minQuantity;//最小供货量
     private Boolean inStock;//是否现货
     private String termBeginDate; //上市时间(供货开始时间)
-    private String  termEndDate;//下市时间(供货结束时间)
+    private String termEndDate;//下市时间(供货结束时间)
     private Integer totalQuantity;//供货总量
     private String origin;//产地
     private String address;//发货地

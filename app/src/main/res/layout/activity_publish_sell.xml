@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="tech.xinong.xnsm.pro.publish.view.PublishSellActivity">
 
-<!--货品名称-->
+    <!--货品名称-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -72,11 +72,38 @@
             android:layout_weight="1"
             android:text="@string/publish_sell_goods_in_stock"/>
 
-        <TextView
-            android:id="@+id/publish_sell_goods_in_stock"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/publish_sell_goods_in_stock"-->
+            <!--style="@style/publish_sell_text"-->
+            <!--android:layout_weight="3"-->
+            <!--/>-->
+        <RadioGroup
+            android:visibility="invisible"
+            android:id="@+id/publish_sell_rg_in_stock"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="3">
+
+            <RadioButton
+                android:id="@+id/publish_sell_rb_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:text="是"/>
+
+            <RadioButton
+                android:id="@+id/publish_sell_rb_no"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:text="否"/>
+
+        </RadioGroup>
+
+
     </LinearLayout>
 
 
@@ -100,6 +127,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             style="@style/publish_sell_text"
             android:layout_weight="1"
@@ -110,6 +138,12 @@
             style="@style/publish_sell_text"
             android:layout_weight="3"
             />
+        <EditText
+            android:id="@+id/publish_sell_et_total_quantity"
+            android:visibility="gone"
+            android:hint=""
+            style="@style/publish_sell_text"
+            android:layout_weight="3"/>
     </LinearLayout>
 
     <!--发货地址-->
