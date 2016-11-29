@@ -1,5 +1,7 @@
 package tech.xinong.xnsm.pro.base.model;
 
+import java.util.List;
+
 /**
  * Created by xiao on 2016/11/18.
  */
@@ -8,8 +10,17 @@ public class Area extends BaseBean {
 
     private String code;
     private String name;
-    private int parent;
-    private String parentStr;
+    private List<Area> children;
+
+    public List<Area> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Area> children) {
+        this.children = children;
+    }
+
+
 
     public String getCode() {
         return code;
@@ -27,19 +38,4 @@ public class Area extends BaseBean {
         this.name = name;
     }
 
-    public int getParent() {
-        return parent;
-    }
-
-    public void setParent(int parent) {
-        this.parent = parent;
-    }
-
-    public String getParentStr() {
-        return parentStr;
-    }
-
-    public void setParentStr(String parentStr) {
-        this.parentStr = parentStr;
-    }
 }

@@ -46,7 +46,9 @@
         <activity android:name=".pro.publish.view.PublishSellActivity" />
         <activity android:name=".pro.publish.view.SelectSpecificationActivity" />
         <activity android:name=".pro.publish.view.SelectUnitPriceActivity" />
-        <activity android:name=".pro.publish.view.SelectTermTimeActivity"></activity>
+        <activity android:name=".pro.publish.view.SelectTermTimeActivity" />
+        <activity android:name=".pro.publish.view.SelectAddressActivity" />
+        <activity android:name=".pro.publish.view.SelectLogisticMethodActivity"></activity>
     </application>
 
 </manifest>

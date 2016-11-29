@@ -6,17 +6,17 @@ package tech.xinong.xnsm.http.framework.utils;
 
 public class HttpConstant {
 
-    public static final String HTTP_HEADER_TOKEN="X-ACCESS-TOKEN";
+    public static final String HTTP_HEADER_TOKEN = "X-ACCESS-TOKEN";
 
 
     public static final String PREFIX_HTTP = "http://";
     public static final String PREFIX_WS = "ws://";
     public static final String PORT = ":8082";
 
-    public static final String IP ="101.201.147.46";
+    public static final String IP = "101.201.147.46";
     //public static final String IP ="192.168.12.254";
 
-    public static final String HOST = PREFIX_HTTP+IP+PORT;
+    public static final String HOST = PREFIX_HTTP + IP + PORT;
 
 
     /**
@@ -30,8 +30,6 @@ public class HttpConstant {
     public static final String URL_LOGIN_VERIFY = "/users/phone/verifyLogin";
     /*注册  cellphone  verifyCode password*/
     public static final String URL_REGISTER = "/public/registration";
-
-
 
 
     /*查询类别*/
@@ -52,13 +50,13 @@ public class HttpConstant {
     /*上传文件*/
     public static final String URL_UPLOAD = "/listingDocs/upload";
     /* 通过产品的Id得到该产品所有的细节*/
-    public static final String URL_GET_PRO_BY_ID="/listings/%s";
-
+    public static final String URL_GET_PRO_BY_ID = "/listings/%s";
 
 
     /*得到所有的运输方式*/
-    public static final String URL_GET_LOGISTIC_METHODS="/logisticMethods";
+    public static final String URL_GET_LOGISTIC_METHODS = "/logisticMethods";
 
     /*根据产品的ID得到所有的规格*/
     public static final String URL_GET_ALLSPECS_BY_PRODUCTID = "/products/%S/allSpecs";
+
 }

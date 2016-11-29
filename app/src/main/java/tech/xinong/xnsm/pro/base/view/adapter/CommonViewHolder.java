@@ -147,4 +147,13 @@ public class CommonViewHolder {
             view.setOnTouchListener(listener);
         }
     }
+
+    public void setViewBackGround(int viewId,int color){
+
+    }
+
+    public void setTextColor(int viewId,int color){
+        View view = ViewFinder.findViewById(mContentView, viewId);
+        ((TextView)view).setTextColor(color);
+    }
 }

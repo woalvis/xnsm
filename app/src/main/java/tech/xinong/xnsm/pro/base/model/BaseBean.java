@@ -13,6 +13,6 @@ public class BaseBean {
         this.id = id;
     }
 
-    String id;
+    public String id;
 
 }

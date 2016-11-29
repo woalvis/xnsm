@@ -1,5 +1,8 @@
 package tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -9,11 +12,10 @@ import okhttp3.Response;
 
 public abstract class AbsXnHttpCallback implements XnHttpCallback{
 
+
     @Override
     public void onHttpError(Call call, Response response, Exception e) {
-        if (response.code()==401){
 
-        }
     }
 
     @Override

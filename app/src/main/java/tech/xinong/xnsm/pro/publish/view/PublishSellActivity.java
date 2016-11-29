@@ -2,14 +2,18 @@ package tech.xinong.xnsm.pro.publish.view;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
+import tech.xinong.xnsm.util.NumUtil;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
@@ -42,7 +46,7 @@ public class PublishSellActivity extends BaseActivity {
     @ViewInject(R.id.publish_sell_address)
     private TextView tvAddress;
     /*原产地*/
-    @ViewInject(R.id.select_order)
+    @ViewInject(R.id.publish_sell_origin)
     private TextView tvOrigin;
     /*物流方式*/
     @ViewInject(R.id.publish_sell_logistic_method)
@@ -56,9 +60,16 @@ public class PublishSellActivity extends BaseActivity {
 
     private String productId;
 
+
+    /**
+     * 请求码
+     */
     public static final int REQ_CODE_SELECT_SPEC = 0x1001;
     public static final int REQ_CODE_SELECT_UNIT_PRICE = 0x1002;
     public static final int REQ_CODE_SELECT_TERM_TIME = 0x1003;
+    public static final int REQ_CODE_SELECT_ADDRESS = 0x1004;
+    public static final int REQ_CODE_SELECT_ORIGIN = 0x1005;
+    public static final int REQ_CODE_SELECT_OGISTIC_METHOD = 0x1006;
 
 
 
@@ -81,6 +92,22 @@ public class PublishSellActivity extends BaseActivity {
                 });
             }
         });
+
+        /*为编辑供货量的editText添加监听*/
+        etTotalQuantity.addTextChangedListener(myTextWatcher);
+
+//        etTotalQuantity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+//            @Override
+//            public void onFocusChange(View v, boolean hasFocus) {
+//                if (NumUtil.isPositiveNumber(etTotalQuantity.getText().toString())>=0){
+//                    tvAddress.setVisibility(View.VISIBLE);
+//                }else {
+//                    Toast.makeText(mContext, "请输入正确的数字", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+
+
     }
 
     @Override
@@ -92,7 +119,9 @@ public class PublishSellActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.publish_sell_goods_specification, R.id.publish_sell_goods_unit_price})
+    @OnClick({R.id.publish_sell_goods_specification, R.id.publish_sell_goods_unit_price,
+            R.id.publish_sell_origin,R.id.publish_sell_logistic_method
+    ,R.id.publish_sell_goods_notes})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.publish_sell_goods_specification:
@@ -103,6 +132,17 @@ public class PublishSellActivity extends BaseActivity {
             case R.id.publish_sell_goods_unit_price:
                 Intent intentSelectPrice = new Intent(mContext, SelectUnitPriceActivity.class);
                 startActivityForResult(intentSelectPrice, REQ_CODE_SELECT_UNIT_PRICE);
+                break;
+            case R.id.publish_sell_origin:
+                Intent intentSelectOrigin = new Intent(mContext,SelectAddressActivity.class);
+                startActivityForResult(intentSelectOrigin,REQ_CODE_SELECT_ORIGIN);
+                break;
+            case R.id.publish_sell_logistic_method:
+                Intent intentSelectLogisticMethod = new Intent(mContext,SelectLogisticMethodActivity.class);
+                startActivityForResult(intentSelectLogisticMethod,REQ_CODE_SELECT_OGISTIC_METHOD);
+                break;
+            case R.id.publish_sell_goods_notes:
+
                 break;
         }
     }
@@ -134,10 +174,55 @@ public class PublishSellActivity extends BaseActivity {
                     String beginDate = data.getStringExtra("beginDate");
                     String endDate = data.getStringExtra("endDate");
                     tvTermBeginDate.setText("上市时间："+beginDate+"\n下市时间："+endDate);
+                    etTotalQuantity.setVisibility(View.VISIBLE);
+                    break;
+                case REQ_CODE_SELECT_ADDRESS:
+                    String address = data.getStringExtra("address");
+                    tvAddress.setText(address);
+                    tvOrigin.setVisibility(View.VISIBLE);
+                    break;
+                case REQ_CODE_SELECT_ORIGIN:
+                    String originAddress = data.getStringExtra("address");
+                    tvOrigin.setText(originAddress);
+                    tvLogisticMethod.setVisibility(View.VISIBLE);
+                    break;
+                case REQ_CODE_SELECT_OGISTIC_METHOD:
+                    String ogisticMethods = data.getStringExtra("result");
+                    tvLogisticMethod.setText(ogisticMethods);
+                    tvGoodsNotes.setVisibility(View.VISIBLE);
                     break;
 
             }
 
         }
     }
+
+   TextWatcher myTextWatcher =   new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (NumUtil.isPositiveNumber(etTotalQuantity.getText().toString())>=0){
+                tvAddress.setVisibility(View.VISIBLE);
+                tvAddress.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(mContext,SelectAddressActivity.class);
+                        startActivityForResult(intent,REQ_CODE_SELECT_ADDRESS);
+                    }
+                });
+            }else {
+                tvAddress.setVisibility(View.INVISIBLE);
+                Toast.makeText(mContext, "请输入正确的数字", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }

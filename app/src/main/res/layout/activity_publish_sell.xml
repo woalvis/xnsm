@@ -137,10 +137,11 @@
             android:id="@+id/publish_sell_total_quantity"
             style="@style/publish_sell_text"
             android:layout_weight="3"
+            android:visibility="gone"
             />
         <EditText
             android:id="@+id/publish_sell_et_total_quantity"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:hint=""
             style="@style/publish_sell_text"
             android:layout_weight="3"/>
@@ -159,6 +160,9 @@
             android:id="@+id/publish_sell_address"
             style="@style/publish_sell_text"
             android:layout_weight="3"
+            android:text="@string/publish_sell_select_address"
+            android:textColor="@color/colorPrimary"
+            android:visibility="invisible"
             />
     </LinearLayout>
 
@@ -172,9 +176,12 @@
             android:text="@string/publish_sell_origin"/>
 
         <TextView
-            android:id="@+id/publish_sell_text"
+            android:id="@+id/publish_sell_origin"
             style="@style/publish_sell_text"
             android:layout_weight="3"
+            android:visibility="invisible"
+            android:text="@string/publish_sell_select_address"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 
@@ -191,6 +198,9 @@
             android:id="@+id/publish_sell_logistic_method"
             style="@style/publish_sell_text"
             android:layout_weight="3"
+            android:visibility="invisible"
+            android:text="@string/publish_sell_select_logistic_method"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 

@@ -78,4 +78,7 @@
     <string name="publish_sell_unit">元/斤</string>
     <string name="publish_sell_help">斤起批</string>
     <string name="publish_sell_edit_total_quantity_hint">请输入供货量</string>
+    <string name="publish_sell_select_address">点这里选择发货地址省市</string>
+    <string name="publish_sell_select_origin">点这里选择原产地省市</string>
+    <string name="publish_sell_select_logistic_method">点这里选择物流方式</string>
 </resources>

@@ -181,6 +181,13 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             .execute(sbc);
     }
 
+    /*得到所有的物流方式*/
+    public void getAllLogisticMethods(AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_GET_LOGISTIC_METHODS))
+                .execute(sbc);
+    }
+
 
     /**
      * 普通的请求回调
@@ -218,6 +225,10 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             /** 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程 */
             @Override
             public void onError(Call call, Response response, Exception e) {
+                if (response.code()==401){
+                    Toast.makeText(mContext, "Token过期,请重新登录", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 callback.onHttpError(call, response, e);
                 Toast.makeText(mContext, "网络请求错误，请检查网络", Toast.LENGTH_SHORT).show();

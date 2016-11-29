@@ -2,10 +2,10 @@ package tech.xinong.xnsm.pro.buy.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -23,8 +23,6 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
-import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.util.ioc.ContentView;
 
@@ -102,12 +100,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
          /*设置选择区域按钮不可点击,防止用户极端操作*/
         selectArea.setClickable(false);
         XinongHttpCommend.getInstence(mContext).getAreas(new AbsXnHttpCallback() {
-
             @Override
             public void onSuccess(String info, String result) {
                 List<Area> areas = JSON.parseArray(result, Area.class);
-                areasMap = getAreaMap(areas);
-                showAreaPopup();
+
+                showAreaPopup(areas);
             }
         });
     }
@@ -129,34 +126,34 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         List<Area> areaParentList = new ArrayList<>();
         List<Area> areaSubList = new ArrayList<>();
         String rootId = "";
-
-        for (Area area : areas) {
-            if (TextUtils.isEmpty(area.getParentStr())) {
-                rootId = area.getId();
-            }
-        }
-
-
-        for (Area area : areas) {
-            if (TextUtils.isEmpty(area.getParentStr()) || rootId.equals(area.getParentStr())) {
-                areaParentList.add(area);
-            } else {
-                areaSubList.add(area);
-            }
-        }
-
-        for (Area area : areaParentList) {
-            String parentId = area.getId();
-            List<Area> areaSubs = new ArrayList<>();
-            for (Area areaSub : areaSubList) {
-                if (areaSub.getParentStr().equals(parentId)) {
-                    areaSubs.add(areaSub);
-                    //areaSubList.remove(areaSub);
-                }
-
-            }
-            areaMap.put(area, areaSubs);
-        }
+//
+//        for (Area area : areas) {
+//            if (TextUtils.isEmpty(area.getParentStr())) {
+//                rootId = area.getId();
+//            }
+//        }
+//
+//
+//        for (Area area : areas) {
+//            if (TextUtils.isEmpty(area.getParentStr()) || rootId.equals(area.getParentStr())) {
+//                areaParentList.add(area);
+//            } else {
+//                areaSubList.add(area);
+//            }
+//        }
+//
+//        for (Area area : areaParentList) {
+//            String parentId = area.getId();
+//            List<Area> areaSubs = new ArrayList<>();
+//            for (Area areaSub : areaSubList) {
+//                if (areaSub.getParentStr().equals(parentId)) {
+//                    areaSubs.add(areaSub);
+//                    //areaSubList.remove(areaSub);
+//                }
+//
+//            }
+//            areaMap.put(area, areaSubs);
+//        }
 
         parentList = new ArrayList<>();
         for (Map.Entry<Area, List<Area>> entry : areaMap.entrySet()) {
@@ -169,69 +166,77 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     /**
      * 选择地区的弹出框
      */
-    private void showAreaPopup() {
+    private void showAreaPopup(List<Area> areas) {
         View view = LayoutInflater.from(this).inflate(R.layout.popup_select, null);
         final PopupWindow popupWindow = new PopupWindow(this);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         ListView parentLv = (ListView) view.findViewById(R.id.popup_lv_parent);
-        final ListView subLv = (ListView) view.findViewById(R.id.popup_lv_sub);
-        parentLv.setAdapter(new CommonAdapter<Area>(this, android.R.layout.simple_list_item_1, parentList) {
-            @Override
-            protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
-                viewHolder.setTextForTextView(android.R.id.text1, item.getName());
-                viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        if (areasMap.get(item).size() != 0) {
-                            Area areaAll = new Area();
-                            areaAll.setName("全部");
-                            areaAll.setParentStr(areasMap.get(item).get(0).getParentStr());
-                            areasMap.get(item).add(0, areaAll);
-                            subLv.setVisibility(View.VISIBLE);
-
-                            subLv.setAdapter(new CommonAdapter<Area>(SelectActivity.this, android.R.layout.simple_list_item_1, areasMap.get(item)) {
-                                @Override
-                                protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
-                                    viewHolder.setTextForTextView(android.R.id.text1, item.getName());
-
-                                    viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            popupWindow.dismiss();
-
-                                              /*设置选择区域按钮可点击*/
-                                            selectArea.setClickable(true);
-                                            if (item.getName().equals("全部")) {
-
-                                                for (Area area : parentList) {
-                                                    if (item.getParentStr().equals(area.getId())) {
-                                                        areaShow.setText(area.getName());
-                                                    }
-                                                }
-
-                                            } else {
-                                                areaShow.setText(item.getName());
-                                            }
-                                        }
-                                    });
-                                }
-                            });
-                        } else {
-  /*设置选择区域按钮可点击*/
-                            selectArea.setClickable(true);
-
-                            popupWindow.dismiss();
-                            areaShow.setText(item.getName());
+        parentLv.setAdapter(new ArrayAdapter<Area>(mContext,
+                android.R.layout.simple_list_item_1,
+                android.R.id.text1,
+                areas));
 
 
-                        }
 
-                    }
-                });
-            }
-        });
+//        final ListView subLv = (ListView) view.findViewById(R.id.popup_lv_sub);
+//        parentLv.setAdapter(new CommonAdapter<Area>(this, android.R.layout.simple_list_item_1, parentList) {
+//            @Override
+//            protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
+//                viewHolder.setTextForTextView(android.R.id.text1, item.getName());
+//                viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+
+//                        if (areasMap.get(item).size() != 0) {
+//                            Area areaAll = new Area();
+//                            areaAll.setName("全部");
+//                            areaAll.setParentStr(areasMap.get(item).get(0).getParentStr());
+//                            areasMap.get(item).add(0, areaAll);
+//                            subLv.setVisibility(View.VISIBLE);
+//
+//                            subLv.setAdapter(new CommonAdapter<Area>(SelectActivity.this, android.R.layout.simple_list_item_1, areasMap.get(item)) {
+//                                @Override
+//                                protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
+//                                    viewHolder.setTextForTextView(android.R.id.text1, item.getName());
+//
+//                                    viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(View v) {
+//                                            popupWindow.dismiss();
+//
+//                                              /*设置选择区域按钮可点击*/
+//                                            selectArea.setClickable(true);
+//                                            if (item.getName().equals("全部")) {
+//
+//                                                for (Area area : parentList) {
+//                                                    if (item.getParentStr().equals(area.getId())) {
+//                                                        areaShow.setText(area.getName());
+//                                                    }
+//                                                }
+//
+//                                            } else {
+//                                                areaShow.setText(item.getName());
+//                                            }
+//                                        }
+//                                    });
+//                                }
+//                            });
+//                        } else {
+//  /*设置选择区域按钮可点击*/
+//                            selectArea.setClickable(true);
+//
+//                            popupWindow.dismiss();
+//                            areaShow.setText(item.getName());
+//
+//
+//                        }
+
+//                    }
+//                });
+//            }
+//        });
 
         popupWindow.setContentView(view);
 
