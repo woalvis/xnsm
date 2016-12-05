@@ -41,11 +41,11 @@ public class ProductListActivity extends BaseActivity {
         }
 
         gvProducts = (GridView) this.findViewById(R.id.product_grid);
-        gvProducts.setAdapter(new CommonAdapter<ProductModel>(this,android.R.layout.simple_list_item_1,products) {
+        gvProducts.setAdapter(new CommonAdapter<ProductModel>(this,R.layout.item_border_text,products) {
             @Override
             protected void fillItemData(CommonViewHolder viewHolder, int position, final ProductModel item) {
-                viewHolder.setTextForTextView(android.R.id.text1,item.getName());
-                viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
+                viewHolder.setTextForTextView(R.id.tv_show,item.getName());
+                viewHolder.setOnClickListener(R.id.tv_show, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                      XinongHttpCommend.getInstence(mContext).getProduct(new AbsXnHttpCallback() {
@@ -54,6 +54,7 @@ public class ProductListActivity extends BaseActivity {
                                 Intent intent = new Intent(ProductListActivity.this,SpecActivity.class);
                                 intent.putExtra("result",result);
                                 intent.putExtra("productId",item.getName());
+                                intent.putExtra("id",item.getId());
                                 intent.putExtra("selectOp",mIntent.getSerializableExtra("selectOp"));
                                 startActivity(intent);
                             }

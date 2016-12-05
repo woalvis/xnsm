@@ -70,8 +70,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 headers.put(HttpConstant.HTTP_HEADER_TOKEN,token);
 
                 /*登陆成功后将用户名密码，还有得到的token存入文件中*/
-                editor.putString("username",name);
-                editor.putString("password",password);
+                editor.putString(XnsConstant.USER_NAME,name);
+                editor.putString(XnsConstant.PASSWORD,password);
                 editor.putString(XnsConstant.TOKEN,token);
                 editor.commit();
 

@@ -29,13 +29,14 @@ public class SelectSpecificationAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private Map<String, String> results;
-
+    private Map<String,String> ids;
 
     public SelectSpecificationAdapter(Context context, List<SelectSpecModel> datas) {
         mContext = context;
         mDatas = datas;
         mInflater = LayoutInflater.from(context);
         results = new HashMap<>();
+        ids = new HashMap<>();
         for (SelectSpecModel selectSpecModel : mDatas) {
             for (SelectSpecificationActivity.SpecificationCategory category : SelectSpecificationActivity.SpecificationCategory.values())
             {
@@ -83,7 +84,7 @@ public class SelectSpecificationAdapter extends BaseAdapter {
         }
         viewHolder.specsTitle.setText(title);
 
-        viewHolder.specsGrid.setAdapter(new ArrayAdapter<String>(mContext, android.R.layout.simple_list_item_1, getItem(position).getSpecs()));
+        viewHolder.specsGrid.setAdapter(new ArrayAdapter<String>(mContext, R.layout.item_border_text, getItem(position).getSpecs()));
 
         final String finalTitle = title;
         viewHolder.specsGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,8 +98,9 @@ public class SelectSpecificationAdapter extends BaseAdapter {
                     tv.setTextColor(mContext.getResources().getColor(R.color.black));
                 }
 
-                Toast.makeText(mContext, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, ((TextView) view).getText().toString(), Toast.LENGTH_SHORT).show();
                 results.put(finalTitle, ((TextView) view).getText().toString());
+                //ids.put(finalTitle,mDatas.get(position).getId());
                 ((TextView) parent.getChildAt(position)).setTextColor(mContext.getResources().getColor(R.color.green_85c43d));
 
             }

@@ -19,7 +19,7 @@ import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.pro.publish.model.SpecsModel;
+import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecificationAdapter;
 import tech.xinong.xnsm.util.ioc.ContentView;
@@ -37,6 +37,8 @@ public class SelectSpecificationActivity extends BaseActivity {
     private Map<String,List<String>> specsMap;
     private List<SelectSpecModel> selectSpecModels;
     private SelectSpecificationAdapter adapter;
+    private List<SpecModel> specsModelList;
+
 
     public enum SpecificationCategory {
         VARIETY("品种"), SIZE("大小"), COLOR("颜色"), GRADE("等级"), MISC("其他");
@@ -59,9 +61,9 @@ public class SelectSpecificationActivity extends BaseActivity {
         XinongHttpCommend.getInstence(this).getAllSpecsByproductId(productId, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
-                List<SpecsModel> specsModelList = JSON.parseArray(result,SpecsModel.class);
+                specsModelList = JSON.parseArray(result,SpecModel.class);
                 List<String> specList = null;
-                for (SpecsModel specsModel : specsModelList){
+                for (SpecModel specsModel : specsModelList){
                     if (specsMap.get(specsModel.getCategory())==null){
                         specList = new ArrayList<>();
                         specList.add(specsModel.getItem());
@@ -100,11 +102,28 @@ public class SelectSpecificationActivity extends BaseActivity {
                 }
                 Intent myIntent = new Intent();
                 myIntent.putExtra("result",adapter.getResults());
+                myIntent.putExtra("ids",getIds(adapter.getResults()));
                 setResult(RESULT_OK,myIntent);
                 Toast.makeText(mContext, adapter.getResults(), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
+    }
+
+    private String getIds(String results) {
+        String[] names = results.split(",");
+        String ids = "";
+        for(String name : names){
+            for (SpecModel specs:specsModelList)
+            {
+                if (name.equals(specs.getItem())){
+                    ids+=specs.getId()+",";
+                }
+            }
+
+        }
+
+       return ids.substring(0,ids.length()-1);
     }
 
 }

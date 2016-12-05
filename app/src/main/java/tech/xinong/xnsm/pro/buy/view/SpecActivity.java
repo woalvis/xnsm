@@ -25,6 +25,7 @@ public class SpecActivity extends BaseActivity {
     private Intent mIntent;
     private CategoryModel.OP_SELECT opSelect;
     private String productId;
+    private String id;
 
 
     @Override
@@ -36,15 +37,16 @@ public class SpecActivity extends BaseActivity {
     public void initData() {
         mIntent = getIntent();
         productId = mIntent.getStringExtra("productId");
+        id = mIntent.getStringExtra("id");
         opSelect = (CategoryModel.OP_SELECT) mIntent.getSerializableExtra("selectOp");
         String result = mIntent.getStringExtra("result");
         List<SpecModel> spes = JSON.parseArray(result,SpecModel.class);
         gridSpec = (GridView) this.findViewById(R.id.spec_grid);
-        gridSpec.setAdapter(new CommonAdapter<SpecModel>(this,android.R.layout.simple_list_item_1,spes) {
+        gridSpec.setAdapter(new CommonAdapter<SpecModel>(this,R.layout.item_border_text,spes) {
             @Override
             protected void fillItemData(CommonViewHolder viewHolder, int position, final SpecModel item) {
-                viewHolder.setTextForTextView(android.R.id.text1,item.getItem());
-                viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
+                viewHolder.setTextForTextView(R.id.tv_show,item.getItem());
+                viewHolder.setOnClickListener(R.id.tv_show, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -55,16 +57,17 @@ public class SpecActivity extends BaseActivity {
                                 intent = new Intent(SpecActivity.this,SelectActivity.class);
                                 intent.putExtra("spec",item);
                                 intent.putExtra("productId",productId);
+                                intent.putExtra("id",id);
                                 startActivity(intent);
                                 break;
                             case PUBLISH_BUY:
                                 Toast.makeText(SpecActivity.this, "buy", Toast.LENGTH_SHORT).show();
                                 break;
                             case PUBLISH_SELL:
-
                                 intent = new Intent(SpecActivity.this,PublishSellActivity.class);
                                 intent.putExtra("spec",item);
                                 intent.putExtra("productId",productId);
+                                intent.putExtra("id",id);
                                 startActivity(intent);
 
                                 break;

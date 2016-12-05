@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import tech.xinong.xnsm.mvp.view.impl.MvpActivity;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
@@ -32,7 +33,9 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
         InjectUtils.inject(this);
         initWidget();
         initData();
+
     }
+
 
     @Override
     public p bindPresenter() {
@@ -44,7 +47,7 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
      */
     public void initWidget(){
 
-    };
+    }
 
 
     /**
@@ -52,6 +55,11 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
      */
     public void initData(){
 
-    };
+    }
+
+
+    public void setTextViewText(TextView tv,String text){
+        tv.setText(text);
+    }
 
 }

@@ -1,244 +1,300 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_publish_sell"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tech.xinong.xnsm.pro.publish.view.PublishSellActivity">
 
-    <!--货品名称-->
     <LinearLayout
+        android:id="@+id/activity_publish_sell"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_name"/>
-        <TextView
-            android:id="@+id/publish_sell_goods_name"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            android:text="苹果 红富士"
-            />
-    </LinearLayout>
+        <!--货品名称-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <TextView
 
-    <!--货品规格-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_specification"/>
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_name" />
 
-        <TextView
-            android:id="@+id/publish_sell_goods_specification"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            android:text="@string/publish_sell_select_specification"
-            android:textColor="@color/colorPrimary"
-            android:clickable="true"
-            />
-    </LinearLayout>
-
-    <!--货品单价-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_unit_price"/>
-
-        <TextView
-            android:id="@+id/publish_sell_goods_unit_price"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-
-            />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/publish_sell_goods_name"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:text="苹果 红富士" />
+        </LinearLayout>
 
 
+        <!--货品规格-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <!--是否现货-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_in_stock"/>
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_specification" />
 
-        <!--<TextView-->
+            <TextView
+                android:id="@+id/publish_sell_goods_specification"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:clickable="true"
+                android:text="@string/publish_sell_select_specification"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <!--货品单价-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_unit_price" />
+
+            <TextView
+                android:id="@+id/publish_sell_goods_unit_price"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+
+                />
+        </LinearLayout>
+
+
+        <!--是否现货-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_in_stock" />
+
+            <!--<TextView-->
             <!--android:id="@+id/publish_sell_goods_in_stock"-->
             <!--style="@style/publish_sell_text"-->
             <!--android:layout_weight="3"-->
             <!--/>-->
-        <RadioGroup
-            android:visibility="invisible"
-            android:id="@+id/publish_sell_rg_in_stock"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="3">
-
-            <RadioButton
-                android:id="@+id/publish_sell_rb_yes"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/publish_sell_rg_in_stock"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:text="是"/>
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
-            <RadioButton
-                android:id="@+id/publish_sell_rb_no"
-                android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/publish_sell_rb_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:text="是" />
+
+                <RadioButton
+                    android:id="@+id/publish_sell_rb_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:text="否" />
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+
+        <!--供货时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_term_begin_date" />
+
+            <TextView
+                android:id="@+id/publish_sell_term_begin_date"
+                style="@style/publish_sell_text"
+                android:layout_weight="3" />
+        </LinearLayout>
+
+        <!--供货量-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_total_quantity" />
+
+            <TextView
+                android:id="@+id/publish_sell_total_quantity"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/publish_sell_et_total_quantity"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:hint=""
+                android:inputType="number"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!--发货地址-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_address" />
+
+            <TextView
+                android:id="@+id/publish_sell_address"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:text="@string/publish_sell_select_address"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!--原产地-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_origin" />
+
+            <TextView
+                android:id="@+id/publish_sell_origin"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:text="@string/publish_sell_select_address"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!--物流方式-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_logistic_method" />
+
+            <TextView
+                android:id="@+id/publish_sell_logistic_method"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:text="@string/publish_sell_select_logistic_method"
+                android:textColor="@color/colorPrimary"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <!--货品描述-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_notes" />
+
+            <TextView
+                android:id="@+id/publish_sell_goods_notes"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:visibility="invisible"
+                android:text="@string/publish_sell_select_goods_note"
+                android:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <!--货品照片-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_photos" />
+
+            <TextView
+                android:id="@+id/publish_sell_goods_photos"
+                style="@style/publish_sell_text"
+                android:layout_weight="3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_broker_allowed" />
+
+            <RadioGroup
+                android:id="@+id/publish_sell_rg_broker_allowed"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:layout_marginLeft="30dp"
-                android:text="否"/>
+                android:layout_weight="3"
+                android:orientation="horizontal"
+                android:visibility="invisible">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/publish_sell_brokerallowed_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:text="是" />
+
+                <RadioButton
+                    android:id="@+id/publish_sell_brokerallowed_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:gravity="center"
+                    android:text="否" />
+
+            </RadioGroup>
 
 
-    </LinearLayout>
+        </LinearLayout>
 
 
-    <!--供货时间-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_term_begin_date"/>
 
-        <TextView
-            android:id="@+id/publish_sell_term_begin_date"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            />
-    </LinearLayout>
-
-    <!--供货量-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_total_quantity"/>
-
-        <TextView
-            android:id="@+id/publish_sell_total_quantity"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
+        <Button
             android:visibility="gone"
-            />
-        <EditText
-            android:id="@+id/publish_sell_et_total_quantity"
-            android:visibility="invisible"
-            android:hint=""
-            style="@style/publish_sell_text"
-            android:layout_weight="3"/>
+            android:clickable="false"
+            android:id="@+id/publish_sell_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"/>
+
+
     </LinearLayout>
-
-    <!--发货地址-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_address"/>
-
-        <TextView
-            android:id="@+id/publish_sell_address"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            android:text="@string/publish_sell_select_address"
-            android:textColor="@color/colorPrimary"
-            android:visibility="invisible"
-            />
-    </LinearLayout>
-
-    <!--原产地-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_origin"/>
-
-        <TextView
-            android:id="@+id/publish_sell_origin"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            android:visibility="invisible"
-            android:text="@string/publish_sell_select_address"
-            android:textColor="@color/colorPrimary"
-            />
-    </LinearLayout>
-
-    <!--物流方式-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_logistic_method"/>
-
-        <TextView
-            android:id="@+id/publish_sell_logistic_method"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            android:visibility="invisible"
-            android:text="@string/publish_sell_select_logistic_method"
-            android:textColor="@color/colorPrimary"
-            />
-    </LinearLayout>
-
-    <!--货品描述-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_notes"/>
-
-        <TextView
-            android:id="@+id/publish_sell_goods_notes"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            />
-    </LinearLayout>
-
-    <!--货品照片-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            style="@style/publish_sell_text"
-            android:layout_weight="1"
-            android:text="@string/publish_sell_goods_photos"/>
-
-        <TextView
-            android:id="@+id/publish_sell_goods_photos"
-            style="@style/publish_sell_text"
-            android:layout_weight="3"
-            />
-    </LinearLayout>
-
-
-
-
-
-
-</LinearLayout>
+</ScrollView>

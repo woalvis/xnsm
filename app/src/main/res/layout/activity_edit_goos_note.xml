@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_edit_goos_note"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="tech.xinong.xnsm.pro.publish.view.EditGoodsNoteActivity">
+
+
+    <EditText
+        android:id="@+id/edit_goods_note_et"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:hint="@string/publish_sell_goods_note_hint"/>
+
+
+    <Button
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/edit_goods_note_submit"
+        android:text="填好了"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:padding="40dp"/>
+
+</LinearLayout>

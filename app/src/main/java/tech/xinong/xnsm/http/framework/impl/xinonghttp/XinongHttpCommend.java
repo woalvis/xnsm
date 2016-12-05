@@ -2,6 +2,7 @@ package tech.xinong.xnsm.http.framework.impl.xinonghttp;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -20,8 +21,13 @@ import tech.xinong.xnsm.http.framework.impl.RequestParam;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.XnHttpCallback;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
+import tech.xinong.xnsm.pro.buy.model.BuyOrderModel;
+import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
+import tech.xinong.xnsm.pro.user.view.LoginActivity;
 import tech.xinong.xnsm.pro.user.view.RegisterActivity;
 
+import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_BUY_NOW;
+import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_ORDER_BY_ID;
 import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_PRO_BY_ID;
 
 /**
@@ -189,6 +195,34 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
 
+    /*发布卖货信息*/
+    public void pulishSellInfo(PublishSellInfoModel publishSellInfoModel, AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        String jsonStr = JSON.toJSONString(publishSellInfoModel);
+        OkGo.post(getAbsoluteUrl(HttpConstant.URL_LISTINGS_SELL))
+                .upJson(jsonStr)
+                .execute(sbc);
+    }
+
+
+    /*立即购买，创建订单*/
+    public void buyNow(BuyOrderModel buyOrderModel,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        String jsonStr = JSON.toJSONString(buyOrderModel);
+        OkGo.post(getAbsoluteUrl(URL_BUY_NOW))
+                .upJson(jsonStr)
+                .execute(sbc);
+    }
+
+
+    /*通过订单的id，得到订单的详情*/
+    public void getOrderDetailById(String id,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(String.format(URL_GET_ORDER_BY_ID,id)))
+                .execute(sbc);
+
+    }
+
     /**
      * 普通的请求回调
      */
@@ -225,11 +259,14 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             /** 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程 */
             @Override
             public void onError(Call call, Response response, Exception e) {
-                if (response.code()==401){
-                    Toast.makeText(mContext, "Token过期,请重新登录", Toast.LENGTH_SHORT).show();
-                    return;
+               if (response!=null) {
+                    if (response.code() == 401) {
+                        Toast.makeText(mContext, "Token过期,请重新登录", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        mContext.startActivity(intent);
+                        return;
+                    }
                 }
-
                 callback.onHttpError(call, response, e);
                 Toast.makeText(mContext, "网络请求错误，请检查网络", Toast.LENGTH_SHORT).show();
             }

@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:hint="@string/publish_sell_edit_price_hint"
+        android:inputType="numberDecimal"
         android:id="@+id/unit_price" />
     <View
         android:layout_width="1px"
@@ -56,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/publish_sell_edit_min_quantity_hint"
+            android:inputType="number"
             android:id="@+id/min_quantity" />
         <View
             android:layout_width="1px"

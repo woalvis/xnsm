@@ -11,6 +11,7 @@ import tech.xinong.xnsm.pro.base.model.BaseBean;
 
 public class SpecModel extends BaseBean implements Serializable{
 
+
     private String product;
     private String category;
     private String item;

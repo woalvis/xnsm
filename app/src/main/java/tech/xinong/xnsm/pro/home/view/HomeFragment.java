@@ -72,16 +72,6 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
         indianCalendarBanner.setViewPager(viewPagerBanner);
 
         gridHomePush = (GridViewForScrollView) contentView.findViewById(R.id.grid_home_push);
-
-//        contentView.findViewById(R.id.tv_login).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                login();
-//            }
-//        });
-
-
-
         autoPlay();
     }
 
@@ -93,24 +83,7 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
 
     private void initNavigation(View contentView){
         DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
-        builder.setLeftText(R.string.register)
-                .setCenterText(R.string.tabbar_home_text)
-                .setRightText(R.string.login)
-                .setLeftTextColor(R.color.app_text_orange_color)
-                .setRightTextColor(R.color.app_text_orange_color)
-                .setLeftOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "注册", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setRightOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(getContext(), "登录", Toast.LENGTH_SHORT).show();
-                    }
-                }).create();
-
+        builder.setCenterText(R.string.home).create();
 
     }
 
@@ -150,7 +123,7 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(mContext, GoodsDetailActivity.class);
-                                    intent.putExtra("detail",item);
+                                    intent.putExtra("id",item.getId());
                                     Toast.makeText(mContext,  item.getProductName(), Toast.LENGTH_SHORT).show();
                                     mContext.startActivity(intent);
                                 }

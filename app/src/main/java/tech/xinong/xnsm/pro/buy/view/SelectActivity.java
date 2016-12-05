@@ -1,7 +1,6 @@
 package tech.xinong.xnsm.pro.buy.view;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
@@ -25,6 +21,7 @@ import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.util.ioc.ContentView;
+import tech.xinong.xnsm.util.ioc.ViewInject;
 
 
 /**
@@ -32,41 +29,28 @@ import tech.xinong.xnsm.util.ioc.ContentView;
  */
 @ContentView(R.layout.activity_select)
 public class SelectActivity extends BaseActivity implements View.OnClickListener {
-
+    @ViewInject(R.id.select_area)
     private TextView selectArea;
+    @ViewInject(R.id.select_area_show)
     private TextView areaShow;
+    @ViewInject(R.id.select_category)
     private TextView selectCategory;
+    @ViewInject(R.id.select_category_show)
     private TextView categoryShow;
+    @ViewInject(R.id.select_spec)
     private TextView selectSpec;
+    @ViewInject(R.id.select_spec_show)
     private TextView specShow;
+    @ViewInject(R.id.select_order)
     private TextView selectOrder;
+    @ViewInject(R.id.select_order_show)
     private TextView orderShow;
-    /*地区数据map*/
-    private Map<Area, List<Area>> areasMap;
-    private List<Area> parentList;
-    private List<Area> subList;
-
+    @ViewInject(R.id.select_layout_bottom)
     private View selectLayoutBottom;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
 
     @Override
     public void initWidget() {
-        selectArea = (TextView) this.findViewById(R.id.select_area);
-        areaShow = (TextView) this.findViewById(R.id.select_area_show);
-        selectCategory = (TextView) this.findViewById(R.id.select_category);
-        categoryShow = (TextView) this.findViewById(R.id.select_category_show);
-        selectSpec = (TextView) this.findViewById(R.id.select_spec);
-        specShow = (TextView) this.findViewById(R.id.select_spec_show);
-        selectOrder = (TextView) this.findViewById(R.id.select_order);
-        orderShow = (TextView) this.findViewById(R.id.select_order_show);
-        selectLayoutBottom = this.findViewById(R.id.select_layout_bottom);
-
-
         selectArea.setOnClickListener(this);
         selectCategory.setOnClickListener(this);
         selectSpec.setOnClickListener(this);
@@ -76,12 +60,12 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         Intent intent = getIntent();
-        SpecModel spce = (SpecModel) intent.getSerializableExtra("spec");
-        Toast.makeText(this, spce.toString(), Toast.LENGTH_SHORT).show();
+        SpecModel spec = (SpecModel) intent.getSerializableExtra("spec");
+        Toast.makeText(this, spec.toString(), Toast.LENGTH_SHORT).show();
         //展示之前选择的品类
-        categoryShow.setText(spce.getProduct());
+        categoryShow.setText(spec.getProduct());
         //展示之前选择品种
-        specShow.setText(spce.getItem());
+        specShow.setText(spec.getItem());
     }
 
     @Override
@@ -109,60 +93,6 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         });
     }
 
-
-    private void selectCategory() {
-
-    }
-
-
-    /**
-     * 把从服务器拿到的地区信息组装成能用的数据结构
-     *
-     * @param areas
-     * @return
-     */
-    private Map<Area, List<Area>> getAreaMap(List<Area> areas) {
-        Map<Area, List<Area>> areaMap = new LinkedHashMap<>();
-        List<Area> areaParentList = new ArrayList<>();
-        List<Area> areaSubList = new ArrayList<>();
-        String rootId = "";
-//
-//        for (Area area : areas) {
-//            if (TextUtils.isEmpty(area.getParentStr())) {
-//                rootId = area.getId();
-//            }
-//        }
-//
-//
-//        for (Area area : areas) {
-//            if (TextUtils.isEmpty(area.getParentStr()) || rootId.equals(area.getParentStr())) {
-//                areaParentList.add(area);
-//            } else {
-//                areaSubList.add(area);
-//            }
-//        }
-//
-//        for (Area area : areaParentList) {
-//            String parentId = area.getId();
-//            List<Area> areaSubs = new ArrayList<>();
-//            for (Area areaSub : areaSubList) {
-//                if (areaSub.getParentStr().equals(parentId)) {
-//                    areaSubs.add(areaSub);
-//                    //areaSubList.remove(areaSub);
-//                }
-//
-//            }
-//            areaMap.put(area, areaSubs);
-//        }
-
-        parentList = new ArrayList<>();
-        for (Map.Entry<Area, List<Area>> entry : areaMap.entrySet()) {
-            parentList.add(entry.getKey());
-        }
-        return areaMap;
-    }
-
-
     /**
      * 选择地区的弹出框
      */
@@ -174,72 +104,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         ListView parentLv = (ListView) view.findViewById(R.id.popup_lv_parent);
 
         parentLv.setAdapter(new ArrayAdapter<Area>(mContext,
-                android.R.layout.simple_list_item_1,
-                android.R.id.text1,
+                R.layout.item_border_text,
+                R.id.tv_show,
                 areas));
 
-
-
-//        final ListView subLv = (ListView) view.findViewById(R.id.popup_lv_sub);
-//        parentLv.setAdapter(new CommonAdapter<Area>(this, android.R.layout.simple_list_item_1, parentList) {
-//            @Override
-//            protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
-//                viewHolder.setTextForTextView(android.R.id.text1, item.getName());
-//                viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-
-//                        if (areasMap.get(item).size() != 0) {
-//                            Area areaAll = new Area();
-//                            areaAll.setName("全部");
-//                            areaAll.setParentStr(areasMap.get(item).get(0).getParentStr());
-//                            areasMap.get(item).add(0, areaAll);
-//                            subLv.setVisibility(View.VISIBLE);
-//
-//                            subLv.setAdapter(new CommonAdapter<Area>(SelectActivity.this, android.R.layout.simple_list_item_1, areasMap.get(item)) {
-//                                @Override
-//                                protected void fillItemData(CommonViewHolder viewHolder, int position, final Area item) {
-//                                    viewHolder.setTextForTextView(android.R.id.text1, item.getName());
-//
-//                                    viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(View v) {
-//                                            popupWindow.dismiss();
-//
-//                                              /*设置选择区域按钮可点击*/
-//                                            selectArea.setClickable(true);
-//                                            if (item.getName().equals("全部")) {
-//
-//                                                for (Area area : parentList) {
-//                                                    if (item.getParentStr().equals(area.getId())) {
-//                                                        areaShow.setText(area.getName());
-//                                                    }
-//                                                }
-//
-//                                            } else {
-//                                                areaShow.setText(item.getName());
-//                                            }
-//                                        }
-//                                    });
-//                                }
-//                            });
-//                        } else {
-//  /*设置选择区域按钮可点击*/
-//                            selectArea.setClickable(true);
-//
-//                            popupWindow.dismiss();
-//                            areaShow.setText(item.getName());
-//
-//
-//                        }
-
-//                    }
-//                });
-//            }
-//        });
-
         popupWindow.setContentView(view);
-
         popupWindow.showAsDropDown(selectLayoutBottom);
 
     }

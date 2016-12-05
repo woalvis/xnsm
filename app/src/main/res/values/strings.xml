@@ -36,6 +36,7 @@
     <string name="logout">退出登录</string>
     <string name="input_password">请输入密码</string>
     <string name="confirm_password">确认密码</string>
+    <string name="my_order">我的订单</string>
 
     <!-- 登录界面需要的字符资源-->
     <string name="phone_num_hint">请输入手机号</string>
@@ -63,6 +64,7 @@
     <string name="publish_sell_goods_specification">货品规格</string>
     <string name="publish_sell_goods_unit_price">货品单价</string>
     <string name="publish_sell_goods_in_stock">是否现货</string>
+    <string name="publish_sell_goods_broker_allowed">是否代买</string>
     <string name="publish_sell_term_begin_date">供货时间</string>
     <string name="publish_sell_total_quantity">供货量</string>
     <string name="publish_sell_address">发货地址</string>
@@ -81,4 +83,21 @@
     <string name="publish_sell_select_address">点这里选择发货地址省市</string>
     <string name="publish_sell_select_origin">点这里选择原产地省市</string>
     <string name="publish_sell_select_logistic_method">点这里选择物流方式</string>
+    <string name="publish_sell_select_goods_note">点这里添加货物描述</string>
+    <string name="publish_sell_goods_note_hint">如：货品特色、种植情况、供应量或包装及杂费情况等，更详细准确的描述能吸引更多的采购商</string>
+
+
+    <!-- 订单详情-->
+    <string name="unit_price">单价</string>
+    <string name="amount">数量</string>
+    <string name="goods_price">货款</string>
+    <string name="transport_cost">运费</string>
+    <string name="total_price">订单总额:</string>
+    <string name="order_helper"></string>
+    <string name="order_buy_details">采购详情</string>
+    <string name="order_logistic_method">物流方式</string>
+    <string name="order_shipping_address">送货地址</string>
+    <string name="buyer_require">采购要求</string>
+    <string name="order_create_time">订单创建时间</string>
+    <string name="order_pay_now">去付款</string>
 </resources>

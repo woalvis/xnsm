@@ -74,11 +74,19 @@ public class SelectTermTimeActivity extends BaseActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String selectDate =year+""+(monthOfYear+1)+""+dayOfMonth;
+                String monthStr = "";
+                String dayStr = "";
                 if (selectDate.compareTo(nowData)<0){
                     Toast.makeText(mContext, "您选择的日期不能小于当前日期", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                tvShow.setText(year + "-" + (monthOfYear+1) + "-" + dayOfMonth);
+                if (monthOfYear+1<10){
+                    monthStr ="0"+(monthOfYear+1);
+                }
+                if (dayOfMonth<10){
+                    dayStr = "0"+dayOfMonth;
+                }
+                tvShow.setText(year + "-" + monthStr + "-" + dayStr);
                 if(check()){
                     selectTermTimeConfirm.setVisibility(View.VISIBLE);
                 }
@@ -92,6 +100,7 @@ public class SelectTermTimeActivity extends BaseActivity {
         boolean flag = false;
         String beginTermData = beginDateShow.getText().toString();
         String endTermData = endDateShow.getText().toString();
+
 
         if (!beginTermData.equals("请选择")&&(!endTermData.equals("请选择"))) {
             if (beginTermData.compareTo(endTermData) > 0) {

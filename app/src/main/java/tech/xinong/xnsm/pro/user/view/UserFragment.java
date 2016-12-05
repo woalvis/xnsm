@@ -1,29 +1,36 @@
 package tech.xinong.xnsm.pro.user.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.user.presenter.LoginPresenter;
 import tech.xinong.xnsm.pro.user.presenter.LoginView;
+import tech.xinong.xnsm.util.XnsConstant;
 
 /**
  * 我的页面
  * Created by 肖志金 on 2016/11/10.
  */
-public class UserFragment extends BaseFragment<LoginPresenter,LoginView> {
+public class UserFragment extends BaseFragment<LoginPresenter,LoginView> implements View.OnClickListener{
 
     private LoginPresenter loginPresenter;
     private LoginView loginView;
     private TextView userLogin;
     private TextView userRegister;
+    private TextView userName;
+
+    private LinearLayout myOrderLayout;
     //创建对象
     @Override
     public LoginPresenter bindPresenter() {
@@ -70,6 +77,20 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> {
                 getActivity().startActivity(intent);
             }
         });
+
+
+        userName = (TextView) contentView.findViewById(R.id.user_name);
+
+        SharedPreferences sp = getActivity().getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+//        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
+//        editor.commit();
+       String userNameStr = sp.getString(XnsConstant.USER_NAME,"");
+        userName.setText(userNameStr);
+
+
+        myOrderLayout = (LinearLayout) contentView.findViewById(R.id.user_my_order_layout);
+        myOrderLayout.setOnClickListener(this);
     }
 
     @Override
@@ -89,4 +110,13 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.user_my_order_layout:
+
+
+                break;
+        }
+    }
 }

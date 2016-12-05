@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -48,24 +47,7 @@ public class SelectAreaAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = mInflater.inflate(R.layout.item_lv_select_area,null);
         TextView tv = (TextView) view.findViewById(R.id.tv_item_select_area);
-        LinearLayout layout = (LinearLayout) view.findViewById(R.id.layout_select_area);
         tv.setText(getItem(position).getName());
-//        if (getItem(position).getChildren()!=null||getItem(position).getChildren().size()>0){
-//            tv.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    ListView listView = new ListView(mContext);
-////
-////                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-////                            LinearLayout.LayoutParams.MATCH_PARENT,
-////                            LinearLayout.LayoutParams.WRAP_CONTENT
-////                    );
-////                    params.weight=1;
-////                    layout.addView(listView,params);
-////                    listView.setAdapter(new SelectAreaAdapter(mContext,getItem(position).getChildren()));
-//                }
-//            });
-  //      }
         return view;
     }
 }

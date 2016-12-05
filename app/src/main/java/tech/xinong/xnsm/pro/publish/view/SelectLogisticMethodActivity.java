@@ -47,9 +47,8 @@ public class SelectLogisticMethodActivity extends BaseActivity {
                     }
 
                     Intent intent = new Intent();
-                    intent.putExtra("result",sb.toString());
+                    intent.putExtra("result",sb.toString().substring(0,sb.toString().length()-1));
                     setResult(RESULT_OK,intent);
-                    Toast.makeText(mContext, sb.toString(), Toast.LENGTH_SHORT).show();
                     finish();
                 }
             }

@@ -19,6 +19,7 @@
             android:layout_marginLeft="@dimen/dimen_12_dip"
             android:textColor="@color/app_text_orange_color"
             android:textSize="@dimen/dimen_16_sp"
+            android:background="@mipmap/title_back_img"
             android:visibility="gone" />
     </LinearLayout>
 

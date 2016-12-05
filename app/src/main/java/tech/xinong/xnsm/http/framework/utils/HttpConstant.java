@@ -14,6 +14,8 @@ public class HttpConstant {
     public static final String PORT = ":8082";
 
     public static final String IP = "101.201.147.46";
+   // public static final String IP = "192.168.32.239";
+
     //public static final String IP ="192.168.12.254";
 
     public static final String HOST = PREFIX_HTTP + IP + PORT;
@@ -58,5 +60,9 @@ public class HttpConstant {
 
     /*根据产品的ID得到所有的规格*/
     public static final String URL_GET_ALLSPECS_BY_PRODUCTID = "/products/%S/allSpecs";
+    /*立即购买，创建订单*/
+    public static final String URL_BUY_NOW = "/buyOrders";
+/*通过订单的id，得到订单的详情*/
+    public static final String URL_GET_ORDER_BY_ID = "/buyOrders/%s?details";
 
 }

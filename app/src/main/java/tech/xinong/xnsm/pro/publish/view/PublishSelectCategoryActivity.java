@@ -42,11 +42,11 @@ public class PublishSelectCategoryActivity extends BaseActivity {
             @Override
             public void onSuccess(String info, String result) {
                 categories = JSONArray.parseArray(result, CategoryModel.class);
-                publishGridCategory.setAdapter(new CommonAdapter<CategoryModel>(mContext,android.R.layout.simple_list_item_1,categories) {
+                publishGridCategory.setAdapter(new CommonAdapter<CategoryModel>(mContext,R.layout.item_border_text,categories) {
                     @Override
                     protected void fillItemData(CommonViewHolder viewHolder, int position, final CategoryModel item) {
-                        viewHolder.setTextForTextView(android.R.id.text1,item.getName());
-                        viewHolder.setOnClickListener(android.R.id.text1, new View.OnClickListener() {
+                        viewHolder.setTextForTextView(R.id.tv_show,item.getName());
+                        viewHolder.setOnClickListener(R.id.tv_show, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(mContext, ProductListActivity.class);
