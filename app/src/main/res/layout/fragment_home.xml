@@ -47,6 +47,7 @@
                 >
 
                 <Button
+                    android:id="@+id/home_my_orders"
                     style="@style/home_btn"
                     android:gravity="center"
                     android:background="@drawable/circle_bg"

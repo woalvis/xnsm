@@ -27,6 +27,7 @@ import tech.xinong.xnsm.pro.user.view.LoginActivity;
 import tech.xinong.xnsm.pro.user.view.RegisterActivity;
 
 import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_BUY_NOW;
+import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_ALL_ORDERS;
 import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_ORDER_BY_ID;
 import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_PRO_BY_ID;
 
@@ -222,6 +223,17 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
                 .execute(sbc);
 
     }
+
+     /*得到该用户的所有订单*/
+    public void getAllOrders(AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(URL_GET_ALL_ORDERS))
+                .tag(this)// 请求的 tag, 主要用于取消对应的请求
+                .cacheKey("getCategories")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
+                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
+                .execute(sbc);
+    }
+
 
     /**
      * 普通的请求回调

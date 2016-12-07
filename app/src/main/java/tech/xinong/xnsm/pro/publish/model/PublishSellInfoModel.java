@@ -40,8 +40,6 @@ public class PublishSellInfoModel implements Serializable{
     private String logisticMethodTags;
     private Boolean brokerAllowed;
     private String notes;
-
-
     private String ownerFullName;
 
     public String getNotes() {

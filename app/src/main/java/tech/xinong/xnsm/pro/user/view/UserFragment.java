@@ -114,7 +114,8 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.user_my_order_layout:
-
+                Intent intent = new Intent(getActivity(),MyOrdersActivity.class);
+                mContext.startActivity(intent);
 
                 break;
         }

@@ -17,7 +17,7 @@ import tech.xinong.xnsm.R;
 public class ImageAdapter  extends PagerAdapter {
 
     private Context mContext;
-    private static final int[] IMAGES = {
+    public static final int[] IMAGES = {
             R.mipmap.banner1,
             R.mipmap.banner2,
             R.mipmap.banner3,

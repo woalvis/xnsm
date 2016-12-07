@@ -172,7 +172,9 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
         XinongHttpCommend.getInstence(this).pulishSellInfo(sellInfo, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
-                Toast.makeText(mContext, "发布成功", Toast.LENGTH_SHORT).show();
+
+
+                Toast.makeText(mContext, info, Toast.LENGTH_SHORT).show();
                 PublishSellActivity.this.finish();
             }
 

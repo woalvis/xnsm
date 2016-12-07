@@ -7,8 +7,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tech.xinong.xnsm.pro.buy.view.OrderDetailActivity">
 
-
-
 <LinearLayout
 
     android:id="@+id/activity_order_detail"
@@ -293,7 +291,7 @@
 
     <TextView
         android:padding="15dp"
-        android:id="@+id/order_pay_now"
+        android:id="@+id/order_pay_now_bt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/order_pay_now"

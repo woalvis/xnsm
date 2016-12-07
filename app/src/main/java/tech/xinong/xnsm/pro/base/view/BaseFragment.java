@@ -11,6 +11,8 @@ import tech.xinong.xnsm.mvp.view.MvpView;
 import tech.xinong.xnsm.mvp.view.impl.MvpFragment;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
 
+import static tech.xinong.xnsm.pro.base.view.adapter.ViewFinder.findViewById;
+
 /**
  * Created by xiao on 2016/11/7.
  */
@@ -31,6 +33,8 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         mContext = getActivity();
         if (contentView==null){
             contentView = inflater.inflate(bindLayoutId(),container,false);
@@ -87,7 +91,11 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
 
     protected abstract void initContentView(View contentView);
 
+    protected <T extends View> T findView(int id) {
+        T view = (T) findViewById(id);
 
+        return view;
+    }
 
 }
 

@@ -62,7 +62,10 @@ public class HttpConstant {
     public static final String URL_GET_ALLSPECS_BY_PRODUCTID = "/products/%S/allSpecs";
     /*立即购买，创建订单*/
     public static final String URL_BUY_NOW = "/buyOrders";
-/*通过订单的id，得到订单的详情*/
+    /*通过订单的id，得到订单的详情*/
     public static final String URL_GET_ORDER_BY_ID = "/buyOrders/%s?details";
+    /*得到该用户的所有订单*/
+    public static final String URL_GET_ALL_ORDERS = "/buyOrders?buyer";
+
 
 }

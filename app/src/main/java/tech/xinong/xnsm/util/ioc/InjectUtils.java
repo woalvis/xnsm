@@ -21,9 +21,9 @@ public class InjectUtils {
 	// 注入activity（加载布局、初始化空间、设置监听）
 	public static void inject(Context c) {
 		injectContentView(c);
-		injectView(c);
+		Map<Integer, Object> map  = injectView(c);
 		injectMyView(c);
-		injectEvent(c, injectView(c));
+		injectEvent(c, map);
 		injectEvent(c,injectMyView(c));
 	}
 
@@ -126,9 +126,10 @@ public class InjectUtils {
 		try {
 			Class<? extends Context> clazz = c.getClass();
 			Field[] fields = clazz.getDeclaredFields();
-
-			for (Field f : fields) {
+			for(int i=0;i<fields.length;i++){
+				Field f = fields[i];
 				f.setAccessible(true);
+				String fieldsName = f.getName();
 				ViewInject annotation = f.getAnnotation(ViewInject.class);
 				if (annotation != null) {
 					int value = annotation.value();
@@ -143,6 +144,23 @@ public class InjectUtils {
 					viewMap.put(value, view);
 				}
 			}
+//			for (Field f : fields) {
+//				f.setAccessible(true);
+//				String fieldsName = f.getName();
+//				ViewInject annotation = f.getAnnotation(ViewInject.class);
+//				if (annotation != null) {
+//					int value = annotation.value();
+//					// 获取当前activity身上的findViewById方法
+//					Method method = clazz.getMethod(METHOD_FIND_VIEW_BYID,
+//							int.class);
+//					// 执行获得我们的控件
+//					Object view = method.invoke(c, value);
+//					// 给我们的属性赋值
+//					f.set(c, view);
+//
+//					viewMap.put(value, view);
+//				}
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

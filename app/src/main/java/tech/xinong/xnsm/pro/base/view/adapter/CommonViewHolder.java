@@ -156,4 +156,8 @@ public class CommonViewHolder {
         View view = ViewFinder.findViewById(mContentView, viewId);
         ((TextView)view).setTextColor(color);
     }
+
+    public View getView(int resId){
+        return mContentView.findViewById(resId);
+    }
 }

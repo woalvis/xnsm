@@ -1,6 +1,7 @@
 package tech.xinong.xnsm.pro.buy.view;
 
-import android.widget.Button;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +13,10 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnH
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.OrderDetailModel;
 import tech.xinong.xnsm.util.ioc.ContentView;
+import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
+
+import static tech.xinong.xnsm.R.id.order_pay_now_bt;
 
 /**
  * 订单详情页
@@ -49,11 +53,12 @@ public class OrderDetailActivity extends BaseActivity {
     private TextView buyerRequire;//买家需求
     @ViewInject(R.id.order_create_time)
     private TextView createTime;//订单创建时间
-    @ViewInject(R.id.order_pay_now)
-    private Button payNow;//去支付的按钮
+    @ViewInject(order_pay_now_bt)
+    private TextView payNow;//去支付的按钮
 
 
-    private int transportCostNum;
+
+
     @Override
     public void initData() {
 
@@ -69,14 +74,26 @@ public class OrderDetailActivity extends BaseActivity {
                 amount.setText(orderDetail.getAmount()+"");
                 goodsPrice.setText(orderDetail.getTotalPrice()+"");
                 logistic_method.setText(orderDetail.getLogisticMethodTag());
-                totalPrice.setText(transportCostNum+orderDetail.getTotalPrice()+"");
+                totalPrice.setText(orderDetail.getTotalPrice()+"");
                 shippingAddress.setText(orderDetail.getAddress());
+                transportCost.setText("0.0");
                 buyerInfo.setText(orderDetail.getBuyer().getFullName());
                 buyerRequire.setText(orderDetail.getBuyerRequire());
+                createTime.setText(orderDetail.getCreateTime());
             }
         });
 
     }
 
+    @OnClick({order_pay_now_bt})
+    public void widgetClick(View view){
+
+        switch (view.getId()){
+            case R.id.order_pay_now_bt:
+                Intent intent = new Intent(mContext,UploadActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 
 }
