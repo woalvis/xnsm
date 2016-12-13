@@ -11,6 +11,7 @@ import android.widget.TextView;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
+import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 
@@ -46,7 +47,7 @@ public class PublishFragment extends BaseFragment<BuyPresenter, BaseView> implem
 
     @Override
     protected void initContentView(View contentView) {
-
+        initNavigation(contentView);
         publishBuy = (TextView) contentView.findViewById(R.id.publish_buy_tv);
         publishSell = (TextView) contentView.findViewById(R.id.publish_sell_tv);
         myBublish = (TextView) contentView.findViewById(R.id.publish_mylist_tv);
@@ -95,4 +96,15 @@ public class PublishFragment extends BaseFragment<BuyPresenter, BaseView> implem
         mContext.startActivity(intent);
     }
 
+
+
+
+    /**
+     * 初始化导航栏
+     * @param contentView
+     */
+    public void initNavigation(View contentView){
+        DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
+        builder.setCenterText(R.string.publish).create();
+    }
 }

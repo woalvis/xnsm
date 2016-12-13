@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
+import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 import tech.xinong.xnsm.pro.publish.model.PublishInfoModel;
@@ -44,6 +47,9 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
             R.mipmap.category_vegetables,//蔬菜
             R.mipmap.category_more};//更多
     private String[] categoryNames;
+    private ImageView navigationBack;
+    private EditText etSearch;
+
 
     private List<CategoryModel> categories;
 
@@ -82,7 +88,7 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
     @Override
     protected void initContentView(View contentView) {
 
-
+        initNavigation(contentView);
         gridCategory = (GridView) contentView.findViewById(R.id.buy_grid_category);
         XinongHttpCommend.getInstence(mContext).getCategories(new AbsXnHttpCallback() {
             @Override
@@ -206,4 +212,25 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+
+    /**
+     * 初始化导航栏
+     * @param contentView
+     */
+     public void initNavigation(View contentView){
+        DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
+        builder.setCenterText(R.string.search)
+                .setCenterOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        skipActivity(SearchActivity.class);
+                    }
+                }).create();
+
+    }
 }

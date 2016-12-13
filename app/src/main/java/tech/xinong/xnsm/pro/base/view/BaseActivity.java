@@ -1,6 +1,8 @@
 package tech.xinong.xnsm.pro.base.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -55,6 +57,13 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
      */
     public void initData(){
 
+    }
+
+
+    public void skipActivity(Class<? extends Activity> cls){
+        Intent intent = new Intent(mContext,cls);
+        mContext.startActivity(intent);
+        this.finish();
     }
 
 

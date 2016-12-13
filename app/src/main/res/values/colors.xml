@@ -22,7 +22,7 @@
 
     <color name="tabbar_compose_normal_color">@color/app_text_orange_color</color>
     <color name="tabbar_compose_press_color">@color/app_text_orange_deep_color</color>
-
+    <color name="hint_text_color">#e2e2e8</color>
 
 
 

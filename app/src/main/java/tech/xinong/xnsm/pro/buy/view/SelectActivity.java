@@ -20,9 +20,8 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
-import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
+import tech.xinong.xnsm.pro.buy.model.adapter.SelectAreaAdapter;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 
@@ -50,10 +49,8 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     private TextView orderShow;
     @ViewInject(R.id.select_layout_bottom)
     private View selectLayoutBottom;
-
     private LinearLayout linearLayoutPopup;
     private PopupWindow popupWindow;
-
     @Override
     public void initWidget() {
         selectArea.setOnClickListener(this);
@@ -108,15 +105,23 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
 
-        final ListView parentLv = (ListView) view.findViewById(R.id.popup_lv_parent);
+        ListView parentLv = (ListView) view.findViewById(R.id.popup_lv_parent);
+        for (Area area : areas){
+            area.setLevel(0);
+        }
+
+        parentLv.setAdapter(new SelectAreaAdapter(
+                mContext,areas));
 
 
-        parentLv.setAdapter(new CommonAdapter<Area>(mContext,android.R.layout.simple_list_item_1,areas) {
+        parentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            protected void fillItemData(CommonViewHolder viewHolder, int position, Area item) {
-                viewHolder.setTextForTextView(android.R.id.text1,item.getName());
-                if (item.getChildren().size()!=0){
-                    setSubArea(parentLv,areas.get(position));
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (areas.get(position).getChildren().size()!=0){
+                    setSubArea(areas.get(position));
+
+                }else {
+                    Toast.makeText(SelectActivity.this, areas.get(position).getName(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -126,28 +131,42 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    private void setSubArea(final ListView listView, final Area item){
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+
+    private void setSubArea(final Area item){
+        for (Area area : item.getChildren()){
+            area.setLevel(item.getLevel()+1);
+        }
+
+        int childCount = linearLayoutPopup.getChildCount();
+        for (int i = childCount-1;i>item.getLevel();i--) {
+            try {
+                linearLayoutPopup.removeViewAt(i);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        final ListView subListView = new ListView(mContext);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.weight = 1;
+        subListView.setLayoutParams(params);
+        linearLayoutPopup.addView(subListView);
+
+        subListView.setAdapter(new tech.xinong.xnsm.pro.buy.model.adapter.SelectAreaAdapter(
+                mContext,item.getChildren()));
+
+        subListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final ListView subListView = new ListView(mContext);
-                subListView.setAdapter(new CommonAdapter<Area>(mContext,android.R.layout.simple_list_item_1,item.getChildren()) {
-                    @Override
-                    protected void fillItemData(CommonViewHolder viewHolder, int position, Area item) {
-                        viewHolder.setTextForTextView(android.R.id.text1,item.getName());
-                        if (item.getChildren().size()!=0){
-                            setSubArea(subListView,item);
-                        }else {
-                            popupWindow.dismiss();
-                        }
-                    }
-                });
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
-                params.weight = 1;
-                subListView.setLayoutParams(params);
-                linearLayoutPopup.addView(subListView);
+                if (item.getChildren().get(position).getChildren().size()!=0){
+                    setSubArea(item.getChildren().get(position));
+                }else {
+                    Toast.makeText(SelectActivity.this, item.getChildren().get(position).getName(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
     }
 
 }

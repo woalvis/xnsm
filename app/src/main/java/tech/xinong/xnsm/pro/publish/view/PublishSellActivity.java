@@ -1,6 +1,7 @@
 package tech.xinong.xnsm.pro.publish.view;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,16 +10,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.model.BaseBean;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
+import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
+import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
 import tech.xinong.xnsm.util.NumUtil;
@@ -61,8 +69,10 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     @ViewInject(R.id.publish_sell_goods_notes)
     private TextView tvGoodsNotes;
     /*货品照片*/
-    @ViewInject(R.id.publish_sell_goods_photos)
-    private TextView tvGoodsPhotos;
+    @ViewInject(R.id.publish_sell_iv_select_photos)
+    private ImageView ivSelectPhotos;
+    @ViewInject(R.id.publish_sell_gv_goods_photos)
+    private GridView gvGoodsPhoto;
     @ViewInject(R.id.publish_sell_submit)
     private Button publishSellSubmit;
     @ViewInject(R.id.publish_sell_rb_yes)
@@ -74,10 +84,14 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     @ViewInject(R.id.publish_sell_rg_broker_allowed)
     private RadioGroup rgBrokerAllowed;
 
+
+
+
+
     private String productId;
     private String id;
     private PublishSellInfoModel sellInfo;
-
+    ArrayList<String> photoList;
 
     /**
      * 请求码
@@ -89,6 +103,7 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     public static final int REQ_CODE_SELECT_ORIGIN = 0x1005;
     public static final int REQ_CODE_SELECT_OGISTIC_METHOD = 0x1006;
     public static final int REQ_CODE_EDIT_GOODS_NOTE = 0x1007;
+    public static final int REQ_CODE_SELECT_PHOTOS = 0x1008;
 
 
 
@@ -120,6 +135,7 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
 
     @Override
     public void initData() {
+        photoList = new ArrayList<>();
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         productId = intent.getStringExtra("productId");
@@ -134,7 +150,7 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
 
     @OnClick({R.id.publish_sell_goods_specification, R.id.publish_sell_goods_unit_price,
             R.id.publish_sell_origin,R.id.publish_sell_logistic_method
-    ,R.id.publish_sell_goods_notes,R.id.publish_sell_submit})
+    ,R.id.publish_sell_goods_notes,R.id.publish_sell_submit,R.id.publish_sell_iv_select_photos})
     public void click(View view) {
         switch (view.getId()) {
             case R.id.publish_sell_goods_specification:
@@ -161,6 +177,10 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                 break;
             case R.id.publish_sell_submit:
                 publishSellSubmit();
+                break;
+            case R.id.publish_sell_iv_select_photos:
+                Intent intentSelectPhotos = new Intent(mContext,SelectPhotosActivity.class);
+                startActivityForResult(intentSelectPhotos,REQ_CODE_SELECT_PHOTOS);
                 break;
         }
     }
@@ -253,7 +273,22 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                     sellInfo.setNotes(goodsNote);
                     rgBrokerAllowed.setVisibility(View.VISIBLE);
                     break;
+                case REQ_CODE_SELECT_PHOTOS:
+                    ArrayList<String> strs=(ArrayList<String>) data.getExtras().get("data");
+                    for (String str : strs){
+                        if (!photoList.contains(str)){
+                            photoList.add(str);
+                        }
+                    }
+                    gvGoodsPhoto.setAdapter(new CommonAdapter<String>(mContext, R.layout.item_gv_goods_photo, photoList) {
+                        @Override
+                        protected void fillItemData(CommonViewHolder viewHolder, int position, String item) {
+                            ImageView imageView = (ImageView) viewHolder.getView(R.id.image);
+                            imageView.setImageBitmap(BitmapFactory.decodeFile(item));
+                        }
+                    });
 
+                    break;
             }
 
         }

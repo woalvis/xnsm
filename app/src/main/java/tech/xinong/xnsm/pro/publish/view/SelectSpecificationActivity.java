@@ -6,15 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.alibaba.fastjson.JSON;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
@@ -62,7 +59,7 @@ public class SelectSpecificationActivity extends BaseActivity {
             @Override
             public void onSuccess(String info, String result) {
                 specsModelList = JSON.parseArray(result,SpecModel.class);
-                List<String> specList = null;
+                List<String> specList;
                 for (SpecModel specsModel : specsModelList){
                     if (specsMap.get(specsModel.getCategory())==null){
                         specList = new ArrayList<>();

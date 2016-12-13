@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".pro.base.application.XnsApplication"
@@ -53,8 +54,10 @@
         <activity android:name=".pro.buy.view.BuyNowActivity" />
         <activity android:name=".pro.user.view.MyOrdersActivity" />
         <activity android:name=".pro.buy.view.OrderDetailActivity" />
-        <activity android:name=".pro.user.view.MyOrderActivity" />
-        <activity android:name=".pro.buy.view.UploadActivity"></activity>
+        <activity android:name=".pro.buy.view.UploadActivity" />
+        <activity android:name=".pro.publish.view.SelectPhotosActivity" />
+        <activity android:name=".pro.publish.view.SkanActivity" />
+        <activity android:name=".pro.buy.view.SearchActivity"></activity>
     </application>
 
 </manifest>

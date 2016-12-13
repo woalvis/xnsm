@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
+import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 
 /**
@@ -39,11 +40,18 @@ public class SellFragment extends BaseFragment<BuyPresenter,BaseView> {
 
     @Override
     protected void initContentView(View contentView) {
-        
+        initNavigation(contentView);
     }
 
     @Override
     protected int bindLayoutId() {
         return R.layout.fragment_sell;
+    }
+
+
+    @Override
+    public void initNavigation(View contentView) {
+        DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
+        builder.setCenterText(R.string.sell).create();
     }
 }

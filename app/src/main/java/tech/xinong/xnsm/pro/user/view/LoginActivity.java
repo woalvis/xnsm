@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lzy.okgo.OkGo;
@@ -19,21 +20,28 @@ import tech.xinong.xnsm.pro.MainActivity;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.util.XnsConstant;
 import tech.xinong.xnsm.util.ioc.ContentView;
+import tech.xinong.xnsm.util.ioc.ViewInject;
 
 @ContentView(R.layout.activity_login)
 public class LoginActivity extends BaseActivity implements View.OnClickListener{
     private EditText etPhoneNum;
     private EditText etPassword;
     private Button login;
+    @ViewInject(R.id.tv_center)
+    private TextView tvCenter;
+    @ViewInject(R.id.tv_right)
+    private TextView tvRight;
 
 
     @Override
     public void initWidget() {
+        initNavigation();
         etPhoneNum = (EditText) this.findViewById(R.id.login_et_username);
         etPassword = (EditText) this.findViewById(R.id.login_et_password);
         login = (Button) this.findViewById(R.id.login_bt_login);
 
         login.setOnClickListener(this);
+
     }
 
     @Override
@@ -53,6 +61,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
             default:break;
         }
 
+    }
+
+
+    private void initNavigation(){
+        tvCenter.setVisibility(View.VISIBLE);
+        tvCenter.setText("登录");
+        tvRight.setVisibility(View.VISIBLE);
+        tvRight.setText("注册");
+        tvRight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skipActivity(RegisterActivity.class);
+            }
+        });
     }
 
 

@@ -1,6 +1,8 @@
 package tech.xinong.xnsm.pro.base.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -46,6 +48,7 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
             //如果存在，那么我们就把它干掉，重写添加，这样的方式我们就可以缓存视图
             parent.removeView(contentView);
         }
+
         return contentView;
     }
 
@@ -85,6 +88,10 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
         return null;
     }
 
+    public void initNavigation(View contentView){
+
+    }
+
     private void initData() {
 
     }
@@ -95,6 +102,11 @@ public abstract class BaseFragment<P extends BasePresenter,V extends MvpView> ex
         T view = (T) findViewById(id);
 
         return view;
+    }
+
+    protected void skipActivity(Class<? extends Activity> cls){
+        Intent intent = new Intent(getActivity(),cls);
+        mContext.startActivity(intent);
     }
 
 }

@@ -235,6 +235,15 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
 
+    /*搜索，只有一个输入需字符串*/
+    public void searchText(String text,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_LISTINGS))
+                .params("searchText",text)
+                .execute(sbc);
+    }
+
+
     /**
      * 普通的请求回调
      */

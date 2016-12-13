@@ -241,10 +241,32 @@
                 android:layout_weight="1"
                 android:text="@string/publish_sell_goods_photos" />
 
-            <TextView
-                android:id="@+id/publish_sell_goods_photos"
-                style="@style/publish_sell_text"
-                android:layout_weight="3" />
+            <LinearLayout
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    />
+
+                <ImageView
+                    android:id="@+id/publish_sell_iv_select_photos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/gridview_addpic"/>
+
+                <GridView
+                    android:id="@+id/publish_sell_gv_goods_photos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:numColumns="9">
+                </GridView>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -281,8 +303,6 @@
                     android:text="否" />
 
             </RadioGroup>
-
-
         </LinearLayout>
 
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
+import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.user.presenter.LoginPresenter;
 import tech.xinong.xnsm.pro.user.presenter.LoginView;
 import tech.xinong.xnsm.util.XnsConstant;
@@ -29,6 +30,7 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
     private TextView userLogin;
     private TextView userRegister;
     private TextView userName;
+    private TextView logout;//退出登录
 
     private LinearLayout myOrderLayout;
     //创建对象
@@ -58,6 +60,7 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
      */
     @Override
     protected void initContentView(View contentView) {
+        initNavigation(contentView);
         userLogin = (TextView) contentView.findViewById(R.id.user_login);
         userRegister = (TextView) contentView.findViewById(R.id.user_register);
         userLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +94,9 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
 
         myOrderLayout = (LinearLayout) contentView.findViewById(R.id.user_my_order_layout);
         myOrderLayout.setOnClickListener(this);
+
+        logout = (TextView) contentView.findViewById(R.id.logout);
+        logout.setOnClickListener(this);
     }
 
     @Override
@@ -116,8 +122,18 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
             case R.id.user_my_order_layout:
                 Intent intent = new Intent(getActivity(),MyOrdersActivity.class);
                 mContext.startActivity(intent);
-
+                break;
+            case R.id.logout:
+                skipActivity(LoginActivity.class);
                 break;
         }
+    }
+
+
+
+    @Override
+    public void initNavigation(View contentView) {
+        DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
+        builder.setCenterText(R.string.user).create();
     }
 }

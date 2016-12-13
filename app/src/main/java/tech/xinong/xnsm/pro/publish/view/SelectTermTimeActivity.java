@@ -74,8 +74,8 @@ public class SelectTermTimeActivity extends BaseActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 String selectDate =year+""+(monthOfYear+1)+""+dayOfMonth;
-                String monthStr = "";
-                String dayStr = "";
+                String monthStr = (monthOfYear+1)+"";
+                String dayStr = dayOfMonth+"";
                 if (selectDate.compareTo(nowData)<0){
                     Toast.makeText(mContext, "您选择的日期不能小于当前日期", Toast.LENGTH_SHORT).show();
                     return;

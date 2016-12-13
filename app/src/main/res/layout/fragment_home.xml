@@ -5,6 +5,11 @@
     android:background="#ddd"
     android:weightSum="1">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/home_swipe_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
@@ -46,27 +51,26 @@
                 android:background="@android:color/white"
                 >
 
-                <Button
+                <ImageView
                     android:id="@+id/home_my_orders"
                     style="@style/home_btn"
                     android:gravity="center"
-                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/circle_bg"
                     android:text="我的订单"
                     />
 
-                <Button
+                <ImageView
                     style="@style/home_btn"
                     android:gravity="center"
                     android:text="行情"
-                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/circle_bg"
                     />
 
-                <Button
-
+                <ImageView
                     style="@style/home_btn"
                     android:gravity="center"
                     android:text="大厅"
-                    android:background="@drawable/circle_bg"
+                    android:src="@drawable/circle_bg"
                     />
 
             </LinearLayout>
@@ -101,4 +105,6 @@
         </LinearLayout>
 
     </ScrollView>
-    </LinearLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>
