@@ -15,6 +15,7 @@ import tech.xinong.xnsm.pro.buy.model.OrderDetailModel;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
+import tech.xinong.xnsm.views.OrderProcessView;
 
 import static tech.xinong.xnsm.R.id.order_pay_now_bt;
 
@@ -55,9 +56,21 @@ public class OrderDetailActivity extends BaseActivity {
     private TextView createTime;//订单创建时间
     @ViewInject(order_pay_now_bt)
     private TextView payNow;//去支付的按钮
+    @ViewInject(R.id.order_seller_order_process)
+    private OrderProcessView orderProcess;
+@ViewInject(R.id.tv_center)
+    private TextView navigationTitle;
 
 
+    @Override
+    public void initWidget() {
+        initNavigation();
+    }
 
+    private void initNavigation() {
+        navigationTitle.setVisibility(View.VISIBLE);
+        navigationTitle.setText("订单详情");
+    }
 
     @Override
     public void initData() {
@@ -70,27 +83,28 @@ public class OrderDetailActivity extends BaseActivity {
                 tvSellerName.setText(orderDetail.getSeller().getFullName());
                 productCategory.setText(orderDetail.getProduct().getName());
                 productDescription.setText(orderDetail.getSpecDesc());
-                unitPrice.setText(orderDetail.getUnitPrice()+"");
-                amount.setText(orderDetail.getAmount()+"");
-                goodsPrice.setText(orderDetail.getTotalPrice()+"");
+                unitPrice.setText(orderDetail.getUnitPrice() + "");
+                amount.setText(orderDetail.getAmount() + "");
+                goodsPrice.setText(orderDetail.getTotalPrice() + "");
                 logistic_method.setText(orderDetail.getLogisticMethodTag());
-                totalPrice.setText(orderDetail.getTotalPrice()+"");
+                totalPrice.setText(orderDetail.getTotalPrice() + "");
                 shippingAddress.setText(orderDetail.getAddress());
                 transportCost.setText("0.0");
                 buyerInfo.setText(orderDetail.getBuyer().getFullName());
                 buyerRequire.setText(orderDetail.getBuyerRequire());
                 createTime.setText(orderDetail.getCreateTime());
+                orderProcess.setStatus(orderDetail.getStatus().getCode());
             }
         });
 
     }
 
     @OnClick({order_pay_now_bt})
-    public void widgetClick(View view){
+    public void widgetClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.order_pay_now_bt:
-                Intent intent = new Intent(mContext,UploadActivity.class);
+                Intent intent = new Intent(mContext, UploadActivity.class);
                 startActivity(intent);
                 break;
         }

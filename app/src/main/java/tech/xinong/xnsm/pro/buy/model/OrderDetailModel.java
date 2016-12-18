@@ -17,7 +17,7 @@ public class OrderDetailModel {
     private String buyerRequire;//买家需求
     private int amount;//购买数量
     private String specDesc;//规格(空格相隔)
-    private String status;// UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款")
+    private OrderStatus status;// UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款")
     private UserModel seller;//卖家
     private UserModel buyer;//买家
     private double unitPrice;//单价
@@ -114,11 +114,11 @@ public class OrderDetailModel {
         this.specDesc = specDesc;
     }
 
-    public String getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

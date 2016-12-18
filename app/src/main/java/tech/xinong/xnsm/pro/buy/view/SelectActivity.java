@@ -25,6 +25,8 @@ import tech.xinong.xnsm.pro.buy.model.adapter.SelectAreaAdapter;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 
+import static tech.xinong.xnsm.R.id.select_area_show;
+
 
 /**
  * 选择具体品类的界面，包含之前传过来的参数
@@ -33,7 +35,7 @@ import tech.xinong.xnsm.util.ioc.ViewInject;
 public class SelectActivity extends BaseActivity implements View.OnClickListener {
     @ViewInject(R.id.select_area)
     private TextView selectArea;
-    @ViewInject(R.id.select_area_show)
+    @ViewInject(select_area_show)
     private TextView areaShow;
     @ViewInject(R.id.select_category)
     private TextView selectCategory;
@@ -63,7 +65,6 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     public void initData() {
         Intent intent = getIntent();
         SpecModel spec = (SpecModel) intent.getSerializableExtra("spec");
-        Toast.makeText(this, spec.toString(), Toast.LENGTH_SHORT).show();
         //展示之前选择的品类
         categoryShow.setText(spec.getProduct());
         //展示之前选择品种
@@ -89,10 +90,29 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
             @Override
             public void onSuccess(String info, String result) {
                 List<Area> areas = JSON.parseArray(result, Area.class);
-
+                resetAreas(areas);
                 showAreaPopup(areas);
             }
         });
+    }
+
+
+    private void resetAreas(List<Area> areas){
+        for (Area area : areas){
+            if (area.getChildren()==null||area.getChildren().size()==0){
+
+            }else {
+                Area tempArea = new Area();
+                tempArea.setId(area.getId());
+                tempArea.setCode(area.getCode());
+                tempArea.setChildren(null);
+                tempArea.setName("全部");
+                tempArea.setLevel(-1);
+                tempArea.setHint(area.getName());
+                area.getChildren().add(0,tempArea);
+                resetAreas(area.getChildren());
+            }
+        }
     }
 
     /**
@@ -135,6 +155,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
 
     private void setSubArea(final Area item){
         for (Area area : item.getChildren()){
+            if (!area.getName().equals("全部"))
             area.setLevel(item.getLevel()+1);
         }
 
@@ -159,10 +180,20 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
         subListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+               if (item.getChildren().get(position).getLevel()<0){
+                   popupWindow.dismiss();
+                   areaShow.setText(item.getChildren().get(position).getHint());
+                   selectArea.setClickable(true);
+                   return;
+               }
+
                 if (item.getChildren().get(position).getChildren().size()!=0){
                     setSubArea(item.getChildren().get(position));
                 }else {
-                    Toast.makeText(SelectActivity.this, item.getChildren().get(position).getName(), Toast.LENGTH_SHORT).show();
+
+                    popupWindow.dismiss();
+                    areaShow.setText(item.getChildren().get(position).getName());
+                    selectArea.setClickable(true);
                 }
             }
         });

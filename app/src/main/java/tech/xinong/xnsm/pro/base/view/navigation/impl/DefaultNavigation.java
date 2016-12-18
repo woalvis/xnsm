@@ -168,9 +168,6 @@ public class DefaultNavigation extends AbsNavigation<DefaultNavigation.Builder.D
                 super(context,parent);
 
             }
-
-
-
             public String getString(int id){
                 return mContext.getResources().getString(id);
             }

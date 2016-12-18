@@ -49,8 +49,8 @@ public class HttpConstant {
     public static final String URL_LISTINGS = "/listings";
     /*创建发布*/
     public static final String URL_LISTINGS_SELL = "/listings/sellerListing";
-    /*上传文件*/
-    public static final String URL_UPLOAD = "/listingDocs/upload";
+
+
     /* 通过产品的Id得到该产品所有的细节*/
     public static final String URL_GET_PRO_BY_ID = "/listings/%s";
 
@@ -67,5 +67,7 @@ public class HttpConstant {
     /*得到该用户的所有订单*/
     public static final String URL_GET_ALL_ORDERS = "/buyOrders?buyer";
 
+    /*上传文件*/
+    public static final String URL_UPLOAD = "/listingDocs/upload";
 
 }

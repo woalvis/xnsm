@@ -21,6 +21,12 @@
         android:orientation="vertical"
         android:background="@drawable/card_shape_unselect"
         >
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,10 +40,18 @@
             android:singleLine="true"
             android:textColorHint="@color/hint_text_color"
             android:hint="@string/phone_num_hint"/>
+
+        </android.support.design.widget.TextInputLayout>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/border_color"/>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,6 +66,7 @@
             android:singleLine="true"
             android:textColorHint="@color/hint_text_color"
             android:hint="@string/input_password"/>
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 

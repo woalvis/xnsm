@@ -3,7 +3,6 @@ package tech.xinong.xnsm.pro.buy.view;
 import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -37,7 +36,6 @@ public class ProductListActivity extends BaseActivity {
 
         if (categoryModel!=null){
             products = categoryModel.getProducts();
-            Toast.makeText(this, products.toString(), Toast.LENGTH_SHORT).show();
         }
 
         gvProducts = (GridView) this.findViewById(R.id.product_grid);

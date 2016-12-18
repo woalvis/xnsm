@@ -12,6 +12,10 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.callback.StringCallback;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -240,6 +244,16 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
         StringCallback sbc = callback(callback);
         OkGo.get(getAbsoluteUrl(HttpConstant.URL_LISTINGS))
                 .params("searchText",text)
+                .execute(sbc);
+    }
+
+
+    public void upLoadFile(File file,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        List<File> files = new ArrayList<>();
+        files.add(file);
+        OkGo.post(HttpConstant.URL_UPLOAD)
+                .addFileParams("files" ,files)
                 .execute(sbc);
     }
 

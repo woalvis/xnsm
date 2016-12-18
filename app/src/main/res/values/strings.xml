@@ -102,4 +102,12 @@
     <string name="order_pay_now">去付款</string>
     <string name="cancel_order">取消订单</string>
 
+    <string-array name="order_status">
+        <item>未付款</item>
+        <item>付款处理中</item>
+        <item>已付款</item>
+        <item>发货</item>
+        <item>收货</item>
+        <item>收款</item>
+    </string-array>
 </resources>

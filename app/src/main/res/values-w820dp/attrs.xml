@@ -57,4 +57,12 @@
     </declare-styleable>
 
 
+    <declare-styleable name="OrderProcessView">
+        <attr name="orderBackground" format="color"></attr>
+        <attr name="orderRoundColor" format="color"></attr>
+        <attr name="orderTextColor" format="color"></attr>
+        <attr name="orderTextSize" format="dimension"></attr>
+    </declare-styleable>
+
+
 </resources>

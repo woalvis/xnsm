@@ -113,7 +113,9 @@ public class MyOrdersActivity extends BaseActivity {
 
     }
 
-
+    /**
+     * 初始化标题栏
+     */
     private void initNavigation(){
         tv_center.setVisibility(View.VISIBLE);
         tv_center.setText("我的订单");
@@ -158,7 +160,7 @@ public class MyOrdersActivity extends BaseActivity {
         });
 
 
-        myOrderLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);

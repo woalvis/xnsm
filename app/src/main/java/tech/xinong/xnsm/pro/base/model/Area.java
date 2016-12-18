@@ -13,6 +13,16 @@ public class Area extends BaseBean {
     private List<Area> children;
     private int level;
 
+    private String hint;
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
     public int getLevel() {
         return level;
     }
