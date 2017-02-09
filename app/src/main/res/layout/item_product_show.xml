@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp">
+
+
+    <ImageView
+        android:id="@+id/product_iv_show"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@mipmap/default_pic_bg"
+        />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        >
+
+
+        <TextView
+            android:id="@+id/product_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="烟薯25 红心 3两以上"
+            android:textColor="@color/black"
+            android:paddingLeft="5dp"
+            />
+
+        <TextView
+            android:id="@+id/product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25元/斤"
+            android:layout_weight="1"
+            android:paddingLeft="5dp"
+            android:textSize="@dimen/dimen_18_sp"
+            android:gravity="center_vertical"
+            android:textColor="@android:color/holo_orange_light"
+            />
+
+
+
+        <TextView
+            android:id="@+id/product_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="天津蓟县 xxx"
+            android:paddingLeft="5dp"
+            android:textColor="@color/ampm_text_color"
+            />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

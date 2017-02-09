@@ -46,7 +46,7 @@ public class ProductListActivity extends BaseActivity {
                 viewHolder.setOnClickListener(R.id.tv_show, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                     XinongHttpCommend.getInstence(mContext).getProduct(new AbsXnHttpCallback() {
+                     XinongHttpCommend.getInstance(mContext).getProduct(new AbsXnHttpCallback() {
                             @Override
                             public void onSuccess(String info, String result) {
                                 Intent intent = new Intent(ProductListActivity.this,SpecActivity.class);

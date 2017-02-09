@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -15,14 +16,20 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
+import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.pro.base.model.BaseBean;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
@@ -30,6 +37,7 @@ import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
 import tech.xinong.xnsm.util.NumUtil;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
@@ -47,14 +55,15 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     private TextView tvUnitPrice;
     /*是否现货*/
     @ViewInject(R.id.publish_sell_rg_in_stock)
-    private RadioGroup rgInstock;
+    private RadioGroup rgInStock;
     /*供货时间*/
     @ViewInject(R.id.publish_sell_term_begin_date)
     private TextView tvTermBeginDate;
     /*供货量*/
     @ViewInject(R.id.publish_sell_total_quantity)
     private TextView tvTotalQuantity;
-    @ViewInject(R.id.publish_sell_et_total_quantity)//供货量的编辑框
+    /*供货量的编辑框*/
+    @ViewInject(R.id.publish_sell_et_total_quantity)
     private EditText etTotalQuantity;
     /*发货地址*/
     @ViewInject(R.id.publish_sell_address)
@@ -71,10 +80,13 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     /*货品照片*/
     @ViewInject(R.id.publish_sell_iv_select_photos)
     private ImageView ivSelectPhotos;
+    /*要上传的照片的展示GridView*/
     @ViewInject(R.id.publish_sell_gv_goods_photos)
     private GridView gvGoodsPhoto;
+    /*发布提交按钮*/
     @ViewInject(R.id.publish_sell_submit)
     private Button publishSellSubmit;
+
     @ViewInject(R.id.publish_sell_rb_yes)
     private RadioButton inStock;
     @ViewInject(R.id.publish_sell_brokerallowed_yes)
@@ -85,39 +97,37 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     private RadioGroup rgBrokerAllowed;
 
 
-
-
-
     private String productId;
     private String id;
     private PublishSellInfoModel sellInfo;
-    ArrayList<String> photoList;
+    private ArrayList<String> photoList;
+    private ArrayList<String> uploadFileStrList;
+    private ArrayList<String> uploadFileIds;
+    private boolean isPressedPublishBt = false;
 
     /**
      * 请求码
      */
-    public static final int REQ_CODE_SELECT_SPEC = 0x1001;
-    public static final int REQ_CODE_SELECT_UNIT_PRICE = 0x1002;
-    public static final int REQ_CODE_SELECT_TERM_TIME = 0x1003;
-    public static final int REQ_CODE_SELECT_ADDRESS = 0x1004;
-    public static final int REQ_CODE_SELECT_ORIGIN = 0x1005;
-    public static final int REQ_CODE_SELECT_OGISTIC_METHOD = 0x1006;
-    public static final int REQ_CODE_EDIT_GOODS_NOTE = 0x1007;
-    public static final int REQ_CODE_SELECT_PHOTOS = 0x1008;
-
-
+    public static final int REQ_CODE_SELECT_SPEC            = 0x1001;//选择类别
+    public static final int REQ_CODE_SELECT_UNIT_PRICE      = 0x1002;//选择单价
+    public static final int REQ_CODE_SELECT_TERM_TIME       = 0x1003;//选择时间
+    public static final int REQ_CODE_SELECT_ADDRESS         = 0x1004;//选择发货地址
+    public static final int REQ_CODE_SELECT_ORIGIN          = 0x1005;//选择货源地址
+    public static final int REQ_CODE_SELECT_LOGISTIC_METHOD = 0x1006;//选择运输方法
+    public static final int REQ_CODE_EDIT_GOODS_NOTE        = 0x1007;//填写货物说明
+    public static final int REQ_CODE_SELECT_PHOTOS          = 0x1008;//选择图片
 
 
     @Override
     public void initWidget() {
-        rgInstock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rgInStock.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 tvTermBeginDate.setText(getResources().getString(R.string.publish_sell_edit_term_time));
                 tvTermBeginDate.setVisibility(View.VISIBLE);
                 tvTermBeginDate.setClickable(true);
                 tvTermBeginDate.setTextColor(getResources().getColor(R.color.colorPrimary));
-                tvTermBeginDate.setOnClickListener(new View.OnClickListener(){
+                tvTermBeginDate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intentSelectTermTime = new Intent(mContext, SelectTermTimeActivity.class);
@@ -136,6 +146,8 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
     @Override
     public void initData() {
         photoList = new ArrayList<>();
+        uploadFileStrList = new ArrayList<>();
+        uploadFileIds = new ArrayList<>();
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
         productId = intent.getStringExtra("productId");
@@ -149,61 +161,93 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
 
 
     @OnClick({R.id.publish_sell_goods_specification, R.id.publish_sell_goods_unit_price,
-            R.id.publish_sell_origin,R.id.publish_sell_logistic_method
-    ,R.id.publish_sell_goods_notes,R.id.publish_sell_submit,R.id.publish_sell_iv_select_photos})
+            R.id.publish_sell_origin, R.id.publish_sell_logistic_method
+            , R.id.publish_sell_goods_notes, R.id.publish_sell_submit, R.id.publish_sell_iv_select_photos})
     public void click(View view) {
         switch (view.getId()) {
+            /*货品规格选择*/
             case R.id.publish_sell_goods_specification:
                 Intent intentSelectSpec = new Intent(this, SelectSpecificationActivity.class);
                 intentSelectSpec.putExtra("productId", productId);
                 startActivityForResult(intentSelectSpec, REQ_CODE_SELECT_SPEC);
                 break;
+            /*单价选择*/
             case R.id.publish_sell_goods_unit_price:
                 Intent intentSelectPrice = new Intent(mContext, SelectUnitPriceActivity.class);
                 startActivityForResult(intentSelectPrice, REQ_CODE_SELECT_UNIT_PRICE);
                 break;
+            /*原产地选择*/
             case R.id.publish_sell_origin:
-                Intent intentSelectOrigin = new Intent(mContext,SelectAddressActivity.class);
-                startActivityForResult(intentSelectOrigin,REQ_CODE_SELECT_ORIGIN);
+                Intent intentSelectOrigin = new Intent(mContext, SelectAddressActivity.class);
+                startActivityForResult(intentSelectOrigin, REQ_CODE_SELECT_ORIGIN);
                 break;
+            /*物流方式选择*/
             case R.id.publish_sell_logistic_method:
-                Intent intentSelectLogisticMethod = new Intent(mContext,SelectLogisticMethodActivity.class);
-                startActivityForResult(intentSelectLogisticMethod,REQ_CODE_SELECT_OGISTIC_METHOD);
+                Intent intentSelectLogisticMethod = new Intent(mContext, SelectLogisticMethodActivity.class);
+                startActivityForResult(intentSelectLogisticMethod, REQ_CODE_SELECT_LOGISTIC_METHOD);
                 tvGoodsNotes.setVisibility(View.VISIBLE);
                 break;
+            /*填写货物描述*/
             case R.id.publish_sell_goods_notes:
-                Intent intentEditGoodsNote = new Intent(mContext,EditGoodsNoteActivity.class);
-                startActivityForResult(intentEditGoodsNote,REQ_CODE_EDIT_GOODS_NOTE);
+                Intent intentEditGoodsNote = new Intent(mContext, EditGoodsNoteActivity.class);
+                startActivityForResult(intentEditGoodsNote, REQ_CODE_EDIT_GOODS_NOTE);
                 break;
+            /*发布卖出货品*/
             case R.id.publish_sell_submit:
-                publishSellSubmit();
+                publishSellSubmit(true);
                 break;
+            /*选择照片*/
             case R.id.publish_sell_iv_select_photos:
-                Intent intentSelectPhotos = new Intent(mContext,SelectPhotosActivity.class);
-                startActivityForResult(intentSelectPhotos,REQ_CODE_SELECT_PHOTOS);
+                Intent intentSelectPhotos = new Intent(mContext, SelectPhotosActivity.class);
+                startActivityForResult(intentSelectPhotos, REQ_CODE_SELECT_PHOTOS);
                 break;
         }
     }
 
-    private void publishSellSubmit() {
-        sellInfo.setTotalQuantity(Integer.parseInt(etTotalQuantity.getText().toString()));
-        sellInfo.setInStock(inStock.isChecked());
-        sellInfo.setBrokerAllowed(brokerAllowed.isChecked());
-        XinongHttpCommend.getInstence(this).pulishSellInfo(sellInfo, new AbsXnHttpCallback() {
-            @Override
-            public void onSuccess(String info, String result) {
 
+    /**
+     * 提交发布信息的按钮
+     */
+    private void publishSellSubmit(boolean isSubmitBt) {
+        if (isSubmitBt) {
+            isPressedPublishBt = true;
+            showProgress("正在上传");
+            if (uploadFileIds.size() == photoList.size()) {//已经上传完成
+                sellInfo.setTotalQuantity(Integer.parseInt(etTotalQuantity.getText().toString()));
+                sellInfo.setInStock(inStock.isChecked());
+                sellInfo.setBrokerAllowed(brokerAllowed.isChecked());
+                List<BaseBean> listingDocs = new ArrayList<>();
+                for (String id : uploadFileIds){
+                    BaseBean baseBean = new BaseBean();
+                    baseBean.setId(id);
+                    listingDocs.add(baseBean);
+                }
+                sellInfo.setListingDocs(listingDocs);
 
-                Toast.makeText(mContext, info, Toast.LENGTH_SHORT).show();
-                PublishSellActivity.this.finish();
+                XinongHttpCommend.getInstance(this).publishSellInfo(sellInfo, new AbsXnHttpCallback() {
+                    @Override
+                    public void onSuccess(String info, String result) {
+                        T.showShort(mContext, info);
+                        cancleProgress();
+                        PublishSellActivity.this.finish();
+                    }
+
+                    @Override
+                    public void onError(String info) {
+                        cancleProgress();
+                        super.onError(info);
+                        Log.d("xx", info);
+                    }
+                });
             }
-
-            @Override
-            public void onError(String info) {
-                super.onError(info);
-                Log.d("xx",info);
+        }else {
+            if (uploadFileIds.size() == photoList.size()) {
+                if (isPressedPublishBt){
+                    publishSellSubmit(true);
+                }
             }
-        });
+        }
+
     }
 
 
@@ -232,17 +276,15 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                     sellInfo.setUnitPrice(new BigDecimal(unitPrice));
                     sellInfo.setMinQuantity(Integer.parseInt(minQuantity));
                     sellInfo.setQuantityUnit("JIN");
-                    tvUnitPrice.setText(unitPrice+"元/斤"+"   "+minQuantity+"斤起");
-
-
+                    tvUnitPrice.setText(unitPrice + "元/斤" + "   " + minQuantity + "斤起");
                     tvUnitPrice.setTextColor(Color.BLACK);
-                    rgInstock.setVisibility(View.VISIBLE);
+                    rgInStock.setVisibility(View.VISIBLE);
                     break;
                 case REQ_CODE_SELECT_TERM_TIME:
                     String beginDate = data.getStringExtra("beginDate");
                     String endDate = data.getStringExtra("endDate");
 
-                    tvTermBeginDate.setText("上市时间："+beginDate+"\n下市时间："+endDate);
+                    tvTermBeginDate.setText("上市时间：" + beginDate + "\n下市时间：" + endDate);
 
                     sellInfo.setTermBeginDate(beginDate);
                     sellInfo.setTermEndDate(endDate);
@@ -258,10 +300,10 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                 case REQ_CODE_SELECT_ORIGIN:
                     String originAddress = data.getStringExtra("address");
                     tvOrigin.setText(originAddress);
-                    sellInfo.setOrigin(originAddress.replace(" ",""));
+                    sellInfo.setOrigin(originAddress.replace(" ", ""));
                     tvLogisticMethod.setVisibility(View.VISIBLE);
                     break;
-                case REQ_CODE_SELECT_OGISTIC_METHOD:
+                case REQ_CODE_SELECT_LOGISTIC_METHOD:
                     String logisticMethods = data.getStringExtra("result");
                     sellInfo.setLogisticMethodTags(logisticMethods);
                     tvLogisticMethod.setText(logisticMethods);
@@ -274,10 +316,36 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                     rgBrokerAllowed.setVisibility(View.VISIBLE);
                     break;
                 case REQ_CODE_SELECT_PHOTOS:
-                    ArrayList<String> strs=(ArrayList<String>) data.getExtras().get("data");
-                    for (String str : strs){
-                        if (!photoList.contains(str)){
-                            photoList.add(str);
+                    ArrayList<String> strs = (ArrayList<String>) data.getExtras().get("data");
+                    if (strs != null && strs.size() > 0) {
+                        List<File> fileList = new ArrayList<>();
+                        for (String str : strs) {
+                            if (!photoList.contains(str)) {
+                                photoList.add(str);
+                            }
+                            if (!uploadFileStrList.contains(str)) {
+                                fileList.add(new File(str));
+                                uploadFileStrList.add(str);
+                            }
+                        }
+                        if (uploadFileStrList != null && uploadFileStrList.size() > 0) {
+                            XinongHttpCommend.getInstance(this).upLoadFile(fileList, new AbsXnHttpCallback() {
+                                @Override
+                                public void onSuccess(String info, String result) {
+                                    if (!TextUtils.isEmpty(info) && HttpConstant.OK.equals(info)) {
+                                        JSONArray jarr = JSON.parseArray(result);
+                                        for (int i = 0, len = jarr.size(); i < len; i++) {
+                                            JSONObject temp = jarr.getJSONObject(i);
+                                            uploadFileIds.add(temp.getString("id"));
+                                        }
+                                    }
+                                    if (uploadFileIds.size() == photoList.size()){
+                                        if (isPressedPublishBt){
+                                            publishSellSubmit(true);
+                                        }
+                                    }
+                                }
+                            });
                         }
                     }
                     gvGoodsPhoto.setAdapter(new CommonAdapter<String>(mContext, R.layout.item_gv_goods_photo, photoList) {
@@ -287,14 +355,13 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
                             imageView.setImageBitmap(BitmapFactory.decodeFile(item));
                         }
                     });
-
                     break;
             }
 
         }
     }
 
-   TextWatcher myTextWatcher =   new TextWatcher() {
+    TextWatcher myTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -302,18 +369,18 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            if (NumUtil.isPositiveNumber(etTotalQuantity.getText().toString())>=0){
+            if (NumUtil.isPositiveNumber(etTotalQuantity.getText().toString()) >= 0) {
                 tvAddress.setVisibility(View.VISIBLE);
                 tvAddress.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(mContext,SelectAddressActivity.class);
-                        startActivityForResult(intent,REQ_CODE_SELECT_ADDRESS);
+                        Intent intent = new Intent(mContext, SelectAddressActivity.class);
+                        startActivityForResult(intent, REQ_CODE_SELECT_ADDRESS);
                     }
                 });
-            }else {
+            } else {
                 tvAddress.setVisibility(View.INVISIBLE);
-                Toast.makeText(mContext, "请输入正确的数字", Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, "请输入正确的数字");
             }
         }
 
@@ -325,7 +392,7 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (publishSellSubmit.getVisibility()==View.GONE)
-        publishSellSubmit.setVisibility(View.VISIBLE);
+        if (publishSellSubmit.getVisibility() == View.GONE)
+            publishSellSubmit.setVisibility(View.VISIBLE);
     }
 }

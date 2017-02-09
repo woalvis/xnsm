@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_auction_show"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.home.view.AuctionShowActivity">
+
+    <include
+        android:id="@+id/auction_show_navigation"
+        layout="@layout/navigation_default"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_height">
+    </include>
+
+    <GridView
+        android:layout_below="@id/auction_show_navigation"
+        android:id="@+id/auction_gv_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="1"
+        android:layout_alignParentLeft="true"></GridView>
+
+</RelativeLayout>

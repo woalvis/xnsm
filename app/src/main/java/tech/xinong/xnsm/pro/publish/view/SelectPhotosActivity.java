@@ -13,7 +13,6 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ import java.util.Map;
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.publish.model.ImageBean;
 import tech.xinong.xnsm.pro.publish.model.adapter.MyGridAdapter;
+import tech.xinong.xnsm.util.T;
 
 
 public class SelectPhotosActivity extends Activity {
@@ -66,7 +66,7 @@ public class SelectPhotosActivity extends Activity {
     }
     private void getImages(){
         if(!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            Toast.makeText(this, "暂无外部存储", Toast.LENGTH_SHORT).show();
+            T.showShort(this, "暂无外部存储");
             return;
         }
         new Thread(){
@@ -119,7 +119,7 @@ public class SelectPhotosActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(resultCode==200){
             ArrayList<String> strs=(ArrayList<String>) data.getExtras().get("data");
-            Toast.makeText(getApplicationContext(), "您选中了"+strs.size()+"个", Toast.LENGTH_SHORT).show();
+            T.showShort(getApplicationContext(), "您选中了"+strs.size()+"个");
             Intent intent=new Intent();
             intent.putExtra("data", strs);
             setResult(RESULT_OK,intent);

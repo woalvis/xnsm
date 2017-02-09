@@ -5,13 +5,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
 import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
@@ -19,6 +21,7 @@ import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecificationAdapter;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
@@ -55,7 +58,7 @@ public class SelectSpecificationActivity extends BaseActivity {
         specsMap = new LinkedHashMap<>();
         Intent intent = getIntent();
         String productId = intent.getStringExtra("productId");
-        XinongHttpCommend.getInstence(this).getAllSpecsByproductId(productId, new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(this).getAllSpecsByproductId(productId, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 specsModelList = JSON.parseArray(result,SpecModel.class);
@@ -101,7 +104,7 @@ public class SelectSpecificationActivity extends BaseActivity {
                 myIntent.putExtra("result",adapter.getResults());
                 myIntent.putExtra("ids",getIds(adapter.getResults()));
                 setResult(RESULT_OK,myIntent);
-                Toast.makeText(mContext, adapter.getResults(), Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, adapter.getResults());
                 finish();
                 break;
         }

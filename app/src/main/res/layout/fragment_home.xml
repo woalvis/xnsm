@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app = "http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ddd"
@@ -51,38 +52,101 @@
                 android:background="@android:color/white"
                 >
 
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
                 <ImageView
                     android:id="@+id/home_my_orders"
                     style="@style/home_btn"
+                    android:layout_gravity="center"
                     android:gravity="center"
                     android:src="@drawable/circle_bg"
-                    android:text="我的订单"
                     />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的订单"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+
+                </FrameLayout>
+
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
                 <ImageView
                     style="@style/home_btn"
                     android:gravity="center"
                     android:text="行情"
+                    android:layout_gravity="center"
                     android:src="@drawable/circle_bg"
                     />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="行情"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+
+                </FrameLayout>
+
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
                 <ImageView
                     style="@style/home_btn"
+                    android:id="@+id/home_auction"
                     android:gravity="center"
-                    android:text="大厅"
+                    android:layout_gravity="center"
                     android:src="@drawable/circle_bg"
                     />
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="大厅"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        />
+    </FrameLayout>
             </LinearLayout>
 
-            <TextView
-
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/darkGreen"
-                android:gravity="center_vertical"
-                android:text="消息推送"/>
+                android:layout_height="wrap_content"
+                android:background="@color/darkGreen">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="消息推送 : "/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+              <tech.xinong.xnsm.views.ADTextView
+                  android:id="@+id/tv_ad"
+                  app:ad_text_content_color="@color/white"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent" />
+              </LinearLayout>
+            </LinearLayout>
 
             <WebView
                 android:visibility="gone"

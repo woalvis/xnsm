@@ -1,10 +1,16 @@
 package tech.xinong.xnsm.pro.base.model;
 
+import java.io.Serializable;
+
 /**
  * Created by xiao on 2016/11/17.
  */
 
-public class BaseBean {
+public class BaseBean implements Serializable{
+
+    public BaseBean() {
+    }
+
     public String getId() {
         return id;
     }

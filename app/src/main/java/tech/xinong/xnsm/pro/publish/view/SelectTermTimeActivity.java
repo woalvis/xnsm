@@ -7,12 +7,12 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Calendar;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
@@ -77,7 +77,7 @@ public class SelectTermTimeActivity extends BaseActivity {
                 String monthStr = (monthOfYear+1)+"";
                 String dayStr = dayOfMonth+"";
                 if (selectDate.compareTo(nowData)<0){
-                    Toast.makeText(mContext, "您选择的日期不能小于当前日期", Toast.LENGTH_SHORT).show();
+                    T.showShort(mContext, "您选择的日期不能小于当前日期");
                     return;
                 }
                 if (monthOfYear+1<10){
@@ -104,7 +104,7 @@ public class SelectTermTimeActivity extends BaseActivity {
 
         if (!beginTermData.equals("请选择")&&(!endTermData.equals("请选择"))) {
             if (beginTermData.compareTo(endTermData) > 0) {
-                Toast.makeText(mContext, "下市日期不能小于上市日期", Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, "下市日期不能小于上市日期");
                 endDateShow.setText("请选择");
             }else {
                 flag = true;

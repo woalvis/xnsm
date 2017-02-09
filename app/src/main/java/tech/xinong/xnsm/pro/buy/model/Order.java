@@ -24,38 +24,38 @@ public class Order {
     private double totalPrice;
     private String origin;
     private String specDesc;
-    private Status status;
+    private OrderStatus status;
     private String address;
     private String logisticMethodTag;
     private File payFile;
     private String buyerRequire;//买家需求
     private String remarks;//备注
 
-    public  enum Status {
-        UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款"),
-        SHIP_GOODS("发货"),RECEIVE_GOODS("收货"),RECEIVE_MONEY("收款");
-
-
-        private String desc;
-
-        private Status(String desc) {
-            this.desc = desc;
-        }
-
-        public static Status getByCode(String name){
-            Status[] enumArr =  Status.values();
-            for(Status status:enumArr){
-                if(status.toString().equals(name)){
-                    return status;
-                }
-            }
-            return null;
-        }
-        public String getDesc() {
-            return desc;
-        }
-    }
-
+//    public  enum Status {
+//        UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款"),
+//        SHIP_GOODS("发货"),RECEIVE_GOODS("收货"),RECEIVE_MONEY("收款");
+//
+//
+//        private String desc;
+//
+//        private Status(String desc) {
+//            this.desc = desc;
+//        }
+//
+//        public static Status getByCode(String name){
+//            Status[] enumArr =  Status.values();
+//            for(Status status:enumArr){
+//                if(status.toString().equals(name)){
+//                    return status;
+//                }
+//            }
+//            return null;
+//        }
+//        public String getDesc() {
+//            return desc;
+//        }
+//    }
+//
 
 
     public String getId() {
@@ -154,11 +154,11 @@ public class Order {
         this.specDesc = specDesc;
     }
 
-    public Status getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

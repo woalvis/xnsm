@@ -33,4 +33,8 @@ public abstract class MvpActivity<P extends MvpPresenter> extends AppCompatActiv
             this.presenter = null;
         }
     }
+
+    public P getPresenter(){
+        return this.presenter;
+    }
 }

@@ -27,40 +27,42 @@ public class OrderDetailActivity extends BaseActivity {
     @ViewInject(R.id.order_seller_head_portrait)
     private ImageView ivSellerHeadPortrait;//卖家头像
     @ViewInject(R.id.order_seller_name)
-    private TextView tvSellerName;//卖家姓名
+    private TextView tvSellerName;         //卖家姓名
     @ViewInject(R.id.order_product_pic)
-    private ImageView ivProductPic;//货物图片
+    private ImageView ivProductPic;        //货物图片
     @ViewInject(R.id.order_product_category)
-    private TextView productCategory;//货物品类
+    private TextView productCategory;      //货物品类
     @ViewInject(R.id.order_product_description)
-    private TextView productDescription;//货物描述
+    private TextView productDescription;   //货物描述
     @ViewInject(R.id.order_unit_price)
-    private TextView unitPrice;//单价
+    private TextView unitPrice;            //单价
     @ViewInject(R.id.order_amount)
-    private TextView amount;//购买数量
+    private TextView amount;               //购买数量
     @ViewInject(R.id.order_goods_price)
-    private TextView goodsPrice;//货物的价格
+    private TextView goodsPrice;           //货物的价格
     @ViewInject(R.id.order_transport_cost)
-    private TextView transportCost;//运输费用
+    private TextView transportCost;        //运输费用
     @ViewInject(R.id.total_price)
-    private TextView totalPrice;//总共的价格
+    private TextView totalPrice;           //总共的价格
     @ViewInject(R.id.order_logistic_method)
-    private TextView logistic_method;//运输方式
+    private TextView logistic_method;      //运输方式
     @ViewInject(R.id.order_shipping_address)
-    private TextView shippingAddress;//送货地址
+    private TextView shippingAddress;      //送货地址
     @ViewInject(R.id.order_buyer_info)
-    private TextView buyerInfo;//买家信息
+    private TextView buyerInfo;            //买家信息
     @ViewInject(R.id.buyer_require)
-    private TextView buyerRequire;//买家需求
+    private TextView buyerRequire;         //买家需求
     @ViewInject(R.id.order_create_time)
-    private TextView createTime;//订单创建时间
+    private TextView createTime;           //订单创建时间
     @ViewInject(order_pay_now_bt)
-    private TextView payNow;//去支付的按钮
+    private TextView payNow;               //去支付的按钮
     @ViewInject(R.id.order_seller_order_process)
     private OrderProcessView orderProcess;
-@ViewInject(R.id.tv_center)
+    @ViewInject(R.id.tv_center)
     private TextView navigationTitle;
 
+
+    private String orderId;
 
     @Override
     public void initWidget() {
@@ -75,8 +77,8 @@ public class OrderDetailActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        String orderId = getIntent().getStringExtra("orderId");
-        XinongHttpCommend.getInstence(mContext).getOrderDetailById(orderId, new AbsXnHttpCallback() {
+        orderId = getIntent().getStringExtra("orderId");
+        XinongHttpCommend.getInstance(mContext).getOrderDetailById(orderId, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 OrderDetailModel orderDetail = JSON.parseObject(result, OrderDetailModel.class);
@@ -94,6 +96,9 @@ public class OrderDetailActivity extends BaseActivity {
                 buyerRequire.setText(orderDetail.getBuyerRequire());
                 createTime.setText(orderDetail.getCreateTime());
                 orderProcess.setStatus(orderDetail.getStatus().getCode());
+                if (orderDetail.getStatus().getCode()>0){
+                    payNow.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -105,6 +110,7 @@ public class OrderDetailActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.order_pay_now_bt:
                 Intent intent = new Intent(mContext, UploadActivity.class);
+                intent.putExtra("orderId",orderId);
                 startActivity(intent);
                 break;
         }

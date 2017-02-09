@@ -14,6 +14,7 @@ public enum OrderStatus {
 
     private OrderStatus(String desc,int code) {
         this.desc = desc;
+        this.code = code;
     }
 
     public static OrderStatus getByCode(String name){

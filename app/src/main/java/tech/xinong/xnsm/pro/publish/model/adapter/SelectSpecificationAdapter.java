@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +17,7 @@ import java.util.Map;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.publish.view.SelectSpecificationActivity;
+import tech.xinong.xnsm.util.T;
 
 /**
  * Created by xiao on 2016/11/27.
@@ -116,7 +116,7 @@ public class SelectSpecificationAdapter extends BaseAdapter {
         if (results != null) {
             for (String key : results.keySet()) {
                 if (TextUtils.isEmpty(results.get(key))){
-                    Toast.makeText(mContext, key+"不能为空", Toast.LENGTH_SHORT).show();
+                    T.showShort(mContext, key+"不能为空");
                     return "";
                 }
                 stringBuffer.append(results.get(key) + ",");

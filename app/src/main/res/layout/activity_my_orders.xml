@@ -12,6 +12,12 @@
         android:id="@+id/my_order_navigation"
         layout="@layout/navigation_default"></include>
 
+
+    <FrameLayout
+        android:id="@+id/content_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
     <android.support.design.widget.TabLayout
         android:id="@+id/my_order_tabs"
         android:layout_width="match_parent"

@@ -25,6 +25,10 @@
     <string name="register">注册</string>
     <string name="submit">提交</string>
     <string name="search">搜索</string>
+    <string name="brackets_default">[ 默认 ]</string>
+    <string name="edit">编辑</string>
+    <string name="set_default">设置默认</string>
+    <string name="save">保存</string>
 
     <!-- user模块所需的字符资源 -->
     <string name="my_orders">我的订单</string>
@@ -37,6 +41,24 @@
     <string name="input_password">请输入密码</string>
     <string name="confirm_password">确认密码</string>
     <string name="my_order">我的订单</string>
+    <string name="phone">电话</string>
+    <string name="name">姓名</string>
+    <string name="edit_profile">编辑头像</string>
+    <string name="add_address">添加新地址</string>
+    <string name="contact">联 系 人：</string>
+    <string name="phone_number">手 机 号：</string>
+    <string name="location">所在地区：</string>
+    <string name="address">详细地址：</string>
+    <string name="postalCode">邮政编码：</string>
+    <string name="address_tag">地址昵称：</string>
+
+    <string name="contact_hint">请输入联系人真实姓名</string>
+    <string name="phone_number_hint">请输入手机号</string>
+    <string name="location_hint">请输入联系人所在地区</string>
+    <string name="address_hint">请输入联系人详细地址</string>
+    <string name="postcode_hint">(选填)邮政编码</string>
+    <string name="address_tag_hint">请输入联系人详细地址</string>
+
 
     <!-- 登录界面需要的字符资源-->
     <string name="phone_num_hint">请输入手机号</string>
@@ -110,4 +132,7 @@
         <item>收货</item>
         <item>收款</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

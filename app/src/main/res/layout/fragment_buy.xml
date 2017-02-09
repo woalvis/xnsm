@@ -6,9 +6,6 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/navigation_default"></include>
-
     <GridView
         android:id="@+id/buy_grid_category"
         android:layout_width="match_parent"
@@ -21,6 +18,8 @@
     <ListView
         android:id="@+id/buy_lv_show"
         android:layout_width="match_parent"
+        android:divider="@null"
+        android:layoutAnimation="@anim/anim_listview_item"
         android:layout_height="wrap_content"></ListView>
 
 </LinearLayout>

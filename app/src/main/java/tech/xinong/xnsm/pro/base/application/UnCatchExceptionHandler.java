@@ -7,9 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
-
 import tech.xinong.xnsm.pro.MainActivity;
+import tech.xinong.xnsm.util.T;
 
 /**
  * Created by xiao on 2016/11/17.
@@ -74,8 +73,8 @@ public class UnCatchExceptionHandler implements Thread.UncaughtExceptionHandler 
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(application.getApplicationContext(),
-                        "很抱歉,程序出现异常,即将退出!", Toast.LENGTH_SHORT).show();
+                T.showShort(application.getApplicationContext(),
+                        "很抱歉,程序出现异常,即将退出!");
                 Looper.loop();
             }
         }.start();

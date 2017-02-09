@@ -3,9 +3,11 @@ package tech.xinong.xnsm.util.imageloder.impl;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.io.File;
 import java.io.FileOutputStream;
 
 import tech.xinong.xnsm.util.CloseUtil;
+import tech.xinong.xnsm.util.SDCardUtils;
 import tech.xinong.xnsm.util.imageloder.ImageCache;
 
 /**
@@ -13,7 +15,7 @@ import tech.xinong.xnsm.util.imageloder.ImageCache;
  */
 
 public class DiskCache implements ImageCache {
-    static String cacheDir = "sdcard/cache/";
+    static String cacheDir = SDCardUtils.getRootDirectoryPath()+ File.separator+"cache"+File.separator;
 
     @Override
     public Bitmap get(String imageUrl) {
@@ -23,10 +25,12 @@ public class DiskCache implements ImageCache {
     @Override
     public void put(String imageUrl, Bitmap bitmap) {
         FileOutputStream fos = null;
+        String imageUrlTemp = imageUrl.replaceAll("/","#");
         try{
-            fos = new FileOutputStream(cacheDir+imageUrl);
+            fos = new FileOutputStream(cacheDir+imageUrlTemp);
             //100等于不压缩
             bitmap.compress(Bitmap.CompressFormat.PNG,100,fos);
+
         }catch (Exception e){
             e.printStackTrace();
         }finally {

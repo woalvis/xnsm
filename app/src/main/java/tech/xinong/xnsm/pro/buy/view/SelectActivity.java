@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
@@ -22,6 +21,7 @@ import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.buy.model.adapter.SelectAreaAdapter;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 
@@ -86,7 +86,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     private void selectArea() {
          /*设置选择区域按钮不可点击,防止用户极端操作*/
         selectArea.setClickable(false);
-        XinongHttpCommend.getInstence(mContext).getAreas(new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 List<Area> areas = JSON.parseArray(result, Area.class);
@@ -141,7 +141,7 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
                     setSubArea(areas.get(position));
 
                 }else {
-                    Toast.makeText(SelectActivity.this, areas.get(position).getName(), Toast.LENGTH_SHORT).show();
+                    T.showShort(SelectActivity.this, areas.get(position).getName());
                 }
             }
         });

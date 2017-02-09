@@ -60,7 +60,7 @@ public class GoodsDetailActivity extends BaseActivity {
         init();
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
-        XinongHttpCommend.getInstence(this).getProductListings(id, new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(this).getProductListings(id, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 PublishSellInfoModel  publishSellInfoModel = JSON.parseObject(result, PublishSellInfoModel.class);

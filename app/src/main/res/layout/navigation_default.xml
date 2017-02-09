@@ -67,9 +67,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimen_12_dip"
-            android:textColor="@color/app_text_orange_color"
+            android:textColor="@color/white"
             android:textSize="@dimen/dimen_16_sp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:text="采购订单"/>
 
 
         <ImageView

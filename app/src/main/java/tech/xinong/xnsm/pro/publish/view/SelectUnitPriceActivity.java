@@ -5,10 +5,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
@@ -25,11 +25,11 @@ public class SelectUnitPriceActivity extends BaseActivity {
     @OnClick(R.id.select_price_submit)
     public void widgetClick(View view) {
         if (TextUtils.isEmpty(unitPrice.getText().toString().trim())){
-            Toast.makeText(mContext, "请填写单价", Toast.LENGTH_SHORT).show();
+            T.showShort(mContext, "请填写单价");
             return;
         }
         if(TextUtils.isEmpty(minQuantity.getText().toString().trim())){
-            Toast.makeText(mContext, "请填写起批量", Toast.LENGTH_SHORT).show();
+            T.showShort(mContext, "请填写起批量");
             return;
         }
         Intent myIntent = new Intent();

@@ -3,6 +3,8 @@ package tech.xinong.xnsm.pro.publish.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import tech.xinong.xnsm.pro.base.model.UnitQuantity;
+
 /**
  * Created by xiao on 2016/11/21.
  */
@@ -32,6 +34,34 @@ public class PublishInfoModel implements Serializable{
     private String termBeginDate;//
     private String unitPrice;//单位价格
     private boolean verified;//认证
+    private String defaultImage;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    private UnitQuantity quantityUnit;
+
+    public UnitQuantity getQuantityUnit() {
+        return quantityUnit;
+    }
+
+    public void setQuantityUnit(UnitQuantity quantityUnit) {
+        this.quantityUnit = quantityUnit;
+    }
+
+    public String getDefaultImage() {
+        return defaultImage;
+    }
+
+    public void setDefaultImage(String defaultImage) {
+        this.defaultImage = defaultImage;
+    }
 
     public int getHits() {
         return hits;

@@ -1,8 +1,4 @@
 package tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback;
-
-import android.content.Context;
-import android.widget.Toast;
-
 import okhttp3.Call;
 import okhttp3.Response;
 

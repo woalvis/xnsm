@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
@@ -17,6 +16,7 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnH
 import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectAreaAdapter;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 
@@ -30,9 +30,7 @@ public class SelectAddressActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
-
-        XinongHttpCommend.getInstence(mContext).getAreas(new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 List<Area> areas = JSON.parseArray(result, Area.class);
@@ -47,7 +45,7 @@ public class SelectAddressActivity extends BaseActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Area area = areas.get(position);
-                Toast.makeText(mContext, area.getName(), Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, area.getName());
                 tvShow.append(area.getName()+"    ");
 
                 if (area.getChildren()==null||area.getChildren().size()==0){//没有子列表了

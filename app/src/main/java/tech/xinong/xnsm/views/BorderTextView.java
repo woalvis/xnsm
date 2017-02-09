@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class BorderTextView extends TextView{
 
-    private int strokeWidth = 1;
+    private int strokeWidth = 2;
 
     public BorderTextView(Context context) {
         this(context,null);
@@ -34,10 +34,10 @@ public class BorderTextView extends TextView{
         //  将边框设为黑色
         paint.setColor(Color.GRAY);
         //  画TextView的4个边
-        canvas.drawLine(0, 0, this.getWidth() - strokeWidth, 0, paint);
-        canvas.drawLine(0, 0, 0, this.getHeight() - strokeWidth, paint);
-        canvas.drawLine(this.getWidth() - strokeWidth, 0, this.getWidth() - strokeWidth, this.getHeight() - strokeWidth, paint);
-        canvas.drawLine(0, this.getHeight() - strokeWidth, this.getWidth() - strokeWidth, this.getHeight() - strokeWidth, paint);
+        canvas.drawLine(strokeWidth, strokeWidth, this.getWidth() - strokeWidth, strokeWidth, paint);
+        canvas.drawLine(strokeWidth, strokeWidth, strokeWidth, this.getHeight() - strokeWidth, paint);
+        canvas.drawLine(this.getWidth() - strokeWidth, strokeWidth, this.getWidth() - strokeWidth, this.getHeight() - strokeWidth, paint);
+        canvas.drawLine(strokeWidth, this.getHeight() - strokeWidth, this.getWidth() - strokeWidth, this.getHeight() - strokeWidth, paint);
         super.onDraw(canvas);
     }
 }

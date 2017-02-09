@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
@@ -18,6 +17,7 @@ import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.publish.model.LogisticMethod;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 
@@ -28,7 +28,6 @@ public class SelectLogisticMethodActivity extends BaseActivity {
     private GridView logisticMethodGrid;
     @ViewInject(R.id.select_logistic_method_bt)
     private Button logisticMethodBt;
-
     private List<String> resultList;
 
 
@@ -38,7 +37,7 @@ public class SelectLogisticMethodActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if (resultList==null||resultList.size()==0){
-                    Toast.makeText(mContext, "您还没有选择物流方式", Toast.LENGTH_SHORT).show();
+                    T.showShort(mContext, "您还没有选择物流方式");
                     return;
                 }else {
                     StringBuffer sb = new StringBuffer("");
@@ -58,7 +57,7 @@ public class SelectLogisticMethodActivity extends BaseActivity {
     @Override
     public void initData() {
         resultList = new ArrayList<>();
-        XinongHttpCommend.getInstence(this).getAllLogisticMethods(new AbsXnHttpCallback(){
+        XinongHttpCommend.getInstance(this).getAllLogisticMethods(new AbsXnHttpCallback(){
             @Override
             public void onSuccess(String info, final String result) {
                 List<LogisticMethod> logisticMethodList = JSON.parseArray(result,LogisticMethod.class);

@@ -2,6 +2,10 @@ package tech.xinong.xnsm.util;
 
 import android.content.Context;
 
+
+/**
+ * dp、sp、转换为px的工具类
+ */
 public class DensityUtil {
 
     /**
@@ -27,4 +31,12 @@ public class DensityUtil {
         final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
+    /**
+     * px to sp保证文字大小不变
+     */
+    public static int px2sp(Context context,float pxValue){
+        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+        return (int) (pxValue/fontScale +0.5f);
+    }
+
 }

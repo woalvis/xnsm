@@ -1,6 +1,7 @@
 package tech.xinong.xnsm.pro.home.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -8,22 +9,24 @@ import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
+import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.BaseView;
 import tech.xinong.xnsm.pro.base.view.adapter.CommonAdapter;
@@ -33,10 +36,12 @@ import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 import tech.xinong.xnsm.pro.buy.view.GoodsDetailActivity;
 import tech.xinong.xnsm.pro.publish.model.PublishInfoModel;
 import tech.xinong.xnsm.pro.user.view.MyOrdersActivity;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.imageloder.ImageLoader;
-import tech.xinong.xnsm.util.imageloder.impl.DoubleImageCache;
+import tech.xinong.xnsm.views.ADTextView;
 import tech.xinong.xnsm.views.CircleIndicator;
 import tech.xinong.xnsm.views.GridViewForScrollView;
+import tech.xinong.xnsm.views.entity.ADEntity;
 
 import static tech.xinong.xnsm.pro.home.view.ImageAdapter.IMAGES;
 
@@ -44,29 +49,34 @@ import static tech.xinong.xnsm.pro.home.view.ImageAdapter.IMAGES;
  * 主页面
  * Created by Administrator on 2016/8/10.
  */
-public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements SwipeRefreshLayout.OnRefreshListener{
+public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements HomeView,SwipeRefreshLayout.OnRefreshListener,ImageLoader.DownloadSuccessListener{
 
     private BuyPresenter buyPresenter;
     private ViewPager viewPagerBanner;
     private CircleIndicator indianCalendarBanner;
     private GridViewForScrollView gridHomePush;
     private ImageView btMyOrders;
+    private ImageView btAuction;
     private SwipeRefreshLayout swipeLayout;
     private static final int REFRESH_COMPLETE = 0x110;//刷新页面handler状态码
-
     private boolean isLooper;
 
     private int currentPosition;
-    private static final int AUTO_PLAY_TIME_INTERVAL= 3000;
+    private static final int AUTO_PLAY_TIME_INTERVAL= 3000;//主页Banner轮播时间间隔控制
 
-    //创建对象
+    private ADTextView adTv;
+    //创建对象,绑定presenter
     @Override
     public BuyPresenter bindPresenter() {
        buyPresenter = new BuyPresenter(getContext());
-
         return buyPresenter;
     }
 
+
+    @Override
+    protected int bindLayoutId() {
+        return R.layout.fragment_home;
+    }
 
 
     @Override
@@ -82,9 +92,30 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
         btMyOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, MyOrdersActivity.class));
+                skipActivity(MyOrdersActivity.class);
+                //startActivity(new Intent(mContext, MyOrdersActivity.class));
             }
         });
+
+        btAuction = (ImageView) contentView.findViewById(R.id.home_auction);
+
+        btAuction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                skipActivity(AuctionShowActivity.class);
+            }
+        });
+
+//        marqueeView = (MarqueeView) contentView.findViewById(R.id.tv_marquee);
+//        marqueeView.setFocusable(true);
+//        marqueeView.requestFocus();
+//        marqueeView.setText("喜农市正式开业啦");//设置文本
+//        marqueeView.startScroll(); //开始
+//
+
+
+        adTv = (ADTextView) contentView.findViewById(R.id.tv_ad);
+        adTv.setmTexts(getStringList());
 
         initNavigation(contentView);
 
@@ -128,6 +159,7 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
     @Override
     public void onStart() {
         super.onStart();
+        /*得到货品列表*/
         getListings();
     }
 
@@ -175,7 +207,7 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
     public void getListings(){
 
 
-        XinongHttpCommend.getInstence(mContext).getListings(new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(mContext).getListings(new AbsXnHttpCallback() {
 
             @Override
             public void onSuccess(String info, String result) {
@@ -190,22 +222,37 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
                         protected void fillItemData(CommonViewHolder viewHolder, int position, final PublishInfoModel item) {
                             viewHolder.setTextForTextView(R.id.item_grid_price,item.getUnitPrice()+"/斤");
                             viewHolder.setTextForTextView(R.id.item_grid_description,item.getOrigin()+"  "+item.getOwnerFullName());
-                            if (item.getPhoto()!=null&&item.getPhoto().length>=1){
-                                ImageLoader.getInstance().setImageCache(new DoubleImageCache())
-                                        .displayImage(item.getPhoto()[0],
-                                                (ImageView)viewHolder.getView(R.id.item_grid_icon));
-                            }else {
-                                viewHolder.setImageForView(R.id.item_grid_icon,R.mipmap.default_pic_bg);
+//
+//                            SimpleDraweeView defaultImage = (SimpleDraweeView) viewHolder.getView(R.id.item_grid_icon);
+//                            if (!TextUtils.isEmpty(item.getDefaultImage())){
+//                                String imageUrl = String.format(HttpConstant.HOST+HttpConstant.URL_SHOW_IMAGE,item.getId(),item.getDefaultImage());
+//                                Uri uri = Uri.parse(imageUrl);
+//                                defaultImage.setImageURI(uri);
+//                            }
+
+                            ImageView defaultImage = (ImageView) viewHolder.getView(R.id.item_grid_icon);
+                            if (!TextUtils.isEmpty(item.getDefaultImage())){
+                               ImageLoader.getInstance().setLis(HomeFragment.this)
+                                       .displayImage(String.format(HttpConstant.HOST+HttpConstant.URL_SHOW_IMAGE,item.getId(),
+                                               item.getDefaultImage()),
+                                               defaultImage);
                             }
 
 
+//                            if (item.getPhoto()!=null&&item.getPhoto().length>=1){
+//                                ImageLoader.getInstance().setImageCache(new DoubleImageCache())
+//                                        .displayImage(item.getPhoto()[0],
+//                                                (ImageView)viewHolder.getView(R.id.item_grid_icon));
+//                            }else {
+//                                viewHolder.setImageForView(R.id.item_grid_icon,R.mipmap.default_pic_bg);
+//                            }
 
                             viewHolder.setOnClickListener(R.id.item_grid_layout, new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(mContext, GoodsDetailActivity.class);
                                     intent.putExtra("id",item.getId());
-                                    Toast.makeText(mContext,  item.getProductName(), Toast.LENGTH_SHORT).show();
+                                    T.showShort(mContext,  item.getProductName());
                                     mContext.startActivity(intent);
                                 }
                             });
@@ -219,10 +266,7 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
         });
     }
 
-    @Override
-    protected int bindLayoutId() {
-        return R.layout.fragment_home;
-    }
+
 
 
 
@@ -240,7 +284,6 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
     public void onRefresh() {
         mHandler.sendEmptyMessageDelayed(REFRESH_COMPLETE, 2000);
     }
@@ -253,13 +296,41 @@ public class HomeFragment extends BaseFragment<BuyPresenter,BaseView> implements
             switch (msg.what)
             {
                 case REFRESH_COMPLETE:
-
                     getListings();
                     swipeLayout.setRefreshing(false);
-                    Toast.makeText(mContext, "刷新成功", Toast.LENGTH_SHORT).show();
+                    T.showShort(mContext, "刷新成功");
                     break;
 
             }
         };
     };
+
+
+    @Override
+    public void onListingRefresh() {
+
+    }
+
+
+    @Override
+    public void onDownloadSuccess(final Bitmap bitmap,final ImageView imageView) {
+
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                imageView.setImageBitmap(bitmap);
+            }
+        });
+
+    }
+
+
+
+    private List<ADEntity> getStringList() {
+        List<ADEntity> ads = new ArrayList<>();
+        for (int i=0;i<10;i++){
+            ads.add(new ADEntity("前缀"+i+":  ","正文我是一个好消息"+i,"http://www.baidu.com"));
+        }
+        return ads;
+    }
 }

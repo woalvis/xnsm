@@ -13,6 +13,7 @@ import tech.xinong.xnsm.mvp.view.MvpView;
 public class BasePresenter<V extends MvpView> extends MvpBasePresenter<V> {
     private Context context;
     public BasePresenter(Context context){
+        super(context);
         this.context = context;
     }
 

@@ -10,7 +10,6 @@
         android:padding="10dp">
         <TextView
             android:id="@+id/seller_name"
-            android:text="test"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,7 +17,6 @@
 
         <TextView
             android:id="@+id/order_state"
-            android:text="test"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

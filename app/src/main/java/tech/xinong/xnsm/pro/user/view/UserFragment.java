@@ -16,7 +16,6 @@ import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseFragment;
 import tech.xinong.xnsm.pro.base.view.navigation.impl.DefaultNavigation;
 import tech.xinong.xnsm.pro.user.presenter.LoginPresenter;
-import tech.xinong.xnsm.pro.user.presenter.LoginView;
 import tech.xinong.xnsm.util.XnsConstant;
 
 /**
@@ -31,14 +30,20 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
     private TextView userRegister;
     private TextView userName;
     private TextView logout;//退出登录
-
-    private LinearLayout myOrderLayout;
+    private LinearLayout myOrderLayout;//我的订单的布局
+    private LinearLayout myAddressLayout;//我的收货地址的布局
     //创建对象
     @Override
     public LoginPresenter bindPresenter() {
         loginPresenter = new LoginPresenter(getContext());
 
         return loginPresenter;
+    }
+
+
+    @Override
+    protected int bindLayoutId() {
+        return R.layout.fragment_user;
     }
 
     @Nullable
@@ -88,7 +93,7 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
         SharedPreferences.Editor editor = sp.edit();
 //        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
 //        editor.commit();
-       String userNameStr = sp.getString(XnsConstant.USER_NAME,"");
+        String userNameStr = sp.getString(XnsConstant.USER_NAME,"");
         userName.setText(userNameStr);
 
 
@@ -97,6 +102,9 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
 
         logout = (TextView) contentView.findViewById(R.id.logout);
         logout.setOnClickListener(this);
+        /*我的收货地址*/
+        myAddressLayout = (LinearLayout) contentView.findViewById(R.id.user_my_address_layout);
+        myAddressLayout.setOnClickListener(this);
     }
 
     @Override
@@ -104,10 +112,7 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
         return super.bindView();
     }
 
-    @Override
-    protected int bindLayoutId() {
-        return R.layout.fragment_user;
-    }
+
 
     @Override
     public void onStart() {
@@ -126,6 +131,9 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
             case R.id.logout:
                 skipActivity(LoginActivity.class);
                 break;
+            case R.id.user_my_address_layout:
+                skipActivity(EditMyAddressActivity.class);
+                break;
         }
     }
 
@@ -134,6 +142,15 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
     @Override
     public void initNavigation(View contentView) {
         DefaultNavigation.Builder builder = new DefaultNavigation.Builder(getContext(),(ViewGroup)contentView);
-        builder.setCenterText(R.string.user).create();
+        builder.setCenterText(R.string.user)
+                .setRightTextColor(R.color.white)
+                .setRightText("编辑资料")
+                .setRightOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        skipActivity(EditMyInfoActivity.class);
+                    }
+                }).create();
+
     }
 }

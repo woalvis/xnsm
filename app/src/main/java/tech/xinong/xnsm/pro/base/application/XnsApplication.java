@@ -3,7 +3,9 @@ package tech.xinong.xnsm.pro.base.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -11,14 +13,19 @@ import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
 
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
+import tech.xinong.xnsm.util.L;
 import tech.xinong.xnsm.util.XnsConstant;
 
 /**
  * Created by xiao on 2016/11/17.
  */
-public class XnsApplication extends Application{
+public class XnsApplication extends Application {
 
     public String token;
+    private static Context mContext;
+    public static XnsApplication mInstance;
+
+
     @Override
     public void onCreate() {
 
@@ -27,25 +34,31 @@ public class XnsApplication extends Application{
 //        Thread.setDefaultUncaughtExceptionHandler(catchException);
         //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
 //        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(this);
+//        crashHandler.it(this);
 
+
+        /**
+         * 初始化Log工具类
+         * true为打印日志用作开发调试
+         * 发布版本时候应该改为false不用日志输出了
+         */
+        L.isDebug = true;
+        mContext = this;
+        mInstance = this;
+        /**
+         * 初始化Fresco
+         */
+        Fresco.initialize(this);
         initOkHttp();
-
-
     }
 
     public void initOkHttp() {
-
-
         SharedPreferences sp = getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-//        editor.putString("token","eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJ4aW5vbmd0ZWNoLmNvbSIsInN1YiI6IjEzODExNTQ4NjY2IiwiaWF0IjoxNDc5OTUzODIyLCJleHAiOjE0Nzk5NjgyMjIsInJvbGVzIjpbIlJPTEVfQ1VTVE9NRVIiXX0.6vnxQxUOStM7ZacdDZZxf1pTERTWcvv2dgMl1Re_6aA");
-//        editor.commit();
-        token = sp.getString(XnsConstant.TOKEN,"");
+        token = sp.getString(XnsConstant.TOKEN, "");
         HttpHeaders headers = new HttpHeaders();
-        headers.put(HttpConstant.HTTP_HEADER_TOKEN,token);
+        headers.put(HttpConstant.HTTP_HEADER_TOKEN, token);
         //-----------------------------------------------------------------------------------//
-
         //必须调用初始化
         OkGo.init(this);
 
@@ -91,5 +104,45 @@ public class XnsApplication extends Application{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+
+    /**
+     * 当系统处于资源匮乏状态时，具有良好行为得应用程序可以释放额外的内存。
+     * 这个方法一般只会在后台进程已经终止，但是前台应用程序仍然缺少内存时调用。
+     * 可以重写这个处理程序来清空缓存或者释放不必要的资源
+     */
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
+
+    /**
+     * 作为，onLowMemory的一个特定于应用程序的替代选择，在Android4.0(API level 13)中引入。
+     * 当运行时决定当前应用程序应该尝试减少其内存开销时（通常在它进入后台时）调用。
+     * 它包含一个level参数，用于提供请求的上下文。
+     * @param level
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
+
+
+    /**
+     * 与Activity不同，在配置改变时，应用程序对象不会被终止和重启。
+     * 如果应用程序使用的值依赖于特定的配置，则重写这个方法来重新加载这些值，
+     * 或者在应用程序级别处理配置改变。
+     * @param newConfig
+     */
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+
+    public static Context getAppContext(){
+        return mContext;
     }
 }

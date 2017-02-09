@@ -9,7 +9,7 @@ import tech.xinong.xnsm.mvp.model.impl.MvpBaseModel;
  */
 
 public abstract class BaseModel extends MvpBaseModel {
-    private Context context;
+    public Context context;
     public BaseModel(Context context){
         this.context = context;
     }

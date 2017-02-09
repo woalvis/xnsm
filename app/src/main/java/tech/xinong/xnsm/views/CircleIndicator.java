@@ -17,8 +17,6 @@ import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 import tech.xinong.xnsm.R;
 
-import static android.support.v4.view.ViewPager.OnPageChangeListener;
-
 /**
  * 页码组件
  */
@@ -185,7 +183,7 @@ public class CircleIndicator extends LinearLayout {
         }
     }
 
-    private final OnPageChangeListener mInternalPageChangeListener = new OnPageChangeListener() {
+    private final ViewPager.OnPageChangeListener mInternalPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -260,7 +258,7 @@ public class CircleIndicator extends LinearLayout {
      * @deprecated User ViewPager addOnPageChangeListener
      */
     @Deprecated
-    public void setOnPageChangeListener(OnPageChangeListener onPageChangeListener) {
+    public void setOnPageChangeListener(ViewPager.OnPageChangeListener onPageChangeListener) {
         if (mViewpager == null) {
             throw new NullPointerException("can not find Viewpager , setViewPager first");
         }

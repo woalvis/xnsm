@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import tech.xinong.xnsm.R;
+import tech.xinong.xnsm.util.DensityUtil;
 
 
 /**
@@ -48,11 +49,11 @@ public class OrderProcessView extends View {
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.OrderProcessView);
         backGroundColor = ta.getColor(R.styleable.OrderProcessView_orderBackground,003344);
         ta.recycle();
-        init();
+        init(context);
     }
 
 
-    private void init(){
+    private void init(Context context){
 
         roundPaint = new Paint();
         roundPaint.setAntiAlias(true);
@@ -65,7 +66,7 @@ public class OrderProcessView extends View {
         statusRoundPaint.setColor(Color.WHITE);
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(18);
+        textPaint.setTextSize(DensityUtil.sp2px(context,12.0f));
         textPaint.setColor(Color.WHITE);
         orderStatus = getResources().getStringArray(R.array.order_status);
         size = orderStatus.length;
@@ -93,7 +94,6 @@ public class OrderProcessView extends View {
             float left = width/20+i*width/size+radius-textWidth/2;
             float top = height/2+textHeight+radius*2;
             canvas.drawText(str,left,top,textPaint);
-
             roundPaint.setColor(Color.GREEN);
        }
 

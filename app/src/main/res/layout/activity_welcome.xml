@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
+    android:background="@color/splash_bg"
     tools:context="tech.xinong.xnsm.pro.WelcomeActivity">
 
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="62dp"
+        app:srcCompat="@mipmap/splash_mask"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="81dp"
+        android:id="@+id/splash_mask" />
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="62dp"
+        app:srcCompat="@color/splash_bg"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="81dp"
+        android:id="@+id/splash_mask_hidden" />
+
+
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/splash_title"
+        android:layout_marginTop="47dp"
+        android:id="@+id/splash_title"
+        android:layout_below="@+id/splash_logo"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="240dp"
+        android:layout_height="71dp"
+        app:srcCompat="@mipmap/splash_logo"
+        android:layout_marginTop="115dp"
+        android:id="@+id/splash_logo"
+        android:visibility="visible"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/splash_mask"
+        android:layout_alignStart="@+id/splash_mask" />
 
 
 
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="我就不信了"-->
+        <!--android:textSize="48sp"-->
+        <!--android:textColor="@color/red"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignLeft="@+id/splash_logo"-->
+        <!--android:layout_alignStart="@+id/splash_logo" />-->
 </RelativeLayout>

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.math.BigDecimal;
 
@@ -23,6 +22,7 @@ import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.BuyOrderModel;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 import tech.xinong.xnsm.views.BorderTextView;
@@ -80,10 +80,10 @@ public class BuyNowActivity extends BaseActivity {
         BaseBean id = new BaseBean();
         id.setId(publishSellInfoModel.getId());
         buyOrder.setSellerListing(id);
-        XinongHttpCommend.getInstence(mContext).buyNow(buyOrder, new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(mContext).buyNow(buyOrder, new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
-                Toast.makeText(mContext, "下单成功", Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, "下单成功");
                 Intent intent = new Intent(mContext, OrderDetailActivity.class);
                 intent.putExtra("orderId",result);
                 startActivity(intent);

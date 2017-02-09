@@ -7,4 +7,6 @@ import tech.xinong.xnsm.pro.base.view.BaseView;
  */
 
 public interface HomeView extends BaseView<String>{
+
+    void onListingRefresh();
 }

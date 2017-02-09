@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,6 +19,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import tech.xinong.xnsm.util.T;
 
 /**
  * Created by xiao on 2016/11/11.
@@ -97,7 +98,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             @Override
             public void run() {
                 Looper.prepare();
-                Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
+                T.showShort(mContext, "很抱歉,程序出现异常,即将退出.");
                 Looper.loop();
             }
         }.start();

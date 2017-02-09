@@ -4,16 +4,15 @@ package tech.xinong.xnsm.http.framework.impl.xinonghttp;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.callback.BitmapCallback;
 import com.lzy.okgo.callback.StringCallback;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
@@ -26,23 +25,22 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnH
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.XnHttpCallback;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.pro.buy.model.BuyOrderModel;
+import tech.xinong.xnsm.pro.buy.model.OrderStatus;
 import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
+import tech.xinong.xnsm.pro.user.model.Address;
+import tech.xinong.xnsm.pro.user.model.RegisterModel;
 import tech.xinong.xnsm.pro.user.view.LoginActivity;
-import tech.xinong.xnsm.pro.user.view.RegisterActivity;
-
-import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_BUY_NOW;
-import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_ALL_ORDERS;
-import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_ORDER_BY_ID;
-import static tech.xinong.xnsm.http.framework.utils.HttpConstant.URL_GET_PRO_BY_ID;
+import tech.xinong.xnsm.util.T;
 
 /**
+ * 网络请求封装类
  * Created by Dream on 16/6/11.
  */
 public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     private OkHttpClient mOkHttpClient;
     private Context mContext;
     public String token;
-    private volatile static XinongHttpCommend instence;
+    private volatile static XinongHttpCommend instance;
     public static final int SUCCESS = 0;
     public static final int ERROR = 1;
     public static final int LOGIN = 2;
@@ -61,15 +59,15 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
      * @param context
      * @return
      */
-    public static XinongHttpCommend getInstence(Context context) {
-        if (instence == null) {
+    public static XinongHttpCommend getInstance(Context context) {
+        if (instance == null) {
             synchronized (XinongHttpCommend.class) {
-                if (instence == null) {
-                    instence = new XinongHttpCommend(context);
+                if (instance == null) {
+                    instance = new XinongHttpCommend(context);
                 }
             }
         }
-        return instence;
+        return instance;
     }
 
     @Override
@@ -139,7 +137,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
      * 登录，需要用户名和密码，密码用MD5进行加密
      */
     public void login(String username, String password, StringCallback callback) {
-      //  StringCallback scb = callback(callback);
+        //StringCallback scb = callback(callback);
         LoginBean loginBean = new LoginBean();
         loginBean.setUsername(username);
         loginBean.setPassword(password);
@@ -156,7 +154,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
      */
     public void getProductListings(String proId, AbsXnHttpCallback callback) {
         StringCallback scb = callback(callback);
-        OkGo.get(String.format(getAbsoluteUrl(URL_GET_PRO_BY_ID), proId))
+        OkGo.get(String.format(getAbsoluteUrl(HttpConstant.URL_GET_PRO_BY_ID), proId))
                 .execute(scb);
     }
 
@@ -175,25 +173,34 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
     /**
-     *注册用户
+     * 注册用户
      */
-    public void registerUser(RegisterActivity.Register register, AbsXnHttpCallback callback) {
+    public void registerUser(RegisterModel.Register register, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
         OkGo.post(getAbsoluteUrl(HttpConstant.URL_REGISTER))
                 .upJson(JSON.toJSONString(register))
                 .execute(sbc);
     }
 
-
-     /*根据产品的ID得到所有的规格*/
-    public void getAllSpecsByproductId(String id,AbsXnHttpCallback callback){
+    /**
+     * 得到当前用户信息
+     */
+    public void getCurrentInfo(AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
-        OkGo.get(String.format(getAbsoluteUrl(HttpConstant.URL_GET_ALLSPECS_BY_PRODUCTID),id))
-            .execute(sbc);
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_FIND_CONTACT))
+                .execute(sbc);
+    }
+
+
+    /*根据产品的ID得到所有的规格*/
+    public void getAllSpecsByproductId(String id, AbsXnHttpCallback callback) {
+        StringCallback sbc = callback(callback);
+        OkGo.get(String.format(getAbsoluteUrl(HttpConstant.URL_GET_ALLSPECS_BY_PRODUCTID), id))
+                .execute(sbc);
     }
 
     /*得到所有的物流方式*/
-    public void getAllLogisticMethods(AbsXnHttpCallback callback){
+    public void getAllLogisticMethods(AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
         OkGo.get(getAbsoluteUrl(HttpConstant.URL_GET_LOGISTIC_METHODS))
                 .execute(sbc);
@@ -201,7 +208,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
 
 
     /*发布卖货信息*/
-    public void pulishSellInfo(PublishSellInfoModel publishSellInfoModel, AbsXnHttpCallback callback){
+    public void publishSellInfo(PublishSellInfoModel publishSellInfoModel, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
         String jsonStr = JSON.toJSONString(publishSellInfoModel);
         OkGo.post(getAbsoluteUrl(HttpConstant.URL_LISTINGS_SELL))
@@ -211,27 +218,36 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
 
 
     /*立即购买，创建订单*/
-    public void buyNow(BuyOrderModel buyOrderModel,AbsXnHttpCallback callback){
+    public void buyNow(BuyOrderModel buyOrderModel, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
         String jsonStr = JSON.toJSONString(buyOrderModel);
-        OkGo.post(getAbsoluteUrl(URL_BUY_NOW))
+        OkGo.post(getAbsoluteUrl(HttpConstant.URL_BUY_NOW))
                 .upJson(jsonStr)
                 .execute(sbc);
     }
 
 
     /*通过订单的id，得到订单的详情*/
-    public void getOrderDetailById(String id,AbsXnHttpCallback callback){
+    public void getOrderDetailById(String id, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
-        OkGo.get(getAbsoluteUrl(String.format(URL_GET_ORDER_BY_ID,id)))
+        OkGo.get(getAbsoluteUrl(String.format(HttpConstant.URL_GET_ORDER_BY_ID, id)))
                 .execute(sbc);
 
     }
 
-     /*得到该用户的所有订单*/
-    public void getAllOrders(AbsXnHttpCallback callback){
+    /*得到该用户的所有采购订单*/
+    public void getAllOrders(AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
-        OkGo.get(getAbsoluteUrl(URL_GET_ALL_ORDERS))
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_GET_ALL_ORDERS))
+                .tag(this)// 请求的 tag, 主要用于取消对应的请求
+                .cacheKey("getCategories")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
+                .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
+                .execute(sbc);
+    }
+    /*得到该用户的所有供应订单*/
+    public void getAllSupplyOrders(AbsXnHttpCallback callback) {
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_GET_ALL_SUPPLY_ORDERS))
                 .tag(this)// 请求的 tag, 主要用于取消对应的请求
                 .cacheKey("getCategories")            // 设置当前请求的缓存key,建议每个不同功能的请求设置一个
                 .cacheMode(CacheMode.DEFAULT)    // 缓存模式，详细请看缓存介绍
@@ -239,22 +255,78 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
     }
 
 
+
     /*搜索，只有一个输入需字符串*/
-    public void searchText(String text,AbsXnHttpCallback callback){
+    public void searchText(String text, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
         OkGo.get(getAbsoluteUrl(HttpConstant.URL_LISTINGS))
-                .params("searchText",text)
+                .params("searchText", text)
+                .execute(sbc);
+    }
+
+    /*添加地址*/
+    public void addAddress(Address address, AbsXnHttpCallback callback) {
+        StringCallback sbc = callback(callback);
+        String jsonStr = JSON.toJSONString(address);
+        OkGo.post(getAbsoluteUrl(HttpConstant.URL_ADD_ADDRESS))
+                .upJson(jsonStr)
                 .execute(sbc);
     }
 
 
-    public void upLoadFile(File file,AbsXnHttpCallback callback){
+    /*上传文件*/
+    public void upLoadFile(List<File> files, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);
-        List<File> files = new ArrayList<>();
-        files.add(file);
-        OkGo.post(HttpConstant.URL_UPLOAD)
-                .addFileParams("files" ,files)
+        OkGo.post(getAbsoluteUrl(HttpConstant.URL_UPLOAD))
+                .addFileParams("files", files)
                 .execute(sbc);
+    }
+
+    /*显示图片*/
+    public void showPic(String imageUrl,BitmapCallback callback){
+       // StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(imageUrl))
+                .execute(callback);
+    }
+
+
+    /*得到所有的拍卖信息*/
+    public void getAuctions(AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(HttpConstant.URL_GET_AUCTIONS))
+                .execute(sbc);
+    }
+
+
+    public void getAuctionDetailById(String auctionId,AbsXnHttpCallback callback){
+        StringCallback sbc = callback(callback);
+        OkGo.get(getAbsoluteUrl(String.format(HttpConstant.URL_GET_AUCTION_DETAIL_BY_ID,auctionId)))
+                .execute(sbc);
+    }
+
+
+    /**
+     * 上传付费凭证
+     */
+    public void uploadBuyOrderTopay(String buyOrderId,File file,AbsXnHttpCallback callback){
+//        List<File> files = new ArrayList<>();
+//        files.add(file);
+
+        OkGo.put(getAbsoluteUrl(String.format(HttpConstant.URL_UPLOAD_ORDER_TOPAY,buyOrderId)))
+                .params("payFile", file)
+                .execute(callback(callback));
+    }
+
+
+    /**
+     * 更改订单状态，仅限于收货和发货
+     * 请求参数：
+     * status表示订单状态(发货Status.SHIP_GOODS，收货Status.RECEIVE_GOODS)
+     */
+    public void orderProductTransfer(String orderId, OrderStatus orderStatus,AbsXnHttpCallback callback){
+        OkGo.put(getAbsoluteUrl(HttpConstant.URL_ORDER_TRANSFER))
+                .params("status",orderStatus.toString())
+                .execute(callback(callback));
     }
 
 
@@ -266,7 +338,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             @Override
             public void onSuccess(String s, Call call, Response response) {
                 if (TextUtils.isEmpty(s)) {
-                    Toast.makeText(mContext, "响应为空，请检查网络", Toast.LENGTH_SHORT).show();
+                    T.showShort(mContext, "响应为空，请检查网络");
                 } else {
                     JSONObject jsonObject = JSON.parseObject(s);
                     int code = jsonObject.getInteger("c");
@@ -279,7 +351,7 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
                         case XinongHttpCommend.LOGIN:
                         case XinongHttpCommend.EXCEPTION:
                         case XinongHttpCommend.ERROR://出错
-                            Toast.makeText(mContext, info, Toast.LENGTH_SHORT).show();
+                            T.showShort(mContext, info);
                             callback.onError(info);
                             break;
 
@@ -294,16 +366,16 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             /** 请求失败，响应错误，数据解析错误等，都会回调该方法， UI线程 */
             @Override
             public void onError(Call call, Response response, Exception e) {
-               if (response!=null) {
+                if (response != null) {
                     if (response.code() == 401) {
-                        Toast.makeText(mContext, "Token过期,请重新登录", Toast.LENGTH_SHORT).show();
+                        T.showShort(mContext, "Token过期,请重新登录");
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         mContext.startActivity(intent);
                         return;
                     }
                 }
                 callback.onHttpError(call, response, e);
-                Toast.makeText(mContext, "网络请求错误，请检查网络", Toast.LENGTH_SHORT).show();
+                T.showShort(mContext, "网络请求错误，请检查网络");
             }
 
         };
@@ -346,4 +418,6 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
             this.password = password;
         }
     }
+
+
 }

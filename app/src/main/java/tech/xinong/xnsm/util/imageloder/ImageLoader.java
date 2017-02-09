@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import tech.xinong.xnsm.util.imageloder.impl.MemoryCache;
-import tech.xinong.xnsm.util.imageloder.impl.OkgoImageDownloader;
+import tech.xinong.xnsm.util.imageloder.impl.DoubleImageCache;
+import tech.xinong.xnsm.util.imageloder.impl.HttpUrlImageDownloader;
 
 /**
  * Created by xiao on 2016/12/7.
@@ -21,7 +21,7 @@ public class ImageLoader {
     /**
      * 图片缓存类，给一个默认的实现，可以调用setImageCache更改缓存策略
      */
-    private ImageCache imageCache = new MemoryCache();
+    private ImageCache imageCache = new DoubleImageCache();
 
     private static ImageLoader instance = new ImageLoader();
 
@@ -34,6 +34,9 @@ public class ImageLoader {
         return instance;
     }
 
+    private DownloadSuccessListener listener;
+    public static final int MYHANDLER_WHAT = 0X101;
+
 
     private void getThreadPool() {
         mEService = Executors.newFixedThreadPool(2);
@@ -42,10 +45,10 @@ public class ImageLoader {
     /**
      * 图片下载类，给一个默认的实现，可以调用setImageCache更改缓存策略
      */
-    private ImageDownloader imageDownloader = new OkgoImageDownloader();
+    private ImageDownloader imageDownloader = new HttpUrlImageDownloader();
 
     /**
-     * 注入缓存实现，用户可以自行选择缓存策略，也可以自己去实线
+     * 注入缓存实现，用户可以自行选择缓存策略，也可以自己去实现
      * @param imageCache
      */
     public ImageLoader setImageCache(ImageCache imageCache) {
@@ -60,13 +63,44 @@ public class ImageLoader {
     private void submitLoadRequest(final String imageUrl,
                                    final ImageView imageView){
         imageView.setTag(imageUrl);
+        mEService.submit(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bitmap = imageDownloader.downloadImage(imageUrl);
+                if (bitmap==null){
+                    return;
+                }
+                if (imageView.getTag().equals(imageUrl)){
+                    try {
+                        if (listener!=null){
+                            listener.onDownloadSuccess(bitmap,imageView);
+                        }
 
+//                        MyHandler myHandler = new MyHandler(bitmap,imageView);
+//                        myHandler.sendEmptyMessage(MYHANDLER_WHAT);
+
+//                        int height  = bitmap.getHeight();
+//                        int width = bitmap.getWidth();
+//                        L.e("bitmap.getHeight()---->",""+bitmap.getHeight());
+//                        L.e("bitmap.getWidth()----->",""+bitmap.getWidth());
+//                       imageView.setImageBitmap(bitmap);
+                    }catch (Throwable e){
+                        e.printStackTrace();
+                    }
+
+                }
+
+                imageCache.put(imageUrl,bitmap);
+            }
+        });
     }
 
     public void displayImage(final String imageUrl,final ImageView imageView){
         Bitmap bitmap = imageCache.get(imageUrl);
         if (bitmap!=null){
-            imageView.setImageBitmap(bitmap);
+            if (listener!=null){
+                listener.onDownloadSuccess(bitmap,imageView);
+            }
             return;
         }
         //图片没有缓存，提交到线程池中下载图片
@@ -148,4 +182,38 @@ public class ImageLoader {
             imageCache.put(path, bitmap);
         }
     }
+
+    public interface DownloadSuccessListener{
+        void onDownloadSuccess(Bitmap bitmap,ImageView imageView);
+    }
+
+    public ImageLoader setLis(DownloadSuccessListener listener){
+        this.listener = listener;
+        return this;
+    }
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
+
+
+    private class MyHandler extends Handler{
+
+        private Bitmap bitmap;
+        private ImageView imageView;
+        public MyHandler(Bitmap bitmap,ImageView imageView){
+            this.bitmap = bitmap;
+            this.imageView = imageView;
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what==MYHANDLER_WHAT){
+                imageView.setImageBitmap(bitmap);
+            }
+        }
+    }
+
 }

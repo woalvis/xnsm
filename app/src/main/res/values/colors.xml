@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="splash_bg">#24b5f4</color>
+
 
     <color name="page_bg_color">#ffe2e2e2</color>
     <color name="main_content_bg">#10000000</color>
@@ -37,7 +39,8 @@
     <color name="green_select_btn_color">#4eaf8f</color>
     <color name="green_btn_color">#64dcb4</color>
 
-
+    <!--发送短信验证的文本背景色-->
+    <color name="orange_btn_color">#fed05a</color>
 
     <!-- 退出登录文本颜色 -->
     <color name="logout_text_color">#de573d</color>

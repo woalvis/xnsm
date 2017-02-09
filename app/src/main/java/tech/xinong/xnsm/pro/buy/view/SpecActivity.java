@@ -3,7 +3,6 @@ package tech.xinong.xnsm.pro.buy.view;
 import android.content.Intent;
 import android.view.View;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 
@@ -16,6 +15,7 @@ import tech.xinong.xnsm.pro.base.view.adapter.CommonViewHolder;
 import tech.xinong.xnsm.pro.buy.model.CategoryModel;
 import tech.xinong.xnsm.pro.buy.model.SpecModel;
 import tech.xinong.xnsm.pro.publish.view.PublishSellActivity;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 
 @ContentView( R.layout.activity_spec)
@@ -61,7 +61,7 @@ public class SpecActivity extends BaseActivity {
                                 startActivity(intent);
                                 break;
                             case PUBLISH_BUY:
-                                Toast.makeText(SpecActivity.this, "buy", Toast.LENGTH_SHORT).show();
+                                T.showShort(SpecActivity.this, "buy");
                                 break;
                             case PUBLISH_SELL:
                                 intent = new Intent(SpecActivity.this,PublishSellActivity.class);

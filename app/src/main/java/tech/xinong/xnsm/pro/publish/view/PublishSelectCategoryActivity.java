@@ -38,7 +38,7 @@ public class PublishSelectCategoryActivity extends BaseActivity {
         Intent intent = getIntent();
         opSelect = (CategoryModel.OP_SELECT) intent.getSerializableExtra("info");
 
-        XinongHttpCommend.getInstence(mContext).getCategories(new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(mContext).getCategories(new AbsXnHttpCallback() {
             @Override
             public void onSuccess(String info, String result) {
                 categories = JSONArray.parseArray(result, CategoryModel.class);

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.TextView;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import tech.xinong.xnsm.mvp.view.impl.MvpActivity;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
 import tech.xinong.xnsm.util.ActivityCollector;
@@ -24,6 +27,8 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
     public SharedPreferences mSharedPreferences;
     public SharedPreferences.Editor editor;
     public Context mContext;
+    public SweetAlertDialog pDialog;
+    private int i = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +40,6 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
         InjectUtils.inject(this);
         initWidget();
         initData();
-
     }
 
 
@@ -43,6 +47,7 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
     public p bindPresenter() {
         return null;
     }
+
 
     /**
      * 初始化控件
@@ -71,4 +76,24 @@ public abstract class BaseActivity <p extends BasePresenter> extends MvpActivity
         tv.setText(text);
     }
 
+
+    public void widgetClick(View view){};
+
+
+    protected void showProgress(String title)
+    {
+        if (pDialog==null)
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText(title);
+        pDialog.setCancelable(false);
+        pDialog.show();
+    }
+
+
+    protected void cancleProgress(){
+        if (pDialog!=null){
+            pDialog.cancel();
+        }
+    }
 }

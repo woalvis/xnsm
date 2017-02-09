@@ -38,6 +38,7 @@ public class PublishSellInfoModel implements Serializable{
     private String origin;//产地
     private String address;//发货地
     private String logisticMethodTags;
+    private List<BaseBean> listingDocs;
     private Boolean brokerAllowed;
     private String notes;
     private String ownerFullName;
@@ -49,10 +50,6 @@ public class PublishSellInfoModel implements Serializable{
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
-    private List<String> listingDocs = new ArrayList<>();
-
-
 
 
     public void setSpecificationConfigsForids(String ids){
@@ -169,11 +166,11 @@ public class PublishSellInfoModel implements Serializable{
         this.brokerAllowed = brokerAllowed;
     }
 
-    public List<String> getListingDocs() {
+    public List<BaseBean> getListingDocs() {
         return listingDocs;
     }
 
-    public void setListingDocs(List<String> listingDocs) {
+    public void setListingDocs(List<BaseBean> listingDocs) {
         this.listingDocs = listingDocs;
     }
 
