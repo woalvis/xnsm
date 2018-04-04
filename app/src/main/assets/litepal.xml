@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="xnm" />
+    <version value="2"></version>
+
+    <list>
+        <mapping class="tech.xinong.xnsm.pro.base.sql.PriceFav"></mapping>
+    </list>
+</litepal>

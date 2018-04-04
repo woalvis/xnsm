@@ -33,6 +33,7 @@ public class SelectLogisticMethodActivity extends BaseActivity {
 
     @Override
     public void initWidget() {
+        super.initWidget();
         logisticMethodBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,9 +58,11 @@ public class SelectLogisticMethodActivity extends BaseActivity {
     @Override
     public void initData() {
         resultList = new ArrayList<>();
-        XinongHttpCommend.getInstance(this).getAllLogisticMethods(new AbsXnHttpCallback(){
+        showProgress();
+        XinongHttpCommend.getInstance(this).providerSupports(new AbsXnHttpCallback(mContext){
             @Override
             public void onSuccess(String info, final String result) {
+                cancelProgress();
                 List<LogisticMethod> logisticMethodList = JSON.parseArray(result,LogisticMethod.class);
                 logisticMethodGrid.setAdapter(new CommonAdapter<LogisticMethod>(mContext,
                         R.layout.item_border_text,
@@ -67,17 +70,18 @@ public class SelectLogisticMethodActivity extends BaseActivity {
                     @Override
                     protected void fillItemData(final CommonViewHolder viewHolder, int position, final LogisticMethod item) {
 
-                        viewHolder.setTextForTextView(R.id.tv_show,item.getDescription());
+                        viewHolder.setTextForTextView(R.id.tv_show,item.getItem());
                         viewHolder.setOnClickListener(R.id.tv_show, new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                String desc = item.getDescription();
-
+                                String desc = item.getItem();
                                 if (resultList.contains(desc)){
-                                    viewHolder.setTextColor(R.id.tv_show,getResources().getColor(R.color.black));
+                                    viewHolder.setTextColor(R.id.tv_show,getResources().getColor(R.color.text_color));
+                                    viewHolder.getView(R.id.tv_show).setBackgroundResource(R.drawable.textview_border);
                                     resultList.remove(desc);
                                 }else {
-                                    viewHolder.setTextColor(R.id.tv_show,getResources().getColor(R.color.green_85c43d));
+                                    viewHolder.setTextColor(R.id.tv_show,getResources().getColor(R.color.white));
+                                    viewHolder.getView(R.id.tv_show).setBackgroundColor(getResources().getColor(R.color.primaryGreen));
                                     resultList.add(desc);
                                 }
                             }
@@ -88,4 +92,8 @@ public class SelectLogisticMethodActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public String setToolBarTitle() {
+        return "服务方式";
+    }
 }

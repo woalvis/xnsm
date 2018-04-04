@@ -2,9 +2,10 @@ package tech.xinong.xnsm.pro;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TabHost;
@@ -14,25 +15,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tech.xinong.xnsm.R;
+import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.view.BuyFragment;
-import tech.xinong.xnsm.pro.home.view.HomeFragment;
+import tech.xinong.xnsm.pro.home.view.HomeFragment1;
 import tech.xinong.xnsm.pro.sell.view.SellFragment;
-import tech.xinong.xnsm.pro.publish.view.PublishFragment;
-import tech.xinong.xnsm.pro.user.view.UserFragment;
+import tech.xinong.xnsm.pro.user.view.UserFragmentTest;
+import tech.xinong.xnsm.util.ActivityCollector;
+import tech.xinong.xnsm.util.T;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
-public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener {
+
+@ContentView(R.layout.activity_main)
+public class MainActivity extends BaseActivity implements TabHost.OnTabChangeListener {
     //保存tab页的基本信息
     private List<TabItem> tabItemList;
-
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("xx","MainActivity+ onCreate");
-        setContentView(R.layout.activity_main);
         initTabItemList();
         initTabView();
     }
+
+    @Override
+    public void initData() {
+
+    }
+
 
     private void initTabItemList() {
 
@@ -41,27 +51,22 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
                 R.mipmap.tabbar_home,
                 R.mipmap.tabbar_home_highlighted,
                 R.string.home,
-                HomeFragment.class));
-        this.tabItemList.add(new TabItem(
-                R.mipmap.tabbar_sell,
-                R.mipmap.tabbar_sell_highlighted,
-                R.string.sell,
-                SellFragment.class));
-        this.tabItemList.add(new TabItem(
-                R.mipmap.tabbar_publish,
-                R.mipmap.tabbar_publish_highlighted,
-                R.string.publish,
-                PublishFragment.class));
+                HomeFragment1.class));
         this.tabItemList.add(new TabItem(
                 R.mipmap.tabbar_buy,
                 R.mipmap.tabbar_buy_highlighted,
                 R.string.buy,
                 BuyFragment.class));
         this.tabItemList.add(new TabItem(
+                R.mipmap.tabbar_sell,
+                R.mipmap.tabbar_sell_highlighted,
+                R.string.sell,
+                SellFragment.class));
+        this.tabItemList.add(new TabItem(
                 R.mipmap.tabbar_profile,
                 R.mipmap.tabbar_profile_highlighted,
                 R.string.user,
-                UserFragment.class));
+                UserFragmentTest.class));
     }
 
     /**
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
      */
     private void initTabView() {
         //管理我们的Fragment
-        FragmentTabHost fragmentTabHost = (FragmentTabHost) findViewById(android.R.id.tabhost);
+        FragmentTabHost fragmentTabHost = findViewById(android.R.id.tabhost);
         //指定Fragment绑定的布局，就是说这些Fragment要放到哪里去
         fragmentTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
         //删除分割线
@@ -176,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
             }
             if (tv_tab != null){
                 if (isChecked){
-                    tv_tab.setTextColor(getResources().getColor(R.color.tabbar_text_press_color));
+                    tv_tab.setTextColor(getResources().getColor(R.color.colorPrimary));
                 }else {
                     tv_tab.setTextColor(getResources().getColor(R.color.tabbar_text_normal_color));
                 }
@@ -194,9 +199,9 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
                     layoutId = R.layout.tabbar_indicator;
                 }
                 viewIndicator = getLayoutInflater().inflate(layoutId, null);
-                iv_tab = (ImageView) viewIndicator.findViewById(R.id.iv_tab);
+                iv_tab = viewIndicator.findViewById(R.id.iv_tab);
                 if (tabTextRes > 0) {
-                    tv_tab = (TextView) viewIndicator.findViewById(R.id.tv_tab);
+                    tv_tab = viewIndicator.findViewById(R.id.tv_tab);
                     tv_tab.setText(getTabText());
                 }
                 iv_tab.setImageResource(imageNormal);
@@ -211,5 +216,31 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     protected void onStart() {
         super.onStart();
         Log.i("xx","onStart");
+    }
+
+
+
+
+
+
+    private long mLastPressBack;
+
+    /**
+     * 捕捉back,实现二次点击回退键再推出程序
+     */
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - mLastPressBack > 2000) {
+                T.showShort(this, "再按一次退出");
+                mLastPressBack = currentTime;
+            } else {
+                ActivityCollector.finishAll();
+                this.finish();
+            }
+        }
+        return true;
     }
 }

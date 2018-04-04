@@ -24,7 +24,7 @@ public class InjectUtils {
 		Map<Integer, Object> map  = injectView(c);
 		injectMyView(c);
 		injectEvent(c, map);
-		injectEvent(c,injectMyView(c));
+		//injectEvent(c,injectMyView(c));
 	}
 
 	private static Map<Integer, Object> injectMyView(Context c) {
@@ -88,10 +88,10 @@ public class InjectUtils {
 							// 获取注解
 							int[] ids = (int[]) valueMethod.invoke(a);
 							// 给我们的Activity设置代理对象
-							ListenerInvercationHandler invercationHandler = new ListenerInvercationHandler(
+							ListenerInvocationHandler invocationHandler = new ListenerInvocationHandler(
 									c);
 							// 回调方法OnclickListener中的onClick绑定
-							invercationHandler
+							invocationHandler
 									.addMethod(callBackMethod, method);
 
 							// 通过Proxy创建一个annotationType的代理对象
@@ -99,7 +99,7 @@ public class InjectUtils {
 							Object listener = Proxy.newProxyInstance(
 									listenerType.getClassLoader(),
 									new Class<?>[] { listenerType },
-									invercationHandler);
+									invocationHandler);
 							// 给我们的控件设置点击事件
 							for (int id : ids) {
 								Object view = viewMap.get(id);
@@ -176,14 +176,16 @@ public class InjectUtils {
 		Class<? extends Context> class1 = c.getClass();
 		ContentView annotation = class1.getAnnotation(ContentView.class);
 		// 获取布局ID
-		int layoutId = annotation.value();
-		try {
-			Method method = class1
-					.getMethod(METHOD_SET_CONTENT_VIEW, int.class);
-			method.invoke(c, layoutId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (annotation!=null) {
+			int layoutId = annotation.value();
+			try {
+				Method method = class1
+						.getMethod(METHOD_SET_CONTENT_VIEW, int.class);
+				method.invoke(c, layoutId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

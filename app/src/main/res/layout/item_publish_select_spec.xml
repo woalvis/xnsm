@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/ll"
+    android:layout_centerInParent="true"
+    android:layout_margin="5dp"
+    >
+        <TextView
+            android:padding="@dimen/x12"
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="英超"
+            android:maxLength="7"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/tv_grey_bg"
+            android:textSize="13sp"/>
+
+</RelativeLayout>

@@ -5,7 +5,7 @@ package tech.xinong.xnsm.pro.base.view.navigation;
  */
 
 public interface INavigation {
-    public int getLayoutId();
+    int getLayoutId();
 
-    public void createAndBind();
+    void createAndBind();
 }

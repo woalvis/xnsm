@@ -15,14 +15,12 @@ public class RegisterModel extends BaseModel{
         super(context);
     }
 
-    public void registerUser(String cellphone,String verificationCode,AbsXnHttpCallback callback){
+    public void registerUser(String cellphone,String pwd,String verificationCode,AbsXnHttpCallback callback){
         Register register = new Register();
         register.setCellphone(cellphone);
         register.setVerificationCode(verificationCode);
-        register.setPassword("123456");
-        register.setConfirmPassword("123456");
-
-
+        register.setPassword(pwd);
+        register.setConfirmPassword(pwd);
         XinongHttpCommend.getInstance(getContext()).registerUser(register, callback);
     }
 

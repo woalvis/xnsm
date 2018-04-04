@@ -13,7 +13,7 @@ import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.pro.base.presenter.BasePresenter;
 import tech.xinong.xnsm.pro.home.model.AuctionModel;
 import tech.xinong.xnsm.pro.home.model.AuctionShow;
-import tech.xinong.xnsm.pro.home.view.AuctionView;
+import tech.xinong.xnsm.pro.home.view.abs.AuctionView;
 
 /**
  * Created by xiao on 2017/1/17.
@@ -31,7 +31,8 @@ public class AuctionPresenter extends BasePresenter<AuctionView>{
     }
 
     public void getAuctions(){
-        auctionModel.getAuctions(new AbsXnHttpCallback() {
+
+        auctionModel.getAuctions(new AbsXnHttpCallback(getContext()) {
             @Override
             public void onSuccess(String info, String result) {
                 if (info.equals(HttpConstant.OK)){

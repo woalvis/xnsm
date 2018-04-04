@@ -2,9 +2,8 @@ package tech.xinong.xnsm.views;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.ImageView;
 
-public class MyImageView extends ImageView {
+public class MyImageView extends android.support.v7.widget.AppCompatImageView {
 
 	private OnMeasureListener onMeasureListener;
 	public MyImageView(Context context, AttributeSet attrs) {

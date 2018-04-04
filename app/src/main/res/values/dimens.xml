@@ -1,23 +1,26 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_horizontal_margin">@dimen/x16</dimen>
+    <dimen name="activity_vertical_margin">@dimen/x16</dimen>
 
     <!-- 字体大小 -->
 
 
     <!--字体大小sp-->
-    <dimen name="dimen_30_sp">30sp</dimen>
-    <dimen name="dimen_16_sp">16sp</dimen>
-    <dimen name="dimen_18_sp">18sp</dimen>
+    <dimen name="dimen_30_sp">@dimen/x30</dimen>
+    <dimen name="dimen_16_sp">@dimen/x16</dimen>
+    <dimen name="dimen_18_sp">@dimen/x18</dimen>
+    <dimen name="dimen_14_sp">@dimen/x14</dimen>
+    <dimen name="dimen_12_sp">@dimen/x12</dimen>
+    <dimen name="dimen_1_dip">@dimen/x1</dimen>
 
-    <dimen name="dimen_1_dip">1dp</dimen>
+    <dimen name="tabbar_height">@dimen/x48</dimen>
 
-    <dimen name="tabbar_height">48dp</dimen>
+    <dimen name="navigation_height">@dimen/x45</dimen>
 
-    <dimen name="navigation_height">45dp</dimen>
-
-    <dimen name="dimen_12_dip">12dp</dimen>
-    <dimen name="normal_text_size">16sp</dimen>
-    <dimen name="big_text_size">18sp</dimen>
+    <dimen name="dimen_12_dip">@dimen/x12</dimen>
+    <dimen name="normal_text_size">@dimen/x16</dimen>
+    <dimen name="big_text_size">@dimen/x18</dimen>
+    <dimen name="txt_m">@dimen/x14</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

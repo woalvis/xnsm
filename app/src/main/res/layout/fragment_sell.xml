@@ -5,10 +5,12 @@
               android:background="@android:color/white"
               android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/sell"
-        android:textSize="@dimen/dimen_30_sp"/>
+  <include layout="@layout/toolbar_green"></include>
+
+  <com.handmark.pulltorefresh.library.PullToRefreshListView
+      android:id="@+id/lv_product"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+  </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </LinearLayout>

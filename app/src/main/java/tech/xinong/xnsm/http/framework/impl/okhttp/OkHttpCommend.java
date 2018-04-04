@@ -13,7 +13,6 @@ public class OkHttpCommend  implements IHttpCommand<HashMap<String,Object>> {
     @Override
     public String execute(String url, IRequestParam<HashMap<String, Object>> requestParam) {
         //OKHttp代码是不是可以
-
         return null;
     }
 }

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_edit_my_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     tools:context="tech.xinong.xnsm.pro.user.view.EditMyInfoActivity">
+
+
+    <include layout="@layout/toolbar_white"></include>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,6 +40,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/user_tel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="138****8666"
@@ -65,12 +72,14 @@
                     >
                 </TextView>
 
-                <TextView
+                <EditText
+                    android:id="@+id/et_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="肖志金"
                     android:textSize="@dimen/dimen_12_dip"
+                    android:hint="请填写你的全名"
                     android:padding="10dp"
+                    android:background="@null"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -81,12 +90,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/im_head"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/x80"
                 android:layout_weight="1"
                 android:scaleType="fitXY"
-                android:src="@mipmap/avatar_img"
+                app:placeholderImage="@mipmap/avatar_img"
+                fresco:roundAsCircle="true"
                 android:layout_margin="5dp"
                 />
             <TextView
@@ -97,4 +108,50 @@
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
+
+
+    <include layout="@layout/line_grey"></include>
+
+
+
+    <LinearLayout
+        android:id="@+id/layout_address"
+        android:padding="@dimen/x15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="收货地址"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            ></View>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/arrow_right"
+            />
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+
+    <TextView
+        android:id="@+id/bt_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x8"
+        android:gravity="center"
+        android:padding="@dimen/x15"
+        android:background="@drawable/bt_bg_green"
+        android:textColor="@color/white"
+        android:text="保存信息" />
 </LinearLayout>

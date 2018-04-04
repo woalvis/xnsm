@@ -12,6 +12,24 @@ public class Area extends BaseBean {
     private String name;
     private List<Area> children;
     private int level;
+    private String fristPinYin;
+    private String pinYin;
+
+    public String getFristPinYin() {
+        return fristPinYin;
+    }
+
+    public void setFristPinYin(String fristPinYin) {
+        this.fristPinYin = fristPinYin;
+    }
+
+    public String getPinYin() {
+        return pinYin;
+    }
+
+    public void setPinYin(String pinYin) {
+        this.pinYin = pinYin;
+    }
 
     private String hint;
 

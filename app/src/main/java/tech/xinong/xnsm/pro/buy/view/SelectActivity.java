@@ -19,7 +19,7 @@ import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.model.Area;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.pro.buy.model.SpecModel;
+import tech.xinong.xnsm.pro.buy.model.SpecificationConfigDTO;
 import tech.xinong.xnsm.pro.buy.model.adapter.SelectAreaAdapter;
 import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
@@ -64,11 +64,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initData() {
         Intent intent = getIntent();
-        SpecModel spec = (SpecModel) intent.getSerializableExtra("spec");
+        SpecificationConfigDTO spec = (SpecificationConfigDTO) intent.getSerializableExtra("spec");
         //展示之前选择的品类
-        categoryShow.setText(spec.getProduct());
+//        categoryShow.setText(spec.getProduct());
         //展示之前选择品种
-        specShow.setText(spec.getItem());
+//        specShow.setText(spec.getItem());
     }
 
     @Override
@@ -86,9 +86,11 @@ public class SelectActivity extends BaseActivity implements View.OnClickListener
     private void selectArea() {
          /*设置选择区域按钮不可点击,防止用户极端操作*/
         selectArea.setClickable(false);
-        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback() {
+        showProgress();
+        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
+                cancelProgress();
                 List<Area> areas = JSON.parseArray(result, Area.class);
                 resetAreas(areas);
                 showAreaPopup(areas);

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    xmlns:fresco = "http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:gravity="center_horizontal"
+    android:layout_height="match_parent">
+    <include layout="@layout/toolbar_white"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:text="@string/id_verify_text"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:text="喜农承诺对您的信息严格保密"
+            android:textColor="@color/black"
+            android:textSize="10sp" />
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_marginBottom="@dimen/x10"
+                android:gravity="center_horizontal">
+
+                <LinearLayout
+                    android:padding="@dimen/x8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/id_card_back"
+                        android:layout_width="@dimen/x120"
+                        android:layout_height="@dimen/x72"
+                        fresco:placeholderImage="@drawable/id_card_back" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:gravity="center"
+                        android:text="人像页"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:padding="@dimen/x8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/id_card_front"
+                        android:layout_width="@dimen/x120"
+                        android:layout_height="@dimen/x72"
+                        android:scaleType="centerCrop"
+                        fresco:placeholderImage="@drawable/id_card_front" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y5"
+                        android:gravity="center"
+                        android:text="国徽页"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/id_card_hand"
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x96"
+                android:scaleType="centerCrop"
+                fresco:placeholderImage="@drawable/id_card_hand" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y5"
+                android:gravity="center"
+                android:text="手持身份证照片"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="请您点击图片进行身份证相应照片的选择"
+                android:textColor="@color/red"
+                android:textSize="@dimen/x14" />
+        </LinearLayout>
+
+        <EditText
+
+            android:id="@+id/et_id_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_bg"
+            android:hint="请填写身份证号"
+            android:padding="10dp"
+            android:textColor="@color/primaryGreen"
+            android:layout_marginTop="@dimen/x10"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"/>
+
+
+        <EditText
+
+            android:id="@+id/et_real_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_bg"
+            android:hint="请填写真实姓名"
+            android:padding="10dp"
+            android:textColor="@color/primaryGreen"
+            android:layout_marginTop="@dimen/x10"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"/>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
+
+        <TextView
+            android:id="@+id/tv_submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/primaryGreen"
+            android:text="@string/submit"
+            android:gravity="center"
+            android:padding="@dimen/x10"
+            />
+
+
+
+    </LinearLayout>
+</LinearLayout>
+
+
+</ScrollView>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_below="@id/toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单编号:"/>
+        <TextView
+            android:id="@+id/tv_order_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物流方式"
+            />
+
+        <TextView
+            android:id="@+id/tv_logistics_mode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="货运零担发货" />
+
+    </LinearLayout>
+    <include layout="@layout/line_grey"></include>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_logistic_com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="承运公司/个人"
+            />
+
+        <TextView
+            android:id="@+id/tv_logistic_com_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="王玉" />
+
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_logistic_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="车牌号码" />
+
+        <TextView
+            android:id="@+id/tv_logistic_no_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="6465849" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8"
+        android:text="物流凭证："
+        />
+    <GridView
+        android:id="@+id/gv_pic"
+        android:numColumns="3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </GridView>
+</LinearLayout>

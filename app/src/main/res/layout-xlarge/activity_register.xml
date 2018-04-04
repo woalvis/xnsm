@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_register"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tech.xinong.xnsm.pro.user.view.RegisterActivity">
+
+    <include
+        android:id="@+id/register_navigation"
+        layout="@layout/navigation_default"></include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:id="@+id/register_text_input_phone_num"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="11"
+            android:text=""
+            android:hint="请输入手机号"
+            android:id="@+id/register_phone_num"
+            android:layout_alignParentTop="true" />
+
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:id="@+id/register_request_verify"
+            android:maxLines="1"
+            android:gravity="center"
+            android:background="@drawable/button_shape_orange"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="@dimen/normal_text_size"
+            android:text="@string/get_verify"
+            android:textColor="@color/white_text_color"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="验证码"
+            android:ems="10"
+            android:text=""
+            android:layout_marginTop="23dp"
+            android:id="@+id/register_verify_num"
+            android:layout_below="@+id/register_phone_num"
+            android:layout_alignLeft="@+id/register_phone_num"
+            android:layout_alignStart="@+id/register_phone_num" />
+
+
+        <TextView
+            android:text="@string/verify_helper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:id="@+id/login_helper" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/register_password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/register_text_input_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/input_password"
+                />
+
+
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+
+            android:id="@+id/register_text_input_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            />
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+
+    <Button
+        android:text="@string/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_register"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/register_verify_num"
+        android:textColor="@color/white"
+        android:background="@drawable/button_selected_shape"
+        android:layout_centerHorizontal="true" />
+</LinearLayout>

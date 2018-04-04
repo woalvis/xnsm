@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ff888888"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_all"
+        android:background="@drawable/bg_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x10"
+        android:padding="@dimen/x10"
+        android:gravity="center"
+        android:text="全部"/>
+
+    <GridView
+        android:id="@+id/rv_spec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"></GridView>
+</LinearLayout>

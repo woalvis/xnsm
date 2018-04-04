@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Looper;
 import android.util.Log;
+
+import java.util.LinkedList;
+
 import tech.xinong.xnsm.pro.MainActivity;
 import tech.xinong.xnsm.util.T;
 
@@ -78,6 +81,8 @@ public class UnCatchExceptionHandler implements Thread.UncaughtExceptionHandler 
                 Looper.loop();
             }
         }.start();
+
+        LinkedList ll = new LinkedList();
         return true;
     }
 }

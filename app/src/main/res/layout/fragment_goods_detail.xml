@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="@dimen/x16"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_goods_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x6"
+        android:layout_marginBottom="@dimen/x8"
+        />
+
+    <tech.xinong.xnsm.views.MyListView
+        android:id="@+id/lv_imgs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </tech.xinong.xnsm.views.MyListView>
+    <TextView
+        android:id="@+id/tv_create_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        />
+</LinearLayout>

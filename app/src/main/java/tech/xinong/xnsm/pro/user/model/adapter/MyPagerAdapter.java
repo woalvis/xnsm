@@ -40,10 +40,11 @@ public class MyPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-
+        ViewGroup parent = (ViewGroup) mViewList.get(position).getParent();
+        if (parent != null) {
+            parent.removeAllViews();
+        }
         container.addView(mViewList.get(position));//添加页卡
-
-
         return mViewList.get(position);
     }
 

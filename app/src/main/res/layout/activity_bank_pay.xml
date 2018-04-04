@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.pay.BankPayActivity">
+
+
+    <include layout="@layout/toolbar_white"></include>
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单号"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_no"
+            android:text="@string/title"
+            android:textColor="@color/black_404040"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <include layout="@layout/line_grey"></include>
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单信息"
+            />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:textColor="@color/black_404040"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <include layout="@layout/line_grey"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="付款方式" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="银行卡支付"
+            android:textColor="@color/black_404040" />
+
+    </RelativeLayout>
+    <include layout="@layout/line_grey"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x10"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="需付款"
+            android:textColor="@color/black_404040"
+            />
+
+        <TextView
+            android:id="@+id/tv_pay_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="2500.00元"
+            android:textColor="@color/black_404040" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/im_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        ></View>
+
+    <TextView
+        android:id="@+id/tv_bank_pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x48"
+        android:text="上传付款凭证"
+        android:textColor="@color/white"
+        android:background="@color/primaryGreen"
+        android:gravity="center"
+        />
+
+</LinearLayout>

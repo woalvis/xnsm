@@ -48,7 +48,6 @@ public class SelectPhotoTheWayActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        super.initData();
         files = new ArrayList<>();
     }
 
@@ -75,9 +74,11 @@ public class SelectPhotoTheWayActivity extends BaseActivity {
 
    private void upload() {
        if (files!=null&&files.size()>0)
-       XinongHttpCommend.getInstance(this).upLoadFile(files, new AbsXnHttpCallback() {
+           showProgress("正在上传");
+       XinongHttpCommend.getInstance(this).upLoadFile(files, new AbsXnHttpCallback(mContext) {
            @Override
            public void onSuccess(String info, String result) {
+               cancelProgress();
                if (!TextUtils.isEmpty(info)&& HttpConstant.OK.equals(info)){
                    JSONArray jsonObject = JSON.parseArray(result);
                    showSnackBar("上传成功，请等待审核");

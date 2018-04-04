@@ -58,4 +58,8 @@ public class AppUtils {
         }
         return null;
     }
+
+    public static String getPackageName(){
+        return "";
+    }
 }

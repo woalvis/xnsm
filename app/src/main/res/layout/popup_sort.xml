@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/sort_green"-->
+            <!--android:padding="@dimen/x8"-->
+            <!--/>-->
+        <TextView
+            android:layout_gravity="center"
+            android:textColor="@color/primaryGreen"
+            android:text="综合排序"
+            android:padding="@dimen/x10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#88888888"
+        ></View>
+
+
+    <TextView
+        android:layout_gravity="center"
+        android:textColor="@color/primaryGreen"
+        android:text="按价格从高到低"
+        android:padding="@dimen/x10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#88888888"
+        ></View>
+
+    <TextView
+        android:layout_gravity="center"
+        android:textColor="@color/primaryGreen"
+        android:text="按价格从低到高"
+        android:padding="@dimen/x10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#88888888"
+        ></View>
+
+</LinearLayout>

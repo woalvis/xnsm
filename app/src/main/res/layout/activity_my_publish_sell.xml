@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.user.view.MyOrdersActivity">
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <LinearLayout
+        android:layout_below="@id/toolbar"
+        android:id="@+id/activity_my_orders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/change_layout"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/content_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/change_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x48"
+        android:layout_alignParentBottom="true"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_buy_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/primaryGreen"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="我的供应" />
+
+        <TextView
+            android:id="@+id/tv_sell_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="我的采购" />
+    </LinearLayout>
+</RelativeLayout>

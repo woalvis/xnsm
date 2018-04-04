@@ -6,7 +6,9 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:padding="10dp"
         android:id="@+id/tv_item_select_area"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

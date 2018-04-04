@@ -8,6 +8,8 @@
     tools:context="tech.xinong.xnsm.pro.user.view.EditMyAddressActivity">
 
 
+    <include layout="@layout/toolbar_white"></include>
+
     <ListView
         android:id="@+id/my_address_lv_addresses"
         android:layout_width="match_parent"

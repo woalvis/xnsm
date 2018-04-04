@@ -4,14 +4,23 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
+import android.os.StrictMode;
+import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.cookie.store.PersistentCookieStore;
 import com.lzy.okgo.model.HttpHeaders;
+import com.vondear.rxtools.RxTool;
 
+import org.litepal.LitePal;
+
+import okhttp3.OkHttpClient;
 import tech.xinong.xnsm.http.framework.utils.HttpConstant;
 import tech.xinong.xnsm.util.L;
 import tech.xinong.xnsm.util.XnsConstant;
@@ -24,17 +33,21 @@ public class XnsApplication extends Application {
     public String token;
     private static Context mContext;
     public static XnsApplication mInstance;
+    private OkHttpClient okHttpClient;
+    public SharedPreferences mSharedPreferences;
+    private SharedPreferences.Editor editor;
 
+    private static int timeOut = 20000;
 
     @Override
     public void onCreate() {
 
-        // 设置Thread Exception Handler
+//       //  设置Thread Exception Handler
 //        UnCatchExceptionHandler catchException = new UnCatchExceptionHandler(this);
 //        Thread.setDefaultUncaughtExceptionHandler(catchException);
-        //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
+//        //在这里为应用设置异常处理程序，然后我们的程序才能捕获未处理的异常
 //        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.it(this);
+//        crashHandler.init(this);
 
 
         /**
@@ -48,20 +61,37 @@ public class XnsApplication extends Application {
         /**
          * 初始化Fresco
          */
-        Fresco.initialize(this);
+        okHttpClient = new OkHttpClient();
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+                .newBuilder(mContext, okHttpClient)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this,config);
         initOkHttp();
+        RxTool.init(this);
+        LitePal.initialize(this);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+        }
+    }
+
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public void initOkHttp() {
-        SharedPreferences sp = getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        token = sp.getString(XnsConstant.TOKEN, "");
+        mSharedPreferences = getSharedPreferences(XnsConstant.SP_NAME, Context.MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
+        token = mSharedPreferences.getString(XnsConstant.TOKEN, "");
         HttpHeaders headers = new HttpHeaders();
         headers.put(HttpConstant.HTTP_HEADER_TOKEN, token);
         //-----------------------------------------------------------------------------------//
         //必须调用初始化
         OkGo.init(this);
-
         //以下设置的所有参数是全局参数,同样的参数可以在请求的时候再设置一遍,那么对于该请求来讲,请求中的参数会覆盖全局参数
         //好处是全局参数统一,特定请求可以特别定制参数
         try {
@@ -72,9 +102,12 @@ public class XnsApplication extends Application {
                     .debug("OkGo")
 
                     //如果使用默认的 60秒,以下三行也不需要传
-                    .setConnectTimeout(OkGo.DEFAULT_MILLISECONDS)  //全局的连接超时时间
-                    .setReadTimeOut(OkGo.DEFAULT_MILLISECONDS)     //全局的读取超时时间
-                    .setWriteTimeOut(OkGo.DEFAULT_MILLISECONDS)    //全局的写入超时时间
+//                    .setConnectTimeout(OkGo.DEFAULT_MILLISECONDS)  //全局的连接超时时间
+//                    .setReadTimeOut(OkGo.DEFAULT_MILLISECONDS)     //全局的读取超时时间
+//                    .setWriteTimeOut(OkGo.DEFAULT_MILLISECONDS)    //全局的写入超时时间
+                    .setConnectTimeout(timeOut)  //全局的连接超时时间
+                    .setReadTimeOut(timeOut)     //全局的读取超时时间
+                    .setWriteTimeOut(timeOut)    //全局的写入超时时间
 
                     //可以全局统一设置缓存模式,默认是不使用缓存,可以不传,具体其他模式看 github 介绍 https://github.com/jeasonlzy/
                     .setCacheMode(CacheMode.NO_CACHE)

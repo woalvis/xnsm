@@ -19,7 +19,7 @@ public abstract class CommonAdapter<T> extends BaseAdapter{
     /**
      * 要展示的数据列表
      */
-    List<T> mData;
+    public List<T> mData;
     /**
      * 每一项的布局id,例如R.layout.my_listview_item.
      */
@@ -99,4 +99,9 @@ public abstract class CommonAdapter<T> extends BaseAdapter{
      * @param item 数据源的第position项数据
      */
     protected abstract void fillItemData(CommonViewHolder viewHolder, int position, T item);
+
+    public void refresh(List<T> datas){
+        mData = datas;
+        notifyDataSetChanged();
+    }
 }

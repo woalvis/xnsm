@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x28"
+        >
+        <LinearLayout
+            android:id="@+id/ll_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_product_name"
+                style="@style/quotes_bar_text"
+                android:text="产品"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/drop_down_open"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_spec"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_product_spec"
+                style="@style/quotes_bar_text"
+                android:text="品类"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/drop_down_open"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_spec_config"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_product_spec_config"
+                style="@style/quotes_bar_text"
+                android:text="规格"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/drop_down_open"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_address"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/tv_product_address"
+                style="@style/quotes_bar_text"
+                android:text="产地"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/drop_down_open"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            ></View>
+        <ImageView
+            android:id="@+id/iv_sort"
+            android:layout_gravity="center"
+            android:padding="@dimen/x6"
+            android:layout_width="@dimen/x40"
+            android:layout_height="match_parent"
+            android:src="@drawable/sort"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+
+</LinearLayout>

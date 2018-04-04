@@ -1,0 +1,84 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".pro.test.Test3"
+    >
+
+    <!--AppBarLayout标题的容器，只能作为coordinatorlayout里面的第一个子View
+    AppBarLayout是一个容器，需要滚动的子view必须放到这个容器里面
+
+    android:fitsSystemWindows="true"          适应系统，是否把内容显示到状态栏
+
+    app:layout_scrollFlags="scroll"           决定子view能否滚出屏幕
+    -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:src="@mipmap/user_bg"
+            android:scaleType="centerCrop"
+            app:layout_scrollFlags="scroll"/>
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toobar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            app:layout_scrollFlags="scroll"
+            android:background="@android:color/holo_blue_dark" />
+
+        <!--<TextView-->
+            <!--android:background="@android:color/holo_orange_dark"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:padding="15dp"-->
+            <!--android:text="小成功靠磨难，大成就靠灾难！"/>-->
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/home_recommend_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/black" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/my_order_vp_view"
+            android:layout_width="match_parent"
+            android:layout_height="2000dp"
+            >
+        </android.support.v4.view.ViewPager>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--主内容写在这里
+
+    必须是NestedScrollView或者是RecyclerView，其他控件不能滑动
+    因为他们都能配置layout_behavior这个属性
+    NestedScrollView和ScrollView使用方法一模一样
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    不写这个属性整个布局会占满屏幕；用来通知AppBarLayout界面内容发生了滚动事件，
+    不配置滚动的话上面内容会一下子滚上去
+    -->
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="asdfasdfoiqjweiojasddk;lfjaosipdujflkasjdfliuasdoifjalksjdflkasjdlkfjaskdjujglk;ajsldkfjasdlkujlkmasdlk;jflkdsajflk;ajsdlkfuajsldkjtlklkudfjlkasjlkdujglksadjgklajsdlkujlkjasdkjaslkdjgiasjdlkgjasldkjglasyudiojkldjfklzjxklcjgalsdg"
+            android:textColor="@color/red"
+            android:padding="15dp"/>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

@@ -65,13 +65,14 @@ public class UploadActivity extends BaseActivity implements ImageLoader.Download
 //        ImageLoader.getInstance().setLis(this).displayImage(imageUrl,showIm);
 
         File file = FileUtil.bitmapToFile(mContext,tempBitmap,"uploadFile.jpg");
-
+        showProgress("正在上传");
         XinongHttpCommend.getInstance(mContext).uploadBuyOrderTopay(
                 orderId,
                 file,
-                new AbsXnHttpCallback() {
+                new AbsXnHttpCallback(mContext) {
                     @Override
                     public void onSuccess(String info, String result) {
+                        cancelProgress();
                         if (info.equals(HttpConstant.OK)){
                             T.showShort(mContext,result);
                             UploadActivity.this.finish();

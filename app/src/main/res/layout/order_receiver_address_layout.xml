@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@id/lay_has_address"
+        android:layout_width="fill_parent"
+        android:layout_height="100.0dip"
+        android:paddingLeft="12.0dip"
+        android:paddingRight="12.0dip"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@id/img_location"
+            android:layout_width="24.0dip"
+            android:layout_height="24.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/location" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/img_right"
+            android:layout_toRightOf="@id/img_location"
+            android:paddingLeft="12.0dip">
+
+            <TextView
+                android:id="@id/tv_buyer_name"
+                style="@style/black_40_16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10.0dip"
+                android:layout_toLeftOf="@id/tv_buyer_mobile"
+                android:ellipsize="end"
+                android:lines="1" />
+
+            <TextView
+                android:id="@id/tv_buyer_mobile"
+                style="@style/black_40_16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_toLeftOf="@id/btn_copy_address"
+                android:lines="1" />
+
+            <TextView
+                android:id="@id/btn_copy_address"
+                android:layout_width="40.0dip"
+                android:layout_height="20.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tv_buyer_name"
+                android:layout_marginLeft="10.0dip"
+                android:background="@drawable/light_green_btn_bg"
+                android:gravity="center"
+                android:text="@string/copy"
+                android:textColor="@color/color_green_main"
+                android:textSize="14.0sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@id/tv_receive_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_buyer_name"
+                android:layout_marginTop="12.0dip"
+                android:textColor="@color/gray"
+                android:textSize="14.0sp" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@id/img_right"
+            android:layout_width="15.0dip"
+            android:layout_height="15.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6.0dip"
+            android:src="@drawable/buy_right"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@id/lay_no_address"
+        android:layout_width="fill_parent"
+        android:layout_height="100.0dip"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:paddingLeft="12.0dip"
+        android:paddingRight="12.0dip"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@id/btn_add_receive_address"
+            style="@style/GreenTextSixteenStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="44.0dip"
+            android:background="@drawable/light_green_frame"
+            android:gravity="center"
+            android:text="@string/add_receive_address" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@id/imageView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/order_detail_divider_bg" />
+</LinearLayout>

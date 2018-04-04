@@ -13,7 +13,17 @@ public class CategoryModel extends BaseBean implements Serializable{
     private String code;
     private String name;
     private String description;
-    private List<ProductModel> products;
+    private List<ProductDTO> products;
+
+    public String getCoverImg() {
+        return coverImg;
+    }
+
+    public void setCoverImg(String coverImg) {
+        this.coverImg = coverImg;
+    }
+
+    private String coverImg;
 
 
     /*选择操作的枚举类*/
@@ -45,11 +55,11 @@ public class CategoryModel extends BaseBean implements Serializable{
         this.description = description;
     }
 
-    public List<ProductModel> getProducts() {
+    public List<ProductDTO> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductModel> products) {
+    public void setProducts(List<ProductDTO> products) {
         this.products = products;
     }
 }

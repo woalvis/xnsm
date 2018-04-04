@@ -1,4 +1,4 @@
-package tech.xinong.xnsm;
+package com.xinongtech.xnsm;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

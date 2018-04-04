@@ -1,6 +1,9 @@
 package tech.xinong.xnsm.util;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by xiao on 2016/11/29.
@@ -43,4 +46,19 @@ public class NumUtil {
 
 
     }
+
+    public static int days(String dataStr){
+        int a = 0;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = sdf.parse(dataStr);
+            long date1Long = date1.getTime();
+            long s2=System.currentTimeMillis();//得到当前的毫秒
+            a = (int) ((date1Long-s2)/1000/60/60/24)+1;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return a;
+    }
+
 }

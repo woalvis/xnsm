@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_address"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:elevation="10dp"
+    android:layout_margin="3dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardMaxElevation="10dp"
+    app:cardElevation="5dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_receiver"
+            android:text="aaa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x16"
+            />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_toRightOf="@id/tv_receiver"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_alignBottom="@id/tv_receiver"
+            android:text="asdjfklasjdf;klasdf"
+            android:paddingBottom="@dimen/x2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="@dimen/x8"
+            android:layout_below="@id/tv_receiver"
+            android:id="@+id/tv_address"
+            android:text="收货地址："
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toRightOf="@id/tv_address"
+            android:layout_alignTop="@id/tv_address"
+            android:layout_marginRight="@dimen/x8"
+            android:id="@+id/tv_address_show"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include
+            android:id="@+id/line1"
+            layout="@layout/line_grey"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@id/tv_address"
+            ></include>
+
+
+        <LinearLayout
+            android:paddingTop="@dimen/x8"
+            android:layout_below="@id/line1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_default"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="设为默认地址"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"></View>
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

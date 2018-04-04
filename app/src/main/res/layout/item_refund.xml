@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:elevation="10dp"
+    android:orientation="vertical"
+    android:padding="@dimen/x8"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    tools:context="tech.xinong.xnsm.pro.user.view.RefundReqActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:padding="@dimen/x4"
+                android:text="订  单  号 :" />
+
+            <TextView
+                android:id="@+id/tv_order_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv1"
+                android:padding="@dimen/x4"
+                android:text="" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x4"
+                android:text="退款单号:" />
+
+            <TextView
+                android:id="@+id/tv_refund_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv2"
+                android:padding="@dimen/x4"
+                android:text="" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/x4">
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="退款状态:" />
+
+                <TextView
+                    android:id="@+id/tv_refund_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv3"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text=""
+                    android:textColor="@color/orange" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/x4">
+
+                <TextView
+                    android:id="@+id/tv8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="退款金额:" />
+
+                <TextView
+                    android:id="@+id/tv_refund_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv8"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text=""
+                    android:textColor="@color/orange" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x4">
+
+            <TextView
+                android:id="@+id/tv100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手续费用:" />
+
+            <TextView
+                android:id="@+id/tv_refund_fees"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv100"
+                android:layout_marginLeft="@dimen/x4"
+                android:text=""
+                android:textColor="@color/orange" />
+        </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/x4">
+
+                <TextView
+                    android:id="@+id/tv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="退款原因:" />
+
+                <TextView
+                    android:id="@+id/tv_refund_reason"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv4"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text="" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x4">
+
+                <TextView
+                    android:id="@+id/tv6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="审批时间:" />
+
+                <TextView
+                    android:id="@+id/tv_refund_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/tv6"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text="" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x4">
+
+                <TextView
+                    android:id="@+id/tv7"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="审批说明:" />
+
+                <TextView
+                    android:id="@+id/tv_refund_approve_msg"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_toRightOf="@id/tv7"
+                    android:layout_marginLeft="@dimen/x4"
+                    android:text="" />
+            </RelativeLayout>
+
+        <TextView
+            android:layout_gravity="center"
+            android:text="申请退款"
+            android:padding="@dimen/x4"
+            android:textColor="@color/white"
+            android:background="@color/primaryGreen"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/x4"
+            />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

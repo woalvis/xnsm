@@ -18,7 +18,6 @@ public class LoginModel extends BaseModel {
         super(context);
     }
 
-
     public void login(String username, String password, StringCallback onHttpResultListener){
         XinongHttpCommend.getInstance(getContext()).login(username,password,onHttpResultListener);
     }

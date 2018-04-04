@@ -1,13 +1,26 @@
 package tech.xinong.xnsm.pro.home.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.alibaba.fastjson.JSONObject;
+
+import java.io.File;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +35,12 @@ import tech.xinong.xnsm.pro.buy.view.SelectPhotoTheWayActivity;
 import tech.xinong.xnsm.pro.home.model.AuctionDetailModel;
 import tech.xinong.xnsm.pro.home.model.AuctionState;
 import tech.xinong.xnsm.pro.home.model.BidModel;
+import tech.xinong.xnsm.util.FileUtil;
+import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
+import tech.xinong.xnsm.views.ColoredSnackbar;
 
 @ContentView(R.layout.activity_auction_detail)
 public class AuctionDetailActivity extends BaseActivity {
@@ -60,26 +76,33 @@ public class AuctionDetailActivity extends BaseActivity {
     private TextView tvMidAccountNumber;
     @ViewInject(R.id.auction_detail_layout_confirm)
     private LinearLayout layoutConfirm;
+    @ViewInject(R.id.auction_scroll)
+    private ScrollView auction_scroll;
+    @ViewInject(R.id.auction_detail_bid_step)
+    private TextView tvStep;
 
 
     public static final int REQ_SELECT_PIC = 0x1001;
 
     private List<AuctionDetailModel> auctionDetailModelList;
     private AuctionDetailModel auctionDetailModel;
+    private String auctionId;
 
     @Override
     public void initData() {
         auctionDetailModelList = new ArrayList<>();
-        String auctionId = getIntent().getStringExtra("auctionId");
+        auctionId = getIntent().getStringExtra("auctionId");
         if (!TextUtils.isEmpty(auctionId)) {
             getAuctionDetailById(auctionId);
         }
     }
 
     private void getAuctionDetailById(String auctionId) {
-        XinongHttpCommend.getInstance(mContext).getAuctionDetailById(auctionId, new AbsXnHttpCallback() {
+        showProgress();
+        XinongHttpCommend.getInstance(mContext).getAuctionDetailById(auctionId, new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
+                cancelProgress();
                 if (info.equals(HttpConstant.OK)) {
                     auctionDetailModel = JSONObject.parseObject(result, AuctionDetailModel.class);
                     tvProductName.setText(auctionDetailModel.getProductName());
@@ -87,7 +110,9 @@ public class AuctionDetailActivity extends BaseActivity {
                     tvCurrentPrice.setText(auctionDetailModel.getCurrentPrice() + "元");
                     tvBidAmount.setText("已有" + auctionDetailModel.getBidNumber() + "次出价");
                     tvDeposit.setText(auctionDetailModel.getDeposit().toString() + "元");
+                    tvStep.setText(auctionDetailModel.getStepPrice().toString());
                     if (auctionDetailModel.isHasDeposit()) {
+
                         tvHelper.setVisibility(View.GONE);
                         tvOperation.setVisibility(View.GONE);
                         tvBid.setVisibility(View.VISIBLE);
@@ -135,12 +160,15 @@ public class AuctionDetailActivity extends BaseActivity {
 
     /**
      * 控件点击的方法，注解里面的集合为控件统一进行OnClick事件注册
+     *
      * @param view
      */
-    @OnClick({R.id.auction_detail_layout_confirm,R.id.auction_detail_tv_bid})
-    public void weigetClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.auction_detail_layout_confirm, R.id.auction_detail_tv_bid,R.id.auction_detail_tv_bid})
+    public void weigetClick(View view) {
+        switch (view.getId()) {
             case R.id.auction_detail_layout_confirm:
+
+                T.showShort(mContext, "报名");
                 deposit();
                 break;
             case R.id.auction_detail_tv_bid:
@@ -151,6 +179,49 @@ public class AuctionDetailActivity extends BaseActivity {
     }
 
     private void bidNow() {
+        final EditText et = new EditText(this);
+        et.setInputType(InputType.TYPE_CLASS_NUMBER);
+        final BigDecimal current = auctionDetailModel.getCurrentPrice();
+        new AlertDialog.Builder(this).setTitle("当前价格为：" + auctionDetailModel.getCurrentPrice()+"元")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setView(et)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String input = et.getText().toString();
+                        if (input.equals("")) {
+                            Toast.makeText(getApplicationContext(), "搜索内容不能为空！" + input, Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            long inputLong = Long.parseLong(input);
+                            BigDecimal inputBigDecimal = new BigDecimal(input);
+                            if (current.compareTo(inputBigDecimal)>0){
+                                T.showShort(mContext,"投标价格不能小于当前价格");
+                                return;
+                            }else {
+                                T.showShort(mContext,"投标价格为："+inputBigDecimal.toString());
+                                showProgress();
+                                XinongHttpCommend.getInstance(mContext).auctionBid(
+                                        auctionDetailModel.getId(),
+                                        inputBigDecimal.doubleValue(),
+                                        new AbsXnHttpCallback(mContext) {
+                                            @Override
+                                            public void onSuccess(String info, String result) {
+                                                cancelProgress();
+                                                T.showShort(mContext,"投标成功");
+                                                getAuctionDetailById(auctionId);
+                                            }
+                                        }
+                                );
+
+                            }
+
+                        }
+                    }
+                })
+                .setNegativeButton("取消", null)
+                .show();
+
+
     }
 
 
@@ -158,20 +229,59 @@ public class AuctionDetailActivity extends BaseActivity {
      * 去提交保证金，让客户选择支付凭证并上传等待审核
      */
     private void deposit() {
-        Intent intent = new Intent(this,SelectPhotoTheWayActivity.class);
-        startActivityForResult(intent,REQ_SELECT_PIC);
+        Intent intent = new Intent(this, SelectPhotoTheWayActivity.class);
+        startActivityForResult(intent, REQ_SELECT_PIC);
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK){
-            if (requestCode==REQ_SELECT_PIC){
-
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQ_SELECT_PIC) {
+                Bitmap bitmap = data.getParcelableExtra("bitmap");
+                if (bitmap != null) {
+                    T.showShort(mContext, "成功");
+                    File file = FileUtil.bitmapToFile(mContext, bitmap, "uploadAuctionFile");
+                    XinongHttpCommend.getInstance(mContext).auctionDeposits(
+                            auctionId,
+                            file,
+                            new AbsXnHttpCallback(mContext) {
+                                @Override
+                                public void onSuccess(String info, String result) {
+                                    snackbarShow("报名成功，可以进行投标了");
+                                    getAuctionDetailById(auctionId);
+                                }
+                            });
+                }
             }
         }
     }
 
+
+    /**
+     * 显示snackBar
+     * @param msg 显示的信息
+     */
+    private void snackbarShow(String msg) {
+        final Snackbar snackbar = Snackbar.make(auction_scroll,msg,5000);
+        ColoredSnackbar.setSnackbarButtonTextColor(snackbar, Color.parseColor("#FFFFFF"));
+        ColoredSnackbar.alert(snackbar).show();
+
+        snackbar.setAction("朕知道了，爱卿退下", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+    }
+
+    /**
+     *
+     * @param state
+     * @param tvState
+     * @param tvTime
+     * @param item
+     */
     private void setAuctionState(AuctionState state, TextView tvState, TextView tvTime, AuctionDetailModel item) {
         int leftDrawableResId = 0;
         String tvText = "";
@@ -196,7 +306,10 @@ public class AuctionDetailActivity extends BaseActivity {
                 break;
             case DISCARDED:
                 leftDrawableResId = R.mipmap.auction_state_discarded;
+
                 tvTimeText = "已在" + item.getEndTime() + "结束";
+
+                layoutConfirm.setVisibility(View.GONE);
                 break;
             default:
                 throw new IllegalArgumentException("没有此拍卖状态");

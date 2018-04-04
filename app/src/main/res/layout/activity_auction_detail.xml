@@ -5,48 +5,8 @@
     android:layout_height="match_parent"
     tools:context="tech.xinong.xnsm.pro.home.view.AuctionDetailActivity">
 
-    <LinearLayout
-        android:id="@+id/auction_detail_layout_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@color/refund_bg"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <TextView
-            android:id="@+id/auction_detail_tv_operation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="去报名"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/auction_detail_tv_helper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:padding="5dp"
-            android:text="(保证金金额￥400)"
-            android:textColor="@color/white"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/auction_detail_tv_bid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="去出价"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:visibility="gone" />
-    </LinearLayout>
-
     <ScrollView
+        android:id="@+id/auction_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -216,6 +176,7 @@
                         android:text="加价幅度" />
 
                     <TextView
+                        android:id="@+id/auction_detail_bid_step"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -315,7 +276,7 @@
                     android:background="@color/color_ff9c00"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="状态" />
+                    android:text="@string/state" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -324,7 +285,7 @@
                     android:background="@color/app_header_bg"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="货物品名" />
+                    android:text="@string/goods_name" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -333,7 +294,7 @@
                     android:background="@color/color_ff9c00"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="产地" />
+                    android:text="@string/origin" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -342,7 +303,7 @@
                     android:background="@color/app_header_bg"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="总重量" />
+                    android:text="@string/total_weight" />
 
             </LinearLayout>
 
@@ -359,7 +320,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
-                android:text="支付信息"
+                android:text="@string/pay_info"
                 android:textColor="@color/refund_bg"/>
 
             <LinearLayout
@@ -372,7 +333,7 @@
                 android:padding="8dp"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="开户姓名"/>
+                android:text="@string/account_name"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -380,7 +341,7 @@
                     android:padding="8dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="开户银行名称"/>
+                    android:text="@string/bank_name"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -388,7 +349,7 @@
                     android:padding="8dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="银行账号"/>
+                    android:text="@string/bank_account"/>
 
             </LinearLayout>
 
@@ -404,7 +365,7 @@
                     android:padding="8dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="开户姓名"/>
+                    android:text="@string/account_name"/>
 
                 <TextView
                     android:id="@+id/auction_detail_mid_account_bank"
@@ -413,7 +374,7 @@
                     android:padding="8dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="开户银行名称"/>
+                    android:text="@string/bank_name"/>
 
                 <TextView
                     android:id="@+id/auction_detail_mid_account_number"
@@ -422,9 +383,67 @@
                     android:padding="8dp"
                     android:layout_weight="2"
                     android:gravity="center"
-                    android:text="银行账号"/>
+                    android:text="@string/bank_account"/>
 
             </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:src="@mipmap/banner3"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:text=""/>
         </LinearLayout>
+        
+
     </ScrollView>
+
+
+
+    <LinearLayout
+        android:id="@+id/auction_detail_layout_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom"
+        android:background="@color/refund_bg"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/auction_detail_tv_operation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/auction_detail_tv_helper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="@string/deposit_helper"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/auction_detail_tv_bid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/pay_info"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
 </FrameLayout>

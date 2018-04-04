@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.wallet.AddBankAccountActivity">
+    <include layout="@layout/toolbar_white"></include>
+
+    <TextView
+        android:id="@+id/tv_help"
+        android:paddingTop="@dimen/x18"
+        android:paddingBottom="@dimen/x18"
+        android:paddingRight="@dimen/x18"
+        android:paddingLeft="@dimen/x18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_fefbf2"
+        android:textSize="@dimen/x14"
+        android:text=""
+        />
+    <TextView
+        android:padding="@dimen/x8"
+        android:text="请您添加支付宝账号"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_alipay_account"
+        android:hint="请输入支付宝账号"
+        android:layout_margin="@dimen/x8"
+        android:gravity="center"
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg"/>
+
+    <EditText
+        android:id="@+id/et_full_name"
+        android:hint="请输入真实姓名"
+        android:layout_margin="@dimen/x8"
+        android:gravity="center"
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg"/>
+
+
+    <include layout="@layout/layout_verification"></include>
+
+    <TextView
+        android:id="@+id/tv_add"
+        android:text="确定添加"
+        android:padding="@dimen/x8"
+        android:gravity="center"
+        android:background="@drawable/tv_green_bg"
+        android:textColor="@color/white"
+        android:layout_margin="@dimen/x12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

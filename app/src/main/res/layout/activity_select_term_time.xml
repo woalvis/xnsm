@@ -5,87 +5,207 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="tech.xinong.xnsm.pro.publish.view.SelectTermTimeActivity">
 
-    <LinearLayout
-        android:id="@+id/select_time_layout"
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_white"></include>
+
+
+
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/x8"
+        android:layout_marginBottom="@dimen/x8"
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_below="@id/toolbar"
+        android:id="@+id/rl_spot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <LinearLayout
-
-            android:id="@+id/select_time_layout_term_begin_date"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+        android:background="@drawable/rl_white_bg"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im_spot_selector"
+            android:padding="@dimen/x8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/message_itembg"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="上市时间"
-                />
-            <TextView
-                android:id="@+id/select_time_tv_begin_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择"/>
-
-        </LinearLayout>
+            android:src="@drawable/date_default"/>
 
         <TextView
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:text="~"/>
-
-        <LinearLayout
-            android:id="@+id/select_time_layout_term_end_date"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
+            android:padding="@dimen/x8"
+            android:id="@+id/tv_spot"
+            android:layout_toRightOf="@id/im_spot_selector"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/x14"
+            android:textColor="@color/text_black"
+            android:text="现货"
+            />
+
+        <TextView
+            android:id="@+id/tv_spot_helper"
+            android:padding="@dimen/x8"
+            android:layout_below="@id/tv_spot"
+            android:layout_toRightOf="@id/im_spot_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/textGray"
+            android:text="手头有货正在热卖，供应充足的选这个"
+            />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_marginLeft="@dimen/x12"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x8"
+        android:layout_marginBottom="@dimen/x8"
+        android:layout_below="@id/rl_spot"
+        android:id="@+id/rl_presell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rl_white_bg"
+        >
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/im_presell_selector"
+            android:padding="@dimen/x8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/date_default"/>
+
+        <TextView
+            android:padding="@dimen/x8"
+            android:id="@+id/tv_presell"
+            android:layout_toRightOf="@id/im_presell_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x14"
+            android:text="预售"
+            android:textColor="@color/text_black"
+            />
+
+        <TextView
+            android:id="@+id/tv_presell_helper"
+            android:padding="@dimen/x8"
+            android:layout_below="@id/tv_presell"
+            android:layout_toRightOf="@id/im_presell_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/textGray"
+            android:text="暂时无货但很快会上架，即将有货的选这个"
+            />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_select_time"
+        android:visibility="gone"
+        android:layout_below="@id/rl_presell"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_spot"
+            android:layout_margin="@dimen/x12"
+            android:layout_below="@id/rl_presell"
             android:orientation="vertical"
-            android:gravity="center"
-            android:background="@drawable/message_itembg"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="下市时间"
-                />
-            <TextView
-                android:id="@+id/select_time_tv_end_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="请选择"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="供货时间"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/text_black"
+                    />
+                <TextView
+                    android:id="@+id/tv_start_time"
+                    android:layout_weight="6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点这里选择供货时间"
+                    />
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
+            </LinearLayout>
 
         </LinearLayout>
+
+        <include layout="@layout/line_grey"></include>
+
+
+        <LinearLayout
+
+            android:id="@+id/ll_endtime"
+            android:layout_margin="@dimen/x12"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下架时间"
+                    android:textSize="@dimen/x12"
+                    android:textColor="@color/text_black"
+                    />
+                <TextView
+                    android:id="@+id/tv_end_time"
+                    android:layout_weight="6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点这里选择下架时间"
+                    />
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_right"
+                    />
+            </LinearLayout>
+
+
+
+
 
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/select_term_time_confirm"
-        android:visibility="invisible"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/select_time_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:text="选好了"/>
+
+        <TextView
+            android:id="@+id/select_term_time_confirm"
+            android:layout_margin="@dimen/x12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选好了"
+            android:gravity="center"
+            android:padding="@dimen/x12"
+            android:background="@color/primaryGreen"
+            android:textColor="@color/white"
+            />
+    </LinearLayout>
 </RelativeLayout>

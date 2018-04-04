@@ -29,6 +29,16 @@ public class AuctionDetailModel {
     private boolean hasBid;                    //该人是否已经对此物品投标过
     private String sellerFullName;             //卖家姓名
     private List<AuctionDetail> auctionDetails;//
+
+    public BigDecimal getStepPrice() {
+        return stepPrice;
+    }
+
+    public void setStepPrice(BigDecimal stepPrice) {
+        this.stepPrice = stepPrice;
+    }
+
+    private BigDecimal stepPrice;              //加价幅度
     private int depositNumber;                 //投标的次数
     private boolean hasDeposit;                //该人是否交过保证金
     private List<BidModel> bids;               //出价的列表

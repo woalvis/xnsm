@@ -1,35 +1,46 @@
 package tech.xinong.xnsm.pro.buy.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.pro.buy.model.OrderDetailModel;
+import tech.xinong.xnsm.pro.home.view.SellerDetailActivity;
+import tech.xinong.xnsm.pro.pay.PayActivity;
+import tech.xinong.xnsm.util.ImageUtil;
 import tech.xinong.xnsm.util.ioc.ContentView;
 import tech.xinong.xnsm.util.ioc.OnClick;
 import tech.xinong.xnsm.util.ioc.ViewInject;
 import tech.xinong.xnsm.views.OrderProcessView;
 
-import static tech.xinong.xnsm.R.id.order_pay_now_bt;
 
 /**
  * 订单详情页
  */
 @ContentView(R.layout.activity_order_detail)
 public class OrderDetailActivity extends BaseActivity {
-    @ViewInject(R.id.order_seller_head_portrait)
-    private ImageView ivSellerHeadPortrait;//卖家头像
     @ViewInject(R.id.order_seller_name)
     private TextView tvSellerName;         //卖家姓名
     @ViewInject(R.id.order_product_pic)
-    private ImageView ivProductPic;        //货物图片
+    private SimpleDraweeView ivProductPic;        //货物图片
     @ViewInject(R.id.order_product_category)
     private TextView productCategory;      //货物品类
     @ViewInject(R.id.order_product_description)
@@ -45,7 +56,7 @@ public class OrderDetailActivity extends BaseActivity {
     @ViewInject(R.id.total_price)
     private TextView totalPrice;           //总共的价格
     @ViewInject(R.id.order_logistic_method)
-    private TextView logistic_method;      //运输方式
+    private TagFlowLayout logistic_method;      //运输方式
     @ViewInject(R.id.order_shipping_address)
     private TextView shippingAddress;      //送货地址
     @ViewInject(R.id.order_buyer_info)
@@ -54,66 +65,181 @@ public class OrderDetailActivity extends BaseActivity {
     private TextView buyerRequire;         //买家需求
     @ViewInject(R.id.order_create_time)
     private TextView createTime;           //订单创建时间
-    @ViewInject(order_pay_now_bt)
+    @ViewInject(R.id.order_pay_now_bt)
     private TextView payNow;               //去支付的按钮
+    @ViewInject(R.id.tv_phone)
+    private TextView tv_phone;
     @ViewInject(R.id.order_seller_order_process)
     private OrderProcessView orderProcess;
-    @ViewInject(R.id.tv_center)
-    private TextView navigationTitle;
-
+    @ViewInject(R.id.order_offer)
+    private TextView order_offer;
+    @ViewInject(R.id.rl_state)
+    private RelativeLayout rl_state;
+    @ViewInject(R.id.tv_state)
+    private TextView tv_state;
+    @ViewInject(R.id.order_no)
+    private TextView order_no;//订单编号
+    @ViewInject(R.id.ll_seller)
+    private LinearLayout ll_seller;
+    @ViewInject(R.id.ll_product)
+    private LinearLayout ll_product;
 
     private String orderId;
-
-    @Override
-    public void initWidget() {
-        initNavigation();
-    }
-
-    private void initNavigation() {
-        navigationTitle.setVisibility(View.VISIBLE);
-        navigationTitle.setText("订单详情");
-    }
+    private String orderNo;
+    private boolean isSeller;
+    private OrderDetailModel orderDetail;
 
     @Override
     public void initData() {
-
+        showProgress();
         orderId = getIntent().getStringExtra("orderId");
-        XinongHttpCommend.getInstance(mContext).getOrderDetailById(orderId, new AbsXnHttpCallback() {
+        orderNo = getIntent().getStringExtra("orderNo");
+        isSeller = getIntent().getBooleanExtra("isSeller",false);
+        order_no.setText(orderNo);
+        if (isSeller){
+            payNow.setVisibility(View.GONE);
+        }
+        XinongHttpCommend.getInstance(mContext).getOrderDetailById(orderId, new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
-                OrderDetailModel orderDetail = JSON.parseObject(result, OrderDetailModel.class);
-                tvSellerName.setText(orderDetail.getSeller().getFullName());
-                productCategory.setText(orderDetail.getProduct().getName());
-                productDescription.setText(orderDetail.getSpecDesc());
+                cancelProgress();
+                orderDetail = JSON.parseObject(result, OrderDetailModel.class);
+                tvSellerName.setText(orderDetail.getSellerName());
+                productCategory.setText(orderDetail.getTitle());
+                ivProductPic.setImageURI(ImageUtil.getImgUrl(orderDetail.getCoverImg()));
                 unitPrice.setText(orderDetail.getUnitPrice() + "");
                 amount.setText(orderDetail.getAmount() + "");
                 goodsPrice.setText(orderDetail.getTotalPrice() + "");
-                logistic_method.setText(orderDetail.getLogisticMethodTag());
-                totalPrice.setText(orderDetail.getTotalPrice() + "");
-                shippingAddress.setText(orderDetail.getAddress());
-                transportCost.setText("0.0");
-                buyerInfo.setText(orderDetail.getBuyer().getFullName());
-                buyerRequire.setText(orderDetail.getBuyerRequire());
+//                logistic_method.setText(orderDetail.getProvideSupport());
+                if (TextUtils.isEmpty(orderDetail.getProvideSupport())){
+
+                }else {
+                    List<String> tags = new ArrayList<>();
+                    for (String tag : orderDetail.getProvideSupport().split(",")){
+                        tags.add(tag);
+                    }
+                    logistic_method.setAdapter(new TagAdapter<String>(tags){
+                        @Override
+                        public View getView(FlowLayout parent, int position, String o) {
+                            TextView tvTag = (TextView) LayoutInflater.from(mContext).inflate(R.layout.item_tag,parent,false);
+                            tvTag.setText(o);
+                            return tvTag;
+                        }
+                    });
+                }
+
+//                totalPrice.setText(orderDetail.getTotalPrice() + "");
+                shippingAddress.setText(orderDetail.getReceiverAddr());
+//                transportCost.setText(orderDetail.getFreight().doubleValue() + "元");
+                transportCost.setText(orderDetail.getFreeShipping()?"包邮":"不包邮");
+                buyerInfo.setText(orderDetail.getBuyerName());
+                buyerRequire.setText(orderDetail.getBuyerMsg());
                 createTime.setText(orderDetail.getCreateTime());
-                orderProcess.setStatus(orderDetail.getStatus().getCode());
-                if (orderDetail.getStatus().getCode()>0){
+                order_offer.setText(orderDetail.getOffer().doubleValue() + "元");
+                tv_phone.setText(orderDetail.getReceiverPhone());
+
+
+                switch (orderDetail.getStatus()) {
+                    case INITIATED://下单
+                    case MODIFIED://修改
+                    case CONFIRMED://确认完成
+                        break;
+                    case PAYMENT_PROCESSING://付款处理中
+                    case PAID://已付款
+                    case SENT://已发货
+                    case RECEIVED://已收货
+                    case RECEIVE_MONEY:    //卖家已收款
+                        orderProcess.setStatus(orderDetail.getStatus().getCode());
+                        break;
+                    case CANCELED://已取消
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("已取消");
+                        break;
+                    case CLOSED://关闭
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("已关闭");
+                        break;
+                    case REFUND_REQ://退款申请
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("退款中");
+                        break;
+                    case PAYMENT_FAILED://付款失败
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("付款失败");
+                        break;
+                    case REFUND://已退款
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("已退款");
+                        break;
+                    case REFUND_PROCESSING:
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("退款处理中");
+                        break;
+                    case REFUND_FAILED:
+                        rl_state.setBackgroundColor(getColorById(R.color.gray1));
+                        tv_state.setText("退款失败");
+                        break;
+                    default:
+                        break;
+                }
+
+                if (orderDetail.getStatus().getCode() > 1) {
                     payNow.setVisibility(View.GONE);
+                }
+
+                if (orderDetail.getStatus().getCode() > 6) {
+                    rl_state.setVisibility(View.VISIBLE);
+                    orderProcess.setVisibility(View.GONE);
+                } else {
+                    rl_state.setVisibility(View.GONE);
+                    orderProcess.setVisibility(View.VISIBLE);
                 }
             }
         });
 
     }
 
-    @OnClick({order_pay_now_bt})
+    @OnClick({R.id.order_pay_now_bt,R.id.ll_seller,R.id.ll_product})
     public void widgetClick(View view) {
-
         switch (view.getId()) {
             case R.id.order_pay_now_bt:
-                Intent intent = new Intent(mContext, UploadActivity.class);
-                intent.putExtra("orderId",orderId);
-                startActivity(intent);
+                PayActivity.skip(mContext,orderId,orderNo,orderDetail.getTitle().split(" ")[0],orderDetail.getTotalPrice());
+//                Intent intent = new Intent(mContext, PayActivity.class);
+//                intent.putExtra("orderId", orderId);
+//                intent.putExtra("orderNo", orderNo);
+//                intent.putExtra("totalPrice", orderDetail.getTotalPrice());
+//                intent.putExtra("title",orderDetail.getTitle().split(" ")[0]);
+//                startActivity(intent);
+                break;
+            case R.id.ll_seller:
+                Intent intentSeller = new Intent(mContext, SellerDetailActivity.class);
+                intentSeller.putExtra("sellerId",orderDetail.getSeller().getId());
+                startActivity(intentSeller);
+                break;
+            case R.id.ll_product:
+                Intent intentProduct = new Intent(mContext, GoodsDetailActivity.class);
+                intentProduct.putExtra("id",orderDetail.getSellerListing().getId());
+                startActivity(intentProduct);
                 break;
         }
     }
 
+    public static void skip(String orderId, String orderNo,boolean isSeller,Context context) {
+        Intent intent = new Intent(context, OrderDetailActivity.class);
+        intent.putExtra("orderId", orderId);
+        intent.putExtra("orderNo", orderNo);
+        intent.putExtra("isSeller",isSeller);
+        context.startActivity(intent);
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
+    }
+
+    @Override
+    public String setToolBarTitle() {
+        return "订单详情";
+    }
 }
+ 

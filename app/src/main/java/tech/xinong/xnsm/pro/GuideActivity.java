@@ -22,18 +22,21 @@ public class GuideActivity extends Activity{
     private List<ImageView> mImageList;
     //分页用的ViewPager
     private ViewPager mViewPager;
+    private GuideActivity context;
+    private int currentPosition;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide);
+        context = this;
         initImageList();
         initView();
     }
 
     private void initView() {
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager = findViewById(R.id.view_pager);
         mViewPager.setAdapter(new GuideAdapter(this,mImages,mImageList));
     }
 
@@ -59,7 +62,7 @@ public class GuideActivity extends Activity{
      * Adapter数据
      * 目的：创建并且显示每一个分页
      */
-    public static class GuideAdapter extends PagerAdapter{
+    public class GuideAdapter extends PagerAdapter{
 
         private Context mContext;
         private List<ImageView> mImageViewList;
@@ -92,16 +95,24 @@ public class GuideActivity extends Activity{
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             ImageView imageView = mImageViewList.get(position);
+            currentPosition = position;
             if (position==mImageViewList.size()-1){
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                       mContext.startActivity(new Intent(mContext,MainActivity.class));
+                      context.finish();
+                    }
+                });
+            }else {
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        currentPosition++;
                     }
                 });
             }
-            imageView.setImageResource(mImages.get(position));
+            imageView.setImageResource(mImages.get(currentPosition));
             //填充视图，超过的部分就截取掉---而且保持图片不变形
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             //绑定视图

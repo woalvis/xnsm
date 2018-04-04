@@ -2,114 +2,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/page_bg_color"
-              android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@color/page_bg_color"
+    android:orientation="vertical"
     android:weightSum="1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="168dp"
+        android:layout_height="@dimen/x150"
         android:background="@color/colorPrimary">
 
 
         <TextView
-            android:text=""
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:id="@+id/user_name" />
+            android:layout_marginTop="@dimen/x10"
+         />
 
         <TextView
-            android:visibility="gone"
+            android:id="@+id/user_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x10"
             android:text="@string/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:id="@+id/user_login" />
+            android:visibility="gone" />
 
         <TextView
-            android:visibility="gone"
-            android:text="@string/register"
+            android:id="@+id/user_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/user_register"
-            android:layout_below="@+id/user_login"
             android:layout_alignLeft="@+id/user_login"
             android:layout_alignStart="@+id/user_login"
-            android:layout_marginTop="11dp" />
+            android:layout_below="@+id/user_login"
+            android:layout_marginTop="@dimen/x10"
+            android:text="@string/register"
+            android:visibility="gone" />
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/avatar_img"
-            android:id="@+id/imageView"
-            android:layout_marginTop="16dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x14"
+            app:srcCompat="@mipmap/avatar_img" />
     </RelativeLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="@dimen/x6"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/user_my_order_layout"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:padding="8dp"
-        >
-
-        <TextView
-            android:paddingLeft="20dp"
-            android:layout_width="150dp"
+        <LinearLayout
+            android:id="@+id/user_my_order_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/my_orders"
-            android:textSize="16sp"
-            android:layout_weight="1"
-            android:textColor="#000000"
-            />
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/x6">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/arrow_right_more"
-            android:layout_marginRight="10dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="@string/my_orders"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/arrow_right_more" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/user_my_address_layout"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding ="8dp"
-            >
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
-                android:paddingLeft="20dp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/my_delivery_address"
-                android:textSize="16sp"
                 android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="@string/my_follow"
                 android:textColor="#000000"
-                />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/arrow_right_more"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/arrow_right_more" />
 
         </LinearLayout>
 
@@ -117,120 +113,114 @@
 
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding="8dp"
-            >
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
-                android:paddingLeft="20dp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
                 android:text="@string/help_center"
-                android:textSize="16sp"
-                android:layout_weight="1"
                 android:textColor="#000000"
-                />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/arrow_right_more"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/arrow_right_more" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding ="8dp"
-            >
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
-                android:paddingLeft="20dp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
                 android:text="@string/csh"
-                android:textSize="16sp"
-                android:layout_weight="1"
                 android:textColor="#000000"
-                />
+                android:textSize="16sp" />
 
             <TextView
-                android:paddingLeft="50dp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/csh_number"
-                android:textSize="16sp"
                 android:layout_weight="1"
+                android:paddingLeft="50dp"
+                android:text="@string/csh_number"
                 android:textColor="@android:color/holo_blue_dark"
-                />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/arrow_right_more"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/arrow_right_more" />
 
         </LinearLayout>
 
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:padding ="8dp"
-            >
+            android:orientation="horizontal"
+            android:padding="8dp">
 
             <TextView
-                android:paddingLeft="20dp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/about"
-                android:textSize="16sp"
                 android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:text="@string/about"
                 android:textColor="#000000"
-                />
+                android:textSize="16sp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/arrow_right_more"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/arrow_right_more" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:background="@color/white"
-    android:layout_weight="1">
-
-    <TextView
-        android:id="@+id/logout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:layout_margin="15dp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:text="@string/logout"
-        android:textColor="@color/logout_text_color"
-        android:textSize="20sp"
-        android:background="@drawable/login_bg_pressed"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp"
+            android:background="@drawable/login_bg_pressed"
+            android:gravity="center"
+            android:text="@string/logout"
+            android:textColor="@color/logout_text_color"
+            android:textSize="20sp" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
 </LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/x8"
+        android:layout_marginTop="@dimen/x6"
+        android:layout_marginLeft="@dimen/x4"
+        android:background="@color/colorPrimary"
+        android:paddingBottom="@dimen/x2"
+        android:paddingLeft="@dimen/x8"
+        android:paddingRight="@dimen/x8"
+        android:paddingTop="@dimen/x2"
+        android:text="核桃"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:visibility="visible"
+        android:layout_width="@dimen/x12"
+        android:layout_height="@dimen/x12"
+        android:layout_alignEnd="@+id/tv"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/tv"
+        android:background="@drawable/delete_bg"
+        android:layout_marginLeft="@dimen/x38"
+        android:gravity="center"
+        android:textSize="@dimen/x8"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/x3"
+        android:layout_marginRight="@dimen/x6"
+        android:text="X" />
+</FrameLayout>

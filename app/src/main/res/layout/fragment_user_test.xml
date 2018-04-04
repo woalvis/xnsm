@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x160"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:collapsedTitleTextAppearance="@dimen/x4"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/user_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fitsSystemWindows="true"
+                    app:actualImageScaleType="centerCrop"
+                    android:background="@mipmap/user_bg"
+                    app:layout_collapseMode="parallax" />
+
+
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_marginTop="@dimen/x15"
+                    android:layout_width="@dimen/x75"
+                    android:layout_height="@dimen/x75"
+                    fresco:actualImageScaleType="centerCrop"
+                    app:placeholderImage="@mipmap/ic_launcher"
+                    app:placeholderImageScaleType="centerCrop"
+                    android:id="@+id/im_head"
+                    android:visibility="gone"
+                    fresco:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/tv_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/im_head"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="17dp"
+                    android:layout_marginRight="@dimen/x15"
+                    android:visibility="gone"
+                    android:text="设置" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:padding="@dimen/x4"
+                    android:id="@+id/im_unlogin"
+                    android:layout_width="@dimen/x75"
+                    android:layout_height="@dimen/x75"
+                    android:layout_centerInParent="true"
+                    fresco:actualImageScaleType="centerCrop"
+                    app:placeholderImage="@mipmap/avatar_img"
+                    app:placeholderImageScaleType="centerCrop"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    android:layout_marginTop="@dimen/x4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点击登录"
+                    android:textColor="@color/white"
+                    android:layout_below="@id/im_unlogin"
+                    android:id="@+id/tv_login"
+                    android:layout_centerHorizontal="true"
+                    />
+            </RelativeLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin" />
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/user_my_order_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_order" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/my_orders"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+            <LinearLayout
+                android:id="@+id/user_my_follow_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_follow" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/my_follow"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+
+            <LinearLayout
+                android:id="@+id/user_my_publish_buy_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_publish" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/my_publish"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/user_my_wallet_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_wallet" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/my_wallet"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/user_my_info_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/white"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:padding="@dimen/x16">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:src="@mipmap/user_user" />-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:paddingLeft="@dimen/x6"-->
+                    <!--android:text="@string/my_info"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="16sp" />-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:background="@mipmap/arrow_right_more" />-->
+            <!--</LinearLayout>-->
+
+            <!--<include layout="@layout/line_grey"></include>-->
+
+
+            <LinearLayout
+                android:id="@+id/user_csh_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_tel" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/csh"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="010-58433029"
+                    android:layout_marginRight="@dimen/x10"
+                    />
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:background="@mipmap/arrow_right_more" />-->
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+            <LinearLayout
+                android:id="@+id/user_online_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_online" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/online"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+            <LinearLayout
+                android:id="@+id/user_identification_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_identification" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/user_identification"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+            <LinearLayout
+                android:id="@+id/user_my_setting_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/x16">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@mipmap/user_setting" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x6"
+                    android:text="@string/setting"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:background="@mipmap/arrow_right_more" />
+            </LinearLayout>
+
+            <include layout="@layout/line_grey"></include>
+
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="15dp"
+                android:background="@drawable/login_bg_pressed"
+                android:gravity="center"
+                android:text="@string/logout"
+                android:textColor="@color/logout_text_color"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
+

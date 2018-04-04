@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tech.xinong.xnsm.pro.base.model.BaseBean;
-import tech.xinong.xnsm.pro.buy.model.SpecModel;
+import tech.xinong.xnsm.pro.buy.model.SpecificationConfigDTO;
 
 /**
  * 创建买货信息发布的数据包装类
@@ -26,7 +26,7 @@ public class PublishSellInfoModel implements Serializable{
     }
 
     private BaseBean product;
-    private List<SpecModel> specificationConfigs;//规格
+    private List<SpecificationConfigDTO> specificationConfigs;//规格
     private BigDecimal unitPrice;//单位价格
     private String quantityUnit;//最小供货单位
     private Integer minQuantity;//最小供货量
@@ -54,9 +54,9 @@ public class PublishSellInfoModel implements Serializable{
 
     public void setSpecificationConfigsForids(String ids){
 
-        List<SpecModel> beanList = new ArrayList<>();
+        List<SpecificationConfigDTO> beanList = new ArrayList<>();
         for(String id : ids.split(",")){
-            SpecModel baseBean = new SpecModel();
+            SpecificationConfigDTO baseBean = new SpecificationConfigDTO();
             baseBean.setId(id);
             beanList.add(baseBean);
         }
@@ -70,11 +70,11 @@ public class PublishSellInfoModel implements Serializable{
         this.product = productId;
     }
 
-    public List<SpecModel> getSpecificationConfigs() {
+    public List<SpecificationConfigDTO> getSpecificationConfigs() {
         return specificationConfigs;
     }
 
-    public void setSpecificationConfigs(List<SpecModel> specificationConfigs) {
+    public void setSpecificationConfigs(List<SpecificationConfigDTO> specificationConfigs) {
         this.specificationConfigs = specificationConfigs;
     }
 

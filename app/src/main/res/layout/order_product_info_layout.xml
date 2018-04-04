@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="12.0dip">
+
+        <LinearLayout
+            android:id="@id/lay_link"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@id/tv_link_name"
+                style="@style/GreyDefaultTextFourteenStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:maxWidth="178.0dip"
+                android:text="卖家"
+                android:textColor="@color/color_gray_text2"
+                android:textSize="14.0sp" />
+
+            <ImageView
+                android:layout_width="11.0dip"
+                android:layout_height="11.0dip"
+                android:src="@drawable/buy_right" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip"
+        android:layout_marginLeft="12.0dip"
+        android:background="@color/divide_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60.0dip"
+        android:layout_margin="12.0dip"
+        android:orientation="horizontal">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@id/img_product"
+            android:layout_width="60.0dip"
+            android:layout_height="60.0dip"
+            android:scaleType="centerCrop"
+            app:placeholderImage="@mipmap/common_photo"
+        />
+
+        <TextView
+            android:id="@id/tv_product_title"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/background_gray"
+            android:gravity="center_vertical"
+            android:lines="2"
+            android:paddingLeft="12.0dip"
+            android:textColor="@color/color_gray_text2"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+</LinearLayout>

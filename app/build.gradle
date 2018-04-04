@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "tech.xinong.xnsm"
         minSdkVersion 15
-        targetSdkVersion 24
-        versionCode 1
+        targetSdkVersion 26
+        versionCode 55
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -20,8 +21,10 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/fastjson-1.2.5.jar')
+//    compile files('libs/fastjson-1.2.5.jar')
+//    compile files('libs/alipaySdk-20170922')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -30,18 +33,38 @@ dependencies {
     // 支持 WebP （静态图+动图），需要添加
     // 仅支持 WebP 静态图，需要添加
     compile 'com.facebook.fresco:webpsupport:0.12.0'
-
-    compile 'com.android.support:design:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.lzy.net:okgo:+'
-    compile 'org.simple:androideventbus:1.0.4'
-    compile 'cn.pedant.sweetalert:library:1.3'
-    compile 'com.facebook.fresco:fresco:0.12.0'
-    compile 'com.facebook.fresco:animated-base-support:0.12.0'
-    compile 'com.facebook.fresco:animated-gif:0.12.0'
-    compile 'com.facebook.fresco:animated-webp:0.12.0'
-    compile 'com.facebook.fresco:webpsupport:0.12.0'
-    compile 'com.dalong:marqueeview:1.0.0'
-    compile 'com.android.support:support-v4:24.2.1'
-    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:appcompat-v7:26.0+'
+    // compile 'com.lzy.net:okgo:1.4.1'                                    //网络请求
+    compile 'com.lzy.net:okgo:2.0.0'//
+    compile 'org.simple:androideventbus:1.0.4'//
+    compile 'cn.pedant.sweetalert:library:1.3'//
+    compile 'com.facebook.fresco:fresco:0.12.0'//
+    compile 'com.facebook.fresco:animated-base-support:0.12.0'//
+    compile 'com.facebook.fresco:animated-gif:0.12.0'//
+    compile 'com.facebook.fresco:animated-webp:0.12.0'//
+    compile 'com.facebook.fresco:webpsupport:0.12.0'//
+    compile 'com.dalong:marqueeview:1.0.0'//
+    compile 'com.android.support:support-annotations:26.0.0-alpha1'//
+    testCompile 'junit:junit:4.12'                                  //单元测试
+    compile 'net.wujingchao.android.view:simple-tag-imageview:1.0.1'//带标签的视图
+    compile project(':pulltorefresh')//刷新组件
+    compile 'com.zhy:flowlayout-lib:1.0.3'//流式布局
+    compile 'com.github.zyyoona7:EasyPopup:1.0.2'//弹出框Popup
+    compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
+    compile 'com.github.ithedan:TextViewDrawable:v1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'//cardview
+    compile 'com.yanzhenjie:album:1.0.0'//
+    compile 'com.mylhyl:circleDialog:2.2.0'//
+    compile 'com.github.vondear:RxTools:v1.7.6'//
+    compile 'com.alibaba:fastjson:1.1.67.android'//
+    compile 'com.github.vondear:RxTools:v1.7.6'//
+    compile 'com.jakewharton:butterknife:8.8.0'//
+    compile 'com.github.bumptech.glide:glide:3.7.0'//图片
+    compile 'jp.wasabeef:glide-transformations:2.0.1'//图片处理工具
+    compile 'com.yalantis:ucrop:2.2.0'//裁剪图片工具
+    compile 'com.github.lecho:hellocharts-android:v1.5.8'//坐标系
+    compile 'com.zhy:base-rvadapter:3.0.3'//recycalView的万能适配器
+    compile 'org.litepal.android:core:1.5.0'
+    compile 'com.android.support:multidex:1.0.2'
 }

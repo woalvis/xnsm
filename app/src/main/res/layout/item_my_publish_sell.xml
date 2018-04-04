@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_show"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/product_show"
+            android:layout_width="@dimen/x75"
+            android:layout_height="@dimen/x75"
+            app:placeholderImage="@mipmap/default_pic_bg" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:text="pingguo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_404040"
+                android:textSize="@dimen/x16"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/tv_product_spec_config"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200dddddd"
+                android:maxLines="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/orange"
+            android:text="155.00元/斤"
+            />
+            <TextView
+                android:id="@+id/tv_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/orange"
+                android:text=""
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            ></View>
+        <TextView
+            android:id="@+id/tv_op"
+            style="@style/tv_button"
+            android:text="下架"
+            android:layout_marginRight="@dimen/x8"
+            />
+
+        <TextView
+            android:layout_marginRight="@dimen/x8"
+            android:id="@+id/tv_update"
+            style="@style/tv_button"
+            android:text="修改"
+            />
+
+        <TextView
+            android:id="@+id/tv_delete"
+            style="@style/tv_button"
+            android:visibility="gone"
+            android:background="@color/alert_red"
+            android:textColor="@color/white"
+            android:text="删除"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+</LinearLayout>

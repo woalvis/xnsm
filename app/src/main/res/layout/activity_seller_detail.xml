@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco = "http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_white"></include>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/cover_img"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x140" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/x8">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/head_img"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                fresco:placeholderImage="@mipmap/avatar_img"
+                ></com.facebook.drawee.view.SimpleDraweeView>
+
+            <TextView
+                android:id="@+id/tv_seller_name"
+                android:padding="@dimen/x8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_ranking"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8">
+
+            <TextView
+                android:id="@+id/tv_personal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x6"
+                android:background="@drawable/tag_bg_blue"
+                android:padding="@dimen/x2"
+                android:text="个人认证"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x10" />
+
+            <TextView
+                android:id="@+id/tv_enterprise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_bg_orange"
+                android:padding="@dimen/x2"
+                android:text="企业认证"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x10" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
+                android:text="山东省青岛市" />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x4"
+            android:background="@color/gray1"></View>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/x8"
+            android:text="他的供应"
+            android:textColor="@color/green_85c43d"
+            android:textSize="@dimen/x16" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/green_85c43d"></View>
+
+        <tech.xinong.xnsm.views.MyListView
+            android:id="@+id/buy_lv_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/x10"
+            android:cacheColorHint="#00000000"
+            android:divider="#19000000"
+            android:dividerHeight="4dp"
+            android:fadingEdge="none"
+            android:fastScrollEnabled="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:smoothScrollbar="true"
+            ptr:ptrAnimationStyle="flip"
+            ptr:ptrMode="both"></tech.xinong.xnsm.views.MyListView>
+    </LinearLayout>
+</ScrollView>

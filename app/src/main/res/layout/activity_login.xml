@@ -8,10 +8,12 @@
     tools:context="tech.xinong.xnsm.pro.user.view.LoginActivity">
 
 
-    <include
-        android:id="@+id/my_order_navigation"
-        layout="@layout/navigation_default"></include>
+    <!--<include-->
+        <!--android:visibility="gone"-->
+        <!--android:id="@+id/my_order_navigation"-->
+        <!--layout="@layout/navigation_default"></include>-->
 
+    <include layout="@layout/toolbar_green"></include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,18 +29,11 @@
             android:id="@+id/text_input_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/normal_text_size"
-            android:textColor="@color/normal_text_color"
-            android:background="@null"
-            android:cursorVisible="true"
-            android:textCursorDrawable="@null"
-            android:padding="10dp"
+        <tech.xinong.xnsm.views.ClearEditText
+            style="@style/edit_login"
             android:id="@+id/login_et_username"
-            android:maxLines="1"
-            android:textColorHint="@color/hint_text_color"
+            android:inputType="number"
+            android:ems="11"
             android:hint="@string/phone_num_hint"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -53,18 +48,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/normal_text_size"
-            android:textColor="@color/normal_text_color"
-            android:background="@null"
-            android:padding="10dp"
-            android:cursorVisible="true"
-            android:textCursorDrawable="@null"
-            android:inputType="textPassword"
             android:id="@+id/login_et_password"
-            android:singleLine="true"
-            android:textColorHint="@color/hint_text_color"
+            style="@style/edit_login"
+            android:inputType="textPassword"
             android:hint="@string/input_password"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -97,6 +83,16 @@
         android:gravity="center"
         android:textSize="@dimen/big_text_size"
         android:text="@string/login"/>
+
+
+    <TextView
+        android:id="@+id/tv_register"
+        android:layout_marginTop="@dimen/x8"
+        android:gravity="center"
+        android:text="没有账号，立即注册"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 
 
 </LinearLayout>

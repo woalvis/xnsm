@@ -4,24 +4,25 @@
     android:id="@+id/activity_select_specification"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="tech.xinong.xnsm.pro.publish.view.SelectSpecificationActivity">
+
+    <include layout="@layout/navigation_default"
+        android:id="@+id/navigation"
+        >
+    </include>
+
+
+    <Button
+        style="@style/btn_submit"
+        android:id="@+id/select_spec_bt_submit"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit"
+        />
 
     <ListView
         android:id="@+id/spec_lv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
-
-
-    <Button
-        android:id="@+id/select_spec_bt_submit"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/spec_lv"
-        android:text="@string/submit"
-        />
+        android:layout_below="@id/navigation"></ListView>
 
 </RelativeLayout>

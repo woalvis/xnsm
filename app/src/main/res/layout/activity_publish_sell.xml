@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tech.xinong.xnsm.pro.publish.view.PublishSellActivity">
+
+
 
     <LinearLayout
         android:id="@+id/activity_publish_sell"
@@ -12,7 +16,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--货品名称-->
+        <include layout="@layout/navigation_default"></include>
+
+        <!--货品分类-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -21,14 +27,39 @@
 
                 style="@style/publish_sell_text"
                 android:layout_weight="1"
-                android:text="@string/publish_sell_goods_name" />
+                android:text="@string/publish_sell_goods_product" />
 
             <TextView
-                android:id="@+id/publish_sell_goods_name"
+                android:id="@+id/publish_sell_goods_product"
                 style="@style/publish_sell_text"
                 android:layout_weight="3"
-                android:text="苹果 红富士" />
+                android:textColor="@color/colorPrimary"
+                android:text="" />
         </LinearLayout>
+
+
+
+        <!--货品品种-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_goods_spec" />
+
+            <TextView
+                android:id="@+id/publish_sell_goods_spec"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:textColor="@color/colorPrimary"
+                android:text="点击选择货品品种" />
+        </LinearLayout>
+
+
+
 
 
         <!--货品规格-->
@@ -46,6 +77,7 @@
                 style="@style/publish_sell_text"
                 android:layout_weight="3"
                 android:clickable="true"
+                android:visibility="gone"
                 android:text="@string/publish_sell_select_specification"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
@@ -66,51 +98,6 @@
                 android:layout_weight="3"
 
                 />
-        </LinearLayout>
-
-
-        <!--是否现货-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/publish_sell_text"
-                android:layout_weight="1"
-                android:text="@string/publish_sell_goods_in_stock" />
-
-            <!--<TextView-->
-            <!--android:id="@+id/publish_sell_goods_in_stock"-->
-            <!--style="@style/publish_sell_text"-->
-            <!--android:layout_weight="3"-->
-            <!--/>-->
-            <RadioGroup
-                android:id="@+id/publish_sell_rg_in_stock"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:visibility="invisible">
-
-                <RadioButton
-                    android:id="@+id/publish_sell_rb_yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center"
-                    android:text="是" />
-
-                <RadioButton
-                    android:id="@+id/publish_sell_rb_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center"
-                    android:text="否" />
-
-            </RadioGroup>
-
-
         </LinearLayout>
 
 
@@ -146,14 +133,93 @@
                 android:layout_weight="3"
                 android:visibility="gone" />
 
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3">
             <EditText
+                android:clickable="false"
+                android:gravity="center_vertical"
+                android:padding="@dimen/x10"
                 android:id="@+id/publish_sell_et_total_quantity"
-                style="@style/publish_sell_text"
+                android:layout_width = "0dp"
+                android:layout_height="wrap_content"
+                android:textSize = "@dimen/x14"
                 android:layout_weight="3"
+                android:maxLength="7"
+                android:textColor="@color/primaryGreen"
                 android:hint=""
+                android:background="@null"
                 android:inputType="number"
                 android:visibility="invisible" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:drawablePadding="@dimen/x10"
+                android:drawableRight="@drawable/arrow_right"
+                android:layout_marginRight="@dimen/x16"
+                />
+            </LinearLayout>
         </LinearLayout>
+
+
+
+
+        <!--是否包邮-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/publish_sell_text"
+                android:layout_weight="1"
+                android:text="@string/publish_sell_freight" />
+
+            <TextView
+                android:id="@+id/publish_sell_freight"
+                style="@style/publish_sell_text"
+                android:layout_weight="3"
+                android:visibility="gone" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_freeshipping"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:visibility="gone"
+                android:gravity="center_vertical">
+
+                <RadioGroup
+                    android:id="@+id/radioGroupID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/is_freight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="是" />
+
+                    <RadioButton
+                        android:id="@+id/no_freight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="否" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
 
         <!--发货地址-->
         <LinearLayout
@@ -236,83 +302,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/publish_sell_text"
-                android:layout_weight="1"
-                android:text="@string/publish_sell_goods_photos" />
-
             <LinearLayout
                 android:layout_weight="3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    />
-
-                <ImageView
-                    android:id="@+id/publish_sell_iv_select_photos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@mipmap/gridview_addpic"/>
-
-                <GridView
+                <tech.xinong.xnsm.views.GridViewForScrollView
                     android:id="@+id/publish_sell_gv_goods_photos"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:numColumns="9">
-                </GridView>
+                    android:layout_height="wrap_content"
+                    android:numColumns="5">
+                </tech.xinong.xnsm.views.GridViewForScrollView>
+
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                style="@style/publish_sell_text"
-                android:layout_weight="1"
-                android:text="@string/publish_sell_goods_broker_allowed" />
-
-            <RadioGroup
-                android:id="@+id/publish_sell_rg_broker_allowed"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:visibility="invisible">
-
-                <RadioButton
-                    android:id="@+id/publish_sell_brokerallowed_yes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center"
-                    android:text="是" />
-
-                <RadioButton
-                    android:id="@+id/publish_sell_brokerallowed_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:gravity="center"
-                    android:text="否" />
-
-            </RadioGroup>
-        </LinearLayout>
-
-
-
         <Button
-            android:visibility="gone"
+            android:visibility="visible"
             android:clickable="false"
             android:id="@+id/publish_sell_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/primaryGreen"
+            android:layout_margin="@dimen/x8"
+            android:textColor="@color/white"
             android:text="@string/confirm"/>
 
 

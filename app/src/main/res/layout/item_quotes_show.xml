@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:padding="@dimen/x6"
+    android:id="@+id/ll_quotes"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1.5">
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/x6"
+            android:text="河南省灵宝市"
+            android:textColor="@color/text_dark"
+            android:textSize="@dimen/x16" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/x6"
+            android:text="黄元帅苹果"
+            android:textColor="@color/text_light" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_current_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1.30"
+            android:gravity="right"
+            android:textColor="@color/text_light"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="right|center_vertical"
+        android:paddingRight="@dimen/x6"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_last_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:gravity="right"
+            android:textColor="@color/text_light"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -27,12 +27,15 @@ public class SelectAddressActivity extends BaseActivity {
     private ListView lv;
     @ViewInject(R.id.select_area_tv_show)
     private TextView tvShow;
+    private String ids;
 
     @Override
     public void initData() {
-        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback() {
+        showProgress();
+        XinongHttpCommend.getInstance(mContext).getAreas(new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
+                cancelProgress();
                 List<Area> areas = JSON.parseArray(result, Area.class);
                 showLv(areas);
             }
@@ -47,10 +50,11 @@ public class SelectAddressActivity extends BaseActivity {
                 Area area = areas.get(position);
                 T.showShort(mContext, area.getName());
                 tvShow.append(area.getName()+"    ");
-
+                ids += area.getId()+",";
                 if (area.getChildren()==null||area.getChildren().size()==0){//没有子列表了
                     Intent myIntent = new Intent();
                     myIntent.putExtra("address",tvShow.getText().toString().trim());
+                    myIntent.putExtra("ids",ids);
                     setResult(RESULT_OK,myIntent);
                     finish();
                 }else {//还有子列表

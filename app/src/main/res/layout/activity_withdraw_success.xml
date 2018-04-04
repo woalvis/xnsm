@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.wallet.WithdrawSuccessActivity">
+
+    <include layout="@layout/toolbar_white"></include>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tv_help"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp"
+        app:cardMaxElevation="10dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/x36"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/x18"
+            android:src="@drawable/date_select" />
+
+        <TextView
+            android:layout_marginTop="@dimen/x8"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/black_404040"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="提现申请已提交" />
+        <TextView
+            android:textSize="@dimen/x10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预计一个工作日内到账" />
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/x16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_404040"
+                android:text="提现支付宝账号"
+                android:textSize="@dimen/x10"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+
+            </View>
+
+            <TextView
+                android:id="@+id/tv_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="abc@qq.com"
+                android:layout_marginRight="@dimen/x8"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/x16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_404040"
+                android:text="提现金额"
+                android:textSize="@dimen/x10"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+
+            </View>
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5000.0元"
+                android:layout_marginRight="@dimen/x8"
+                android:layout_marginBottom="@dimen/x10"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_i_know"
+        android:padding="@dimen/x10"
+        style="@style/bt_submit"
+        android:text="我知道了"
+        />
+
+</LinearLayout>

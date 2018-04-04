@@ -17,6 +17,9 @@ public class StreamTool {
         while( (len = inStream.read(buffer)) !=-1 ){
             outStream.write(buffer, 0, len);
         }
+        if (1==1){
+            System.out.println(System.currentTimeMillis());
+        }
         byte[] data = outStream.toByteArray();//网页的二进制数据
         outStream.close();
         inStream.close();

@@ -22,25 +22,24 @@ import tech.xinong.xnsm.util.ioc.ContentView;
 @ContentView(R.layout.activity_publish_select_category)
 public class PublishSelectCategoryActivity extends BaseActivity {
 
-
     private GridView publishGridCategory;
     private List<CategoryModel> categories;
     private CategoryModel.OP_SELECT opSelect;
 
-
     @Override
     public void initWidget() {
-        publishGridCategory = (GridView) findViewById(R.id.publish_grid_category);
+        publishGridCategory = findViewById(R.id.publish_grid_category);
     }
 
     @Override
     public void initData() {
         Intent intent = getIntent();
         opSelect = (CategoryModel.OP_SELECT) intent.getSerializableExtra("info");
-
-        XinongHttpCommend.getInstance(mContext).getCategories(new AbsXnHttpCallback() {
+        showProgress();
+        XinongHttpCommend.getInstance(mContext).getCategories(new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
+                cancelProgress();
                 categories = JSONArray.parseArray(result, CategoryModel.class);
                 publishGridCategory.setAdapter(new CommonAdapter<CategoryModel>(mContext,R.layout.item_border_text,categories) {
                     @Override

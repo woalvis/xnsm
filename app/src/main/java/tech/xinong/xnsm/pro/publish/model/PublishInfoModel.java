@@ -3,16 +3,14 @@ package tech.xinong.xnsm.pro.publish.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import tech.xinong.xnsm.http.framework.impl.xinonghttp.PageInfo;
 import tech.xinong.xnsm.pro.base.model.UnitQuantity;
 
 /**
  * Created by xiao on 2016/11/21.
  */
 
-public class PublishInfoModel implements Serializable{
-
-
-
+public class PublishInfoModel extends PageInfo implements Serializable{
     public String getId() {
         return id;
     }

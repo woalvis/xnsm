@@ -21,7 +21,7 @@
             android:textColor="#ffafafaf"
             android:textSize="18sp"
             android:layout_marginTop="8dp"
-            android:text="什么都没有哦~" />
+            android:text="@string/all_null" />
 
     </LinearLayout>
 </RelativeLayout>

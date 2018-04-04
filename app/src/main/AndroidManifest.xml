@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".pro.base.application.XnsApplication"
@@ -21,56 +23,257 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".pro.WelcomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <activity
-            android:name=".pro.GuideActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
-        <activity
-            android:name=".pro.MainActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".pro.user.view.LoginActivity"
-            android:label="@string/login" />
-        <activity
-            android:name=".pro.user.view.RegisterActivity"
-            android:label="@string/register" />
-        <activity android:name=".pro.buy.view.ProductListActivity" />
-        <activity android:name=".pro.buy.view.SpecActivity" />
-        <activity android:name=".pro.buy.view.SelectActivity" />
-        <activity
-            android:name=".pro.buy.view.GoodsDetailActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".pro.publish.view.PublishSelectCategoryActivity" />
-        <activity android:name=".pro.publish.view.PublishSellActivity" />
-        <activity android:name=".pro.publish.view.SelectSpecificationActivity" />
-        <activity android:name=".pro.publish.view.SelectUnitPriceActivity" />
-        <activity android:name=".pro.publish.view.SelectTermTimeActivity" />
-        <activity android:name=".pro.publish.view.SelectAddressActivity" />
-        <activity android:name=".pro.publish.view.SelectLogisticMethodActivity" />
-        <activity android:name=".pro.publish.view.EditGoodsNoteActivity" />
-        <activity android:name=".pro.buy.view.BuyNowActivity" />
-        <activity android:name=".pro.user.view.MyOrdersActivity" />
-        <activity android:name=".pro.buy.view.OrderDetailActivity" />
-        <activity android:name=".pro.buy.view.UploadActivity" />
-        <activity android:name=".pro.publish.view.SelectPhotosActivity" />
-        <activity android:name=".pro.publish.view.SkanActivity" />
-        <activity android:name=".pro.buy.view.SearchActivity" />
-        <activity android:name=".pro.buy.view.SelectPhotoTheWayActivity" />
-        <activity android:name=".pro.user.view.EditMyInfoActivity" />
-        <activity android:name=".pro.user.view.EditMyAddressActivity" />
-        <activity android:name=".pro.user.view.AddAddressActivity" />
-        <activity android:name=".pro.SplashActivity">
+            android:name=".pro.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".pro.home.view.AuctionShowActivity" />
-        <activity android:name=".pro.home.view.AuctionDetailActivity"></activity>
+        <activity android:name=".pro.publish.view.TestSelectAddressActivity" />
+
+        <!-- 闪屏页 -->
+        <activity
+            android:name=".pro.WelcomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <!-- 引导页 -->
+        <activity
+            android:name=".pro.GuideActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
+        <!-- 程序主窗口 -->
+        <activity
+            android:name=".pro.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pro.test.TestActivity" />
+        <activity android:name=".pro.test.Test1Activity" />
+        <activity android:name=".pro.test.Test2" />
+        <activity android:name=".pro.test.Test3" />
+        <activity android:name=".pro.test.Test4" />
+
+        <!-- 登录 -->
+        <activity
+            android:name=".pro.user.view.LoginActivity"
+            android:label="@string/login"
+            android:theme="@style/SimpleTheme" />
+        <!-- 注册 -->
+        <activity
+            android:name=".pro.user.view.RegisterActivity"
+            android:label="@string/register"
+            android:theme="@style/SimpleTheme" />
+        <activity
+            android:name=".pro.buy.view.ProductListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.SpecActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.SelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.GoodsDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".pro.publish.view.PublishSelectCategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.PublishSellActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SelectSpecificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SelectUnitPriceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SelectTermTimeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SelectAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SelectLogisticMethodActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.EditGoodsNoteActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.BuyNowActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.user.view.MyOrdersActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.OrderDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".pro.buy.view.UploadActivity" />
+        <activity
+            android:name=".pro.publish.view.SelectPhotosActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.publish.view.SkanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.SearchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.buy.view.SelectPhotoTheWayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.user.view.EditMyInfoActivity"
+            android:screenOrientation="portrait" />
+        <!-- 编辑地址 -->
+        <activity
+            android:name=".pro.user.view.EditMyAddressActivity"
+            android:screenOrientation="portrait" />
+        <!-- 增加地址 -->
+        <activity
+            android:name=".pro.user.view.AddAddressActivity"
+            android:screenOrientation="portrait" />
+        <!-- 拍卖 -->
+        <activity
+            android:name=".pro.home.view.AuctionShowActivity"
+            android:screenOrientation="portrait" />
+        <!-- 拍卖具体 -->
+        <activity
+            android:name=".pro.home.view.AuctionDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 关注的窗体 -->
+        <activity
+            android:name=".pro.home.view.FollowActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 采购详情 -->
+        <activity
+            android:name=".pro.sell.view.SellDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 选择产品的窗体 -->
+        <activity
+            android:name=".pro.publish.view.PublishSelectActivity"
+            android:label="@string/select_product"
+            android:screenOrientation="portrait"
+            android:theme="@style/SimpleTheme" />
+        <activity
+            android:name=".pro.SelectPhotoActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".pro.home.view.H5Activity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".pro.home.view.QuotesActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".pro.publish.view.PublishBuyActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".pro.user.view.MyPublishActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity android:name=".pro.home.view.SellerDetailActivity" />
+        <activity
+            android:name=".pro.user.view.CheckOfferActivity"
+            android:configChanges="keyboardHidden|orientation" />
+        <activity
+            android:name=".pro.buy.view.SearchShowActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".pro.user.view.SentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.sell.view.SubmitPriceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.user.view.OfferDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".pro.user.view.CheckLogisticActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.yanzhenjie.album.AlbumActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="图库"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|stateHidden" />
+        <activity android:name=".pro.pay.PayActivity" />
+
+        <!-- 支付宝用界面 -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.buy.view.SelectAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.user.view.UpdateOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.user.view.BuyListingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.user.view.VerifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.user.view.PersonalVerifyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.user.view.RefundReqActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".pro.wallet.MyWalletActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="tech.xinong.xnsm.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".pro.user.view.VerificationActivity" />
+        <activity android:name=".pro.wallet.MyBillsActivity" />
+        <activity
+            android:name=".pro.wallet.PayPwdActivity"
+            android:label="@string/title_activity_pay_pwd"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".pro.wallet.WalletResetActivity" />
+        <activity android:name=".pro.buy.view.OrderConfirmActivity" />
+        <activity android:name=".pro.wallet.WalletUpdatePwdActivity" />
+        <activity android:name=".pro.pay.PaySuccessActivity" />
+        <activity android:name=".pro.wallet.AddBankAccountActivity" />
+        <activity android:name=".pro.wallet.WithdrawActivity" />
+        <activity android:name=".pro.wallet.BanksActivity" />
+        <activity android:name=".pro.base.Util.ImageShowActivity" />
+        <activity android:name=".pro.home.view.ProductQuotesActivity" />
+        <activity android:name=".pro.home.view.QuotesDetailActivity" />
+        <activity android:name=".pro.pay.BankPayActivity" />
+        <activity android:name=".pro.wallet.WithdrawSuccessActivity"></activity>
     </application>
 
 </manifest>

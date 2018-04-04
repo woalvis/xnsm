@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_sell_show"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="6dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/seller_cover_img"
+        android:layout_width="@dimen/x120"
+        android:layout_height="@dimen/x100"
+        app:placeholderImage="@mipmap/default_pic_bg"
+        android:scaleType="centerCrop"
+        />
+
+    <RelativeLayout
+        android:paddingLeft="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100"
+        >
+
+        <TextView
+            android:layout_marginTop="@dimen/x4"
+            android:id="@+id/seller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="杨丽华"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/x16" />
+
+        <TextView
+            android:layout_marginTop="@dimen/x4"
+            android:id="@+id/sell_address"
+            android:layout_below="@id/seller_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x12"
+            android:text=""/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/sell_address"
+            android:layout_marginTop="@dimen/x6">
+
+            <TextView
+                android:id="@+id/tv_personal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_bg_blue"
+                android:layout_marginRight="@dimen/x6"
+                android:padding="@dimen/x2"
+                android:text="个人认证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x10" />
+
+            <TextView
+                android:id="@+id/tv_enterprise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tag_bg_orange"
+                android:padding="@dimen/x2"
+                android:text="企业认证"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x10" />
+        </LinearLayout>
+
+        <TextView
+
+            android:id="@+id/tv_business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="经营：橙子"
+            android:layout_marginBottom="@dimen/x4"
+            android:textSize="@dimen/x12" />
+    </RelativeLayout>
+
+
+</LinearLayout>

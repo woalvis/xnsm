@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/product_show_layout"
+    android:padding="@dimen/x8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_product_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="山鸡"
+        android:textSize="@dimen/x14"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/tv_product_spec"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:text="七彩山鸡" />
+
+    <!--<com.zhy.view.flowlayout.TagFlowLayout-->
+        <!--android:layout_below="@id/tv_product_address"-->
+        <!--android:id="@+id/fl_tag"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"></com.zhy.view.flowlayout.TagFlowLayout>-->
+
+
+    <TextView
+    android:id="@+id/help"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/tv_product_spec"
+    android:layout_marginTop="@dimen/x8"
+    android:text="距截止日还有6天" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/tv_quote_num"
+        android:text="人已报价"
+        android:layout_alignTop="@id/tv_quote_num"
+        />
+
+    <TextView
+        android:id="@+id/tv_quote_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/tv_product_spec"
+        android:layout_marginTop="@dimen/x8"
+        android:text="0"
+        android:textColor="@color/orange_btn_color"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/help"
+        android:layout_toEndOf="@+id/tv_quote_num"
+        android:layout_toRightOf="@+id/tv_quote_num"
+        android:textColor="@color/orange"
+        android:layout_marginTop="@dimen/x18"
+        android:text="TextView" />
+
+
+    <TextView
+        android:id="@+id/tv_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/orange_btn_color"
+        android:text="1-5元/斤" />
+
+
+    <TextView
+        android:layout_alignParentRight="true"
+        android:id="@+id/tv_delete"
+        style="@style/tv_button"
+        android:visibility="visible"
+        android:background="@color/alert_red"
+        android:textColor="@color/white"
+        android:text="删除"
+        android:layout_below="@id/help"
+        android:layout_marginTop="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_check_quote"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/help"
+        android:layout_marginTop="18dp"
+        android:layout_toLeftOf="@+id/tv_delete"
+        android:background="@drawable/button_shape_orange"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="@dimen/x6"
+        android:paddingLeft="@dimen/x12"
+        android:paddingRight="@dimen/x12"
+        android:paddingTop="@dimen/x6"
+        android:textColor="@color/white"
+        android:text="查看报价" />
+
+
+    <TextView
+        android:id="@+id/tv_stop_buy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/help"
+        android:layout_marginTop="18dp"
+       android:layout_toLeftOf="@id/tv_check_quote"
+        android:background="@drawable/bt_grey_bg"
+        android:paddingBottom="@dimen/x6"
+        android:paddingLeft="@dimen/x12"
+        android:paddingRight="@dimen/x12"
+        android:paddingTop="@dimen/x6"
+        android:layout_marginRight="@dimen/x8"
+        android:text="停止采购" />
+
+    <TextView
+        android:layout_alignTop="@id/tv_delete"
+        android:layout_toLeftOf="@id/tv_stop_buy"
+        android:id="@+id/tv_update"
+        android:text="修改发布"
+        android:layout_below="@id/help"
+        android:layout_marginRight="@dimen/x4"
+        style="@style/tv_button"/>
+
+
+
+</RelativeLayout>

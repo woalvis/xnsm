@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="lay_bottom">false</item>
+    <item type="id" name="lay_has_address">false</item>
+    <item type="id" name="img_location">false</item>
+    <item type="id" name="tv_buyer_name">false</item>
+    <item type="id" name="tv_buyer_mobile">false</item>
+    <item type="id" name="btn_copy_address">false</item>
+    <item type="id" name="time_bg">false</item>
+    <item type="id" name="tv_receive_address">false</item>
+    <item type="id" name="lay_no_address">false</item>
+    <item type="id" name="btn_add_receive_address">false</item>
+    <item type="id" name="lay_search">false</item>
+    <item type="id" name="img_right">false</item>
+    <item type="id" name="imageView1">false</item>
+    <item type="id" name="lay_link">false</item>
+    <item type="id" name="tv_link_name">false</item>
+    <item type="id" name="btn_chat">false</item>
+    <item type="id" name="btn_tel">false</item>
+    <item type="id" name="img_product">false</item>
+    <item type="id" name="tv_product_title">false</item>
+    <item type="id" name="tv_product_price">false</item>
+    <item type="id" name="tv_num_lb">false</item>
+    <item type="id" name="lay_choose_num">false</item>
+    <item type="id" name="btn_minus">false</item>
+    <item type="id" name="edit_num">false</item>
+    <item type="id" name="btn_add">false</item>
+    <item type="id" name="service_lb">false</item>
+    <item type="id" name="tv_service_way">false</item>
+    <item type="id" name="service_img">false</item>
+    <item type="id" name="edit_leave_msg">false</item>
+    <item type="id" name="tv_leave_msg_num">false</item>
+    <item type="id" name="btn_commit"></item>
+    <item type="id" name="textView4"></item>
+    <item type="id" name="text_amount"></item>
+
+</resources>

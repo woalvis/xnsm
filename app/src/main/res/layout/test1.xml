@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 广告轮番页 -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <tech.xinong.xnsm.views.CircleIndicator
+            android:id="@+id/circle_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="12dp"></tech.xinong.xnsm.views.CircleIndicator>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x120"></android.support.v4.view.ViewPager>
+    </FrameLayout>
+
+
+
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/iv"
+        android:layout_width="@dimen/x300"
+        android:layout_height="@dimen/x100"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_unipay"
+        />
+</LinearLayout>

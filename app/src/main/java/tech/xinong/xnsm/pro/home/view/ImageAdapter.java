@@ -1,14 +1,13 @@
 package tech.xinong.xnsm.pro.home.view;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import tech.xinong.xnsm.R;
+import java.util.List;
+
+import tech.xinong.xnsm.pro.home.model.AdsModel;
 
 /**
  * Created by xiao on 2016/11/7.
@@ -17,22 +16,20 @@ import tech.xinong.xnsm.R;
 public class ImageAdapter  extends PagerAdapter {
 
     private Context mContext;
-    public static final int[] IMAGES = {
-            R.mipmap.banner1,
-            R.mipmap.banner2,
-            R.mipmap.banner3,
-            R.mipmap.banner4
-    };
-    private static final int[] COLORS = {Color.GREEN, Color.RED, Color.WHITE, Color.BLUE,Color.MAGENTA};
 
-    public ImageAdapter(Context context){
+    private List<AdsModel> adsModels;
+    private List<View> views;
+
+    public ImageAdapter(Context context, List<AdsModel> adsModels,List<View> views){
         super();
         mContext = context;
+        this.adsModels = adsModels;
+        this.views = views;
     }
 
     @Override
     public int getCount() {
-        return IMAGES.length;
+        return adsModels.size();
     }
 
 
@@ -55,19 +52,35 @@ public class ImageAdapter  extends PagerAdapter {
 
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        //创建一个新的ImageView并把它添加到提供的容器中
-        ImageView iv = new ImageView(mContext);
-        //设置此位置的内容
-        iv.setImageResource(IMAGES[position]);
-        iv.setScaleType(ImageView.ScaleType.FIT_XY);
+    public Object instantiateItem(ViewGroup container, final int position) {
+//        View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner,container,false);
+//
+//
+//        //创建一个新的ImageView并把它添加到提供的容器中
+//        SimpleDraweeView iv = (SimpleDraweeView) view.findViewById(R.id.im_banner);
+//        //设置此位置的内容
+//        iv.setImageURI(adsModels.get(position).getCoverImg());
+//        iv.setScaleType(ImageView.ScaleType.FIT_XY);
         //iv.setBackgroundColor(COLORS[position]);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
-        iv.setLayoutParams(params);
+//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT);
+//        iv.setLayoutParams(params);
+
+
+        /**
+         * 给活动轮番页添加点击事件
+         */
+//        iv.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent();
+//                intent.putExtra("url",adsModels.get(position).getContentUrl());
+//                mContext.startActivity(intent);
+//            }
+//        });
         //这里你必须自己添加视图，Android框架是不会为你添加的
-        container.addView(iv);
+        container.addView(views.get(position));
         //将这个视图作为这个位置的键对象返回
-        return iv;
+        return views.get(position);
     }
 
     @Override

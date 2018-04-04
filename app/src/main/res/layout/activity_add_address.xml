@@ -10,6 +10,8 @@
     tools:context="tech.xinong.xnsm.pro.user.view.AddAddressActivity">
 
 
+    <include layout="@layout/toolbar_white"></include>
+
     <LinearLayout
         android:padding="10dp"
         android:layout_width="match_parent"
@@ -54,6 +56,7 @@
             android:layout_weight="3">
 
             <EditText
+                android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.design.widget.TextInputLayout>
@@ -136,6 +139,8 @@
             android:layout_weight="3">
 
             <EditText
+                android:inputType="number"
+                android:maxLength="6"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </android.support.design.widget.TextInputLayout>

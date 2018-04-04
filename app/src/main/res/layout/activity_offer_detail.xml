@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8"
+        android:layout_alignParentBottom="true"
+        android:text="立即买"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/alert_red"
+        />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_above="@id/buy_now"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include layout="@layout/toolbar_white"></include>
+
+            <include layout="@layout/line_grey"></include>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x8">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/im_head"
+                    android:layout_width="@dimen/x75"
+                    android:layout_height="@dimen/x75"
+                    app:placeholderImage="@mipmap/avatar_img"
+                    fresco:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/tv_seller_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@+id/im_head"
+                    android:layout_toRightOf="@+id/im_head"
+                    android:text="wangkun" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray1"
+                android:padding="@dimen/x8"
+                android:text="他的报价" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/layout_help_bg"
+                android:paddingBottom="@dimen/x24"
+                android:paddingLeft="@dimen/x8"
+                android:paddingRight="@dimen/x8"
+                android:paddingTop="@dimen/x24">
+
+                <TextView
+                    android:id="@+id/tv_product_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="神秘果"
+                    android:textColor="@color/black_404040"
+                    android:textSize="@dimen/x16" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_product_name"
+                    android:layout_marginTop="@dimen/x8"
+                    android:text="北京市朝阳区" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="@dimen/x64"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/bg_tv_round"
+                    android:gravity="center"
+                    android:padding="@dimen/x8"
+                    android:text="10元/斤"
+                    android:textColor="@color/orange" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x8"
+                android:text="他的留言" />
+
+            <TextView
+                android:id="@+id/tv_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/x8" />
+
+            <tech.xinong.xnsm.views.MyListView
+                android:id="@+id/ll_images"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </tech.xinong.xnsm.views.MyListView>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

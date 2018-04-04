@@ -1,5 +1,6 @@
 package tech.xinong.xnsm.pro.user.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.design.widget.TextInputLayout;
@@ -23,7 +24,6 @@ import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.XinongHttpCommend;
 import tech.xinong.xnsm.http.framework.impl.xinonghttp.xinonghttpcallback.AbsXnHttpCallback;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
-import tech.xinong.xnsm.pro.user.presenter.LoginPresenter;
 import tech.xinong.xnsm.pro.user.presenter.RegisterPresenter;
 import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.ioc.ContentView;
@@ -49,13 +49,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     private TextInputLayout inputPassword;           //
     @ViewInject(R.id.register_text_input_confirm)
     private TextInputLayout inputConfirmPassword;
+    @ViewInject(R.id.tv_login)
+    private TextView tv_login;
     private OkHttpClient mOkHttpClient;
     private EditText etPassword;
     private EditText etPasswordConfirm;
+    @ViewInject(R.id.tv_center)
+    private TextView centerTv;
 
     private CountDownTimer timer;
-
-//    private String
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
@@ -72,10 +74,11 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     public void initWidget() {
 
-
+        initNavigation();
 
         reqVerify.setOnClickListener(this);
         registerUser.setOnClickListener(this);
+        tv_login.setOnClickListener(this);
         etPassword = inputPassword.getEditText();
         etPasswordConfirm = inputConfirmPassword.getEditText();
 
@@ -124,7 +127,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                 reqVerify.setClickable(true);
             }
         };
+    }
 
+    @Override
+    public void initData() {
 
     }
 
@@ -158,6 +164,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
             case R.id.register_register:
                 register();
                 break;
+            case R.id.tv_login:
+                Intent intent = new Intent(mContext,LoginActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -170,6 +180,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
      */
     private void register() {
         getPresenter().registerUser(etPhoneNum.getText().toString().trim(),
+                etPassword.getText().toString().trim(),
                 etRegisterVerifyNum.getText().toString().trim());
 //
 //        XinongHttpCommend.getInstance(this).registerUser(register, new AbsXnHttpCallback() {
@@ -186,7 +197,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
      * @param cellPhone
      */
     private void reqVerify(String cellPhone) {
-        XinongHttpCommend.getInstance(this).registerVerify(cellPhone, new AbsXnHttpCallback() {
+        XinongHttpCommend.getInstance(this).registerVerify(cellPhone, new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
                 passwordLayout.setVisibility(View.VISIBLE);
@@ -199,7 +210,17 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void onRegisterSuccess() {
-        LoginPresenter loginPresenter = new LoginPresenter(this);
-        //loginPresenter.login();
+        T.showShort(this,"注册成功");
+        skipActivity(LoginActivity.class);
+    }
+
+    private void initNavigation(){
+        centerTv.setVisibility(View.VISIBLE);
+        centerTv.setText(getResources().getString(R.string.register));
+    }
+
+    @Override
+    public RegisterPresenter bindPresenter() {
+        return new RegisterPresenter(this);
     }
 }

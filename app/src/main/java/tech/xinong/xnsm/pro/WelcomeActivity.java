@@ -3,39 +3,46 @@ package tech.xinong.xnsm.pro;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import java.util.Properties;
+
 import tech.xinong.xnsm.R;
+import tech.xinong.xnsm.pro.base.Util.ProperTies;
+import tech.xinong.xnsm.pro.base.view.BaseActivity;
+import tech.xinong.xnsm.util.XnsConstant;
+import tech.xinong.xnsm.util.ioc.ContentView;
 
 
 /**
  * 闪屏页，程序的入口
  */
-
-public class WelcomeActivity extends Activity {
+@ContentView(R.id.activity_welcome)
+public class WelcomeActivity extends BaseActivity {
 
     private ImageView splash_title;
     private ImageView splash_mask;
     private ImageView splash_logo;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
-        //init();
+    public void initWidget() {
+        init();
     }
 
+    @Override
+    public void initData() {
 
+    }
 
     private void init() {
-        splash_logo = (ImageView) findViewById(R.id.splash_logo);
-        splash_title = (ImageView) findViewById(R.id.splash_title);
-        splash_mask = (ImageView) findViewById(R.id.splash_mask);
+        getFavs();
+        splash_logo =findViewById(R.id.splash_logo);
+        splash_title = findViewById(R.id.splash_title);
+        splash_mask = findViewById(R.id.splash_mask);
         ObjectAnimator objectAnimatorLogo = ObjectAnimator.ofFloat(splash_logo,"alpha",1.0f,0.0f);
         ObjectAnimator objectAnimatorTitle = ObjectAnimator.ofFloat(splash_title,"alpha",0.0f,1.0f);
         objectAnimatorLogo.setDuration(3000);
@@ -47,12 +54,14 @@ public class WelcomeActivity extends Activity {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
+
+
+
                 Intent intent = new Intent(WelcomeActivity.this,GuideActivity.class);
                 startActivity(intent);
             }
 
         });
-
 
 
         final Animation mask = AnimationUtils.loadAnimation(this, R.anim.slide_in_from_left);
@@ -62,5 +71,18 @@ public class WelcomeActivity extends Activity {
 //
 //            }
 //        },2000);
+    }
+
+
+
+    public String[] getFavs(){
+        Properties proper = ProperTies.getProperties(mContext);
+        String favString = proper.getProperty(XnsConstant.FAVS);
+        Log.i("TAG", "favString=" + favString);
+        mSharedPreferences = getSharedPreferences(XnsConstant.SP_NAME, MODE_PRIVATE);
+        editor = mSharedPreferences.edit();
+        editor.putString(XnsConstant.FAVS,favString);
+        editor.commit();
+        return favString.split(",");
     }
 }

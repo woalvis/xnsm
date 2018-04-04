@@ -1,117 +1,215 @@
 package tech.xinong.xnsm.pro.buy.model;
 
-import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
-import tech.xinong.xnsm.pro.user.model.UserModel;
+import java.math.BigDecimal;
+
+import tech.xinong.xnsm.pro.base.model.BaseDTO;
+import tech.xinong.xnsm.pro.base.model.WeightUnit;
 
 /**
  * Created by xiao on 2016/12/5.
+
+ }
  */
 
-public class OrderDetailModel {
-    private String id;
-    private String address;//送货地址
-    private double totalPrice;//总共费用
-    private double transportCost;//运输费
-    private String quantityUnit;//单位
-    private String origin;//原产地
-    private String buyerRequire;//买家需求
-    private int amount;//购买数量
-    private String specDesc;//规格(空格相隔)
-    private OrderStatus status;// UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款")
-    private UserModel seller;//卖家
-    private UserModel buyer;//买家
-    private double unitPrice;//单价
-    private PublishSellInfoModel sellerListing;
-    private ProductModel product;
-    private String logisticMethodTag;
-    private String createTime;
+public class OrderDetailModel extends BaseDTO{
+    private static final long serialVersionUID = 3525530536377084099L;
 
-    public String getCreateTime() {
-        return createTime;
+    private Long orderNo;
+
+    private BaseDTO buyer;
+
+    private BaseDTO seller;
+
+    private BaseDTO sellerListing;
+
+    private String buyerName;
+
+    private String sellerName;
+
+    private Boolean buyerDelete;
+
+    private Boolean sellerDelete;
+
+    private String coverImg;//默认图片
+
+    private String title;//显示的标题
+
+    private BigDecimal unitPrice;//单价
+
+    private WeightUnit weightUnit;//单位
+
+    private BigDecimal amount;//购买数量
+
+    private BigDecimal offer;//优惠多少钱
+
+    private BigDecimal freight;//运费
+
+    private BigDecimal xnFees;//喜农费用
+
+    private BigDecimal  totalPrice; //订单总额
+
+    private OrderStatus status;
+
+    private String receiver;
+
+    private String receiverPhone;
+
+    private String receiverAddr;
+
+    private String provideSupport;//'支持的服务'，逗号分隔。
+
+    private String payFile;
+
+    private String buyerMsg;//买家留言
+
+    private Boolean freeShipping;//是否包邮
+
+    private String buyerPhone;
+
+    private String sellerPhone;
+
+    public Boolean getFreeShipping() {
+        return freeShipping;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
+    public void setFreeShipping(Boolean freeShipping) {
+        this.freeShipping = freeShipping;
     }
 
-    public String getLogisticMethodTag() {
-        return logisticMethodTag;
+    public Long getOrderNo() {
+        return orderNo;
     }
 
-    public void setLogisticMethodTag(String logisticMethodTag) {
-        this.logisticMethodTag = logisticMethodTag;
+    public void setOrderNo(Long orderNo) {
+        this.orderNo = orderNo;
     }
 
-    public String getId() {
-        return id;
+    public BaseDTO getBuyer() {
+        return buyer;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setBuyer(BaseDTO buyer) {
+        this.buyer = buyer;
     }
 
-    public String getAddress() {
-        return address;
+    public BaseDTO getSeller() {
+        return seller;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setSeller(BaseDTO seller) {
+        this.seller = seller;
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public BaseDTO getSellerListing() {
+        return sellerListing;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setSellerListing(BaseDTO sellerListing) {
+        this.sellerListing = sellerListing;
     }
 
-    public double getTransportCost() {
-        return transportCost;
+    public String getBuyerName() {
+        return buyerName;
     }
 
-    public void setTransportCost(double transportCost) {
-        this.transportCost = transportCost;
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
     }
 
-    public String getQuantityUnit() {
-        return quantityUnit;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public void setQuantityUnit(String quantityUnit) {
-        this.quantityUnit = quantityUnit;
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
-    public String getOrigin() {
-        return origin;
+    public Boolean getBuyerDelete() {
+        return buyerDelete;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setBuyerDelete(Boolean buyerDelete) {
+        this.buyerDelete = buyerDelete;
     }
 
-    public String getBuyerRequire() {
-        return buyerRequire;
+    public Boolean getSellerDelete() {
+        return sellerDelete;
     }
 
-    public void setBuyerRequire(String buyerRequire) {
-        this.buyerRequire = buyerRequire;
+    public void setSellerDelete(Boolean sellerDelete) {
+        this.sellerDelete = sellerDelete;
     }
 
-    public int getAmount() {
+    public String getCoverImg() {
+        return coverImg;
+    }
+
+    public void setCoverImg(String coverImg) {
+        this.coverImg = coverImg;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public WeightUnit getWeightUnit() {
+        return weightUnit;
+    }
+
+    public void setWeightUnit(WeightUnit weightUnit) {
+        this.weightUnit = weightUnit;
+    }
+
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public String getSpecDesc() {
-        return specDesc;
+    public BigDecimal getOffer() {
+        return offer;
     }
 
-    public void setSpecDesc(String specDesc) {
-        this.specDesc = specDesc;
+    public void setOffer(BigDecimal offer) {
+        this.offer = offer;
+    }
+
+    public BigDecimal getFreight() {
+        return freight;
+    }
+
+    public void setFreight(BigDecimal freight) {
+        this.freight = freight;
+    }
+
+    public BigDecimal getXnFees() {
+        return xnFees;
+    }
+
+    public void setXnFees(BigDecimal xnFees) {
+        this.xnFees = xnFees;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     public OrderStatus getStatus() {
@@ -122,43 +220,52 @@ public class OrderDetailModel {
         this.status = status;
     }
 
-    public UserModel getSeller() {
-        return seller;
+    public String getReceiver() {
+        return receiver;
     }
 
-    public void setSeller(UserModel seller) {
-        this.seller = seller;
+    public void setReceiver(String receiver) {
+        this.receiver = receiver;
     }
 
-    public UserModel getBuyer() {
-        return buyer;
+    public String getReceiverPhone() {
+        return receiverPhone;
     }
 
-    public void setBuyer(UserModel buyer) {
-        this.buyer = buyer;
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
     }
 
-    public double getUnitPrice() {
-        return unitPrice;
+    public String getReceiverAddr() {
+        return receiverAddr;
     }
 
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setReceiverAddr(String receiverAddr) {
+        this.receiverAddr = receiverAddr;
     }
 
-    public PublishSellInfoModel getSellerListing() {
-        return sellerListing;
+    public String getProvideSupport() {
+        return provideSupport;
     }
 
-    public void setSellerListing(PublishSellInfoModel sellerListing) {
-        this.sellerListing = sellerListing;
+    public void setProvideSupport(String provideSupport) {
+        this.provideSupport = provideSupport;
     }
 
-    public ProductModel getProduct() {
-        return product;
+    public String getPayFile() {
+        return payFile;
     }
 
-    public void setProduct(ProductModel product) {
-        this.product = product;
+    public void setPayFile(String payFile) {
+        this.payFile = payFile;
     }
+
+    public String getBuyerMsg() {
+        return buyerMsg;
+    }
+
+    public void setBuyerMsg(String buyerMsg) {
+        this.buyerMsg = buyerMsg;
+    }
+
 }

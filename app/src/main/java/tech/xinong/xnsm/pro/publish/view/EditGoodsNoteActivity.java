@@ -17,9 +17,13 @@ public class EditGoodsNoteActivity extends BaseActivity {
     private EditText etGoodsNote;
     @ViewInject(R.id.edit_goods_note_submit)
     private Button btGoodsNote;
-
     @Override
     public void initWidget() {
+        super.initWidget();
+        String note = intent.getStringExtra("note");
+        if (!TextUtils.isEmpty(note)){
+            etGoodsNote.setText(note);
+        }
         btGoodsNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,8 +33,23 @@ public class EditGoodsNoteActivity extends BaseActivity {
                     intent.putExtra("result",result);
                     setResult(RESULT_OK,intent);
                     finish();
+                }else {
+                    Intent intent = new Intent();
+                    intent.putExtra("result","");
+                    setResult(RESULT_OK,intent);
+                    finish();
                 }
             }
         });
+    }
+
+    @Override
+    public String setToolBarTitle() {
+        return "货品描述";
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

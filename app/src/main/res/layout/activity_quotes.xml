@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+
+        android:id="@+id/home_swipe_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <tech.xinong.xnsm.views.PagerScrollView1
+            android:id="@+id/scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyc_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/x8"
+                    android:text="关注的产品" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_tags"
+                    android:padding="@dimen/x10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+                <tech.xinong.xnsm.views.MyListView
+                    android:id="@+id/lv_show"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                </tech.xinong.xnsm.views.MyListView>
+            </LinearLayout>
+        </tech.xinong.xnsm.views.PagerScrollView1>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/x28"-->
+    <!--&gt;-->
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_weight="1">-->
+    <!--<TextView-->
+    <!--style="@style/quotes_bar_text"-->
+    <!--android:text="核桃"-->
+    <!--/>-->
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/drop_down_open"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_weight="1">-->
+    <!--<TextView-->
+    <!--style="@style/quotes_bar_text"-->
+    <!--android:text="品种"-->
+    <!--/>-->
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/drop_down_open"-->
+    <!--/>-->
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:gravity="center"-->
+    <!--android:layout_weight="1">-->
+    <!--<TextView-->
+    <!--style="@style/quotes_bar_text"-->
+    <!--android:text="全国"-->
+    <!--/>-->
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@mipmap/drop_down_open"-->
+    <!--/>-->
+
+    <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/x4"-->
+    <!--android:background="@color/main_line_color"-->
+    <!--&gt;</View>-->
+
+
+    <!--<com.handmark.pulltorefresh.library.PullToRefreshListView-->
+    <!--android:layout_marginTop="@dimen/x6"-->
+    <!--android:id="@+id/quotes_lv_show"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--ptr:ptrAnimationStyle="flip"-->
+    <!--ptr:ptrMode="both"-->
+    <!--android:cacheColorHint="#00000000"-->
+    <!--android:divider="#19000000"-->
+    <!--android:dividerHeight="4dp"-->
+    <!--android:fadingEdge="none"-->
+    <!--android:fastScrollEnabled="false"-->
+    <!--android:footerDividersEnabled="false"-->
+    <!--android:headerDividersEnabled="false"-->
+    <!--android:smoothScrollbar="true"-->
+    <!--&gt;</com.handmark.pulltorefresh.library.PullToRefreshListView>-->
+
+
+    <!---->
+</LinearLayout>

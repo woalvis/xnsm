@@ -18,8 +18,8 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
         registerModel = new RegisterModel(context);
     }
 
-    public void registerUser(String cellphone,String verificationCode){
-        registerModel.registerUser(cellphone, verificationCode, new AbsXnHttpCallback() {
+    public void registerUser(String cellphone,String pwd, String verificationCode){
+        registerModel.registerUser(cellphone,pwd,verificationCode, new AbsXnHttpCallback(getContext()) {
             @Override
             public void onSuccess(String info, String result) {
                 getView().onRegisterSuccess();

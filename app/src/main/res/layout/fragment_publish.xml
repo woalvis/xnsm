@@ -34,7 +34,7 @@
            android:id="@+id/publish_mylist_tv"
            android:gravity="center"
            android:background="#0000ff"
-           android:text="@string/my_publish"
+           android:text="@string/publish_buy"
            android:layout_width="0dp"
            android:layout_height="match_parent"
            android:layout_weight="1"/>

@@ -1,0 +1,90 @@
+[33mcommit c93c8253d5b85f51b8a647fd9cc02dcd55bc9518[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31mxnsm/master[m[33m)[m
+Author: woalvis <93960852.qq.com>
+Date:   Thu Feb 9 16:04:04 2017 +0800
+
+    2.9
+
+[33mcommit 5ffaf7c7d8ad829e1f68723072e84a1d2af4c608[m
+Author: woalvis <93960852.qq.com>
+Date:   Sun Dec 18 10:48:52 2016 +0800
+
+    12-18提交
+
+[33mcommit 98adaf49ebac001cf050fcc2f07e66877873f167[m
+Author: woalvis <93960852.qq.com>
+Date:   Tue Dec 13 18:45:14 2016 +0800
+
+    12.13下班提交，做了自定义的进度控件，还有搜索的接口，还有选择区域的的pupop
+
+[33mcommit 7b3d4555f97f92006880370d09534074dcf3795c[m
+Author: woalvis <93960852.qq.com>
+Date:   Wed Dec 7 18:47:03 2016 +0800
+
+    12-7下班提交
+
+[33mcommit a9f198b26bbb8b9641317286d62d95d8fe339afd[m
+Author: woalvis <93960852.qq.com>
+Date:   Mon Dec 5 18:45:51 2016 +0800
+
+    12-5下班提交
+
+[33mcommit a29e22d2b4a67828720d8ede6895c4cd87d6dd0d[m
+Author: woalvis <93960852.qq.com>
+Date:   Tue Nov 29 18:11:27 2016 +0800
+
+    11.29下班提交，发布模块开发中
+
+[33mcommit ef42e590888c9f0d7a1be35f8a78510d6bad589d[m
+Author: woalvis <93960852.qq.com>
+Date:   Mon Nov 28 18:40:34 2016 +0800
+
+    11.28下班提交，正在做发布模块
+
+[33mcommit d73b2f84dfe46d2f438b0a4e6cb8782233f9b236[m
+Author: woalvis <93960852.qq.com>
+Date:   Sun Nov 27 21:08:25 2016 +0800
+
+    11.27开始前提交
+
+[33mcommit 42bb3aa4baf12ec947689fab9d201d6c7a6e3c46[m
+Author: woalvis <93960852.qq.com>
+Date:   Thu Nov 24 19:23:11 2016 +0800
+
+    11.24下班提交
+
+[33mcommit 5da3d9086a81816eb27dfffdffe3ce74edba1544[m
+Author: woalvis <93960852.qq.com>
+Date:   Wed Nov 23 18:56:21 2016 +0800
+
+    11月23日，下班提交
+
+[33mcommit cc71d888c63eff6da11e8859c8c766d2790ddbdb[m
+Author: woalvis <93960852.qq.com>
+Date:   Tue Nov 22 18:23:08 2016 +0800
+
+    11.22下班提交
+
+[33mcommit bfb638e81f7f747a70d63ef38c9939f6154da9b9[m
+Author: woalvis <93960852.qq.com>
+Date:   Wed Nov 16 18:20:45 2016 +0800
+
+    11-16下班提交
+
+[33mcommit 5c88f35c4fdbad317c5ccbff336c953206de2883[m
+Merge: d445fe1 cc158c7
+Author: woalvis <93960852.qq.com>
+Date:   Wed Nov 16 11:02:12 2016 +0800
+
+    Merge branch 'master' of https://github.com/woalvis/xnsm
+
+[33mcommit cc158c7c455c3bf69355dc6ff7468267da0c2004[m
+Author: woalvis <93960852@qq.com>
+Date:   Wed Nov 16 10:56:12 2016 +0800
+
+    Initial commit
+
+[33mcommit d445fe15f6603112697338b1eea02f4eb8238958[m
+Author: woalvis <93960852.qq.com>
+Date:   Wed Nov 16 10:42:31 2016 +0800
+
+    喜农市1.0.0启动版本

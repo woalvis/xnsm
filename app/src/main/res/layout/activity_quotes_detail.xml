@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="tech.xinong.xnsm.pro.home.view.QuotesDetailActivity">
+
+    <include layout="@layout/toolbar_white"></include>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+      <tech.xinong.xnsm.views.HorizontalScrollMenu
+          android:id="@+id/hsm_container"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"></tech.xinong.xnsm.views.HorizontalScrollMenu>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/wheel_h_index"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+
+        android:padding="@dimen/x10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="今日均价"
+                />
+            <TextView
+                android:id="@+id/tv_today_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.43元/斤"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/x18"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="相比于昨日"
+                />
+            <RelativeLayout
+                android:id="@+id/rl_show"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_compare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_404040"
+                    android:textSize="@dimen/x16"
+                    android:text="下跌0.03"
+                    />
+                <ImageView
+                    android:id="@+id/im_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_compare"
+                    android:layout_alignBottom="@id/tv_compare"
+                    android:layout_toRightOf="@id/tv_compare"
+                    android:src="@drawable/arrow_down"
+                    />
+                <TextView
+                    android:id="@+id/tv_present"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_404040"
+                    android:textSize="@dimen/x16"
+                    android:text="2.05%"
+                    android:layout_toRightOf="@id/im_state"
+                    />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_no_data"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/x18"
+                android:text="没有数据"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <lecho.lib.hellocharts.view.LineChartView
+    android:padding="@dimen/x10"
+    android:id="@+id/line_chart"
+    android:layout_width="fill_parent"
+    android:layout_height="300dp"/>
+    <TextView
+        android:id="@+id/tv_empty"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="没有数据"
+        android:textSize="@dimen/x18"
+        />
+
+</LinearLayout>

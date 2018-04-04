@@ -5,13 +5,14 @@
 
     <TextView
         android:id="@+id/item_grid_spec_name"
+        android:gravity="center"
         android:paddingLeft="2dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#bbbbbb"/>
+        android:background="@drawable/textview_border_deep"/>
     <TextView
         android:id="@+id/item_grid_spec_value"
         android:paddingLeft="2dp"
@@ -20,7 +21,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="#dddddd"/>
+        android:background="@drawable/textview_border"/>
 
 
 

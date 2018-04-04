@@ -37,4 +37,27 @@ public abstract class MvpActivity<P extends MvpPresenter> extends AppCompatActiv
     public P getPresenter(){
         return this.presenter;
     }
+
+//
+//    public void setOnClickListener(View.OnClickListener listener, int... ids) {
+//        if (ids == null) {
+//            return;
+//        }
+//        for (int id : ids) {
+//            get(id).setOnClickListener(listener);
+//        }
+//    }
+//
+//    public <T extends View> T get(int id) {
+//        return (T) bindView(id);
+//    }
+//
+//    public <T extends View> T bindView(int id) {
+//        T view = (T) mViews.get(id);
+//        if (view == null) {
+//            view = (T) rootView.findViewById(id);
+//            mViews.put(id, view);
+//        }
+//        return view;
+//    }
 }

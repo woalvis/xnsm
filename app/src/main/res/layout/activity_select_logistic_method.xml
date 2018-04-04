@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_select_logistic_method"
-    android:orientation="vertical"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="tech.xinong.xnsm.pro.publish.view.SelectLogisticMethodActivity">
 
+    <include
+        layout="@layout/toolbar_white"></include>
+
+
     <GridView
+        android:layout_below="@id/toolbar"
         android:id="@+id/select_logistic_method_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="2">
-
     </GridView>
 
-
     <Button
-        android:id="@+id/select_logistic_method_bt"
-        android:layout_marginTop="20dp"
-        android:padding="15dp"
-        android:text="@string/submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/x8"
+        android:text="@string/confirm"
+        android:background="@drawable/bt_bg_green"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:id="@+id/select_logistic_method_bt" />
+
+</RelativeLayout>

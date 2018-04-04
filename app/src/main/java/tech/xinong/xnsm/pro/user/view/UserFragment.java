@@ -36,7 +36,6 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
     @Override
     public LoginPresenter bindPresenter() {
         loginPresenter = new LoginPresenter(getContext());
-
         return loginPresenter;
     }
 
@@ -105,6 +104,10 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
         /*我的收货地址*/
         myAddressLayout = (LinearLayout) contentView.findViewById(R.id.user_my_address_layout);
         myAddressLayout.setOnClickListener(this);
+
+//        Toolbar toolbar = (Toolbar) contentView.findViewById(R.id.toolbar);
+//        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) contentView.findViewById(R.id.collapsing_toolbar);
+//        collapsingToolbarLayout.setTitle(userNameStr);
     }
 
     @Override
@@ -116,7 +119,6 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
 
     @Override
     public void onStart() {
-        Log.i("xx","UserFragment----onStart");
         super.onStart();
     }
 
@@ -136,7 +138,6 @@ public class UserFragment extends BaseFragment<LoginPresenter,LoginView> impleme
                 break;
         }
     }
-
 
 
     @Override

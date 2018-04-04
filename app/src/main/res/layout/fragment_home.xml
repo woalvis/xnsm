@@ -1,36 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app = "http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ddd"
-    android:weightSum="1">
+    android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/home_swipe_ly"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--android:id="@+id/home_swipe_ly"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
 
-    <ScrollView
+    <tech.xinong.xnsm.views.PagerScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- 导航栏，搜索 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x38"
+                android:background="#333333">
 
+                <LinearLayout
+                    android:id="@+id/home_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x55"
+                    android:layout_marginRight="@dimen/x55"
+                    android:layout_marginTop="@dimen/x8"
+                    android:background="@color/white"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="@dimen/x18"
+                        android:layout_height="@dimen/x18"
+                        android:background="@mipmap/search_icon" />
+
+                    <TextView
+                        android:id="@+id/imtv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/search"
+                        android:textColor="@color/colorPrimary" />
+                </LinearLayout>
+
+            </LinearLayout>
+            <!-- 导航栏，搜索  结束 -->
+
+            <!-- 广告轮番页 -->
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
-            <android.support.v4.view.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="160dp">
-            </android.support.v4.view.ViewPager>
 
 
                 <tech.xinong.xnsm.views.CircleIndicator
@@ -38,137 +65,175 @@
                     android:layout_width="match_parent"
                     android:layout_height="24dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"></tech.xinong.xnsm.views.CircleIndicator>
 
-
-                </tech.xinong.xnsm.views.CircleIndicator>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x120"></android.support.v4.view.ViewPager>
             </FrameLayout>
 
-
+            <!-- 订单，行情，关注的布局 -->
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                >
+                android:padding="@dimen/x14">
 
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                <ImageView
-                    android:id="@+id/home_my_orders"
-                    style="@style/home_btn"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:src="@drawable/circle_bg"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/home_my_orders"
+                        style="@style/home_btn"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:src="@mipmap/home_order" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="我的订单"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        />
+                        android:text="@string/my_orders"
+                        android:textSize="@dimen/x10" />
 
-                </FrameLayout>
+                </LinearLayout>
 
 
-
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                <ImageView
-                    style="@style/home_btn"
-                    android:gravity="center"
-                    android:text="行情"
-                    android:layout_gravity="center"
-                    android:src="@drawable/circle_bg"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/home_my_quotes"
+                        style="@style/home_btn"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:src="@mipmap/home_quotes" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="行情"
                         android:layout_gravity="center"
-                        android:gravity="center"
-                        />
+                        android:text="@string/quotes"
+                        android:textSize="@dimen/x10" />
 
-                </FrameLayout>
+                </LinearLayout>
 
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                <ImageView
-                    style="@style/home_btn"
-                    android:id="@+id/home_auction"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:src="@drawable/circle_bg"
-                    />
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/home_my_follow"
+                        style="@style/home_btn"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:src="@mipmap/home_follow" />
 
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="大厅"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        />
-    </FrameLayout>
+                        android:text="@string/follow"
+                        android:textSize="@dimen/x10" />
+                </LinearLayout>
             </LinearLayout>
 
+            <!--消息推送的布局-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/darkGreen">
+                android:layout_marginTop="@dimen/x8"
+                android:background="@color/yellow_fed328"
+                android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:gravity="center_vertical"
-                android:padding="10dp"
-                android:text="消息推送 : "/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x45"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/x8"
+                    android:text="@string/message_push" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical">
-              <tech.xinong.xnsm.views.ADTextView
-                  android:id="@+id/tv_ad"
-                  app:ad_text_content_color="@color/white"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent" />
-              </LinearLayout>
+
+                    <tech.xinong.xnsm.views.ADTextView
+                        android:id="@+id/tv_ad"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:ad_text_content_color="@color/white" />
+                </LinearLayout>
             </LinearLayout>
 
             <WebView
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@android:color/holo_blue_dark">
+                android:layout_height="@dimen/x135"
+                android:background="@android:color/holo_blue_dark"
+                android:visibility="gone">
 
             </WebView>
 
 
-
-            <tech.xinong.xnsm.views.GridViewForScrollView
-                android:id="@+id/grid_home_push"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:numColumns="2"
-                >
-            </tech.xinong.xnsm.views.GridViewForScrollView>
+                android:layout_height="wrap_content"
+                android:background="@color/white">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/home_recommend_imgs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/x75"
+                    android:background="@color/white">
+
+
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+
+            <TextView
+                style="@style/small_title"
+                android:background="@color/white"
+                android:text="@string/recommended_for_you"
+                 />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/home_recommend_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@color/black" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/my_order_vp_view"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"></android.support.v4.view.ViewPager>
+
         </LinearLayout>
+    </tech.xinong.xnsm.views.PagerScrollView>
 
-    </ScrollView>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
-    </android.support.v4.widget.SwipeRefreshLayout>
-</LinearLayout>
+    <tech.xinong.xnsm.views.LoadView
+        android:id="@+id/load_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </tech.xinong.xnsm.views.LoadView>
+</RelativeLayout>

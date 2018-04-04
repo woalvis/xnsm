@@ -6,5 +6,4 @@ package tech.xinong.xnsm.pro.base.model;
 
 public enum Week{
 
-
 }

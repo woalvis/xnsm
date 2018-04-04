@@ -33,6 +33,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Enumeration;
 import java.util.List;
 
+import tech.xinong.xnsm.pro.base.application.XnsApplication;
+
 /**
  * Created by xiao on 2016/11/15.
  */
@@ -49,19 +51,17 @@ public class DeviceInfoUtil {
     }
 
     private static DisplayMetrics obtainDisMetri() {
-//        WindowManager wm = (WindowManager) YaZhiDaoApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
-//        DisplayMetrics outMetrics = new DisplayMetrics();
-//        wm.getDefaultDisplay().getMetrics(outMetrics);
-//        return outMetrics;
-        return null;
+        WindowManager wm = (WindowManager) XnsApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics;
     }
 
     public static float obtainDensity() {
-//        WindowManager wm = (WindowManager) YaZhiDaoApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
-//        DisplayMetrics outMetrics = new DisplayMetrics();
-//        wm.getDefaultDisplay().getMetrics(outMetrics);
-//        return outMetrics.density;
-        return 0;
+        WindowManager wm = (WindowManager) XnsApplication.getAppContext().getSystemService(Context.WINDOW_SERVICE);
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.density;
     }
 
     /**

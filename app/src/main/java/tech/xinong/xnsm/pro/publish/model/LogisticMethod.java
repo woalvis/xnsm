@@ -7,7 +7,12 @@ package tech.xinong.xnsm.pro.publish.model;
 public class LogisticMethod {
     private String id;
     private String tag;
+
+
     private String description;
+    private String name;
+    private String item;
+
 
     public String getId() {
         return id;
@@ -32,4 +37,21 @@ public class LogisticMethod {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
+    }
+
 }

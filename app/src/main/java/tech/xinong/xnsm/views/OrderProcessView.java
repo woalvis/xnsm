@@ -29,7 +29,7 @@ public class OrderProcessView extends View {
     private int backGroundColor;//背景色
 
     public void setStatus(int status) {
-        this.status = status;
+        this.status = status-1;
         invalidate();
     }
 
@@ -47,7 +47,7 @@ public class OrderProcessView extends View {
     public OrderProcessView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray ta = context.obtainStyledAttributes(attrs,R.styleable.OrderProcessView);
-        backGroundColor = ta.getColor(R.styleable.OrderProcessView_orderBackground,003344);
+        backGroundColor = ta.getColor(R.styleable.OrderProcessView_orderBackground,001122);
         ta.recycle();
         init(context);
     }
@@ -80,6 +80,10 @@ public class OrderProcessView extends View {
         for (int i=0;i<size;i++){
             if (i>status){
                 roundPaint.setColor(Color.WHITE);
+                textPaint.setColor(Color.WHITE);
+            }else {
+                //textPaint.setColor(getResources().getColor(R.color.uxin_call_sdk_in_come_answer_text_color));
+                textPaint.setColor(Color.GREEN);
             }
             if (i<6&&i>0) {
                 canvas.drawLine(width / 20 + (i - 1) * width / size + radius * 2, height / 2, width / 20 + (i) * width / size, height / 2, roundPaint);

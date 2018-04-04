@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">喜农市</string>
+    <string name="app_name">喜农市-测试版</string>
     <string name="toast_hello">你好，世界</string>
 
 
     <string name="discover">发现</string>
-    <string name="home">主页</string>
+    <string name="home">首页</string>
     <string name="sell">我要卖</string>
     <string name="publish">发布</string>
     <string name="buy">我要买</string>
@@ -16,6 +16,9 @@
     <string name="tabbar_message_text">消息</string>
     <string name="tabbar_discover_text">发现</string>
     <string name="tabbar_profile_text">我</string>
+
+    <string name="no_record">没有记录</string>
+
     <!-- 通用字符资源-->
     <string name="confirm">确认</string>>
     <string name="username">用户名：</string>
@@ -29,18 +32,57 @@
     <string name="edit">编辑</string>
     <string name="set_default">设置默认</string>
     <string name="save">保存</string>
+    <string name="quotes">行情</string>
+    <string name="hall">大厅</string>
+    <string name="follow">关注</string>
+    <string name="all_null">什么都没有哦~</string>
+    <string name="message_push">消息推送：</string>
+    <string name="state">状态</string>
+    <string name="goods_name">商品名称：</string>
+    <string name="origin">产地</string>
+    <string name="total_weight">总重量</string>
+    <string name="area">地区</string>
+    <string name="national">全国</string>
+    <string name="category">品类</string>
+    <string name="variety">品种</string>
+    <string name="order">排序</string>
+    <string name="buy_list">采购订单</string>
+    <string name="buy_now">立即买</string>
+    <string name="detailed_specifications">详细规格</string>
+    <string name="detailed_description_of_the_seller">卖家的详细描述</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="filled_out">填好了</string>
+    <string name="begin_time">上市时间</string>
+    <string name="end_time">下市时间</string>
+    <string name="please_choose">请选择</string>
+    <string name="choose_ok">选好了</string>
+    <string name="buy_requirements">采购要求</string>
+    <string name="delivery_address">送货地址</string>
+    <string name="logistics_method">物流方式</string>
+    <string name="buy_now2">立即购买</string>
+    <string name="seller">买家：</string>
+    <string name="app_tv_load">请稍候···</string>
+    <string name="sell_list">供应订单</string>
+    <string name="recommended_for_you">为您推荐</string>
+    <string name="confirm_price">申请报价</string>
+    <string name="select_product">选择品类</string>
+
 
     <!-- user模块所需的字符资源 -->
     <string name="my_orders">我的订单</string>
+    <string name="my_follow">我的关注</string>
+    <string name="my_info">注册信息</string>
     <string name="my_delivery_address">收货地址管理</string>
     <string name="help_center">帮助中心</string>
     <string name="csh">客服电话</string>
-    <string name="csh_number">010-xxxxxxxx</string>
+    <string name="online">在线客服</string>
+    <string name="user_identification">我要认证</string>
+    <string name="csh_number">010-58433029</string>
     <string name="about">关于</string>
     <string name="logout">退出登录</string>
     <string name="input_password">请输入密码</string>
     <string name="confirm_password">确认密码</string>
-    <string name="my_order">我的订单</string>
     <string name="phone">电话</string>
     <string name="name">姓名</string>
     <string name="edit_profile">编辑头像</string>
@@ -50,21 +92,23 @@
     <string name="location">所在地区：</string>
     <string name="address">详细地址：</string>
     <string name="postalCode">邮政编码：</string>
-    <string name="address_tag">地址昵称：</string>
+    <string name="address_tag">地址简称：</string>
 
     <string name="contact_hint">请输入联系人真实姓名</string>
     <string name="phone_number_hint">请输入手机号</string>
     <string name="location_hint">请输入联系人所在地区</string>
     <string name="address_hint">请输入联系人详细地址</string>
     <string name="postcode_hint">(选填)邮政编码</string>
-    <string name="address_tag_hint">请输入联系人详细地址</string>
+    <string name="address_tag_hint">请输入地址简称</string>
 
 
     <!-- 登录界面需要的字符资源-->
     <string name="phone_num_hint">请输入手机号</string>
     <string name="send_verify">发送验证短信</string>
     <string name="verify_code_hint">请输入验证码</string>
-    <string name="verify_helper">短信验证码默认通过短信形式发送给您显示为四位数字</string>
+    <string name="verify_helper">短信验证码默认通过短信形式发送给您显示为六位数字</string>
+    <string name="get_verify">获取验证码</string>
+    <string name="copy">复制</string>
 
 
     <string-array name="categories">
@@ -80,18 +124,22 @@
     <string name="publish_sell">发布供货</string>
     <string name="publish_buy">发布采购</string>
     <string name="my_publish">我的发布</string>
+    <string name="my_wallet">我的钱包</string>
 
     <!--发布供货消息-->
-    <string name="publish_sell_goods_name">货品名称</string>
+    <string name="publish_sell_goods_product">货品分类</string>
+    <string name="publish_sell_goods_spec">货品品种</string>
     <string name="publish_sell_goods_specification">货品规格</string>
+    <string name="publish_sell_goods_title">货品标题</string>
     <string name="publish_sell_goods_unit_price">货品单价</string>
     <string name="publish_sell_goods_in_stock">是否现货</string>
     <string name="publish_sell_goods_broker_allowed">是否代买</string>
     <string name="publish_sell_term_begin_date">供货时间</string>
     <string name="publish_sell_total_quantity">供货量</string>
+    <string name="publish_sell_freight">是否包邮</string>
     <string name="publish_sell_address">发货地址</string>
     <string name="publish_sell_origin">原产地</string>
-    <string name="publish_sell_logistic_method">物流方式</string>
+    <string name="publish_sell_logistic_method">服务支持</string>
     <string name="publish_sell_goods_notes">货品描述</string>
     <string name="publish_sell_goods_photos">货品照片</string>
     <string name="publish_sell_select_specification">点击选择货品规格</string>
@@ -104,16 +152,35 @@
     <string name="publish_sell_edit_total_quantity_hint">请输入供货量</string>
     <string name="publish_sell_select_address">点这里选择发货地址省市</string>
     <string name="publish_sell_select_origin">点这里选择原产地省市</string>
-    <string name="publish_sell_select_logistic_method">点这里选择物流方式</string>
+    <string name="publish_sell_select_logistic_method">点这里选择服务支持</string>
     <string name="publish_sell_select_goods_note">点这里添加货物描述</string>
     <string name="publish_sell_goods_note_hint">如：货品特色、种植情况、供应量或包装及杂费情况等，更详细准确的描述能吸引更多的采购商</string>
     <string name="publish_sell_goods_select_photos_helper">上传真实的图片（最多可上传9张）</string>
+
+    <!--发布采购-->
+    <string name="publish_buy_goods">采购货品</string>
+    <string name="publish_buy_spec">货品品种</string>
+    <string name="publish_buy_specification">货品规格</string>
+    <string name="publish_buy_amount">需求量</string>
+    <string name="publish_buy_price">期望价格</string>
+    <string name="publish_buy_origin">货源地</string>
+    <string name="publish_buy_period">采购频率</string>
+    <string name="publish_buy_additional_remarks">补充说明：</string>
+    <string name="publish_buy_remarks_hint">详细的描述采购要求，可以收到更满意的报价</string>
+    <string name="publish_buy_duration">采购时长</string>
+    <string name="publish_buy_address">收货地址</string>
+    <string name="publish_buy_contract">联系人</string>
+    <string name="publish_buy_tel">联系电话</string>
+    <string name="publish_buy_photos">（选填）最多上传4张图片</string>
+    <string name="publish_buy_submit">发布采购</string>
+
 
     <!-- 订单详情-->
     <string name="unit_price">单价</string>
     <string name="amount">数量</string>
     <string name="goods_price">货款</string>
     <string name="transport_cost">运费</string>
+    <string name="offer">优惠</string>
     <string name="total_price">订单总额:</string>
     <string name="order_helper"></string>
     <string name="order_buy_details">采购详情</string>
@@ -121,8 +188,9 @@
     <string name="order_shipping_address">送货地址</string>
     <string name="buyer_require">采购要求</string>
     <string name="order_create_time">订单创建时间</string>
-    <string name="order_pay_now">去付款</string>
+    <string name="order_pay_now">付款</string>
     <string name="cancel_order">取消订单</string>
+    <string name="order_no">订单编号</string>
 
     <string-array name="order_status">
         <item>未付款</item>
@@ -133,6 +201,67 @@
         <item>收款</item>
     </string-array>
 
+
+    <!--拍卖模块字符资源-->
+    <string name="pay_info">支付信息</string>
+    <string name="account_name">开户姓名</string>
+    <string name="bank_name">开户银行名称</string>
+    <string name="bank_account">银行账号</string>
+    <string name="deposit_helper">(保证金金额￥400)</string>
+    <string name="bid_now">去出价</string>
+    <string name="sign_up">去报名</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="supply_product_desc">可详细描述货运方式，供货量、货品特色等情况，详尽的描述有助于采购商更好的了解您的货品，提高销售。</string>
+
+
+    <!--采购详情-->
+    <string name="to_goods_category">采购品类</string>
+    <string name="to_goods_num">采购数量</string>
+    <string name="to_goods_origin">指定产地</string>
+    <string name="to_goods_time">要货时间</string>
+    <string name="to_goods_expect_price">期望价格</string>
+    <string name="to_goods_free_shipping">是否包邮</string>
+    <string name="to_goods_quality_requirement">品质要求</string>
+    <string name="add_receive_address">添加收货地址</string>
+
+
+    <string name="title">请选择时间</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="hour">时</string>
+    <string name="minute">分</string>
+    <string name="select_date">选择日期</string>
+    <string name="current_date">当前日期</string>
+    <string name="select_time">选择时间</string>
+    <string name="current_time">当前时间</string>
+    <string name="chat">聊生意</string>
+    <string name="tel">打电话</string>
+    <string name="product_price">单价</string>
+    <string name="number">数量</string>
+    <string name="order_service_way">服务方式</string>
+    <string name="service_way">服务方式（非必填）</string>
+    <string name="service_way_hint">点击选择服务方式</string>
+    <string name="leave_msg">留言</string>
+    <string name="no_must_info">（非必填）</string>
+    <string name="leave_msg_edit_hint">详细说明您对货品的要求等</string>
+    <string name="leave_msg_edit_tips">还可以输入50字</string>
+    <string name="btn_ok">确定</string>
+    <string name="order_amount_lb">总金额：</string>
+
+
+    <!--验证需要用的字符资源-->
+    <string name="org_verify_help_one">1、为保证证件真实性，图片要求为(营业执照复印件，加盖企业公章)的组合</string>
+    <string name="org_verify_help_two">2、上传证件需要和所发短信相符</string>
+    <string name="org_verify_help_three">3、文件支持png、jpg、bmp、jpeg格式</string>
+    <string name="id_verify_text">请您将身份证的正反面进行拍摄上传</string>
+    <string name="title_activity_pay_pwd">PayPwdActivity</string>
+    <string name="payment_success">支付成功</string>
+    <string name="payment_success_tip">您已成功付款！</string>
+    <string name="account_of_payment_tip">支付金额：</string>
+    <string name="order_id_tip">订单编号：</string>
+    <string name="view_order">查看订单</string>
+    <string name="back_home_index">返回首页</string>
 </resources>

@@ -5,6 +5,8 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:order="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_order_detail"
     android:layout_width="match_parent"
@@ -13,21 +15,18 @@
     android:weightSum="1"
     tools:context="tech.xinong.xnsm.pro.buy.view.OrderDetailActivity">
 
+<!--
+    <include layout="@layout/navigation_default"></include>-->
 
-    <include layout="@layout/navigation_default"></include>
+    <include layout="@layout/toolbar_green"></include>
 
-    <tech.xinong.xnsm.views.OrderProcessView
-        android:id="@+id/order_seller_order_process"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        order:orderBackground="@color/green_select_btn_color"
-        />
+
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
         >
 
         <LinearLayout
@@ -35,18 +34,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+
+            <tech.xinong.xnsm.views.OrderProcessView
+                android:id="@+id/order_seller_order_process"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                order:orderBackground="@color/primaryGreen"
+                android:visibility="gone"
+                />
+
+            <RelativeLayout
+                android:id="@+id/rl_state"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:visibility="visible"
+                android:gravity="center"
+                android:background="@color/gray1"
+                >
+                <TextView
+                    android:id="@+id/tv_state"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x24"
+                    android:text="已取消"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
             <LinearLayout
+                android:id="@+id/ll_seller"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:paddingLeft="20dp">
-
-                <ImageView
-                    android:id="@+id/order_seller_head_portrait"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/ic_launcher" />
+                android:paddingLeft="20dp"
+                android:padding="@dimen/x8">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -57,7 +78,7 @@
                     android:id="@+id/order_seller_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="卖家：" />
+                    android:text="" />
             </LinearLayout>
 
             <View
@@ -70,16 +91,17 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:padding="10dp">
 
-                <ImageView
+                <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/order_product_pic"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@mipmap/category_vegetables" />
+                    fresco:placeholderImage="@mipmap/default_pic_bg" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -121,13 +143,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/unit_price" />
 
-
                 <TextView
                     android:id="@+id/order_unit_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="123asdf"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
 
@@ -148,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="123asdf"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
 
@@ -169,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="123asdf"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
 
@@ -190,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="123asdf"
+                    android:text=""
                     android:textColor="@color/colorPrimary" />
             </RelativeLayout>
 
@@ -201,13 +222,39 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/offer" />
+
+
+                <TextView
+                    android:id="@+id/order_offer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text=""
+                    android:textColor="@color/colorPrimary" />
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10dp">
+                <TextView
+
                     android:id="@+id/total_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="akdjfakjdf" />
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/x16"
+                    android:text="2000" />
 
                 <TextView
+                    android:layout_marginTop="@dimen/x4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/total_price"
@@ -238,11 +285,11 @@
                     android:padding="10dp"
                     android:text="@string/order_logistic_method" />
 
-                <TextView
+                <com.zhy.view.flowlayout.TagFlowLayout
                     android:id="@+id/order_logistic_method"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp" />
+                    android:padding="@dimen/x8"/>
             </LinearLayout>
 
             <RelativeLayout
@@ -253,8 +300,16 @@
                     android:id="@+id/order_shipping_address_show"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
+                    android:padding="@dimen/x8"
                     android:text="@string/order_shipping_address" />
+
+                <TextView
+                    android:id="@+id/tv_buyer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/order_shipping_address_show"
+                    android:padding="@dimen/x8"
+                    android:text="收货人" />
 
                 <TextView
 
@@ -262,8 +317,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/order_shipping_address_show"
-                    android:padding="10dp"
-                    android:text="jasdjfkjadsf" />
+                    android:padding="@dimen/x8"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/order_buyer_info"
@@ -272,8 +327,25 @@
                     android:layout_below="@+id/order_shipping_address_show"
                     android:layout_toEndOf="@+id/order_shipping_address_show"
                     android:layout_toRightOf="@+id/order_shipping_address_show"
-                    android:padding="10dp"
+                    android:padding="@dimen/x8"
                     android:text="buy" />
+
+                <TextView
+                    android:id="@+id/tv_buyer1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_buyer"
+                    android:padding="@dimen/x8"
+                    android:text="联系方式" />
+
+                <TextView
+                    android:id="@+id/tv_phone"
+                    android:layout_below="@id/order_buyer_info"
+                    android:layout_toRightOf="@id/tv_buyer1"
+                    android:padding="@dimen/x8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
 
             </RelativeLayout>
 
@@ -291,7 +363,7 @@
                     android:id="@+id/buyer_require"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="10dp" />
+                    android:padding="@dimen/x8"/>
 
             </LinearLayout>
 
@@ -300,6 +372,26 @@
                 android:layout_height="15dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/done_text_color_disabled"></View>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/order_no" />
+
+
+                <TextView
+                    android:id="@+id/order_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -316,20 +408,32 @@
                     android:id="@+id/order_create_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/order_create_time" />
+                    android:text="" />
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/order_pay_now_bt"
+
+
+    <LinearLayout
+        android:id="@+id/ll_op"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="15dp"
-        android:text="@string/order_pay_now"
-        android:textColor="@color/white" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/order_pay_now_bt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_bg_green"
+            android:layout_margin="@dimen/x6"
+            android:gravity="center"
+            android:padding="@dimen/x16"
+            android:text="@string/order_pay_now"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
 </LinearLayout>

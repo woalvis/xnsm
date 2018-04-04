@@ -7,18 +7,36 @@ import tech.xinong.xnsm.pro.base.model.BaseBean;
  */
 
 public class BuyOrderModel extends BaseBean {
-    private String address;
+    private String addressId;
+    private String listingId;
     private int amount;
-    private String buyerRequire;
-    private String logisticMethodTag;
-    private BaseBean sellerListing;
+    private String provideSupport;
+    private String buyerMsg;
 
-    public String getAddress() {
-        return address;
+    public String getQuotationId() {
+        return quotationId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setQuotationId(String quotationId) {
+        this.quotationId = quotationId;
+    }
+
+    private String quotationId;
+
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getListingId() {
+        return listingId;
+    }
+
+    public void setListingId(String listingId) {
+        this.listingId = listingId;
     }
 
     public int getAmount() {
@@ -29,27 +47,19 @@ public class BuyOrderModel extends BaseBean {
         this.amount = amount;
     }
 
-    public String getBuyerRequire() {
-        return buyerRequire;
+    public String getProvideSupport() {
+        return provideSupport;
     }
 
-    public void setBuyerRequire(String buyerRequire) {
-        this.buyerRequire = buyerRequire;
+    public void setProvideSupport(String provideSupport) {
+        this.provideSupport = provideSupport;
     }
 
-    public String getLogisticMethodTag() {
-        return logisticMethodTag;
+    public String getBuyerMsg() {
+        return buyerMsg;
     }
 
-    public void setLogisticMethodTag(String logisticMethodTag) {
-        this.logisticMethodTag = logisticMethodTag;
-    }
-
-    public BaseBean getSellerListing() {
-        return sellerListing;
-    }
-
-    public void setSellerListing(BaseBean sellerListing) {
-        this.sellerListing = sellerListing;
+    public void setBuyerMsg(String buyerMsg) {
+        this.buyerMsg = buyerMsg;
     }
 }

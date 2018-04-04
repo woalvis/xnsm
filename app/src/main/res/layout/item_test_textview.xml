@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_show"
+    android:layout_width="@dimen/x60"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/x4"
+    android:background="@drawable/textview_border"
+    android:gravity="center"
+    android:paddingBottom="@dimen/x6"
+    android:paddingLeft="@dimen/x12"
+    android:paddingRight="@dimen/x12"
+    android:paddingTop="@dimen/x6"
+    android:text="" />

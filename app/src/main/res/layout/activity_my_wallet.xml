@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/toolbar_white"></include>
+
+    <RelativeLayout
+        android:background="@mipmap/wallet_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x140">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="账户资金"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/x18"
+            android:textSize="@dimen/x16"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/textView3" />
+
+
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="@dimen/x16"
+            android:text="￥0.00"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_freeze"
+            android:layout_below="@id/tv_balance"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="冻结金额：￥888.00"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/tv_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/white_line_bg"
+            android:text="提现"
+            android:paddingTop="@dimen/x4"
+            android:paddingBottom="@dimen/x4"
+            android:paddingLeft="@dimen/x8"
+            android:paddingRight="@dimen/x8"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/wallet_bill_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/x16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/x6"
+            android:text="账单"
+            android:textColor="@color/black_404040"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            ></View>
+        <TextView
+            android:text="收支记录"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x4"
+            />
+        <ImageView
+            android:layout_marginTop="@dimen/x2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/arrow_right_more" />
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+
+    <LinearLayout
+        android:id="@+id/wallet_pwd_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/x16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/x6"
+            android:text="钱包密码"
+            android:textColor="@color/black_404040"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            ></View>
+        <TextView
+            android:text="设置/重置/修改钱包密码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x4"
+            />
+        <ImageView
+            android:layout_marginTop="@dimen/x2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/arrow_right_more" />
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+
+    <LinearLayout
+        android:id="@+id/wallet_gathering_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="@dimen/x16">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/x6"
+            android:text="收款账号"
+            android:textColor="@color/black_404040"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:layout_weight="1"
+            ></View>
+        <TextView
+            android:text="支付宝账号"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x4"
+            />
+        <ImageView
+            android:layout_marginTop="@dimen/x2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@mipmap/arrow_right_more" />
+    </LinearLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+
+
+</LinearLayout>

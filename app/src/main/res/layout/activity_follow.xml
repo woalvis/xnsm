@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/toolbar_white"></include>
+
+
+
+    <LinearLayout
+        android:id="@+id/user_my_follow_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hint_text_color"
+        android:visibility="visible"
+        android:paddingTop="@dimen/x8"
+        android:paddingBottom="@dimen/x8"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x10"
+            android:text="已关注:" />
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/flowlayout_favs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.zhy.view.flowlayout.TagFlowLayout>
+        <!--<View-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--&gt;</View>-->
+               <!--<ImageView-->
+            <!--android:id="@+id/im_delete"-->
+            <!--android:layout_marginRight="@dimen/x8"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/delete"/>-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x10"
+            android:text="农产品" />
+
+        <include layout="@layout/line_grey"></include>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyc_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+
+    </View>
+
+    <!--<Button-->
+        <!--android:id="@+id/bt_edit_follow"-->
+        <!--android:layout_margin="@dimen/x8"-->
+        <!--style="@style/bt_submit"-->
+        <!--android:text="编辑关注"-->
+        <!--/>-->
+</LinearLayout>

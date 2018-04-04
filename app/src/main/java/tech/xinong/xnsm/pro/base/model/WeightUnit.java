@@ -95,4 +95,15 @@ public enum WeightUnit implements Unit{
     public BigDecimal convert(BigDecimal srcWeight, WeightUnit srcUnit) {
         throw new AbstractMethodError();
     }
+
+    public static WeightUnit getWeightUnit(String name){
+        for (WeightUnit unit : WeightUnit.values()){
+            if (unit.getDisplayName().equals(name)){
+                return unit;
+            }
+        }
+
+        return null;
+    }
+
 }

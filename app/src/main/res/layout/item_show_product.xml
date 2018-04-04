@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_show"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_marginLeft="@dimen/x8"
+    android:layout_marginRight="@dimen/x8"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/im_head"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x80"
+            android:background="#00000000"
+            fresco:actualImageScaleType="fitCenter"
+            app:placeholderImage="@mipmap/default_pic_bg" />
+
+        <ImageView
+            android:id="@+id/im_select"
+            android:layout_width="@dimen/x12"
+            android:layout_height="@dimen/x12"
+            android:src="@drawable/date_default"
+            android:layout_marginLeft="@dimen/x70"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aaaaa" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="aaaaa" />
+</LinearLayout>

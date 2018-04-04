@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="订单编号" />
+        <TextView
+            android:id="@+id/tv_order_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="345678909876543456789876" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_logistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8"
+            android:text="物流方式"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1">
+
+        </View>
+        <TextView
+            android:id="@+id/tv_logistics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8"
+            android:text="请输入"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_com_person"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_com_person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8"
+            android:text=""
+            />
+
+        <EditText
+            android:id="@+id/et_com_person"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8"
+            android:textSize="@dimen/x12"
+            android:gravity="right"
+            />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_logistic_no"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_logistic_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x8"
+            android:text=""
+            />
+        <EditText
+            android:id="@+id/et_logistic_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:textSize="@dimen/x12"
+            android:padding="@dimen/x8"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:padding="@dimen/x8"
+        android:text="物流凭证（请上传并保留发货凭证，以避免纠纷）"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <tech.xinong.xnsm.views.GridViewForScrollView
+        android:id="@+id/gv_goods_photos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numColumns="4">
+    </tech.xinong.xnsm.views.GridViewForScrollView>
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </View>
+    <TextView
+        android:layout_margin="@dimen/x8"
+        android:id="@+id/tv_submit"
+        android:text="确认发货"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:background="@color/primaryGreen"
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

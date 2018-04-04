@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tech.xinong.xnsm.views.LoadView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/downLoadStatusBox"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+    android:padding="8dp"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/downLoadStatusPbBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/dialog_backgroud_shape"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <ProgressBar
+            android:id="@+id/downLoadLoading"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:indeterminateDrawable="@drawable/app_refresh_progress"/>
+
+        <TextView
+            android:id="@+id/downLoad_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/app_tv_load"
+            android:textColor="@color/white"
+            android:textSize="17sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/downLoadErrMsgBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/downLoadErrText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15.0dp"/>
+
+        <Button
+            android:id="@+id/downLoadbtnListLoadErr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"/>
+    </LinearLayout>
+
+</tech.xinong.xnsm.views.LoadView>

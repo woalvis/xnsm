@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:layout_marginTop="100dp"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#671283"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-        app:srcCompat="@drawable/deliver_gray_one_px"
-        android:id="@+id/imageView3" />
+        android:layout_height="86px"
+        android:layout_marginTop="26px"
+        android:background="#ffffffff">
+
+        <ImageView
+            android:id="@+id/id_tv_add"
+            android:layout_width="34px"
+            android:layout_height="34px"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="276px"
+            android:layout_marginTop="26px"
+            android:src="@mipmap/avatar_img"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26px"
+            android:layout_toRightOf="@id/id_tv_add"
+            android:text="新增旅客"
+            android:textColor="#1fb6c4"
+            android:textSize="32px"
+            />
+    </RelativeLayout>
+
+
+
+
+<ImageView
+
+    android:background="@color/red"
+    android:src="@mipmap/user_bg"
+    android:scaleType="fitXY"
+    android:layout_width="@dimen/x180"
+    android:layout_height="@dimen/x180" />
+
+
 </LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/popup_set_period_text"
+        android:text="按价格从低到高排序"
+        android:id="@+id/tv_low_to_high"
+        />
+
+    <include layout="@layout/line_grey"></include>
+
+    <TextView
+        style="@style/popup_set_period_text"
+        android:text="按价格从高到低排序"
+        android:id="@+id/tv_high_to_low"
+        />
+
+    <include layout="@layout/line_grey"></include>
+
+    <!--<TextView-->
+        <!--style="@style/popup_set_period_text"-->
+        <!--android:text="每月"-->
+        <!--android:id="@+id/tv_month"-->
+        <!--/>-->
+
+</LinearLayout>

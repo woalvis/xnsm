@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:alpha="50"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="118dp"
+        android:background="@drawable/dialog_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="退款"
+            android:textColor="@color/black_404040"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/loginSeperate"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_title"
+            android:background="#b9bcb1"/>
+
+        <RelativeLayout
+            android:id="@+id/middleRela"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginSeperate"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_dialog_mess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="left"
+                android:text="您尚未登录，是否登录?"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+
+            <EditText
+                android:id="@+id/et"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/dialog_edit_bg"
+                android:gravity="start"
+                android:padding="@dimen/album_dp_10"
+                android:text=""
+                android:hint="请您输入退款原因"
+                android:textColor="@color/black_404040" />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/middleRela"
+            android:layout_centerHorizontal="true"
+            android:padding="@dimen/x10"
+            android:text="退款会产生0.6%的手续费，由买家承担"
+            android:textColor="@color/red_btn_bg_color" />
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/tv_content"
+            android:background="#b9bcb1" />
+
+        <LinearLayout
+            android:id="@+id/login_BottomBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_content"
+            android:layout_centerHorizontal="true"
+
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/but_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_button_press_bg_selector"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="取消"
+                android:textColor="@color/black_404040"
+                android:textSize="16sp" />
+
+            <View
+                android:id="@+id/loginHidden_seperate"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#b9bcb1" />
+
+            <TextView
+                android:id="@+id/loginHidden"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_button_press_bg_selector"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="隐藏"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#b9bcb1" />
+
+            <TextView
+                android:id="@+id/bt_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/dialog_button_press_bg_selector"
+                android:gravity="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="确定"
+                android:textColor="@color/black_404040"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

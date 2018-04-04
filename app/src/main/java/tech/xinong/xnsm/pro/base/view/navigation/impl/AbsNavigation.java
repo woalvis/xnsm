@@ -71,7 +71,9 @@ public abstract class AbsNavigation<P extends AbsNavigation.Builder.NavigationPa
         public static class NavigationParams{
             public Context mContext;
             public ViewGroup parent;
+
             public NavigationParams(Context context,ViewGroup parent){
+
                 mContext = context;
                 this.parent = parent;
             }

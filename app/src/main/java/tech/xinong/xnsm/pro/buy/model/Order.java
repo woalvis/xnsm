@@ -1,157 +1,75 @@
 package tech.xinong.xnsm.pro.buy.model;
 
-import java.io.File;
+import java.math.BigDecimal;
 
-import tech.xinong.xnsm.pro.base.model.UnitQuantity;
-import tech.xinong.xnsm.pro.publish.model.PublishSellInfoModel;
-import tech.xinong.xnsm.pro.user.model.UserModel;
+import tech.xinong.xnsm.pro.base.model.BaseDTO;
+import tech.xinong.xnsm.pro.base.model.WeightUnit;
 
 /**
  *
  * Created by xiao on 2016/12/6.
  */
 
-public class Order {
-    private String id;
-    private UserModel buyer;
-    private UserModel seller;
-    private ProductModel product;
-    private PublishSellInfoModel sellerListing;
-    private int unitPrice;
-    private UnitQuantity quantityUnit;
-    private int amount;
-    private double transportCost;
-    private double totalPrice;
-    private String origin;
-    private String specDesc;
+public class Order extends BaseDTO{
+
+    private WeightUnit weightUnit;
     private OrderStatus status;
-    private String address;
-    private String logisticMethodTag;
-    private File payFile;
-    private String buyerRequire;//买家需求
-    private String remarks;//备注
+    private BigDecimal unitPrice;
+    private String sellerName;
+    private BigDecimal offer;
+    private BaseDTO seller;
+    private String buyerName;
+    private BigDecimal amount;
+    private String title;
+    private String orderNo;
+    private BaseDTO buyer;
+    private BigDecimal freight;
+    private BigDecimal totalPrice;
+    private int refundCount;
+    private Boolean freeShipping;
 
-//    public  enum Status {
-//        UNPAID("未付款"), PAYMENT_IN("付款处理中"),PAYED("已付款"),PAYFAIL("付款失败"),REFUND("已退款"),
-//        SHIP_GOODS("发货"),RECEIVE_GOODS("收货"),RECEIVE_MONEY("收款");
-//
-//
-//        private String desc;
-//
-//        private Status(String desc) {
-//            this.desc = desc;
-//        }
-//
-//        public static Status getByCode(String name){
-//            Status[] enumArr =  Status.values();
-//            for(Status status:enumArr){
-//                if(status.toString().equals(name)){
-//                    return status;
-//                }
-//            }
-//            return null;
-//        }
-//        public String getDesc() {
-//            return desc;
-//        }
-//    }
-//
-
-
-    public String getId() {
-        return id;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public UserModel getBuyer() {
-        return buyer;
+    private String updateTime;
+
+    public Boolean getFreeShipping() {
+        return freeShipping;
     }
 
-    public void setBuyer(UserModel buyer) {
-        this.buyer = buyer;
+    public void setFreeShipping(Boolean freeShipping) {
+        this.freeShipping = freeShipping;
     }
 
-    public UserModel getSeller() {
-        return seller;
+    public int getRefundCount() {
+        return refundCount;
     }
 
-    public void setSeller(UserModel seller) {
-        this.seller = seller;
+    public void setRefundCount(int refundCount) {
+        this.refundCount = refundCount;
     }
 
-    public ProductModel getProduct() {
-        return product;
+    public String getCoverImg() {
+        return coverImg;
     }
 
-    public void setProduct(ProductModel product) {
-        this.product = product;
+    public void setCoverImg(String coverImg) {
+        this.coverImg = coverImg;
     }
 
-    public PublishSellInfoModel getSellerListing() {
-        return sellerListing;
+    private String coverImg;
+
+    public WeightUnit getWeightUnit() {
+        return weightUnit;
     }
 
-    public void setSellerListing(PublishSellInfoModel sellerListing) {
-        this.sellerListing = sellerListing;
-    }
-
-    public int getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(int unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public UnitQuantity getQuantityUnit() {
-        return quantityUnit;
-    }
-
-    public void setQuantityUnit(String quantityUnit) {
-        this.quantityUnit = UnitQuantity.getByName(quantityUnit);
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public double getTransportCost() {
-        return transportCost;
-    }
-
-    public void setTransportCost(double transportCost) {
-        this.transportCost = transportCost;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    public String getSpecDesc() {
-        return specDesc;
-    }
-
-    public void setSpecDesc(String specDesc) {
-        this.specDesc = specDesc;
+    public void setWeightUnit(WeightUnit weightUnit) {
+        this.weightUnit = weightUnit;
     }
 
     public OrderStatus getStatus() {
@@ -162,44 +80,91 @@ public class Order {
         this.status = status;
     }
 
-    public String getAddress() {
-        return address;
+    public BigDecimal getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    public String getLogisticMethodTag() {
-        return logisticMethodTag;
+    public String getSellerName() {
+        return sellerName;
     }
 
-    public void setLogisticMethodTag(String logisticMethodTag) {
-        this.logisticMethodTag = logisticMethodTag;
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
-    public File getPayFile() {
-        return payFile;
+    public BigDecimal getOffer() {
+        return offer;
     }
 
-    public void setPayFile(File payFile) {
-        this.payFile = payFile;
+    public void setOffer(BigDecimal offer) {
+        this.offer = offer;
     }
 
-    public String getBuyerRequire() {
-        return buyerRequire;
+    public BaseDTO getSeller() {
+        return seller;
     }
 
-    public void setBuyerRequire(String buyerRequire) {
-        this.buyerRequire = buyerRequire;
+    public void setSeller(BaseDTO seller) {
+        this.seller = seller;
     }
 
-    public String getRemarks() {
-        return remarks;
+    public String getBuyerName() {
+        return buyerName;
     }
 
-    public void setRemarks(String remarks) {
-        this.remarks = remarks;
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
     }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    public BaseDTO getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(BaseDTO buyer) {
+        this.buyer = buyer;
+    }
+
+    public BigDecimal getFreight() {
+        return freight;
+    }
+
+    public void setFreight(BigDecimal freight) {
+        this.freight = freight;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }

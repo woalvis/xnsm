@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="tech.xinong.xnsm.pro.user.view.VerificationActivity">
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="10dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardMaxElevation="10dp"
+        app:cardElevation="5dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true"
+        android:layout_margin="@dimen/x8">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/x12">
+
+            <ImageView
+                android:id="@+id/im_verify"
+                android:layout_width="@dimen/x72"
+                android:layout_height="@dimen/x54"
+                android:src="@mipmap/uncretified" />
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginTop="@dimen/x4"
+                android:layout_toRightOf="@id/im_verify"
+                android:text="个人认证"
+                android:textColor="@color/black_404040"
+                android:textSize="@dimen/x14" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/tv"
+                android:text="已认证"
+                android:textColor="@color/orange" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginTop="@dimen/x4"
+                android:layout_toRightOf="@id/im_verify"
+                android:text="请您尽快完成认证，以便更多的操作"
+                android:textSize="@dimen/x10" />
+
+            <LinearLayout
+                android:layout_below="@id/im_verify"
+                android:layout_marginBottom="@dimen/x8"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="@dimen/x16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:padding="@dimen/x8"
+                    android:id="@+id/tv_info"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/alert_red"
+                    android:text="renzhengdexinxi"
+                    android:visibility="gone"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_verify"
+                    style="@style/tv_button_green"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="立即认证" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_white"></include>
+
+    <TextView
+        android:id="@+id/tv_seller_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8"
+        android:text="卖家：我来也" />
+
+    <include layout="@layout/line_grey"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/im_product_img"
+            android:layout_width="@dimen/x75"
+            android:layout_height="@dimen/x75" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/im_product_img"
+            android:layout_alignTop="@id/im_product_img"
+            android:layout_toRightOf="@id/im_product_img"
+            android:orientation="vertical"
+            android:padding="@dimen/x4">
+
+            <TextView
+
+                android:id="@+id/tv_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_product_spec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/line_grey"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/x8">
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.0元/斤"
+            android:textColor="@color/orange" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_price"
+            android:text=" x 19998" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="￥19999980.0元"
+            android:textColor="@color/orange" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/line_grey"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x8"></include>
+
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:layout_marginTop="@dimen/x18"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="采购需求" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="@dimen/x8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="送货地址" />
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+        <TextView
+            android:id="@+id/tv_change_address"
+            android:text="更改地址"
+            style="@style/tv_button" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        ></View>
+
+    <TextView
+        android:gravity="center"
+        android:background="@color/alert_red"
+        android:text="立即购买"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:padding="@dimen/x8"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

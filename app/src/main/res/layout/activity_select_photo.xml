@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:background="#000000"
+            android:id="@+id/img_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/select_img_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/choose_camera"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/photo_btn_bg"
+            android:text="摄像头"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/choose_gallery"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:background="@drawable/library_btn_bg"
+            android:text="相册"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"></View>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:text="取消"
+            android:padding="10dp"
+            android:id="@+id/tv_cancel"
+            android:textColor="@drawable/test_color_selector"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/photo_show"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone"/>
+
+</FrameLayout>
