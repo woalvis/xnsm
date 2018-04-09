@@ -100,6 +100,12 @@ public class SubmitPriceActivity extends BaseActivity implements ListShowAdapter
                     T.showShort(mContext,"价格填写有误");
                     return;
                 }
+
+
+                if (tv_goods_address.getText().toString().equals("点击选择")||TextUtils.isEmpty(tv_goods_address.getText().toString())){
+                    T.showShort(mContext,"请您选择货品所在地");
+                    return;
+                }
                 quotation.setBuyerListingId(buyerListing.getId());
                 quotation.setSellerListingId(listings.get(currentPosition).getId());
                 quotation.setComment(et_supply_product.getText().toString());

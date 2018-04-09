@@ -58,17 +58,14 @@
         />
 
 
-
     <TextView
         android:id="@+id/tv_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/help"
-        android:layout_toEndOf="@+id/tv_quote_num"
-        android:layout_toRightOf="@+id/tv_quote_num"
-        android:textColor="@color/orange"
-        android:layout_marginTop="@dimen/x18"
-        android:text="TextView" />
+        android:layout_alignRight="@+id/tv_amount"
+        android:layout_below="@+id/tv_product_name"
+        android:text="TextView"
+        android:textColor="@color/orange" />
 
 
     <TextView

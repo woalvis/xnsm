@@ -94,7 +94,10 @@
 
 
     <LinearLayout
-        android:padding="@dimen/x8"
+        android:paddingLeft="@dimen/x8"
+        android:paddingRight="@dimen/x8"
+        android:paddingTop="@dimen/x12"
+        android:paddingBottom="@dimen/x12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -108,7 +111,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="河北省张家口市>"
+            android:textColor="@color/primaryGreen"
+            android:text=""
             />
 
 
@@ -126,6 +130,7 @@
         android:id="@+id/et_supply_product"
         android:layout_width="match_parent"
         android:padding="@dimen/x8"
+        android:textSize="@dimen/x10"
         android:layout_height="@dimen/x100"
         android:hint="@string/supply_product_desc"
         />

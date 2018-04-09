@@ -27,6 +27,15 @@ public class Order extends BaseDTO{
     private BigDecimal totalPrice;
     private int refundCount;
     private Boolean freeShipping;
+    private BigDecimal xnFees;
+
+    public BigDecimal getXnFees() {
+        return xnFees;
+    }
+
+    public void setXnFees(BigDecimal xnFees) {
+        this.xnFees = xnFees;
+    }
 
     public String getUpdateTime() {
         return updateTime;

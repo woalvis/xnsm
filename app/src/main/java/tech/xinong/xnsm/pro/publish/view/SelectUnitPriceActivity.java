@@ -12,6 +12,8 @@ import com.zyyoona7.lib.EasyPopup;
 import com.zyyoona7.lib.HorizontalGravity;
 import com.zyyoona7.lib.VerticalGravity;
 
+import java.math.BigDecimal;
+
 import tech.xinong.xnsm.R;
 import tech.xinong.xnsm.pro.base.view.BaseActivity;
 import tech.xinong.xnsm.util.T;
@@ -68,9 +70,7 @@ public class SelectUnitPriceActivity extends BaseActivity {
         mPopup.getView(R.id.jin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_unit.setText("元/斤");
-                min_quantity_str.setText("斤起批");
-                unitStr = "斤";
+                selectUnit("斤");
                 mPopup.dismiss();
             }
         });
@@ -78,9 +78,7 @@ public class SelectUnitPriceActivity extends BaseActivity {
         mPopup.getView(R.id.gongjin).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_unit.setText("元/公斤");
-                unitStr = "公斤";
-                min_quantity_str.setText("公斤起批");
+                selectUnit("公斤");
                 mPopup.dismiss();
             }
         });
@@ -88,9 +86,7 @@ public class SelectUnitPriceActivity extends BaseActivity {
         mPopup.getView(R.id.dun).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                select_unit.setText("元/吨");
-                unitStr = "吨";
-                min_quantity_str.setText("吨起批");
+                selectUnit("吨");
                 mPopup.dismiss();
             }
         });
@@ -100,6 +96,12 @@ public class SelectUnitPriceActivity extends BaseActivity {
     }
 
 
+    private void selectUnit(String str){
+        select_unit.setText("元/"+str);
+        min_quantity_str.setText(str+"起批");
+        unitStr = str;
+    }
+
     @Override
     public String setToolBarTitle() {
         return "货品价格";
@@ -107,6 +109,17 @@ public class SelectUnitPriceActivity extends BaseActivity {
 
     @Override
     public void initData() {
-
+        BigDecimal unitPriceText = (BigDecimal) getIntent().getSerializableExtra("unitPrice");
+        BigDecimal minQuantityText = (BigDecimal) getIntent().getSerializableExtra("minQuantity");
+        String unitStr = getIntent().getStringExtra("unit");
+        if (unitPriceText!=null){
+            unitPrice.setText(unitPriceText.doubleValue()+"");
+        }
+        if(minQuantityText!=null){
+            minQuantity.setText(minQuantityText.doubleValue()+"");
+        }
+        if (!TextUtils.isEmpty(unitStr)){
+            selectUnit(unitStr);
+        }
     }
 }

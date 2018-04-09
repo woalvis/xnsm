@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -26,6 +25,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ import tech.xinong.xnsm.pro.buy.presenter.BuyPresenter;
 import tech.xinong.xnsm.pro.buy.view.GoodsDetailActivity;
 import tech.xinong.xnsm.pro.buy.view.SearchActivity;
 import tech.xinong.xnsm.pro.home.model.AdsModel;
+import tech.xinong.xnsm.pro.home.model.NetworkImageHolderView;
 import tech.xinong.xnsm.pro.home.model.RecommendedSellModel;
 import tech.xinong.xnsm.pro.home.view.abs.HomeView;
 import tech.xinong.xnsm.pro.home.view.adapter.RecommendAdapter;
@@ -60,7 +62,6 @@ import tech.xinong.xnsm.util.L;
 import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.imageloder.ImageLoader;
 import tech.xinong.xnsm.views.ADTextView;
-import tech.xinong.xnsm.views.CircleIndicator;
 import tech.xinong.xnsm.views.InsideViewPager;
 import tech.xinong.xnsm.views.ListViewForScrollView;
 import tech.xinong.xnsm.views.PagerScrollView1;
@@ -74,8 +75,8 @@ import tech.xinong.xnsm.views.entity.ADEntity;
 public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implements HomeView, SwipeRefreshLayout.OnRefreshListener, ImageLoader.DownloadSuccessListener, RecommendAdapter.OnItemClickListener {
 
     private BuyPresenter buyPresenter;
-    private ViewPager viewPagerBanner;
-    private CircleIndicator indianCalendarBanner;
+//    private ViewPager viewPagerBanner;
+//    private CircleIndicator indianCalendarBanner;
     // private GridViewForScrollView gridHomePush;
     private ImageView btMyOrders;//订单
     private ImageView btMyQuotes;//行情
@@ -111,6 +112,7 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
     private float mLastX;
     private int reCommendTotalPages;
     private int recommendCurrentPage;
+    private ConvenientBanner convenientBanner;
 
     //创建对象,绑定presenter
     @Override
@@ -135,9 +137,8 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
         scrollView = contentView.findViewById(R.id.scroll);
         recommendProductLv = view.findViewById(R.id.grid_home_push);
         recommendSellerLv =  view1.findViewById(R.id.grid_home_push);
-
-        viewPagerBanner =  contentView.findViewById(R.id.view_pager);
-
+        convenientBanner = contentView.findViewById(R.id.convenientBanner);
+//        viewPagerBanner =  contentView.findViewById(R.id.view_pager);
         home_search = contentView.findViewById(R.id.home_search);
         home_search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +195,7 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
             homeRecommendTabs.addTab(homeRecommendTabs.newTab().setText(title));
         }
 
-        indianCalendarBanner = contentView.findViewById(R.id.circle_indicator);
+//        indianCalendarBanner = contentView.findViewById(R.id.circle_indicator);
         home_recommend_imgs = contentView.findViewById(R.id.home_recommend_imgs);
 
         scrollView.setOnTouchListener(new View.OnTouchListener() {
@@ -380,6 +381,7 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.item_lv_recommend, null);
         recommendProductLv = view.findViewById(R.id.grid_home_push);
         recommendSellerLv =  view1.findViewById(R.id.grid_home_push);
+
         List<View> views = new ArrayList<>();
         initRecommendedSellerAdapter();
         initRecommendAdapter();
@@ -453,126 +455,141 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
 
                 ads = JSON.parseArray(result, AdsModel.class);
                 List<View> views = new ArrayList<>();
+                List<String> imgUrls = new ArrayList<>();
                 if (ads.size()>0){
                     default_img.setVisibility(View.GONE);
-                    viewPagerBanner.setVisibility(View.VISIBLE);
+                    convenientBanner.setVisibility(View.VISIBLE);
                     for (int i = 0; i < ads.size(); i++) {
-                        View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner, null, false);
-                        SimpleDraweeView sdv = view.findViewById(R.id.im_banner);
-                        sdv.setImageURI(ImageUtil.getImgUrl(ads.get(i).getCoverImg()));
-                        final int finalI = i;
-                        sdv.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                H5Activity.skip(mContext,ads.get(finalI).getContentUrl(),ads.get(finalI).getCustomerId());
-                            }
-                        });
-                        views.add(view);
+                        imgUrls.add(ImageUtil.getImgUrl(ads.get(i).getCoverImg()));
+//                        View view = LayoutInflater.from(mContext).inflate(R.layout.item_banner, null, false);
+//                        SimpleDraweeView sdv = view.findViewById(R.id.im_banner);
+//                        sdv.setImageURI(ImageUtil.getImgUrl(ads.get(i).getCoverImg()));
+//                        final int finalI = i;
+//                        sdv.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                H5Activity.skip(mContext,ads.get(finalI).getContentUrl(),ads.get(finalI).getCustomerId());
+//                            }
+//                        });
+//                        views.add(view);
                     }
-                    ImageAdapter bannerAdapter = new ImageAdapter(getActivity(), ads, views);
-                    viewPagerBanner.setAdapter(bannerAdapter);
-                    indianCalendarBanner.setViewPager(viewPagerBanner);
-                    if (autoPlayThread==null){
-                        autoPlay();
-                    }
-                    viewPagerBanner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+                    convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
                         @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                            if (position == 0) {    //判断当切换到第0个页面时把currentPosition设置为images.length,即倒数第二个位置，小圆点位置为length-1
-                                currentPosition = ads.size();
-                            } else if (position == ads.size() + 1) {//当切换到最后一个页面时currentPosition设置为第一个位置，小圆点位置为0
-                                currentPosition = 1;
-                            } else {
-                                currentPosition = position;
-                            }
+                        public NetworkImageHolderView createHolder() {
+                            return new NetworkImageHolderView();
                         }
-
-                        @Override
-                        public void onPageSelected(int position) {
-
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int state) {
-                            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                                viewPagerBanner.setCurrentItem(currentPosition, false);
-                            }
-                        }
-                    });
+                    },ads)//设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                            .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
+                            //设置指示器的方向
+                            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
 
 
-                    viewPagerBanner.setOnTouchListener(new View.OnTouchListener() {
-                        @Override
-                        public boolean onTouch(View v, MotionEvent event) {
-                            int action = event.getAction();
 
-                            if(action == MotionEvent.ACTION_DOWN) {
-                                // 记录点击到ViewPager时候，手指的X坐标
-                                mLastX = event.getX();
-                            }
-                            if(action == MotionEvent.ACTION_MOVE) {
-                                // 超过阈值
-                                if(Math.abs(event.getX() - mLastX) > 60f) {
-                                    swipeLayout.setEnabled(false);
-                                    swipeLayout.requestDisallowInterceptTouchEvent(true);
-                                }
-                            }
-                            if(action == MotionEvent.ACTION_UP) {
-                                // 用户抬起手指，恢复父布局状态
-                                swipeLayout.requestDisallowInterceptTouchEvent(false);
-                                swipeLayout.setEnabled(true);
-                            }
-                            return false;
-                        }
-                    });
+//                    ImageAdapter bannerAdapter = new ImageAdapter(getActivity(), ads, views);
+//                    viewPagerBanner.setAdapter(bannerAdapter);
+//                    indianCalendarBanner.setViewPager(viewPagerBanner);
+//                    if (autoPlayThread==null){
+//                        autoPlay();
+//                    }
+//                    viewPagerBanner.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//                        @Override
+//                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                            if (position == 0) {    //判断当切换到第0个页面时把currentPosition设置为images.length,即倒数第二个位置，小圆点位置为length-1
+//                                currentPosition = ads.size();
+//                            } else if (position+ 1 == ads.size() ) {//当切换到最后一个页面时currentPosition设置为第一个位置，小圆点位置为0
+//                                currentPosition = 0;
+//                            } else {
+//                                currentPosition = position;
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onPageSelected(int position) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onPageScrollStateChanged(int state) {
+//                            if (state == ViewPager.SCROLL_STATE_IDLE) {
+//                                viewPagerBanner.setCurrentItem(currentPosition, false);
+//                            }
+//                        }
+//                    });
+//
+//
+//                    viewPagerBanner.setOnTouchListener(new View.OnTouchListener() {
+//                        @Override
+//                        public boolean onTouch(View v, MotionEvent event) {
+//                            int action = event.getAction();
+//
+//                            if(action == MotionEvent.ACTION_DOWN) {
+//                                // 记录点击到ViewPager时候，手指的X坐标
+//                                mLastX = event.getX();
+//                            }
+//                            if(action == MotionEvent.ACTION_MOVE) {
+//                                // 超过阈值
+//                                if(Math.abs(event.getX() - mLastX) > 60f) {
+//                                    swipeLayout.setEnabled(false);
+//                                    swipeLayout.requestDisallowInterceptTouchEvent(true);
+//                                }
+//                            }
+//                            if(action == MotionEvent.ACTION_UP) {
+//                                // 用户抬起手指，恢复父布局状态
+//                                swipeLayout.requestDisallowInterceptTouchEvent(false);
+//                                swipeLayout.setEnabled(true);
+//                            }
+//                            return false;
+//                        }
+//                    });
 
 
 
                 }else {
                     default_img.setVisibility(View.VISIBLE);
-                    viewPagerBanner.setVisibility(View.GONE);
+                    convenientBanner.setVisibility(View.GONE);
                 }
 
             }
         });
     }
 
-    /**
-     * 设置线程，自动轮播的时间间隔
-     */
-    private void autoPlay() {
-        autoPlayThread =  new Thread() {
-            @Override
-            public void run() {
-                super.run();
-                while (true) {
-                    SystemClock.sleep(AUTO_PLAY_TIME_INTERVAL);
-                    if (currentPosition >= ads.size() - 1) {
-                        currentPosition = -1;
-                    }
-                    currentPosition++;
-                    handler.sendEmptyMessage(1);
-                }
-            }
-        };
-        autoPlayThread.start();
-    }
+//    /**
+//     * 设置线程，自动轮播的时间间隔
+//     */
+//    private void autoPlay() {
+//        autoPlayThread =  new Thread() {
+//            @Override
+//            public void run() {
+//                super.run();
+//                while (true) {
+//                    SystemClock.sleep(AUTO_PLAY_TIME_INTERVAL);
+//                    if (currentPosition >= ads.size() - 1) {
+//                        currentPosition = -1;
+//                    }
+//                    currentPosition++;
+//                    handler.sendEmptyMessage(1);
+//                }
+//            }
+//        };
+//        autoPlayThread.start();
+//    }
 
 
     @Override
     public void onStop() {
         super.onStop();
     }
-
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            if (msg.what == 1) {
-                viewPagerBanner.setCurrentItem(currentPosition, false);
-            }
-        }
-    };
+//
+//    Handler handler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            if (msg.what == 1) {
+//                viewPagerBanner.setCurrentItem(currentPosition, false);
+//            }
+//        }
+//    };
 
 
 
@@ -656,6 +673,14 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
     @Override
     public void onResume() {
         super.onResume();
+
+        convenientBanner.startTurning(3000);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        convenientBanner.stopTurning();
     }
 
     @Override

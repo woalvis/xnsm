@@ -254,6 +254,18 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
         getRequest.execute(sbc);
     }
 
+    public void filterSellListings(AbsXnHttpCallback callback, Map<String, String> param) {
+        StringCallback sbc = callback(callback);
+        GetRequest getRequest = OkGo.get(getAbsoluteUrl(HttpConstant.URL_BUYER_LISTINGS));
+        Iterator<Map.Entry<String, String>> paramIterator = param.entrySet().iterator();
+
+        while (paramIterator.hasNext()) {
+            Map.Entry<String, String> entry = paramIterator.next();
+            getRequest.params(entry.getKey(), entry.getValue());
+        }
+        getRequest.execute(sbc);
+    }
+
 
     /*获取轮播图列表*/
     public void campaigns(String[] productNames, AbsXnHttpCallback callback) {

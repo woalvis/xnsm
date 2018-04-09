@@ -94,7 +94,6 @@ public class MyBuyOrderFragment extends BaseFragment {
     @Override
     protected void initContentView(View contentView) {
         this.contentView = contentView;
-        //init(contentView);
     }
 
 
@@ -102,14 +101,15 @@ public class MyBuyOrderFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        initFromNet();
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        initFromNet();
+        refresh();
+
     }
 
     private void initFromNet() {
@@ -122,77 +122,28 @@ public class MyBuyOrderFragment extends BaseFragment {
         unpaidOrderList = new ArrayList<>();
         payedOrderList = new ArrayList<>();
         refundOrderList = new ArrayList<>();
+        orderMap.put("全部", orderList);
+        orderMap.put("待支付", unpaidOrderList);
+        orderMap.put("待收货", payedOrderList);
+        orderMap.put("退款/售后", refundOrderList);
 
-        XinongHttpCommend.getInstance(mContext).getAllOrders(new AbsXnHttpCallback(mContext) {
-            @Override
-            public void onSuccess(final String info, String result) {
-                PageInfo pageInfo = JSONObject.parseObject(result,PageInfo.class);
-                totalPageAll = pageInfo.getTotalPages();
-                if (totalPageAll<=120){
-                    orderList = JSON.parseArray(pageInfo.getContent(), Order.class);
-                    for (Order order : orderList) {
-                        switch (order.getStatus()) {
-                            case INITIATED://下单  取消
-                                break;
-                            case MODIFIED://修改   取消，确认
-                            case CONFIRMED://确认完成  付款
-                                unpaidOrderList.add(order);
-                                break;
-                            case PAYMENT_PROCESSING://付款处理中  无
-                                break;
-                            case PAID://已付款  申请退款
-                                payedOrderList.add(order);
-                                break;
-                            case PAYMENT_FAILED://付款失败  无
-                            case SENT://已发货  收货，申请退款
-                                payedOrderList.add(order);
-                                break;
-                            case RECEIVED://已收货
-                            case RECEIVE_MONEY:    //卖家已收款
-                            case CANCELED://已取消 删除
-                            case CLOSED://关闭  删除
-                                break;
-                            case REFUND_REQ://退款申请  查看退款申请
-                            case REFUND://已退款  删除，查看退款
-                            case REFUND_PROCESSING:
-                                refundOrderList.add(order);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                    //"全部", "待支付", "待收货", "退款/售后"
-                    orderMap.put("全部", orderList);
-                    orderMap.put("待支付", unpaidOrderList);
-                    orderMap.put("待收货", payedOrderList);
-                    orderMap.put("退款/售后", refundOrderList);
+        int listViewPosition = 0;
+        for (String status : mDatas) {
+            View view = LayoutInflater.from(mContext).inflate(R.layout.viewpager_item_lv, null);
+            PullToRefreshListView listView = view.findViewById(R.id.lv);
+            setListView(listView, orderMap.get(status),contentView,listViewPosition);
+            listViewPosition++;
+            mViewList.add(view);
+        }
 
-                }else {
-                    //订单多余20需要逐个做分页
-                }
-                String content = JSON.parseObject(result).getString("content");
-                int listViewPosition = 0;
-                for (String status : mDatas) {
-                    View view = LayoutInflater.from(mContext).inflate(R.layout.viewpager_item_lv, null);
-                    PullToRefreshListView listView = view.findViewById(R.id.lv);
-                    setListView(listView, orderMap.get(status),contentView,listViewPosition);
-                    listViewPosition++;
-                    mViewList.add(view);
-                }
-
-                mAdapter = new MyPagerAdapter(mContext, mViewList, mDatas);
+        mAdapter = new MyPagerAdapter(mContext, mViewList, mDatas);
 //                mAdapter.notifyDataSetChanged();
-                // mViewPager.setAdapter(mAdapter);
-                if(mViewPager.getAdapter() == null) {
-                    mViewPager.setAdapter(mAdapter);
-                    mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
-                    mTabLayout.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
-                }
-
-
-            }
-        },pageAll,size);
-
+        // mViewPager.setAdapter(mAdapter);
+        if(mViewPager.getAdapter() == null) {
+            mViewPager.setAdapter(mAdapter);
+            mTabLayout.setupWithViewPager(mViewPager);//将TabLayout和ViewPager关联起来。
+            mTabLayout.setTabsFromPagerAdapter(mAdapter);//给Tabs设置适配器
+        }
     }
 
     private void setListView(final PullToRefreshListView listView, final List<Order> orders, final View contentView, final int listViewPosition) {
@@ -204,7 +155,6 @@ public class MyBuyOrderFragment extends BaseFragment {
                     refreshView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                          //  initFromNet();
                             refresh();
                             switch (listViewPosition){
                                 case 0:
@@ -239,12 +189,13 @@ public class MyBuyOrderFragment extends BaseFragment {
             protected void fillItemData(CommonViewHolder viewHolder, final int position, final Order item) {
                 final SimpleDraweeView coverImg = (SimpleDraweeView) viewHolder.getView(R.id.product_pic);
                 String coverImgUrl = item.getCoverImg();
-
+                TextView tv_xn_fee = (TextView) viewHolder.getView(R.id.tv_xn_fee);
                 TextView first = (TextView) viewHolder.getView(R.id.first);
                 TextView second = (TextView) viewHolder.getView(R.id.second);
                 TextView third = (TextView) viewHolder.getView(R.id.third);
                 TextView tv_freight = (TextView) viewHolder.getView(R.id.tv_freight);
                 TextView tv_offer = (TextView) viewHolder.getView(R.id.tv_offer);
+                tv_xn_fee.setVisibility(View.GONE);
                 viewHolder.setTextForTextView(R.id.tv_order_no,"订单号："+item.getOrderNo());
                 if (TextUtils.isEmpty(coverImgUrl)){
 //                    XinongHttpCommend.getInstance(mContext).getProductImg(new AbsXnHttpCallback(mContext) {
@@ -597,6 +548,10 @@ public class MyBuyOrderFragment extends BaseFragment {
 
 
     private void refresh(){
+        unpaidOrderList.clear();
+        payedOrderList.clear();
+        refundOrderList.clear();
+
         XinongHttpCommend.getInstance(mContext).getAllOrders(new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(final String info, String result) {

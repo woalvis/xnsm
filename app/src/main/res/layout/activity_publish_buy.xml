@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sl_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -95,16 +96,16 @@
                     android:inputType="number"
                     android:padding="@dimen/x10"
                     android:textColor="@color/primaryGreen"
-                    android:textSize="@dimen/x14"
+                    android:textSize="@dimen/x12"
                     android:visibility="visible" />
 
                 <tech.xinong.xnsm.views.ImageTextView
                     android:id="@+id/unit"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x16"
+                    android:layout_height="30dp"
                     android:drawablePadding="@dimen/x10"
                     android:drawableRight="@drawable/arrow_right"
+                    android:paddingRight="@dimen/x26"
                     android:text="斤"
                     android:visibility="visible" />
             </LinearLayout>
@@ -346,6 +347,7 @@
                 android:layout_width="0dp"
                 style="@style/default_edit"
                 android:layout_weight="3"
+                android:textSize="@dimen/x12"
                 android:hint="请输入联系人姓名"
                 android:text="" />
         </LinearLayout>

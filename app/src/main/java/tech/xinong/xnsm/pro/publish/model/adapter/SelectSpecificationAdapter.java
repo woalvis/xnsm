@@ -88,6 +88,10 @@ public class SelectSpecificationAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void refresh(List<SelectSpecModel> datas){
+        this.mDatas = datas;
+        notifyDataSetChanged();
+    }
 
     public String getResults() {
         StringBuffer stringBuffer = new StringBuffer();

@@ -286,6 +286,11 @@ public class PublishSellActivity extends BaseActivity implements CompoundButton.
             /*单价选择*/
             case R.id.publish_sell_goods_unit_price:
                 Intent intentSelectPrice = new Intent(mContext, SelectUnitPriceActivity.class);
+                if (dto != null){
+                    intentSelectPrice.putExtra("unitPrice", dto.getUnitPrice());
+                    intentSelectPrice.putExtra("minQuantity",dto.getMinQuantity());
+                    intentSelectPrice.putExtra("unit",dto.getWeightUnit().getDisplayName());
+                }
                 startActivityForResult(intentSelectPrice, REQ_CODE_SELECT_UNIT_PRICE);
                 break;
             /*原产地选择*/

@@ -7,7 +7,7 @@ android {
         applicationId "tech.xinong.xnsm"
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 55
+        versionCode 57
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
@@ -67,4 +67,5 @@ dependencies {
     compile 'com.zhy:base-rvadapter:3.0.3'//recycalView的万能适配器
     compile 'org.litepal.android:core:1.5.0'
     compile 'com.android.support:multidex:1.0.2'
+    compile 'com.bigkoo:convenientbanner:2.0.5'//banner轮播
 }

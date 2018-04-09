@@ -1,6 +1,7 @@
 package tech.xinong.xnsm.pro.publish.view;
 
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,12 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.zyyoona7.lib.EasyPopup;
-import com.zyyoona7.lib.HorizontalGravity;
-import com.zyyoona7.lib.VerticalGravity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +30,7 @@ import tech.xinong.xnsm.pro.buy.model.SpecificationConfigDTO;
 import tech.xinong.xnsm.pro.buy.view.SpecActivity;
 import tech.xinong.xnsm.pro.publish.model.PublishBuyInfoModel;
 import tech.xinong.xnsm.pro.sell.model.BuyerListing;
+import tech.xinong.xnsm.util.DeviceInfoUtil;
 import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.XnsConstant;
 import tech.xinong.xnsm.util.ioc.ContentView;
@@ -45,6 +46,8 @@ public class PublishBuyActivity extends BaseActivity {
 
     private String productId;
     private String productName;
+    @ViewInject(R.id.sl_layout)
+    private ScrollView sl_layout;
     @ViewInject(R.id.publish_buy_goods)
     private TextView publish_buy_goods;
     @ViewInject(R.id.publish_buy_spec)
@@ -397,7 +400,9 @@ public class PublishBuyActivity extends BaseActivity {
         });
 
 
-        mPopup.showAsDropDown(period);
+        LinearLayout tv = mPopup.getView(R.id.ll_layout);
+        tv.measure(0,0);
+        mPopup.showAsDropDown(sl_layout,  0, -tv.getMeasuredHeight());
     }
 
 
@@ -406,8 +411,9 @@ public class PublishBuyActivity extends BaseActivity {
                 .setContentView(R.layout.test_popuop)
                 .setAnimationStyle(R.style.PopAnim)
                 //是否允许点击PopupWindow之外的地方消失
+                .setWidth(DeviceInfoUtil.getScreenWidth())
                 .setFocusAndOutsideEnable(true)
-                .setBackgroundDimEnable(false)
+                .setBackgroundDimEnable(true)
                 .createPopup();
         mPopup.getView(R.id.jin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -440,7 +446,9 @@ public class PublishBuyActivity extends BaseActivity {
                 mPopup.dismiss();
             }
         });
-        mPopup.showAtAnchorView(view, VerticalGravity.ABOVE, HorizontalGravity.CENTER, 0, 0);
+        CardView tv = mPopup.getView(R.id.popup_layout);
+        tv.measure(0,0);
+        mPopup.showAsDropDown(sl_layout,  0, -tv.getMeasuredHeight());
     }
 
 

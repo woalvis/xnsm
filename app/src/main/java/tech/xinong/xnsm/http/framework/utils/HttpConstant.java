@@ -12,7 +12,7 @@ public class HttpConstant {
     public static final String PORT = ":8083";
     public static final String IP = "101.201.147.46";//test环境
    // public static final String IP = "192.168.33.12";//海超环境
- //   public static final String IP = "101.201.152.127";//intag环境
+    //public static final String IP = "101.201.152.127";//intag环境
 
 //    public static final String IP = "192.168.33.180";
     //public static final String IP ="192.168.12.254";
