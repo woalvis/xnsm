@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -246,6 +245,17 @@ public class MySupplyOrderFragment extends BaseFragment {
                 viewHolder.setTextForTextView(R.id.unit_num, item.getAmount().intValue() + "");
                 viewHolder.setTextForTextView(R.id.product_total_price, item.getTotalPrice().subtract(item.getXnFees()) + "元");
                 viewHolder.setTextForTextView(R.id.tv_xn_fee, "平台费用：-" + item.getXnFees() + "元");
+
+                viewHolder.setOnClickListener(R.id.order_item_layout, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OrderDetailActivity.skip( item.getId(),
+                                item.getOrderNo(),
+                                false,
+                                mContext);
+                    }
+                });
+
 //                viewHolder.setTextForTextView(R.id.tv_freight,"运费："+item.getFreight().toString()+"元");
                 if (item.getFreeShipping()) {
                     tv_freight.setVisibility(View.VISIBLE);
@@ -413,17 +423,17 @@ public class MySupplyOrderFragment extends BaseFragment {
         };
         listView.setAdapter(adapter);
         adapters.add(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                OrderDetailActivity.skip(orders.get(position - 1).getId(),
-                        orders.get(position - 1).getOrderNo(), true, mContext);
-//                Intent intent = new Intent(mContext, OrderDetailActivity.class);
-//                intent.putExtra("orderId", orders.get(position-1).getId());
-//                mContext.startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                OrderDetailActivity.skip(orders.get(position - 1).getId(),
+//                        orders.get(position - 1).getOrderNo(), true, mContext);
+////                Intent intent = new Intent(mContext, OrderDetailActivity.class);
+////                intent.putExtra("orderId", orders.get(position-1).getId());
+////                mContext.startActivity(intent);
+//            }
+//        });
 
         listView.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
             @Override

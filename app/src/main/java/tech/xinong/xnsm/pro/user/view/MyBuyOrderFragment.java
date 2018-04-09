@@ -8,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -195,6 +194,15 @@ public class MyBuyOrderFragment extends BaseFragment {
                 TextView third = (TextView) viewHolder.getView(R.id.third);
                 TextView tv_freight = (TextView) viewHolder.getView(R.id.tv_freight);
                 TextView tv_offer = (TextView) viewHolder.getView(R.id.tv_offer);
+                viewHolder.setOnClickListener(R.id.order_item_layout, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OrderDetailActivity.skip( item.getId(),
+                                item.getOrderNo(),
+                        false,
+                        mContext);
+                    }
+                });
                 tv_xn_fee.setVisibility(View.GONE);
                 viewHolder.setTextForTextView(R.id.tv_order_no,"订单号："+item.getOrderNo());
                 if (TextUtils.isEmpty(coverImgUrl)){
@@ -393,15 +401,15 @@ public class MyBuyOrderFragment extends BaseFragment {
         adapters.add(adapter);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                OrderDetailActivity.skip( orders.get(position-1).getId(),
-                        orders.get(position-1).getOrderNo(),
-                        false,
-                        mContext);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                OrderDetailActivity.skip( orders.get(position-1).getId(),
+//                        orders.get(position-1).getOrderNo(),
+//                        false,
+//                        mContext);
+//            }
+//        });
 
     }
 
