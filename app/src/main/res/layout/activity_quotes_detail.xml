@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="1.43元/斤"
                 android:textColor="@color/orange"
-                android:textSize="@dimen/x18"
+                android:textSize="@dimen/x12"
                 />
         </LinearLayout>
 
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black_404040"
-                    android:textSize="@dimen/x16"
+                    android:textSize="@dimen/x12"
                     android:text="下跌0.03"
                     />
                 <ImageView
@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black_404040"
-                    android:textSize="@dimen/x16"
+                    android:textSize="@dimen/x12"
                     android:text="2.05%"
                     android:layout_toRightOf="@id/im_state"
                     />

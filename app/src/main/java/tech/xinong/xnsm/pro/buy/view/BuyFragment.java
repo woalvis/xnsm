@@ -62,12 +62,14 @@ import tech.xinong.xnsm.pro.publish.model.adapter.ProductAdapter;
 import tech.xinong.xnsm.pro.publish.model.adapter.ProvinceAdapter;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecificationAdapter;
+import tech.xinong.xnsm.pro.publish.view.PublishBuyActivity;
 import tech.xinong.xnsm.pro.publish.view.PublishSelectActivity;
 import tech.xinong.xnsm.pro.publish.view.PublishSellActivity;
 import tech.xinong.xnsm.pro.user.view.LoginActivity;
 import tech.xinong.xnsm.util.DeviceInfoUtil;
 import tech.xinong.xnsm.util.T;
 import tech.xinong.xnsm.util.XnsConstant;
+
 import static android.app.Activity.RESULT_OK;
 import static tech.xinong.xnsm.pro.buy.view.BuyFragment.OpMode.INIT;
 
@@ -140,7 +142,6 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> implements
                     productId = mContext.getConfigIds()[0];
                     return;
                 }
-
                 mCirclePop = getPopup(R.layout.popup_product_name, view);
                 XinongHttpCommend.getInstance(mContext).getCategories(new AbsXnHttpCallback(mContext) {
                     @Override
@@ -605,7 +606,21 @@ public class BuyFragment extends BaseFragment<BuyPresenter, BaseView> implements
         switch (item.getItemId()) {
             case R.id.action_publish:
                 if (isLogin()){
-                    publishInfo(true);
+                    Properties proper = ProperTies.getProperties(mContext);
+                    String favs[] = proper.getProperty(XnsConstant.FAVS).split(",");
+                    if (favs.length>0&&!favs[0].equals("")){
+                        if (favs.length==1){
+                            Intent intent = new Intent(mContext,PublishBuyActivity.class);
+                            String productId = mContext.getConfigIds()[0];
+                            String productName = mContext.getConfigNames()[0];
+                            intent.putExtra("productId",
+                                    productId);
+                            intent.putExtra("productName",productName);
+                            mContext.startActivity(intent);
+                        }
+                    }else {
+                        PublishSelectActivity.skip(getActivity(),PublishSelectActivity.PUBLISH,0);
+                    }
                 }else {
                     twoButtonDialog("喜农市",
                             "您还没有登录账号，不能进行发布",

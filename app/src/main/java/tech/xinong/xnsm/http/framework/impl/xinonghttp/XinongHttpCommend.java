@@ -613,6 +613,10 @@ public class XinongHttpCommend implements IHttpCommand<RequestParam> {
                 .execute(sbc);
     }
 
+
+
+
+
     /*搜索，只有一个输入需字符串*/
     public void searchTextByspecId(String specId, AbsXnHttpCallback callback) {
         StringCallback sbc = callback(callback);

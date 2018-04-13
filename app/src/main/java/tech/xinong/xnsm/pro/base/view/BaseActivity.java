@@ -43,6 +43,7 @@ import tech.xinong.xnsm.util.ActivityCollector;
 import tech.xinong.xnsm.util.ImageUtil;
 import tech.xinong.xnsm.util.XnsConstant;
 import tech.xinong.xnsm.util.ioc.InjectUtils;
+import tech.xinong.xnsm.views.BaseDialog;
 import tech.xinong.xnsm.views.BaseEditDialog;
 
 /**
@@ -185,17 +186,31 @@ public abstract class BaseActivity<p extends BasePresenter> extends MvpActivity<
                                 View.OnClickListener confirmListener,
                                 View.OnClickListener cancelListener){
 
-        new CircleDialog.Builder(this)
-                .setCanceledOnTouchOutside(false)
-                .setCancelable(false)
+
+
+        BaseDialog.getInstance().setConfirmText(confirmText)
                 .setTitle(title)
-                .setText(contentText)
-                .setTitleColor(getResources().getColor(R.color.primaryGreen))
-                .setTitleColor(getResources().getColor(R.color.primaryGreen))
-                .setTextColor(getResources().getColor(R.color.primaryGreen))
-                .setNegative(cancelText, cancelListener)
-                .setPositive(confirmText,confirmListener)
-                .show();
+                .setCancelText(cancelText)
+                .setCancelListener(cancelListener)
+                .setContentText(contentText)
+                .setConfirmListener(confirmListener).show(getSupportFragmentManager(),"base");
+
+
+
+
+
+
+//        new CircleDialog.Builder(this)
+//                .setCanceledOnTouchOutside(false)
+//                .setCancelable(false)
+//                .setTitle(title)
+//                .setText(contentText)
+//                .setTitleColor(getResources().getColor(R.color.primaryGreen))
+//                .setTitleColor(getResources().getColor(R.color.primaryGreen))
+//                .setTextColor(getResources().getColor(R.color.primaryGreen))
+//                .setNegative(cancelText, cancelListener)
+//                .setPositive(confirmText,confirmListener)
+//                .show();
 
 
 //           pDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE)
@@ -209,7 +224,7 @@ public abstract class BaseActivity<p extends BasePresenter> extends MvpActivity<
 //           pDialog.show();
 
     }
-    public void showDialogBotton(String title, String content,AdapterView.OnItemClickListener listener){
+    public void showDialogButton(String title, String content,AdapterView.OnItemClickListener listener){
         final String[] items = content.split(",");
         new CircleDialog.Builder(this)
                 .configDialog(new ConfigDialog() {

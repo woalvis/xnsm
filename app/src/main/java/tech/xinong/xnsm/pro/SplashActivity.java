@@ -1,5 +1,6 @@
 package tech.xinong.xnsm.pro;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
@@ -8,13 +9,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -27,6 +32,7 @@ import com.mylhyl.circledialog.CircleDialog;
 import com.vondear.rxtools.RxAppTool;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,8 +66,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         mContext = this;
-        //checkForUpdate();
-        init();
+        checkForUpdate();
+        //init();
     }
 
 
@@ -240,12 +246,10 @@ public class SplashActivity extends AppCompatActivity {
 
 
     void showChangeLog(String changelog) {
-
-
         showDoneDialog("更新详情", changelog, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadAPK();
+                checkPermission();
             }
         });
 
@@ -264,6 +268,7 @@ public class SplashActivity extends AppCompatActivity {
      * 下载安装文件
      */
     void downloadAPK() {
+
         builder = new CircleDialog.Builder(this);
         builder.setCancelable(false).setCanceledOnTouchOutside(false)
                 .setTitle("下载")
@@ -281,6 +286,7 @@ public class SplashActivity extends AppCompatActivity {
 
         String[] allowedContentTypes = new String[]{"application/vnd.android.package-archive", "*"};
         OkGo.get(update_url)//
+        //OkGo.get("http://speed.myzone.cn/WindowsXP_SP2.exe")//
                 .tag(this)//
                 .execute(new FileCallback(FileUtil.initPath(), "xns.apk") {  //文件下载时，可以指定下载的文件目录和文件名
                     @Override
@@ -306,6 +312,8 @@ public class SplashActivity extends AppCompatActivity {
 //        String str = "/xns.apk"; //APK的名字
 //        String fileName = FileUtil.initPath() + str; //我们上面说到路径
 //        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 //            //判断版本是否在7.0以上
 //            Uri apkUri =
@@ -313,7 +321,7 @@ public class SplashActivity extends AppCompatActivity {
 //                            "tech.xinong.xnsm" + ".fileprovider",
 //                            file);
 //            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-//            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+//
 //            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
 //        } else {
 //            intent.setDataAndType(Uri.fromFile(file),
@@ -380,5 +388,60 @@ public class SplashActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+
+
+    final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    public void checkPermission() {
+        if(Build.VERSION.SDK_INT >= 23) {
+            List<String> permissionStrs = new ArrayList<>();
+            int hasWriteSdcardPermission =
+                    ContextCompat.checkSelfPermission(
+                            mContext,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            if(hasWriteSdcardPermission !=
+                    PackageManager.PERMISSION_GRANTED) {
+                permissionStrs.add(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                );
+            }
+
+            int hasCameraPermission = ContextCompat.checkSelfPermission(
+                    mContext,
+                    Manifest.permission.CAMERA);
+            if(hasCameraPermission != PackageManager.PERMISSION_GRANTED) {
+                permissionStrs.add(Manifest.permission.CAMERA);
+            }
+            String[] stringArray = permissionStrs.toArray(new String[0]);
+            if (permissionStrs.size() > 0) {
+                requestPermissions(stringArray,
+                        REQUEST_CODE_ASK_PERMISSIONS);
+                return;
+            }else {
+                downloadAPK();
+            }
+        }else {
+            downloadAPK();
+        }
+    }
+
+    //权限设置后的回调函数，判断相应设置，requestPermissions传入的参数为几个权限，则permissions和grantResults为对应权限和设置结果
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch(requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS :
+                //可以遍历每个权限设置情况
+                if(grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //这里写你需要相关权限的操作
+                    downloadAPK();
+                }else{
+                    Toast.makeText(mContext,
+                            "权限没有开启",Toast.LENGTH_SHORT).show();
+                }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions,
+                grantResults);
     }
 }

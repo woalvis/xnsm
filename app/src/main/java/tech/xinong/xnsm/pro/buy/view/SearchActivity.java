@@ -99,7 +99,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 finish();
                 break;
             case R.id.tv_clear:
-                twoButtonDialog("确认清除搜索历史", "是否铲除所有的历史搜索记录",
+                twoButtonDialog("确认清除搜索历史", "是否清除所有的历史搜索记录",
                         "确认清除", "取消", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

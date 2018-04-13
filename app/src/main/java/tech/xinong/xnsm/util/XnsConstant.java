@@ -28,6 +28,6 @@ public class XnsConstant {
     public static final String FAVNAME = "favname";
     public static final String FAvID = "favid";
 
-    public static final String FIR_APP_ID = "58a68c5c959d692fea0000c9";
-    public static String FIR_APP_TOKEN = "238df6401c1d67e6a5db80d4f8352dce";
+    public static final String FIR_APP_ID = "5ac43171959d696dadc86fe3";
+    public static String FIR_APP_TOKEN = "3c91c250b44eb0f05a477f35ea45f691";
 }

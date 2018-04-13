@@ -353,7 +353,7 @@ public class MySupplyOrderFragment extends BaseFragment {
                         first.setVisibility(View.GONE);
                         break;
                     case RECEIVE_MONEY:
-                        viewHolder.setTextForTextView(R.id.order_state, "已收款");
+                        viewHolder.setTextForTextView(R.id.order_state, "交易完成");
                         second.setVisibility(View.GONE);
                         first.setVisibility(View.GONE);
                         third.setVisibility(View.VISIBLE);
@@ -584,7 +584,7 @@ public class MySupplyOrderFragment extends BaseFragment {
                     intentSent.putExtra("orderNo", item.getOrderNo());
                     intentSent.putExtra("orderId", item.getId());
                     startActivity(intentSent);
-                    mContext.finish();
+                    //mContext.finish();
                     break;
 //                case state_refund_req:
 //                    Intent intentRefund = new Intent(mContext,RefundReqActivity.class);

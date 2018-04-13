@@ -85,7 +85,7 @@ public class ProductQuotesActivity extends BaseActivity {
 
                         viewHolder.setTextForTextView(R.id.tv_current_price,currentPrice+"");
 
-
+                        disparity = item.getCurrentAveragePrice().subtract(item.getLastAveragePrice()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                         if (disparity<0){
                             viewHolder.setTextColor(R.id.tv_current_price,getResources().getColor(R.color.green));
                             viewHolder.setTextColor(R.id.tv_last_price,getResources().getColor(R.color.green));

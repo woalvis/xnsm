@@ -518,30 +518,30 @@ public class HomeFragment1 extends BaseFragment<BuyPresenter, BaseView> implemen
 //                    });
 //
 //
-//                    viewPagerBanner.setOnTouchListener(new View.OnTouchListener() {
-//                        @Override
-//                        public boolean onTouch(View v, MotionEvent event) {
-//                            int action = event.getAction();
-//
-//                            if(action == MotionEvent.ACTION_DOWN) {
-//                                // 记录点击到ViewPager时候，手指的X坐标
-//                                mLastX = event.getX();
-//                            }
-//                            if(action == MotionEvent.ACTION_MOVE) {
-//                                // 超过阈值
-//                                if(Math.abs(event.getX() - mLastX) > 60f) {
-//                                    swipeLayout.setEnabled(false);
-//                                    swipeLayout.requestDisallowInterceptTouchEvent(true);
-//                                }
-//                            }
-//                            if(action == MotionEvent.ACTION_UP) {
-//                                // 用户抬起手指，恢复父布局状态
-//                                swipeLayout.requestDisallowInterceptTouchEvent(false);
-//                                swipeLayout.setEnabled(true);
-//                            }
-//                            return false;
-//                        }
-//                    });
+                    convenientBanner.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            int action = event.getAction();
+
+                            if(action == MotionEvent.ACTION_DOWN) {
+                                // 记录点击到ViewPager时候，手指的X坐标
+                                mLastX = event.getX();
+                            }
+                            if(action == MotionEvent.ACTION_MOVE) {
+                                // 超过阈值
+                                if(Math.abs(event.getX() - mLastX) > 1600f) {
+                                    swipeLayout.setEnabled(false);
+                                    swipeLayout.requestDisallowInterceptTouchEvent(true);
+                                }
+                            }
+                            if(action == MotionEvent.ACTION_UP) {
+                                // 用户抬起手指，恢复父布局状态
+                                swipeLayout.requestDisallowInterceptTouchEvent(false);
+                                swipeLayout.setEnabled(true);
+                            }
+                            return false;
+                        }
+                    });
 
 
 

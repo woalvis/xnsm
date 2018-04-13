@@ -58,8 +58,8 @@ import tech.xinong.xnsm.pro.publish.model.adapter.ProductAdapter;
 import tech.xinong.xnsm.pro.publish.model.adapter.ProvinceAdapter;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecModel;
 import tech.xinong.xnsm.pro.publish.model.adapter.SelectSpecificationAdapter;
-import tech.xinong.xnsm.pro.publish.view.PublishBuyActivity;
 import tech.xinong.xnsm.pro.publish.view.PublishSelectActivity;
+import tech.xinong.xnsm.pro.publish.view.PublishSellActivity;
 import tech.xinong.xnsm.pro.sell.model.BuyerListingSum;
 import tech.xinong.xnsm.pro.sell.model.SellListingsAdapter;
 import tech.xinong.xnsm.pro.user.view.LoginActivity;
@@ -504,7 +504,8 @@ public class SellFragment extends BaseFragment<BuyPresenter,BaseView> implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_buy,menu);
+        inflater.inflate(R.menu.menu_sell,menu);
+
     }
 
     @Override
@@ -513,21 +514,7 @@ public class SellFragment extends BaseFragment<BuyPresenter,BaseView> implements
         switch (item.getItemId()) {
             case R.id.action_publish:
                 if (isLogin()){
-                    Properties proper = ProperTies.getProperties(mContext);
-                    String favs[] = proper.getProperty(XnsConstant.FAVS).split(",");
-                    if (favs.length>0&&!favs[0].equals("")){
-                        if (favs.length==1){
-                            Intent intent = new Intent(mContext,PublishBuyActivity.class);
-                            String productId = mContext.getConfigIds()[0];
-                            String productName = mContext.getConfigNames()[0];
-                            intent.putExtra("productId",
-                                    productId);
-                            intent.putExtra("productName",productName);
-                            mContext.startActivity(intent);
-                        }
-                    }else {
-                        PublishSelectActivity.skip(getActivity(),PublishSelectActivity.PUBLISH,0);
-                    }
+                    publishInfo(true);
                 }else {
                     twoButtonDialog("喜农市",
                             "您还没有登录账号，不能进行发布",
@@ -541,10 +528,6 @@ public class SellFragment extends BaseFragment<BuyPresenter,BaseView> implements
                             },
                             null);
                 }
-
-
-
-
                 break;
         }
         return true;
@@ -602,4 +585,24 @@ public class SellFragment extends BaseFragment<BuyPresenter,BaseView> implements
             return area.getPinYin().compareTo(t1.getPinYin());
         }
     }
+
+
+    private void publishInfo(boolean isBuy) {
+        Properties proper = ProperTies.getProperties(mContext);
+        String favs[] = proper.getProperty(XnsConstant.FAVS).split(",");
+        if (favs.length>0&&!favs[0].equals("")){
+            if (favs.length==1){
+                Intent intent = new Intent(mContext,PublishSellActivity.class);
+                String productId = mContext.getConfigIds()[0];
+                String productName = mContext.getConfigNames()[0];
+                intent.putExtra("productId",
+                        productId);
+                intent.putExtra("productName",productName);
+                mContext.startActivity(intent);
+            }
+        }else {
+            PublishSelectActivity.skip(mContext, PublishSelectActivity.SELL, 0);
+        }
+    }
+
 }

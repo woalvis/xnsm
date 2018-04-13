@@ -37,6 +37,8 @@ import tech.xinong.xnsm.util.ioc.ViewInject;
 import tech.xinong.xnsm.views.HorizontalScrollMenu;
 import tech.xinong.xnsm.views.entity.BaseAdapter;
 
+import static java.math.BigDecimal.ROUND_HALF_DOWN;
+
 @ContentView(R.layout.activity_quotes_detail)
 public class QuotesDetailActivity extends BaseActivity {
 
@@ -83,7 +85,8 @@ public class QuotesDetailActivity extends BaseActivity {
         model = (PriceModel) intent.getSerializableExtra("model");
         setToolBarTitle(model.getProvince()+model.getCity()+model.getSpecName()+"的行情");
 
-        XinongHttpCommend.getInstance(mContext).getSpecByProductId(model.getProductId(), new AbsXnHttpCallback(mContext) {
+        XinongHttpCommend.getInstance(mContext).getSpecByProductId(model.getProductId(),
+                new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
                 spes = JSON.parseArray(result,SpecificationConfigDTO.class);
@@ -91,13 +94,14 @@ public class QuotesDetailActivity extends BaseActivity {
                 for (int i=0;i<spes.size();i++){
                     if (specId.equals(spes.get(i).getId())){
                         arr.add(0,spes.get(i).getName());
+                        spes.add(0,spes.get(i));
+                        spes.remove(i+1);
                     }else {
                         arr.add(spes.get(i).getName());
                     }
 
 
                 }
-
                 hsm_container.setSwiped(false);
                 hsm_container.setAdapter(new MenuAdapter(arr),currentPosition);
                 //updateChart(specId);
@@ -108,9 +112,11 @@ public class QuotesDetailActivity extends BaseActivity {
     }
 
 
-    private void updateChart(String specId){
+    private void updateChart(SpecificationConfigDTO spec){
 
-        XinongHttpCommend.getInstance(mContext).priceSpceOrCity(specId, cityId, new AbsXnHttpCallback(mContext) {
+        setToolBarTitle(model.getProvince()+model.getCity()+spec.getName()+"的行情");
+
+        XinongHttpCommend.getInstance(mContext).priceSpceOrCity(spec.getId(), cityId, new AbsXnHttpCallback(mContext) {
             @Override
             public void onSuccess(String info, String result) {
                 tv_empty.setVisibility(View.GONE);
@@ -124,17 +130,20 @@ public class QuotesDetailActivity extends BaseActivity {
                         prices.add(model.getCurrentAveragePrice().setScale(2, BigDecimal.ROUND_HALF_UP).floatValue());
                     }
                     PriceDetailModel cuPriceDetailModel = priceDetailModels.get(priceDetailModels.size()-1);
-                    if (cuPriceDetailModel.equals(
+                    if (cuPriceDetailModel.getRecordingDate().equals(
                             sdf.format(new Date(System.currentTimeMillis()-1000*60*60*24)))){//如果相等说明有当前价格
                         tv_today_price.setText(cuPriceDetailModel.getCurrentAveragePrice().setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()+
                                 cuPriceDetailModel.getUom());
                         PriceDetailModel cuPriceDetailModel2 = priceDetailModels.get(priceDetailModels.size()-2);
                         if (cuPriceDetailModel2!=null){
-                            if (cuPriceDetailModel.equals(
+                            if (cuPriceDetailModel2.getRecordingDate().equals(
                                     sdf.format(new Date(System.currentTimeMillis()-1000*60*60*24*2)))){
                                 BigDecimal today = cuPriceDetailModel.getCurrentAveragePrice();
                                 BigDecimal yesToday = cuPriceDetailModel2.getCurrentAveragePrice();
                                 BigDecimal compare = today.subtract(yesToday);
+                                tv_no_data.setVisibility(View.GONE);
+                                tv_present.setVisibility(View.VISIBLE);
+                                rl_show.setVisibility(View.VISIBLE);
                                 if (compare.compareTo(new BigDecimal(0))>0){
                                     tv_compare.setText("上涨"+compare.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()+
                                             cuPriceDetailModel.getUom());
@@ -144,7 +153,7 @@ public class QuotesDetailActivity extends BaseActivity {
                                             cuPriceDetailModel.getUom());
                                     im_state.setImageResource(R.drawable.arrow_down);
                                 }
-                                String present = compare.divide(today).multiply(new BigDecimal(100)).
+                                String present = compare.divide(today,2,ROUND_HALF_DOWN).multiply(new BigDecimal(100)).
                                         setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()+"%";
                                 tv_present.setText(present);
                             }
@@ -286,7 +295,7 @@ public class QuotesDetailActivity extends BaseActivity {
 //                    "内容页：" + (position + 1) + " 访问状态：" + visitStatus,
 //                    Toast.LENGTH_SHORT).show();
             currentPosition = position;
-            updateChart(spes.get(position).getId());
+            updateChart(spes.get(position));
 
         }
 

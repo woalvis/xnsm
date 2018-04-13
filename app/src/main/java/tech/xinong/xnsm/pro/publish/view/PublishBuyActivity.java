@@ -229,7 +229,7 @@ public class PublishBuyActivity extends BaseActivity {
                 break;
             case R.id.ll_buy_time:
 
-                showDialogBotton("采购时长", "7天,三个月,六个月", new AdapterView.OnItemClickListener() {
+                showDialogButton("采购时长", "7天,三个月,六个月", new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         publish_buy_duration.setText(contents[position]);

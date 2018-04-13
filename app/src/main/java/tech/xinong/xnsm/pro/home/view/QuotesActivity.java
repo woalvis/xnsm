@@ -186,17 +186,15 @@ public class QuotesActivity extends BaseActivity implements CategoryAdapter.OnIt
                         double lastPrice = 0;
                         double disparity = 0;
                         if (item.getCurrentAveragePrice()!=null){
-                            currentPrice = item.getCurrentAveragePrice().setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+                            currentPrice = item.getCurrentAveragePrice().
+                                    setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 
                         }
-
                         if (item.getLastAveragePrice()!=null){
                             lastPrice = item.getLastAveragePrice().setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                         }
-
                         viewHolder.setTextForTextView(R.id.tv_current_price,currentPrice+"");
-
-
+                        disparity = item.getCurrentAveragePrice().subtract(item.getLastAveragePrice()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
                         if (disparity<0){
                             viewHolder.setTextColor(R.id.tv_current_price,getResources().getColor(R.color.green));
                             viewHolder.setTextColor(R.id.tv_last_price,getResources().getColor(R.color.green));

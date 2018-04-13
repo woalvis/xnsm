@@ -55,14 +55,14 @@ public class ProductCommonAdapter extends CommonAdapter<SellerListingInfoDTO> {
     protected void fillItemData(CommonViewHolder viewHolder, int position, final SellerListingInfoDTO item) {
         final SimpleDraweeView defaultImage = (SimpleDraweeView) viewHolder.getView(R.id.product_iv_show);
         if (!TextUtils.isEmpty(item.getCoverImg())) {
-            if (defaultImage.getTag()==null){
+
                 String imageUrl = ImageUtil.getImgUrl(item.getCoverImg());
                 defaultImage.setImageURI(ImageUtil.getImgUrl(imageUrl));
                 defaultImage.setTag(imageUrl);
-            }
+
 
         } else {
-            if (defaultImage.getTag()==null){
+
                 XinongHttpCommend.getInstance(mContext).getProductImg(new AbsXnHttpCallback(mContext) {
                     @Override
                     public void onSuccess(String info, String result) {
@@ -71,7 +71,7 @@ public class ProductCommonAdapter extends CommonAdapter<SellerListingInfoDTO> {
                         defaultImage.setTag(result);
                     }
                 }, item.id);
-            }
+
         }
         TagFlowLayout fl_tag = (TagFlowLayout) viewHolder.getView(R.id.fl_tag);
         String productDesc = item.getTitle();

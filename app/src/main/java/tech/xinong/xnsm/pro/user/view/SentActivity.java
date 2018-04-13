@@ -86,7 +86,7 @@ public class SentActivity extends BaseActivity {
         ll_logistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialogBotton("物流方式", "物流/快递发货,货运零担发货", new AdapterView.OnItemClickListener() {
+                showDialogButton("物流方式", "物流/快递发货,货运零担发货", new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         ll_com_person.setVisibility(View.VISIBLE);
@@ -119,8 +119,8 @@ public class SentActivity extends BaseActivity {
                         public void onSuccess(String info, String result) {
                             T.showShort(mContext,"发货成功");
                             cancelProgress();
-                            Intent intent = new Intent(mContext,MyOrdersActivity.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(mContext,MyOrdersActivity.class);
+//                            startActivity(intent);
                             finish();
                         }
                     });

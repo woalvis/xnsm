@@ -26,6 +26,7 @@ import tech.xinong.xnsm.pro.buy.model.SellerListingInfoDTO;
 import tech.xinong.xnsm.pro.user.model.PublishStates;
 import tech.xinong.xnsm.pro.user.model.adapter.MyPagerAdapter;
 import tech.xinong.xnsm.pro.user.model.adapter.MyPublishSellAdapter;
+import tech.xinong.xnsm.util.T;
 
 /**
  * Created by xiao on 2017/12/15.
@@ -131,13 +132,13 @@ public class MyPublishBuyFragment extends BaseFragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
                 rePage = 0;
-                getListByState(PublishStates.PENDING, OpMode.PULLDOWN, refreshView, rePage);
+                getListByState(PublishStates.REJECTED, OpMode.PULLDOWN, refreshView, rePage);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 rePage++;
-                getListByState(PublishStates.PENDING, OpMode.PULLDOWN, refreshView, rePage);
+                getListByState(PublishStates.REJECTED, OpMode.PULLDOWN, refreshView, rePage);
             }
         });
     }

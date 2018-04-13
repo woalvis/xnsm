@@ -11,8 +11,7 @@
     android:background="#ddd"
     android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-
+    <tech.xinong.xnsm.views.MySwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/home_swipe_ly"
@@ -91,7 +90,7 @@
                     android:id="@+id/default_img"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x120"
-                    android:background="@mipmap/default_pic_bg"
+                    android:background="@drawable/canvass"
                     android:visibility="gone"
                     >
                 </ImageView>
@@ -224,9 +223,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/x75"
                     android:background="@color/white">
-
-
                 </android.support.v7.widget.RecyclerView>
+
+                <ImageView
+                    android:id="@+id/ads_default_img"
+                    android:src="@drawable/canvass"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x75"
+                    android:visibility="gone"/>
             </LinearLayout>
 
             <TextView
@@ -252,7 +256,7 @@
             </tech.xinong.xnsm.views.InsideViewPager>
         </LinearLayout>
     </tech.xinong.xnsm.views.PagerScrollView1>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </tech.xinong.xnsm.views.MySwipeRefreshLayout>
     <!--</android.support.v4.widget.SwipeRefreshLayout>-->
 
     <tech.xinong.xnsm.views.LoadView
